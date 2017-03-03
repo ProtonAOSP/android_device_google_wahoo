@@ -1,0 +1,5 @@
+type wc_prop, property_type;
+type camera_prop, property_type;
+type ssr_prop, property_type;
+type tee_listener_prop, property_type;
+type keymaster_prop, property_type;

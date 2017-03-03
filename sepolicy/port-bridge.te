@@ -1,0 +1,10 @@
+type port-bridge, domain;
+type port-bridge_exec, exec_type, file_type;
+
+init_daemon_domain(port-bridge)
+
+allowxperm port-bridge at_device:chr_file ioctl IPC_ROUTER_IOCTL_GET_VERSION;
+
+userdebug_or_eng(`
+permissive port-bridge;
+')
