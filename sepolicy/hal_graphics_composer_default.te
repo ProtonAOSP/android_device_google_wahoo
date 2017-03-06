@@ -1,0 +1,8 @@
+# Binder access (for display.qservice)
+# TODO remove after the HAL is fixed
+binder_service(hal_graphics_composer_default)
+binder_use(hal_graphics_composer_default)
+allow hal_graphics_composer_default surfaceflinger_service:service_manager { add find };
+
+# HWC_UeventThread
+allow hal_graphics_composer_default self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
