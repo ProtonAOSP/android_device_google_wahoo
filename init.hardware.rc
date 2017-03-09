@@ -360,6 +360,48 @@ service cnss-daemon /vendor/bin/cnss-daemon -n -l
    user system
    group system inet net_admin wifi
 
+service imsqmidaemon /vendor/bin/imsqmidaemon
+   class main
+   user system
+   socket ims_qmid stream 0660 system radio
+   group radio log diag
+
+service imsdatadaemon /vendor/bin/imsdatadaemon
+   class main
+   user system
+   socket ims_datad stream 0660 system radio
+   group system wifi radio inet net_raw log net_admin
+   disabled
+
+on property:sys.ims.QMI_DAEMON_STATUS=1
+   start imsdatadaemon
+
+service ims_rtp_daemon /vendor/bin/ims_rtp_daemon
+   class main
+   user system
+   socket ims_rtpd stream 0660 system radio
+   group radio diag inet log
+   disabled
+
+service imscmservice /vendor/bin/imscmservice
+   class main
+   user system
+   group radio diag inet log
+   disabled
+
+on property:sys.ims.DATA_DAEMON_STATUS=1
+   start ims_rtp_daemon
+   start imscmservice
+
+service qmuxd /vendor/bin/qmuxd
+   class main
+   user root
+   group radio audio bluetooth gps nfc qcom_diag
+
+service cnd /vendor/bin/cnd
+   class main
+   socket cnd stream 660 root inet
+
 service netmgrd /vendor/bin/netmgrd
     class main
     user root
@@ -369,6 +411,7 @@ service port-bridge /vendor/bin/port-bridge
     class main
     user radio
     group radio system inet
+    disabled
     oneshot
 
 service qti /vendor/bin/qti

@@ -1,0 +1,5 @@
+type ims, domain, domain_deprecated;
+type ims_exec, exec_type, file_type;
+
+init_daemon_domain(ims)
+net_domain(ims)

@@ -1,0 +1,5 @@
+type qmuxd, domain, domain_deprecated;
+type qmuxd_exec, exec_type, file_type;
+
+net_domain(qmuxd)
+init_daemon_domain(qmuxd)

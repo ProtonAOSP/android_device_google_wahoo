@@ -35,6 +35,10 @@
 /dev/socket/qmux_bluetooth(/.*)?                u:object_r:qmuxd_socket:s0
 /dev/socket/qmux_gps(/.*)?                      u:object_r:qmuxd_socket:s0
 /dev/socket/qmux_radio(/.*)?                    u:object_r:qmuxd_socket:s0
+/dev/socket/ims_qmid                            u:object_r:ims_socket:s0
+/dev/socket/ims_datad                           u:object_r:ims_socket:s0
+/dev/socket/ims_rtpd                            u:object_r:ims_socket:s0
+/dev/socket/cnd                                 u:object_r:cnd_socket:s0
 /dev/socket/thermal-send-client                 u:object_r:thermal_socket:s0
 /dev/socket/thermal-recv-client                 u:object_r:thermal_socket:s0
 /dev/socket/thermal-recv-passive-client         u:object_r:thermal_socket:s0
@@ -96,6 +100,12 @@
 /vendor/bin/loc_launcher        u:object_r:location_exec:s0
 /vendor/bin/lowi-server         u:object_r:location_exec:s0
 /vendor/bin/pd-mapper           u:object_r:pd_mapper_exec:s0
+/vendor/bin/imsqmidaemon        u:object_r:ims_exec:s0
+/vendor/bin/imsdatadaemon       u:object_r:ims_exec:s0
+/vendor/bin/ims_rtp_daemon      u:object_r:ims_exec:s0
+/vendor/bin/imscmservice        u:object_r:imscm_exec:s0
+/vendor/bin/qmuxd               u:object_r:qmuxd_exec:s0
+/vendor/bin/cnd                 u:object_r:cnd_exec:s0
 
 # data files
 /data/time(/.*)?                       u:object_r:time_data_file:s0
