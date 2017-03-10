@@ -17,6 +17,19 @@
 import init.${ro.hardware}.usb.rc
 import init.${ro.hardware}.diag.rc
 
+on charger
+    write /sys/devices/system/cpu/cpu2/online 0
+    write /sys/devices/system/cpu/cpu3/online 0
+    write /sys/devices/system/cpu/cpu4/online 0
+    write /sys/devices/system/cpu/cpu5/online 0
+    write /sys/devices/system/cpu/cpu6/online 0
+    write /sys/devices/system/cpu/cpu7/online 0
+    wait /dev/block/bootdevice
+
+service charger /charger
+    class charger
+    seclabel u:r:charger:s0
+
 on early-init
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug

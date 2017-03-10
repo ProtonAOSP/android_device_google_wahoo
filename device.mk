@@ -421,3 +421,7 @@ PRODUCT_COPY_FILES += \
 # Provide meaningful APN configuration
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/apns-full-conf.xml:system/etc/apns-conf.xml
+
+# Use the default charger mode images
+PRODUCT_PACKAGES += \
+    charger_res_images
