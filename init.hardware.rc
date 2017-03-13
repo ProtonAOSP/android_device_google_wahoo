@@ -16,6 +16,7 @@
 
 import init.${ro.hardware}.usb.rc
 import init.${ro.hardware}.diag.rc
+inport init.${ro.hardware}.logging.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
