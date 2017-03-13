@@ -251,6 +251,9 @@ PRODUCT_COPY_FILES += \
     device/google/wahoo/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
 
 PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0-service.device
+
+PRODUCT_PACKAGES += \
     libmm-omxcore \
     libOmxCore \
     libstagefrighthw \
