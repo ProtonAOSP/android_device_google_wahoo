@@ -68,6 +68,7 @@
 /sys/devices/soc/caa0000\.qcom,jpeg(/.*)?                           u:object_r:sysfs_camera:s0
 /sys/devices/soc/caa4000\.qcom,fd(/.*)?                             u:object_r:sysfs_camera:s0
 /sys/bus/msm_subsys(/.*)?                                           u:object_r:sysfs_msm_subsys:s0
+/sys/module/subsystem_restart                                       u:object_r:sysfs_msm_subsys_restart:s0
 
 # files in /system
 /system/bin/init\.power\.sh            u:object_r:init_power_exec:s0
@@ -112,6 +113,7 @@
 /data/misc/radio(/.*)?                 u:object_r:radio_data_file:s0
 /data/misc/netmgr(/.*)?                u:object_r:netmgr_data_file:s0
 /data/misc/location(/.*)?              u:object_r:location_data_file:s0
+/data/ramdump(/.*)?                    u:object_r:ramdump_data_file:s0
 
 # /
 /tombstones             u:object_r:rootfs:s0
