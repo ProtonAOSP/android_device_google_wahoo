@@ -1,0 +1,6 @@
+type esed, domain;
+type esed_exec, exec_type, file_type;
+
+allow esed pn81a_device:chr_file rw_file_perms;
+
+init_daemon_domain(esed)
