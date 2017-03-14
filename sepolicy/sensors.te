@@ -6,6 +6,8 @@ init_daemon_domain(sensors)
 
 allow sensors self:socket rw_socket_perms_no_ioctl;
 
+allow sensors persist_sensors_file:file rw_file_perms;
+
 r_dir_file(sensors, sysfs_msm_subsys)
 
 userdebug_or_eng(`
