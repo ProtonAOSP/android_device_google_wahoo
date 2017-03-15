@@ -302,19 +302,14 @@ PRODUCT_PACKAGES += \
 
 #GNSS HAL
 PRODUCT_PACKAGES += \
-    android.hardware.gnss@1.0-impl
+    gps.conf \
+    libgps.utils \
+    android.hardware.gnss@1.0-impl-qti \
+    android.hardware.gnss@1.0-service-qti
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/sec_config:system/etc/sec_config
 
-PRODUCT_PACKAGES += \
-    gps.conf \
-    gps.default \
-    libgps.utils \
-    libloc_eng \
-    libloc_api_v02 \
-    libloc_ds_api \
-    libgnsspps
 
 HOSTAPD := hostapd
 HOSTAPD += hostapd_cli
@@ -421,3 +416,7 @@ PRODUCT_COPY_FILES += \
 # Provide meaningful APN configuration
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/apns-full-conf.xml:system/etc/apns-conf.xml
+
+# Use the default charger mode images
+PRODUCT_PACKAGES += \
+    charger_res_images
