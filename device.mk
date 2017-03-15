@@ -162,6 +162,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:system/etc/permissions/android.hardware.opengles.aep.xml \
+    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
+    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
+    frameworks/native/data/etc/android.hardware.nfc.hcef.xml:system/etc/permissions/android.hardware.nfc.hcef.xml \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.power.sh:system/bin/init.power.sh \
@@ -243,6 +246,17 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
   android.hardware.bluetooth@1.0-impl    \
   android.hardware.bluetooth@1.0-service
+
+# NFC packages
+PRODUCT_PACKAGES += \
+    nfc_nci.$(PRODUCT_HARDWARE) \
+    NfcNci \
+    Tag \
+    android.hardware.nfc@1.0-impl
+
+PRODUCT_COPY_FILES += \
+    device/google/wahoo/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
+    device/google/wahoo/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
 
 PRODUCT_PACKAGES += \
     libmm-omxcore \
