@@ -16,6 +16,7 @@
 
 import init.${ro.hardware}.usb.rc
 import init.${ro.hardware}.diag.rc
+inport init.${ro.hardware}.logging.rc
 
 on charger
     write /sys/devices/system/cpu/cpu2/online 0
