@@ -3,4 +3,6 @@ type cnd_exec, exec_type, file_type;
 
 file_type_auto_trans(cnd, socket_device, cnd_socket);
 
+allow cnd self:socket rw_socket_perms_no_ioctl;
+
 init_daemon_domain(cnd)
