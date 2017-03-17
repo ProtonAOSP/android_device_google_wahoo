@@ -12,7 +12,7 @@
         <version>2.1</version>
         <interface>
             <name>IBiometricsFingerprint</name>
-            <instance>fingerprint_hal</instance>
+            <instance>default</instance>
         </interface>
     </hal>
     <hal format="hidl">
