@@ -1,2 +1,4 @@
 genfscon proc /debug/fwdump                           u:object_r:proc_wifi_dbg:s0
 genfscon proc /debugdriver/driverdump                 u:object_r:proc_wifi_dbg:s0
+
+genfscon debugfs /kgsl/proc                           u:object_r:debugfs_kgsl:s0
