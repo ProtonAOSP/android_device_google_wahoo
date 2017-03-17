@@ -17,13 +17,13 @@
     </hal>
     <hal format="hidl">
         <name>android.hardware.graphics.allocator</name>
-        <transport arch="32+64">passthrough</transport>
+        <transport>hwbinder</transport>
         <impl level="generic"></impl>
         <version>2.0</version>
     </hal>
     <hal format="hidl">
         <name>android.hardware.graphics.composer</name>
-        <transport arch="32+64">passthrough</transport>
+        <transport>hwbinder</transport>
         <impl level="generic"></impl>
         <version>2.1</version>
     </hal>
