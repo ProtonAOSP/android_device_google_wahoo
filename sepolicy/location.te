@@ -19,6 +19,7 @@ allow location location_data_file:sock_file create_file_perms;
 
 allow location self:netlink_route_socket create_socket_perms_no_ioctl;
 allow location self:netlink_generic_socket rw_socket_perms_no_ioctl;
+allow location self:netlink_socket read;
 allow location self:socket create_socket_perms;
 allow location self:udp_socket create_socket_perms;
 allowxperm location self:socket ioctl IPC_ROUTER_IOCTL_LOOKUP_SERVER;
