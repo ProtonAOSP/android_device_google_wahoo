@@ -5,6 +5,7 @@ init_daemon_domain(wcnss_service)
 net_domain(wcnss_service)
 
 allow wcnss_service shell_exec:file rx_file_perms;
+allow wcnss_service toolbox_exec:file rx_file_perms;
 
 allow wcnss_service self:socket create_socket_perms;
 allowxperm wcnss_service self:socket ioctl IPC_ROUTER_IOCTL_LOOKUP_SERVER;

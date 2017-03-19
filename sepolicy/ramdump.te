@@ -1,7 +1,16 @@
 type ramdump_exec, exec_type, file_type;
 
 userdebug_or_eng(`
-type ramdump, domain;
-init_daemon_domain(ramdump)
-permissive ramdump;
+  type ramdump, domain;
+  init_daemon_domain(ramdump)
+
+  allow ramdump self:capability sys_rawio;
+
+  allow ramdump sda_block_device:blk_file rw_file_perms;
+  allow ramdump ramdump_data_file:file r_file_perms;
+
+  # read from /fstab.taimen
+  allow ramdump rootfs:file r_file_perms;
+
+  permissive ramdump;
 ')
