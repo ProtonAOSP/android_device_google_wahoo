@@ -248,7 +248,7 @@ on boot
     mkdir /data/time/ 0700 system system
 
     # Permission for laser sensor driver
-    chown camera camera /sys/class/htc_laser/laser/enable_ps_sensor
+    chown camera camera /sys/class/wahoo_laser/laser/enable_ps_sensor
 
 service init-radio-sh /system/bin/init.radio.sh
     class late_start
