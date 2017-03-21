@@ -173,6 +173,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     vidc.debug.perf.mode=2
 
+# NFC/camera interaction workaround - DO NOT COPY TO NEW DEVICES
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.camera.notify_nfc=1
+
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
