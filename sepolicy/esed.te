@@ -1,6 +1,9 @@
 type esed, domain;
 type esed_exec, exec_type, file_type;
 
+hal_server_domain(esed, hal_oemlock)
+hal_server_domain(esed, hal_weaver)
+
 allow esed pn81a_device:chr_file rw_file_perms;
 
 init_daemon_domain(esed)
