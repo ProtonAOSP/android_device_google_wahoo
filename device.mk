@@ -91,10 +91,6 @@ MASTER_SIDE_CP_TARGET_LIST := msm8998 # ION specific settings
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/manifest.xml:vendor/manifest.xml
 
-# Use Sdcardfs
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.sdcardfs=1
-
 # A/B support
 PRODUCT_PACKAGES += \
     otapreopt_script \
