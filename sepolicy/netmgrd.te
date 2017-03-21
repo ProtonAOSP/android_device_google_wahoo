@@ -11,6 +11,7 @@ unix_socket_connect(netmgrd, netd, netd)
 
 allow netmgrd netmgrd_socket:dir w_dir_perms;
 allow netmgrd netmgrd_socket:sock_file { create setattr };
+allow netmgrd self:netlink_xfrm_socket { create_socket_perms_no_ioctl nlmsg_write };
 allow netmgrd self:netlink_generic_socket create_socket_perms_no_ioctl;
 allow netmgrd self:netlink_socket create_socket_perms_no_ioctl;
 allow netmgrd self:socket create_socket_perms;

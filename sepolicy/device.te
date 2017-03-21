@@ -1,4 +1,5 @@
 type at_device, dev_type;
+type bt_device, dev_type;
 type avtimer_device, dev_type;
 type diag_device, dev_type, mlstrustedobject;
 type dsp_device, dev_type;

@@ -7,7 +7,8 @@ userdebug_or_eng(`
   allow ramdump self:capability sys_rawio;
 
   allow ramdump sda_block_device:blk_file rw_file_perms;
-  allow ramdump ramdump_data_file:file r_file_perms;
+  allow ramdump ramdump_data_file:file rw_file_perms;
+  allow ramdump ramdump_data_file:dir w_dir_perms;
 
   # read from /fstab.taimen
   allow ramdump rootfs:file r_file_perms;

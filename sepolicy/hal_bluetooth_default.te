@@ -1,0 +1,3 @@
+get_prop(hal_bluetooth_default, wc_prop)
+
+allow hal_bluetooth_default bt_device:chr_file rw_file_perms;
