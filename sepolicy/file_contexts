@@ -55,6 +55,7 @@
 # files in sysfs
 /sys/class/uio(/.*)?                                                u:object_r:sysfs_uio:s0
 /sys/devices/soc/1d0101c\.qcom,spss(/.*)?                           u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/5c00000\.qcom,ssc(/.*)?                            u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/c900000\.qcom,mdss_mdp/c900000\.qcom,mdss_mdp:qcom,mdss_fb_primary/leds(/.*)? u:object_r:sysfs_leds:s0
 /sys/devices/soc/800f000\.qcom,spmi/spmi-0/spmi0-03/800f000\.qcom,spmi:qcom,pmi8998@3:qcom,leds@d000/leds(/.*)? u:object_r:sysfs_leds:s0
 /sys/devices/soc/soc:qcom,ipa_fws@1e08000(/.*)?                     u:object_r:sysfs_msm_subsys:s0

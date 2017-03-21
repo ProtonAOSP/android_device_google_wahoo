@@ -4,6 +4,7 @@ type wcnss_filter_exec, exec_type, file_type;
 init_daemon_domain(wcnss_filter)
 
 set_prop(wcnss_filter, wc_prop)
+set_prop(wcnss_filter, bluetooth_prop)
 
 userdebug_or_eng(`
 permissive wcnss_filter;
