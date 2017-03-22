@@ -3,6 +3,7 @@ type cnd_exec, exec_type, file_type;
 
 file_type_auto_trans(cnd, socket_device, cnd_socket);
 
-allow cnd self:socket rw_socket_perms_no_ioctl;
+allow cnd self:socket create_socket_perms;
+allowxperm cnd self:socket ioctl IPC_ROUTER_IOCTL_LOOKUP_SERVER;
 
 init_daemon_domain(cnd)

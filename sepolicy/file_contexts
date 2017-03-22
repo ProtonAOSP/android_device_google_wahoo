@@ -1,4 +1,5 @@
 # dev nodes
+/dev/btpower                                    u:object_r:bt_device:s0
 /dev/diag                                       u:object_r:diag_device:s0
 /dev/kgsl-3d0                                   u:object_r:gpu_device:s0
 /dev/rtc0                                       u:object_r:rtc_device:s0
@@ -58,6 +59,7 @@
 /sys/devices/soc/5c00000\.qcom,ssc(/.*)?                            u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/c900000\.qcom,mdss_mdp/c900000\.qcom,mdss_mdp:qcom,mdss_fb_primary/leds(/.*)? u:object_r:sysfs_leds:s0
 /sys/devices/soc/800f000\.qcom,spmi/spmi-0/spmi0-03/800f000\.qcom,spmi:qcom,pmi8998@3:qcom,leds@d000/leds(/.*)? u:object_r:sysfs_leds:s0
+/sys/devices/soc/soc:qcom,kgsl-hyp(/.*)?                            u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/soc:qcom,ipa_fws@1e08000(/.*)?                     u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/cce0000\.qcom,venus(/.*)?                          u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/0\.qcom,rmtfs_sharedmem(/.*)?                      u:object_r:sysfs_rmtfs:s0
