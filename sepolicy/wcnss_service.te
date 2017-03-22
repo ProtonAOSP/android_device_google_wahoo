@@ -4,14 +4,26 @@ type wcnss_service_exec, exec_type, file_type;
 init_daemon_domain(wcnss_service)
 net_domain(wcnss_service)
 
+binder_use(wcnss_service)
+binder_call(wcnss_service, per_mgr)
+
 allow wcnss_service shell_exec:file rx_file_perms;
 allow wcnss_service toolbox_exec:file rx_file_perms;
 
 allow wcnss_service proc_net:file w_file_perms;
 
 allow wcnss_service self:socket create_socket_perms;
-allowxperm wcnss_service self:socket ioctl IPC_ROUTER_IOCTL_LOOKUP_SERVER;
-allow wcnss_service self:netlink_socket read;
+allowxperm wcnss_service self:socket ioctl msm_sock_ipc_ioctls;
+allow wcnss_service self:netlink_generic_socket create_socket_perms_no_ioctl;
+allow wcnss_service self:netlink_socket create_socket_perms_no_ioctl;
+
+allow wcnss_service wifi_data_file:dir rw_dir_perms;
+allow wcnss_service wifi_data_file:file create_file_perms;
+
+r_dir_file(wcnss_service, sysfs_msm_subsys)
+
+allow wcnss_service sysfs_soc:dir search;
+allow wcnss_service sysfs_soc:file r_file_perms;
 
 userdebug_or_eng(`
 permissive wcnss_service;

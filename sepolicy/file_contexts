@@ -51,14 +51,21 @@
 # dev block nodes
 /dev/block/sdd[0-9]+                            u:object_r:sdd_block_device:s0
 /dev/block/sdf[0-9]+                            u:object_r:sdf_block_device:s0
-/dev/block/sda[0-9]+                            u:object_r:sda_block_device:s0
+/dev/block/sda[0-9]*                            u:object_r:sda_block_device:s0
 
 # files in sysfs
 /sys/class/uio(/.*)?                                                u:object_r:sysfs_uio:s0
+/sys/devices/soc/a1800000\.qcom,rmtfs_rtel_sharedmem(/.*)?          u:object_r:sysfs_rmtfs:s0
+/sys/devices/soc/800f000\.qcom,spmi(/.*)?                           u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/4080000\.qcom,mss(/.*)?                            u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/17300000\.qcom,lpass(/.*)?                         u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/1d0101c\.qcom,spss(/.*)?                           u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/5c00000\.qcom,ssc(/.*)?                            u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/c900000\.qcom,mdss_rotator(/.*)?                   u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/c900000\.qcom,mdss_mdp/caps                        u:object_r:sysfs_mdss_mdp_caps:s0
 /sys/devices/soc/c900000\.qcom,mdss_mdp/c900000\.qcom,mdss_mdp:qcom,mdss_fb_primary/leds(/.*)? u:object_r:sysfs_leds:s0
 /sys/devices/soc/800f000\.qcom,spmi/spmi-0/spmi0-03/800f000\.qcom,spmi:qcom,pmi8998@3:qcom,leds@d000/leds(/.*)? u:object_r:sysfs_leds:s0
+/sys/devices/soc/5000000\.qcom,kgsl-3d0(/.*)?                       u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/soc:qcom,kgsl-hyp(/.*)?                            u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/soc:qcom,ipa_fws@1e08000(/.*)?                     u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/cce0000\.qcom,venus(/.*)?                          u:object_r:sysfs_msm_subsys:s0

@@ -4,5 +4,16 @@ binder_service(hal_graphics_composer_default)
 binder_use(hal_graphics_composer_default)
 allow hal_graphics_composer_default surfaceflinger_service:service_manager { add find };
 
+allow hal_graphics_composer_default sysfs_camera:dir search;
+allow hal_graphics_composer_default sysfs_camera:file r_file_perms;
+allow hal_graphics_composer_default sysfs_msm_subsys:dir search;
+allow hal_graphics_composer_default sysfs_msm_subsys:file r_file_perms;
+allow hal_graphics_composer_default sysfs_mdss_mdp_caps:file r_file_perms;
+
+r_dir_file(hal_graphics_composer_default, sysfs_leds)
+
 # HWC_UeventThread
 allow hal_graphics_composer_default self:netlink_kobject_uevent_socket create_socket_perms_no_ioctl;
+
+# Access /sys/devices/virtual/graphics/fb0
+r_dir_file(hal_graphics_composer_default, sysfs_type)
