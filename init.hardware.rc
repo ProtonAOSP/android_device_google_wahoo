@@ -211,11 +211,6 @@ on early-boot
     write /dev/stune/top-app/schedtune.prefer_idle 1
 
 on boot
-    # Install touch modules
-    insmod /vendor/lib/modules/synaptics_dsx_core_htc.ko
-    insmod /vendor/lib/modules/synaptics_dsx_fw_update_htc.ko
-    insmod /vendor/lib/modules/synaptics_dsx_rmi_dev_htc.ko
-
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
     mkdir /dev/socket/qmux_audio 0770 media audio
