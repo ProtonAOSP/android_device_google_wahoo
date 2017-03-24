@@ -30,6 +30,8 @@
 /dev/hbtp_vm                                    u:object_r:hbtp_device:s0
 /dev/sg[0-9]+                                   u:object_r:sg_device:s0
 /dev/sensors                                    u:object_r:sensors_device:s0
+/dev/mnh_sm                                     u:object_r:easel_device:s0
+/dev/easelcomm-client                           u:object_r:easel_device:s0
 
 # dev socket nodes
 /dev/socket/qmux_audio(/.*)?                    u:object_r:qmuxd_socket:s0
