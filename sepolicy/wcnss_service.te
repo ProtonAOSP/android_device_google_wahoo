@@ -4,6 +4,8 @@ type wcnss_service_exec, exec_type, file_type;
 init_daemon_domain(wcnss_service)
 net_domain(wcnss_service)
 
+# TODO(b/36599434): Remove this once wcnss_service stops using Binder services
+typeattribute wcnss_service binder_in_vendor_violators;
 binder_use(wcnss_service)
 binder_call(wcnss_service, per_mgr)
 
