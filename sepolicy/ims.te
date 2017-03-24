@@ -4,6 +4,8 @@ type ims_exec, exec_type, file_type;
 init_daemon_domain(ims)
 net_domain(ims)
 
+set_prop(ims, ims_prop)
+
 allow ims sysfs_soc:dir search;
 allow ims sysfs_soc:file r_file_perms;
 
