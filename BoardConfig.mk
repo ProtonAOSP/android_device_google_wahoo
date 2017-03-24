@@ -32,7 +32,7 @@ BOARD_KERNEL_CMDLINE += androidboot.hardware=$(TARGET_BOOTLOADER_BOARD_NAME) and
 BOARD_KERNEL_CMDLINE += user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive service_locator.enable=1
 BOARD_KERNEL_CMDLINE += swiotlb=2048
-BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/etc/firmware
+BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware
 BOARD_KERNEL_CMDLINE += no_console_suspend=1
 
 BOARD_KERNEL_BASE        := 0x00000000
