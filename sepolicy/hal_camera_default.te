@@ -1,0 +1,2 @@
+# TODO(b/36569385): Remove once Camera HAL no longer uses Binder
+typeattribute hal_camera_default binder_in_vendor_violators;
