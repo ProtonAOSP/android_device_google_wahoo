@@ -9,10 +9,10 @@ allow rfs_access self:capability { chown setgid setpcap setuid net_bind_service 
 wakelock_use(rfs_access)
 
 # For tftp server file access
-allow rfs_access firmware_file:file r_file_perms;
 allow rfs_access firmware_file:dir search;
+allow rfs_access firmware_file:file r_file_perms;
+allow rfs_access persist_file:dir { rw_dir_perms setattr };
 allow rfs_access persist_file:file create_file_perms;
-allow rfs_access persist_file:dir rw_dir_perms;
 
 allow rfs_access self:socket create_socket_perms_no_ioctl;
 

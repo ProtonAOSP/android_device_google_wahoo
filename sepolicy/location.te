@@ -22,7 +22,9 @@ allow location self:netlink_generic_socket create_socket_perms_no_ioctl;
 allow location self:netlink_socket create_socket_perms_no_ioctl;
 allow location self:socket create_socket_perms;
 allow location self:udp_socket create_socket_perms;
-allowxperm location self:socket ioctl IPC_ROUTER_IOCTL_LOOKUP_SERVER;
+allow location self:udp_socket create_socket_perms;
+allowxperm location self:udp_socket ioctl { SIOCGIFHWADDR SIOCIWFIRSTPRIV_05 };
+allowxperm location self:socket ioctl msm_sock_ipc_ioctls;
 
 # files in /sys
 r_dir_file(location, sysfs_type)

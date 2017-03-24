@@ -4,6 +4,8 @@ userdebug_or_eng(`
   type ramdump, domain;
   init_daemon_domain(ramdump)
 
+  set_prop(ramdump, ramdump_prop)
+
   allow ramdump self:capability sys_rawio;
 
   allow ramdump sda_block_device:blk_file rw_file_perms;
