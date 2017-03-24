@@ -4,10 +4,13 @@ type ims_exec, exec_type, file_type;
 init_daemon_domain(ims)
 net_domain(ims)
 
+allow ims sysfs_soc:dir search;
+allow ims sysfs_soc:file r_file_perms;
+
 allow ims self:socket create_socket_perms;
 allow ims self:netlink_generic_socket create_socket_perms_no_ioctl;
 allow ims netmgrd_socket:sock_file w_file_perms;
 allowxperm ims self:socket ioctl msm_sock_ipc_ioctls;
 allowxperm ims self:udp_socket ioctl RMNET_IOCTL_EXTENDED;
 
-r_dir_file(ims, sysfs_msm_subsys);
+r_dir_file(ims, sysfs_msm_subsys)
