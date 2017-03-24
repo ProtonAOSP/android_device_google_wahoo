@@ -24,7 +24,7 @@ r_dir_file(hal_camera, sysfs_type)
 allow hal_camera system_file:dir r_dir_perms;
 
 # talk over binder to some binder services
-# TODO: Must be moved to HIDL
+# TODO(b/36569385): Must be moved to HIDL
 binder_use(hal_camera)
 binder_call(hal_camera, binderservicedomain)
 

@@ -1,3 +1,5 @@
+# TODO(b/36443535): Remove this once rild stops using Binder
+typeattribute rild binder_in_vendor_violators;
 binder_use(rild)
 binder_call(rild, per_mgr)
 

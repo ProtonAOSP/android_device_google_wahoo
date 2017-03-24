@@ -1,5 +1,6 @@
 # Binder access (for display.qservice)
-# TODO remove after the HAL is fixed
+# TODO(35706331): Remove once Graphics Composer HAL stops using Binder
+typeattribute hal_graphics_composer_default binder_in_vendor_violators;
 binder_service(hal_graphics_composer_default)
 binder_use(hal_graphics_composer_default)
 allow hal_graphics_composer_default surfaceflinger_service:service_manager { add find };
