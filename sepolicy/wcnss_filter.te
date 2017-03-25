@@ -9,3 +9,12 @@ set_prop(wcnss_filter, bluetooth_prop)
 userdebug_or_eng(`
 permissive wcnss_filter;
 ')
+
+# TODO(b/34274385): Remove this once Bluetooh HAL is guaranteed to not be run in passthrough mode
+# What's going on here is that Bluetooth HAL is talking over sockets to wcnss_filter, which is
+# permitted. However, those rules target hal_bluetooth rather than hal_bluetooth_server and thus
+# are also granted to all clients of Bluetooth HAL (e.g., bluetooth daemon) which are core
+# components, and socket communications between system components and vendor components are not
+# permted.
+# Once we switch full Treble devices to binderized only mode, this issue will disappear.
+typeattribute wcnss_filter socket_between_core_and_vendor_violators;
