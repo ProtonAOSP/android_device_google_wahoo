@@ -34,6 +34,7 @@ BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive service_locator.enable=1
 BOARD_KERNEL_CMDLINE += swiotlb=2048
 BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware
 BOARD_KERNEL_CMDLINE += no_console_suspend=1
+BOARD_KERNEL_CMDLINE += loop.max_part=7
 
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 4096
