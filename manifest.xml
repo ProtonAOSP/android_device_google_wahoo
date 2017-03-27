@@ -1,5 +1,17 @@
 <manifest version="1.0">
     <hal format="hidl">
+        <name>android.hardware.audio</name>
+        <transport>hwbinder</transport>
+        <impl level="generic"></impl>
+        <version>2.0</version>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.audio.effect</name>
+        <transport>hwbinder</transport>
+        <impl level="generic"></impl>
+        <version>2.0</version>
+    </hal>
+    <hal format="hidl">
         <name>android.hardware.light</name>
         <transport>hwbinder</transport>
         <impl level="generic"></impl>
@@ -72,5 +84,15 @@
         <transport>hwbinder</transport>
         <impl level="generic"></impl>
         <version>1.0</version>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.soundtrigger</name>
+        <transport>hwbinder</transport>
+        <impl level="generic"></impl>
+        <version>2.0</version>
+        <interface>
+            <name>ISoundTriggerHw</name>
+            <instance>sound_trigger.primary</instance>
+        </interface>
     </hal>
 </manifest>
