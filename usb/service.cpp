@@ -28,12 +28,10 @@ using android::hardware::usb::V1_0::IUsb;
 using android::hardware::usb::V1_0::implementation::Usb;
 
 int main() {
-    const char instance[] = "usb_hal";
-
     android::sp<IUsb> service = new Usb();
 
     configureRpcThreadpool(1, true /*callerWillJoin*/);
-    service->registerAsService(instance);
+    service->registerAsService();
 
     ALOGI("USB HAL Ready.");
     joinRpcThreadpool();
