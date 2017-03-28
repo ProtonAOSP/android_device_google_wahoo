@@ -13,3 +13,6 @@ allow cnd self:socket create_socket_perms;
 allowxperm cnd self:socket ioctl IPC_ROUTER_IOCTL_LOOKUP_SERVER;
 
 init_daemon_domain(cnd)
+
+# TODO(b/36613996): Remove this once system_app no longer communicates over sockets with cnd
+typeattribute cnd socket_between_core_and_vendor_violators;
