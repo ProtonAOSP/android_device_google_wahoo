@@ -94,6 +94,7 @@
 /system/bin/ramdump                    u:object_r:ramdump_exec:s0
 
 # files in /vendor
+/vendor/bin/hw/android\.hardware\.dumpstate@1\.0-service.wahoo      u:object_r:hal_dumpstate_impl_exec:s0
 /vendor/bin/perfd               u:object_r:perfd_exec:s0
 /vendor/bin/thermal-engine      u:object_r:thermal-engine_exec:s0
 /vendor/bin/sensors.qcom        u:object_r:sensors_exec:s0

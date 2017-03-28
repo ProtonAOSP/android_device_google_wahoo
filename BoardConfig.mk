@@ -63,8 +63,6 @@ ENABLE_CPUSETS := true
 
 TARGET_COPY_OUT_VENDOR := vendor
 
-BOARD_HAL_STATIC_LIBRARIES := libdumpstate.$(TARGET_BOOTLOADER_BOARD_NAME)
-
 # Install odex files into the other system image
 BOARD_USES_SYSTEM_OTHER_ODEX := true
 

@@ -15,3 +15,7 @@ allowxperm rild self:socket ioctl msm_sock_ipc_ioctls;
 # TODO(b/36613472): Remove this once system_server, mediaserver, radio, and bluetooth no longer
 # communicate with rild over sockets.
 typeattribute rild socket_between_core_and_vendor_violators;
+
+userdebug_or_eng(`
+  domain_auto_trans(rild, smlog_dump_exec, smlog_dump)
+')

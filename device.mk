@@ -429,3 +429,7 @@ PRODUCT_PACKAGES += \
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PROPERTY_OVERRIDES += ro.logd.size=1M
 endif
+
+# Dumpstate HAL
+PRODUCT_PACKAGES += \
+    android.hardware.dumpstate@1.0-service.wahoo

@@ -1,0 +1,32 @@
+type hal_dumpstate_impl, domain;
+hal_server_domain(hal_dumpstate_impl, hal_dumpstate)
+
+type hal_dumpstate_impl_exec, exec_type, file_type;
+init_daemon_domain(hal_dumpstate_impl)
+
+# Execute dump scripts
+allow hal_dumpstate_impl shell_exec:file rx_file_perms;
+allow hal_dumpstate_impl toolbox_exec:file rx_file_perms;
+
+# Temp exception :TODO fix via /36736902
+typeattribute hal_dumpstate_impl coredata_in_vendor_violators;
+
+userdebug_or_eng(`
+  # smlog_dump
+  domain_auto_trans(hal_dumpstate_impl, smlog_dump_exec, smlog_dump)
+  allow hal_dumpstate_impl smlog_dump_file:dir create_dir_perms;
+  allow hal_dumpstate_impl smlog_dump_file:file create_file_perms;
+  allow hal_dumpstate_impl radio_data_file:dir r_dir_perms;
+  allow hal_dumpstate_impl netmgr_data_file:dir r_dir_perms;
+  allow hal_dumpstate_impl radio_data_file:file r_file_perms;
+  allow hal_dumpstate_impl netmgr_data_file:file r_file_perms;
+')
+
+allow hal_dumpstate_impl uio_device:chr_file rw_file_perms;
+r_dir_file(hal_dumpstate_impl, sysfs_uio)
+r_dir_file(hal_dumpstate_impl, sysfs_rmtfs)
+r_dir_file(hal_dumpstate_impl, sysfs_msm_subsys)
+
+# Access to files for dumping
+allow hal_dumpstate_impl  sysfs:dir r_dir_perms;
+# rpm stat
