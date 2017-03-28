@@ -102,7 +102,6 @@
 /vendor/bin/pm-service          u:object_r:per_mgr_exec:s0
 /vendor/bin/pm-proxy            u:object_r:per_proxy_exec:s0
 /vendor/bin/qseecomd            u:object_r:tee_exec:s0
-/vendor/bin/time_daemon         u:object_r:time_daemon_exec:s0
 /vendor/bin/subsystem_ramdump   u:object_r:subsystem_ramdump_exec:s0
 /vendor/bin/adsprpcd            u:object_r:adsprpcd_exec:s0
 /vendor/bin/irsc_util           u:object_r:irsc_util_exec:s0
@@ -126,7 +125,6 @@
 /vendor/bin/hw/android\.hardware\.usb@1\.0-service.device            u:object_r:hal_usb_default_exec:s0
 
 # data files
-/data/time(/.*)?                       u:object_r:time_data_file:s0
 /data/misc/radio(/.*)?                 u:object_r:radio_data_file:s0
 /data/misc/netmgr(/.*)?                u:object_r:netmgr_data_file:s0
 /data/misc/location(/.*)?              u:object_r:location_data_file:s0
