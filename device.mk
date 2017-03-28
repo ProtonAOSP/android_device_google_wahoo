@@ -234,6 +234,12 @@ PRODUCT_PACKAGES +=                         \
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl
 
+# Memtrack HAL
+PRODUCT_PACKAGES += \
+    memtrack.msm8998 \
+    android.hardware.memtrack@1.0-impl \
+    android.hardware.memtrack@1.0-service
+
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
   android.hardware.bluetooth@1.0-impl    \
