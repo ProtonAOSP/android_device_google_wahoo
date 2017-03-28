@@ -1,1 +1,3 @@
+get_prop(radio, ims_prop)
+
 r_dir_file(radio, sysfs_msm_subsys)

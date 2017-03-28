@@ -3,14 +3,24 @@ type cnd_exec, exec_type, file_type;
 
 file_type_auto_trans(cnd, socket_device, cnd_socket);
 
-allow cnd self:capability { setgid setuid };
+allow cnd self:capability { chown fsetid setgid setuid };
+
+allow cnd self:udp_socket create_socket_perms;
+allowxperm cnd self:udp_socket ioctl SIOCGIFMTU;
+
+allow cnd wpa_socket:dir w_dir_perms;
+allow cnd wpa_socket:sock_file create_file_perms;
+allow cnd wifi_data_file:dir search;
+
+allow cnd sysfs_soc:dir search;
+allow cnd sysfs_soc:file r_file_perms;
 
 allow cnd proc_meminfo:file r_file_perms;
 
 r_dir_file(cnd, sysfs_msm_subsys)
 
 allow cnd self:socket create_socket_perms;
-allowxperm cnd self:socket ioctl IPC_ROUTER_IOCTL_LOOKUP_SERVER;
+allowxperm cnd self:socket ioctl msm_sock_ipc_ioctls;
 
 init_daemon_domain(cnd)
 

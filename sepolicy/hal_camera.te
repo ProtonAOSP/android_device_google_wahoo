@@ -12,6 +12,8 @@ allow hal_camera self:capability sys_nice;
 
 allow hal_camera gpu_device:chr_file rw_file_perms;
 
+allow hal_camera perfd_socket:sock_file w_file_perms;
+
 # access to /dev/input/event{5,10}
 allow hal_camera input_device:dir r_dir_perms;
 allow hal_camera input_device:chr_file r_file_perms;
