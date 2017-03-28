@@ -287,6 +287,15 @@ on boot
     # Permission for laser sensor driver
     chown camera camera /sys/class/wahoo_laser/laser/enable_ps_sensor
 
+    # Permission for Vibrator
+    chown system system /sys/class/leds/vibrator/device/mode
+    chown system system /sys/class/leds/vibrator/device/od_clamp
+    chown system system /sys/class/leds/vibrator/device/rtp_input
+    chown system system /sys/class/leds/vibrator/device/scale
+    chown system system /sys/class/leds/vibrator/device/set_sequencer
+    chown system system /sys/class/leds/vibrator/device/autocal_result
+    chown system system /sys/class/leds/vibrator/device/ctrl_loop
+
     # Permission for LED driver
     chown system system /sys/class/leds/red/on_off_ms
     chown system system /sys/class/leds/green/on_off_ms

@@ -143,6 +143,7 @@ sys/devices/bt_wcn[0-9]+/rfkill/rfkill0/state                       u:object_r:s
 /vendor/bin/init\.qcom\.ipastart\.sh                                 u:object_r:init-qcom-ipastart-sh_exec:s0
 /vendor/bin/init\.insmod\.sh                                         u:object_r:init-insmod-sh_exec:s0
 /vendor/etc/init\.insmod\.cfg                                        u:object_r:init-insmod-sh_exec:s0
+/vendor/bin/hw/android\.hardware\.vibrator@1\.0-service.wahoo        u:object_r:hal_vibrator_default_exec:s0
 
 # data files
 /data/misc/radio(/.*)?                 u:object_r:radio_data_file:s0
