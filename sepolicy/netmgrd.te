@@ -31,6 +31,10 @@ r_dir_file(netmgrd, sysfs_msm_subsys)
 wakelock_use(netmgrd)
 
 allow netmgrd proc_net:file rw_file_perms;
+# TODO(b/36663482): Remove coredata_in_vendor_violators once
+# netmgrd no longer directly accesses /data outside
+# /data/vendor.
+typeattribute netmgrd coredata_in_vendor_violators;
 allow netmgrd net_data_file:dir r_dir_perms;
 allow netmgrd net_data_file:file r_file_perms;
 allow netmgrd netmgr_data_file:dir rw_dir_perms;
