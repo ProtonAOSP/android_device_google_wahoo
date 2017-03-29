@@ -19,8 +19,9 @@ allow netmgrd self:socket create_socket_perms;
 allowxperm netmgrd self:socket ioctl msm_sock_ipc_ioctls;
 allowxperm netmgrd self:udp_socket ioctl priv_sock_ioctls;
 
-allow netmgrd sysfs_net:file rw_file_perms;
 allow netmgrd sysfs_net:dir r_dir_perms;
+allow netmgrd sysfs_net:file rw_file_perms;
+allow netmgrd sysfs_soc:dir search;
 allow netmgrd sysfs_soc:file r_file_perms;
 allow netmgrd sysfs_msm_subsys:dir r_dir_perms;
 allow netmgrd sysfs_msm_subsys:file r_file_perms;
