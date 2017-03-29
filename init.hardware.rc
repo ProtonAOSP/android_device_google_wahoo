@@ -256,6 +256,11 @@ service init-radio-sh /system/bin/init.radio.sh
     group root radio
     oneshot
 
+service folio_daemon /vendor/bin/folio_daemon
+    class late_start
+    user root
+    group root
+
 service perfd /vendor/bin/perfd
    class main
    user root

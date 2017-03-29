@@ -1,0 +1,8 @@
+type folio_daemon, domain;
+type folio_daemon_exec, exec_type, file_type;
+
+init_daemon_domain(folio_daemon)
+
+userdebug_or_eng(`
+permissive folio_daemon;
+')
