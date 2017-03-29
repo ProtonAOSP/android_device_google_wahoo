@@ -423,3 +423,9 @@ PRODUCT_COPY_FILES += \
 # Use the default charger mode images
 PRODUCT_PACKAGES += \
     charger_res_images
+
+# b/36703476
+# Set default log size on userdebug/eng build to 1M
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+PRODUCT_PROPERTY_OVERRIDES += ro.logd.size=1M
+endif
