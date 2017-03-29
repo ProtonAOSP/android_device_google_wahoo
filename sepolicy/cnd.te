@@ -8,6 +8,9 @@ allow cnd self:capability { chown fsetid setgid setuid };
 allow cnd self:udp_socket create_socket_perms;
 allowxperm cnd self:udp_socket ioctl SIOCGIFMTU;
 
+# TODO(b/36712542): Remove this once cnd stops accessing data
+# outside /data/vendor.
+typeattribute cnd coredata_in_vendor_violators;
 allow cnd wpa_socket:dir w_dir_perms;
 allow cnd wpa_socket:sock_file create_file_perms;
 allow cnd wifi_data_file:dir search;
