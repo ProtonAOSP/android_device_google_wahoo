@@ -19,7 +19,10 @@ set_prop(nfc_hal_pn54x, nfc_prop)
 # NFC device access.
 allow nfc_hal_pn54x nfc_device:chr_file rw_file_perms;
 
-# Data file accesses.
+# TODO(b/36686703): Remove once nfc_hal_pn54x is no longer accesses data
+# outside /data/vendor. Also, the label cannot be nfc_data_file since
+# that belongs to the nfc app.
+typeattribute nfc_hal_pn54x coredata_in_vendor_violators;
 allow nfc_hal_pn54x nfc_data_file:dir create_dir_perms;
 allow nfc_hal_pn54x nfc_data_file:notdevfile_class_set create_file_perms;
 

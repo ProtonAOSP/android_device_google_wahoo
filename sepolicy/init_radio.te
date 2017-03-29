@@ -7,6 +7,10 @@ init_daemon_domain(init_radio)
 allow init_radio shell_exec:file r_file_perms;
 allow init_radio toolbox_exec:file rx_file_perms;
 
+# TODO(b/36663092): Remove once init_radio no longer accesses data
+# outside /data/vendor. Also, the label cannot be radio_data_file since
+# that belongs to the radio app.
+typeattribute init_radio coredata_in_vendor_violators;
 allow init_radio radio_data_file:dir create_dir_perms;
 allow init_radio radio_data_file:file create_file_perms;
 
