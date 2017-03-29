@@ -114,7 +114,7 @@ void dump_list(struct list_node *head)
     if (head == NULL)
         return;
 
-    printf("List:\n");
+    ALOGV("List:\n");
 
     while ((current_node = current_node->next)) {
         if (current_node->dump) {

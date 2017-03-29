@@ -21,7 +21,6 @@ LOCAL_CFLAGS += -DINTERACTION_BOOST
 
 LOCAL_MODULE := power.$(TARGET_DEVICE)
 LOCAL_MODULE_TAGS := optional
-LOCAL_CFLAGS += -Wno-unused-parameter -Wno-unused-variable
 include $(BUILD_SHARED_LIBRARY)
 
 endif

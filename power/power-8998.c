@@ -281,7 +281,7 @@ static int interaction_hint(void *data)
     return HINT_HANDLED;
 }
 
-int power_hint_override(struct power_module *module, power_hint_t hint, void *data)
+int power_hint_override(struct power_module *UNUSED(module), power_hint_t hint, void *data)
 {
     int ret_val = HINT_NONE;
     switch(hint) {
@@ -305,7 +305,7 @@ int power_hint_override(struct power_module *module, power_hint_t hint, void *da
     return ret_val;
 }
 
-int set_interactive_override(struct power_module *module, int on)
+int set_interactive_override(struct power_module *UNUSED(module), int UNUSED(on))
 {
     return HINT_HANDLED; /* Don't excecute this code path, not in use */
 }
