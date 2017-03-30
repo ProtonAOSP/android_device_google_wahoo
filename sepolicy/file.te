@@ -36,4 +36,6 @@ type persist_sensors_file, file_type;
 
 type netmgr_data_file, file_type, data_file_type;
 
+type nfc_vendor_data_file, file_type, data_file_type;
+
 type ramdump_data_file, file_type, data_file_type, mlstrustedobject;

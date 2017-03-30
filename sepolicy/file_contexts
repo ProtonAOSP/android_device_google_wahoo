@@ -137,6 +137,7 @@
 /data/misc/location(/.*)?              u:object_r:location_data_file:s0
 /data/ramdump(/.*)?                    u:object_r:ramdump_data_file:s0
 /data/nfc(/.*)?                        u:object_r:nfc_data_file:s0
+/data/vendor/nfc(/.*)?                 u:object_r:nfc_vendor_data_file:s0
 
 # /
 /tombstones             u:object_r:rootfs:s0
