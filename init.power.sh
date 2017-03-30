@@ -50,3 +50,6 @@ done
 
 write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
 
+# Signal perfd that boot has completed
+setprop sys.post_boot.parsed 1
+

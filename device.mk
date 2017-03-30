@@ -80,7 +80,7 @@ MASTER_SIDE_CP_TARGET_LIST := msm8998 # ION specific settings
 
 # Vendor Interface Manifest
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/manifest.xml:vendor/manifest.xml
+    $(LOCAL_PATH)/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/manifest.xml
 
 # A/B support
 PRODUCT_PACKAGES += \
@@ -156,6 +156,15 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.power.sh:system/bin/init.power.sh \
+
+# power HAL
+PRODUCT_PACKAGES += \
+    power.$(PRODUCT_HARDWARE) \
+    android.hardware.power@1.0-impl \
+    android.hardware.power@1.0-service
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
 
 # graphics
 PRODUCT_PROPERTY_OVERRIDES += \
