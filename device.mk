@@ -195,6 +195,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.data_ltd_sys_ind=1 \
     persist.radio.is_wps_enabled=true \
     persist.radio.videopause.mode=1 \
+    persist.radio.sib16_support=1 \
     persist.rcs.supported=1 \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
 
