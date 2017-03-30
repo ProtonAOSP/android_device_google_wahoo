@@ -1,0 +1,16 @@
+type init-insmod-sh, domain;
+type init-insmod-sh_exec, exec_type, file_type;
+
+init_daemon_domain(init-insmod-sh)
+
+allow init-insmod-sh shell_exec:file rx_file_perms;
+
+# execute toybox/toolbox
+allow init-insmod-sh toolbox_exec:file rx_file_perms;
+
+# Set the sys.touch.modules.ready property
+set_prop(init-insmod-sh, system_prop)
+
+# Allow insmod
+allow init-insmod-sh self:capability sys_module;
+allow init-insmod-sh system_file:system module_load;

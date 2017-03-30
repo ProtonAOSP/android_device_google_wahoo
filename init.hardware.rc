@@ -36,15 +36,46 @@ on early-init
     chmod 0755 /sys/kernel/debug
 
 on init
+    # Loading kernel modules in background
+    start insmod_sh
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
+
+    # disable thermal hotplug for thermal
+    write /sys/module/msm_thermal/core_control/enabled 0
+    # bring back all cores
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu4/online 1
+    write /sys/devices/system/cpu/cpu5/online 1
+    write /sys/devices/system/cpu/cpu6/online 1
+    write /sys/devices/system/cpu/cpu7/online 1
+    # configure governor settings for little cluster
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "sched"
+    # configure governor settings for big cluster
+    write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor "sched"
+
+    start power_sh
+    # enable all cores for all cpuset during boot
+    write /dev/cpuset/top-app/cpus 0-7
+    write /dev/cpuset/foreground/cpus 0-7
+    write /dev/cpuset/foreground/boost/cpus 0-7
+    write /dev/cpuset/background/cpus 0-7
+    write /dev/cpuset/system-background/cpus 0-7
+
+    # set default schedTune value for foreground/top-app
+    write /dev/stune/foreground/schedtune.prefer_idle 1
+    write /dev/stune/top-app/schedtune.boost 10
+    write /dev/stune/top-app/schedtune.prefer_idle 1
 
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
-    mount_all fstab.${ro.hardware}
+    mount_all fstab.${ro.hardware} --early
     swapon_all fstab.${ro.hardware}
 
     # Keeping following partitions outside fstab file. As user may not have
@@ -56,6 +87,24 @@ on fs
     restorecon_recursive /persist
     mkdir /persist/data 0700 system system
 
+    # Start HW service manager early
+    start hwservicemanager
+
+on late-fs
+    # Start devices by sysfs trigger
+    start devstart_sh
+    # Start services for bootanim
+    start servicemanager
+    start vr_wm
+    start surfaceflinger
+    start bootanim
+    start hwcomposer-2-1
+    start configstore-hal-1-0
+    start gralloc-2-0
+
+    # Mount RW partitions which need run fsck
+    mount_all fstab.${ro.hardware} --late
+
 on post-fs
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
@@ -63,20 +112,23 @@ on post-fs
     # Since bootloader does not have a UI turn screen ON
     write /sys/class/leds/lcd-backlight/brightness 255
 
-    # Enable audio and video device for bootanim
-    write /sys/kernel/boot_adsp/boot 1
-    write /sys/kernel/boot_slpi/boot 1
-
-    start qseecomd
-
     chmod 0664 /sys/devices/virtual/graphics/fb0/idle_time
     chown system graphics /sys/devices/virtual/graphics/fb0/idle_time
 
 on property:sys.listeners.registered=true
     # load IPA FWs
-    write /dev/ipa 1
+    start ipastart_sh
 
 on post-fs-data
+    # We can start netd here before in is launched in common init.rc on zygote-start
+    start netd
+    # Start qseecomd once we have /data/
+    start qseecomd
+
+# zygote need to be started after otapreopt which will be done on post-fs-data
+on zygote-start
+    # zygote is started in common init.rc
+    # and now we can continue initialize /data/
     mkdir /data/tombstones 0771 system system
     mkdir /tombstones/modem 0771 system system
     mkdir /tombstones/lpass 0771 system system
@@ -190,26 +242,10 @@ on post-fs-data
     setprop vold.post_fs_data_done 1
 
 on early-boot
-    exec - root root system -- /system/bin/init.power.sh
-
-    # update cpusets now that processors are up
-    # initialize for Silver Only first and then Silver + Gold
-    # Silver Only configuration cannot work with 0-7
-    write /dev/cpuset/top-app/cpus 0-3
-    write /dev/cpuset/foreground/cpus 0-3
-    write /dev/cpuset/foreground/boost/cpus 0-3
-    write /dev/cpuset/background/cpus 0-3
-    write /dev/cpuset/system-background/cpus 0-3
-    write /dev/cpuset/top-app/cpus 0-7
-    write /dev/cpuset/foreground/cpus 0-7
-    write /dev/cpuset/foreground/boost/cpus 0-7
-    write /dev/cpuset/background/cpus 0-7
-    write /dev/cpuset/system-background/cpus 0-7
-
-    # set default schedTune value for foreground/top-app
-    write /dev/stune/foreground/schedtune.prefer_idle 1
-    write /dev/stune/top-app/schedtune.boost 10
-    write /dev/stune/top-app/schedtune.prefer_idle 1
+    # wait for devices
+    wait_for_prop sys.qcom.devup 1
+    # wait for insmod_sh to finish all modules
+    wait_for_prop sys.all.modules.ready 1
 
 on boot
     mkdir /dev/socket/qmux_radio 0770 radio radio
@@ -485,3 +521,31 @@ service bugreport /system/bin/dumpstate -d -p -B -z \
 service chre /vendor/bin/chre
     class late_start
     socket chre seqpacket 0660 root system
+
+service power_sh /system/bin/init.power.sh
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
+
+service devstart_sh /vendor/bin/init.qcom.devstart.sh
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
+
+service ipastart_sh /vendor/bin/init.qcom.ipastart.sh
+    class main
+    user system
+    group net_admin
+    disabled
+    oneshot
+
+service insmod_sh /vendor/bin/init.insmod.sh
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
