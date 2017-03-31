@@ -21,6 +21,7 @@ allow cnd sysfs_soc:file r_file_perms;
 allow cnd proc_meminfo:file r_file_perms;
 
 r_dir_file(cnd, sysfs_msm_subsys)
+set_prop(cnd, cnd_prop)
 
 allow cnd self:socket create_socket_perms;
 allowxperm cnd self:socket ioctl msm_sock_ipc_ioctls;

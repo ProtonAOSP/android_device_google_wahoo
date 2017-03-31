@@ -1,1 +1,2 @@
 allow hal_bootctl_default sda_block_device:blk_file rw_file_perms;
+allow hal_bootctl_default sdb_block_device:blk_file r_file_perms;

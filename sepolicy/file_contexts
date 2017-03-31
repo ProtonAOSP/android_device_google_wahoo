@@ -48,9 +48,11 @@
 /dev/socket/thermal-recv-passive-client         u:object_r:thermal_socket:s0
 /dev/socket/perfd                               u:object_r:perfd_socket:s0
 /dev/socket/netmgr(/.*)?                        u:object_r:netmgrd_socket:s0
-/dev/nq-nci                                      u:object_r:nfc_device:s0
+/dev/nq-nci                                     u:object_r:nfc_device:s0
+/dev/ttyHS0                                     u:object_r:hci_attach_dev:s0
 
 # dev block nodes
+/dev/block/sdb[01]                              u:object_r:sdb_block_device:s0
 /dev/block/sdd[0-9]+                            u:object_r:sdd_block_device:s0
 /dev/block/sdf[0-9]+                            u:object_r:sdf_block_device:s0
 /dev/block/sda[0-9]*                            u:object_r:sda_block_device:s0

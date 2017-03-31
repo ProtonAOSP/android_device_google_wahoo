@@ -1,4 +1,5 @@
 persist.camera.            u:object_r:camera_prop:s0
+persist.sys.cnd            u:object_r:cnd_prop:s0
 sys.ims.                   u:object_r:ims_prop:s0
 sys.keymaster.loaded       u:object_r:keymaster_prop:s0
 persist.net.doxlat         u:object_r:net_radio_prop:s0

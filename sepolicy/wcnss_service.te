@@ -16,6 +16,7 @@ allow wcnss_service proc_net:file w_file_perms;
 
 allow wcnss_service self:socket create_socket_perms;
 allowxperm wcnss_service self:socket ioctl msm_sock_ipc_ioctls;
+allowxperm wcnss_service self:udp_socket ioctl SIOCSIFFLAGS;
 allow wcnss_service self:netlink_generic_socket create_socket_perms_no_ioctl;
 allow wcnss_service self:netlink_socket create_socket_perms_no_ioctl;
 
@@ -25,6 +26,8 @@ typeattribute wcnss_service coredata_in_vendor_violators;
 
 allow wcnss_service wifi_data_file:dir rw_dir_perms;
 allow wcnss_service wifi_data_file:file create_file_perms;
+
+allow wcnss_service proc_net:file getattr;
 
 r_dir_file(wcnss_service, sysfs_msm_subsys)
 

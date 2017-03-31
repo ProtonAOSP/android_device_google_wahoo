@@ -1,5 +1,9 @@
 allow system_server self:socket ioctl;
 allowxperm system_server self:socket ioctl msm_sock_ipc_ioctls;
 
+# TODO(b/36613917): Remove this once system_server no longer communicates with netmgrd over sockets.
+typeattribute netmgrd socket_between_core_and_vendor_violators;
+unix_socket_connect(system_server, netmgrd, netmgrd)
+
 allow system_server persist_sensors_file:file r_file_perms;
 allow system_server persist_sensors_file:dir search;

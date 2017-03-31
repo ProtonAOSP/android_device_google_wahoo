@@ -6,6 +6,8 @@ init_daemon_domain(wcnss_filter)
 set_prop(wcnss_filter, wc_prop)
 set_prop(wcnss_filter, bluetooth_prop)
 
+allow wcnss_filter hci_attach_dev:chr_file rw_file_perms;
+
 userdebug_or_eng(`
 permissive wcnss_filter;
 ')

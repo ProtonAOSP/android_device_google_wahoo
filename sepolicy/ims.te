@@ -6,6 +6,8 @@ net_domain(ims)
 
 set_prop(ims, ims_prop)
 
+unix_socket_connect(ims, netmgrd, netmgrd)
+
 allow ims sysfs_soc:dir search;
 allow ims sysfs_soc:file r_file_perms;
 
