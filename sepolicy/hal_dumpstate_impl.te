@@ -9,7 +9,9 @@ allow hal_dumpstate_impl shell_exec:file rx_file_perms;
 allow hal_dumpstate_impl toolbox_exec:file rx_file_perms;
 
 # Temp exception :TODO fix via /36736902
-typeattribute hal_dumpstate_impl coredata_in_vendor_violators;
+userdebug_or_eng(`
+  typeattribute hal_dumpstate_impl coredata_in_vendor_violators;
+')
 
 userdebug_or_eng(`
   # smlog_dump

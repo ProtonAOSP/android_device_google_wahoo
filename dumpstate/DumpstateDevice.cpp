@@ -46,45 +46,54 @@ namespace {
 
 static void getModemLogs(int fd)
 {
-    bool modemLogsEnabled = 0;
     std::string modemLogDir = android::base::GetProperty(MODEM_LOG_LOC_PROPERTY, "");
     if (modemLogDir.empty()) {
         ALOGD("No modem log place is set\n");
         return;
     }
-    /* Check if smlog_dump tool exist */
-    if (!PropertiesHelper::IsUserBuild() && !access("/vendor/bin/smlog_dump", X_OK)) {
-        modemLogsEnabled = android::base::GetBoolProperty(MODEM_LOGGING_SWITCH, false);
 
-        /* Execute SMLOG DUMP if SMLOG is enabled */
-        if (modemLogsEnabled) {
-            CommandOptions options = CommandOptions::WithTimeout(120).Build();
-            std::string modemLogAllDir = modemLogDir + "/modem_log";
-            std::vector<std::string> rilAndNetmgrLogs
-                {
-                 "/data/misc/radio/ril_log",
-                 "/data/misc/radio/ril_log_old",
-                 "/data/misc/netmgr/netmgr_log",
-                 "/data/misc/netmgr/netmgr_log_old"
-                };
-            std::string modemLogMkDirCmd= "/system/bin/mkdir " + modemLogAllDir;
-            RunCommandToFd(fd, "MKDIR MODEM LOG", { "/system/bin/sh", "-c", modemLogMkDirCmd.c_str()}, options);
-            RunCommandToFd(fd, "SMLOG DUMP", { "smlog_dump", "-d", "-o", modemLogAllDir.c_str() }, options);
-            for (std::string logFile : rilAndNetmgrLogs)
+    if (!PropertiesHelper::IsUserBuild()) {
+        bool smlogEnabled = android::base::GetBoolProperty(MODEM_LOGGING_SWITCH, false) && !access("/vendor/bin/smlog_dump", X_OK);
+
+        CommandOptions options = CommandOptions::WithTimeout(120).Build();
+        std::string modemLogAllDir = modemLogDir + "/modem_log";
+        std::string qdbFile = "/firmware/image/qdsp6m.qdb";
+        std::vector<std::string> rilAndNetmgrLogs
             {
-              std::string copyCmd= "/system/bin/cp " + logFile + " " + modemLogAllDir;
-              RunCommandToFd(fd, "MV MODEM LOG", { "/system/bin/sh", "-c", copyCmd.c_str()}, options);
-            }
-            std::string filePrefix = android::base::GetProperty(MODEM_LOG_PREFIX_PROPERTY, "");
-            if (!filePrefix.empty()) {
-                std::string modemLogCombined = modemLogDir + "/" + filePrefix + "all.tar";
-                std::string modemLogTarCmd= "/system/bin/tar cvf " + modemLogCombined + " -C " + modemLogAllDir + " .";
-                RunCommandToFd(fd, "TAR LOG", { "/system/bin/sh", "-c", modemLogTarCmd.c_str()}, options);
-                std::string modemLogPermCmd= "/system/bin/chmod a+rw " + modemLogCombined;
-                RunCommandToFd(fd, "CHG PERM", { "/system/bin/sh", "-c", modemLogPermCmd.c_str()}, options);
-                std::string modemLogClearCmd= "/system/bin/rm -r " + modemLogAllDir;
-                RunCommandToFd(fd, "RM MODEM DIR", { "/system/bin/sh", "-c", modemLogClearCmd.c_str()}, options);
-            }
+              "/data/misc/radio/ril_log",
+              "/data/misc/radio/ril_log_old",
+              "/data/misc/netmgr/netmgr_log",
+              "/data/misc/netmgr/netmgr_log_old"
+            };
+
+        std::string modemLogMkDirCmd= "/system/bin/mkdir -p " + modemLogAllDir;
+        RunCommandToFd(fd, "MKDIR MODEM LOG", { "/system/bin/sh", "-c", modemLogMkDirCmd.c_str()}, options);
+
+        if (smlogEnabled) {
+            RunCommandToFd(fd, "SMLOG DUMP", { "smlog_dump", "-d", "-o", modemLogAllDir.c_str() }, options);
+
+            std::string copyCmd= "/system/bin/cp " + qdbFile + " " + modemLogAllDir;
+            RunCommandToFd(fd, "CP QDB FILE", { "/system/bin/sh", "-c", copyCmd.c_str()}, options);
+        }
+
+        for (std::string logFile : rilAndNetmgrLogs)
+        {
+            std::string copyCmd= "/system/bin/cp " + logFile + " " + modemLogAllDir;
+            RunCommandToFd(fd, "CP MODEM LOG", { "/system/bin/sh", "-c", copyCmd.c_str()}, options);
+        }
+
+        std::string filePrefix = android::base::GetProperty(MODEM_LOG_PREFIX_PROPERTY, "");
+
+        if (!filePrefix.empty()) {
+            std::string modemLogCombined = modemLogDir + "/" + filePrefix + "all.tar";
+            std::string modemLogTarCmd= "/system/bin/tar cvf " + modemLogCombined + " -C " + modemLogAllDir + " .";
+            RunCommandToFd(fd, "TAR LOG", { "/system/bin/sh", "-c", modemLogTarCmd.c_str()}, options);
+
+            std::string modemLogPermCmd= "/system/bin/chmod a+rw " + modemLogCombined;
+            RunCommandToFd(fd, "CHG PERM", { "/system/bin/sh", "-c", modemLogPermCmd.c_str()}, options);
+
+            std::string modemLogClearCmd= "/system/bin/rm -r " + modemLogAllDir;
+            RunCommandToFd(fd, "RM MODEM DIR", { "/system/bin/sh", "-c", modemLogClearCmd.c_str()}, options);
         }
     }
 }
