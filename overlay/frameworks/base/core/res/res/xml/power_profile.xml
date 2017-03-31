@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<device name="Android">
+
+  <!-- Device specific items that must be in device inheriting from wahoo:
+       battery.capacity, screen.on, screen.full, camera.flashlight, camera.avg
+       modem.controller.idle, modem.controller.rx, modem.controller.tx, modem.controller.voltage,
+
+       Item not being relevant anymore:
+       bluetooth.active, bluetooth.on,
+       wifi.on, wifi.active, wifi.scan as they shoud be provided by WifiActivityEnergyInfo
+       dsp.audio, dsp.video
+  -->
+
+  <!-- assume same rock bottom for now -->
+  <item name="cpu.idle">6</item>
+
+  <!-- assume CPUidle XO when CPU up but inactive -->
+  <item name="cpu.awake">0</item>
+
+  <item name="gps.on">30</item>
+
+  <item name="radio.active">50</item>
+  <item name="radio.scanning">5</item>
+  <array name="radio.on"> <!-- Strength 0 to BINS-1 -->
+    <value>6</value>      <!-- none -->
+    <value>5</value>      <!-- poor -->
+    <value>4</value>      <!-- moderate -->
+    <value>3</value>      <!-- good -->
+    <value>3</value>      <!-- great -->
+  </array>
+
+  <item name="wifi.controller.voltage">0</item>
+
+  <array name="cpu.clusters.cores">
+    <value>4</value> <!-- Cluster 0 has 4 cores (cpu0, cpu1, cpu2, cpu3) -->
+    <value>4</value> <!-- Cluster 1 has 4 cores (cpu4, cpu5, cpu5, cpu7) -->
+  </array>
+
+  <!-- Different CPU speeds as reported in
+       /sys/devices/system/cpu/cpu0/cpufreq/stats/time_in_state -->
+  <array name="cpu.speeds.cluster0">
+    <value>300000</value>
+    <value>364800</value>
+    <value>441600</value>
+    <value>518400</value>
+    <value>595200</value>
+    <value>672000</value>
+    <value>748800</value>
+    <value>825600</value>
+    <value>883200</value>
+    <value>960000</value>
+    <value>1036800</value>
+    <value>1094400</value>
+    <value>1171200</value>
+    <value>1248000</value>
+    <value>1324800</value>
+    <value>1401600</value>
+    <value>1478400</value>
+    <value>1555200</value>
+    <value>1670400</value>
+    <value>1747200</value>
+    <value>1824000</value>
+    <value>1900800</value>
+  </array>
+
+  <array name="cpu.active.cluster0">
+    <value>81.07</value>
+    <value>82.44</value>
+    <value>85.57</value>
+    <value>85.57</value>
+    <value>87.38</value>
+    <value>87.64</value>
+    <value>88.50</value>
+    <value>85.75</value>
+    <value>90.06</value>
+    <value>89.72</value>
+    <value>95.87</value>
+    <value>97.92</value>
+    <value>99.25</value>
+    <value>100.79</value>
+    <value>103.21</value>
+    <value>105.21</value>
+    <value>107.85</value>
+    <value>110.54</value>
+    <value>116.19</value>
+    <value>119.17</value>
+    <value>124.99</value>
+    <value>127.52</value>
+  </array>
+
+  <!-- Different CPU speeds as reported in
+       /sys/devices/system/cpu/cpu4/cpufreq/stats/time_in_state -->
+  <array name="cpu.speeds.cluster1">
+    <value>300000</value>
+    <value>345600</value>
+    <value>422400</value>
+    <value>499200</value>
+    <value>576000</value>
+    <value>652800</value>
+    <value>729600</value>
+    <value>806400</value>
+    <value>902400</value>
+    <value>979200</value>
+    <value>1056000</value>
+    <value>1132800</value>
+    <value>1190400</value>
+    <value>1267200</value>
+    <value>1344000</value>
+    <value>1420800</value>
+    <value>1497600</value>
+    <value>1574400</value>
+    <value>1651200</value>
+    <value>1728000</value>
+    <value>1804800</value>
+    <value>1881600</value>
+    <value>1958400</value>
+    <value>2035200</value>
+    <value>2112000</value>
+    <value>2208000</value>
+    <value>2265600</value>
+    <value>2323200</value>
+    <value>2342400</value>
+    <value>2361600</value>
+    <value>2457600</value>
+  </array>
+
+  <array name="cpu.active.cluster1">
+    <value>110.84</value>
+    <value>115.40</value>
+    <value>121.32</value>
+    <value>128.42</value>
+    <value>134.36</value>
+    <value>144.85</value>
+    <value>138.22</value>
+    <value>121.59</value>
+    <value>136.13</value>
+    <value>154.32</value>
+    <value>147.94</value>
+    <value>135.68</value>
+    <value>166.60</value>
+    <value>189.79</value>
+    <value>167.17</value>
+    <value>232.42</value>
+    <value>210.54</value>
+    <value>257.31</value>
+    <value>273.06</value>
+    <value>291.94</value>
+    <value>318.73</value>
+    <value>356.17</value>
+    <value>403.42</value>
+    <value>420.08</value>
+    <value>471.84</value>
+    <value>549.37</value>
+    <value>600.14</value>
+    <value>647.87</value>
+    <value>672.53</value>
+    <value>685.39</value>
+    <value>675.07</value>
+  </array>
+
+</device>
