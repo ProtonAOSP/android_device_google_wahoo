@@ -262,7 +262,8 @@ PRODUCT_PACKAGES += \
     nfc_nci.$(PRODUCT_HARDWARE) \
     NfcNci \
     Tag \
-    android.hardware.nfc@1.0-impl
+    android.hardware.nfc@1.0-impl \
+    android.hardware.nfc@1.0-service
 
 PRODUCT_COPY_FILES += \
     device/google/wahoo/nfc/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm.conf \
