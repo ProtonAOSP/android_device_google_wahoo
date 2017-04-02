@@ -11,6 +11,7 @@ type qdsp_device, dev_type, mlstrustedobject;
 type ramdump_device, dev_type;
 type rmnet_device, dev_type;
 type sda_block_device, dev_type;
+type sdc_block_device, dev_type;
 type sdb_block_device, dev_type;
 type sdd_block_device, dev_type;
 type sdf_block_device, dev_type;
