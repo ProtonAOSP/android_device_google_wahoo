@@ -10,6 +10,7 @@ add_service(per_mgr, per_mgr_service)
 typeattribute per_mgr binder_in_vendor_violators;
 binder_use(per_mgr)
 binder_call(per_mgr, per_proxy)
+binder_call(per_mgr, wcnss_service)
 
 allow per_mgr self:capability net_bind_service;
 

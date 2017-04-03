@@ -8,4 +8,5 @@ init_daemon_domain(chre)
 
 allow chre ion_device:chr_file { open read };
 allow chre qdsp_device:chr_file { ioctl open read };
+
 allow chre system_file:dir read;

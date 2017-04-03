@@ -1,0 +1,2 @@
+allow hal_usb_default sysfs_msm_subsys:dir search;
+allow hal_usb_default sysfs_msm_subsys:file r_file_perms;
