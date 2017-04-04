@@ -1,1 +1,5 @@
-vendor.qcom.PeripheralManager                  u:object_r:per_mgr_service:s0
+vendor.qcom.PeripheralManager                        u:object_r:per_mgr_service:s0
+rcs                                                  u:object_r:radio_service:s0
+qti.ims.ext                                          u:object_r:imscm_service:s0
+cneservice                                           u:object_r:cne_service:s0
+com.fingerprints.extension.IFingerprintNavigation    u:object_r:fingerprint_service:s0

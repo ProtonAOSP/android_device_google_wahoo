@@ -9,6 +9,11 @@ allow folio_daemon binder_device:chr_file rw_file_perms;
 # violations are handled
 typeattribute folio_daemon binder_in_vendor_violators;
 
+binder_use(folio_daemon)
+
+allow folio_daemon sensorservice_service:service_manager find;
+allow folio_daemon permission_service:service_manager find;
+
 userdebug_or_eng(`
 permissive folio_daemon;
 ')
