@@ -346,10 +346,12 @@ WPA += wpa_supplicant_wcn.conf
 WPA += wpa_supplicant
 PRODUCT_PACKAGES += $(WPA)
 
+# Wifi
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
     wificond \
-    wifilogd
+    wifilogd \
+    libwpa_client
 
 LIB_NL := libnl_2
 PRODUCT_PACKAGES += $(LIB_NL)
