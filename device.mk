@@ -349,6 +349,7 @@ PRODUCT_PACKAGES += $(WPA)
 # Wifi
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
+    android.hardware.wifi.offload@1.0-service \
     wificond \
     wifilogd \
     libwpa_client
