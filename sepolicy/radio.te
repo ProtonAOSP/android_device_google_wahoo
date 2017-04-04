@@ -1,3 +1,6 @@
 get_prop(radio, ims_prop)
 
+allow radio qmuxd_socket:dir search;
+allow radio qmuxd_socket:sock_file write;
+
 r_dir_file(radio, sysfs_msm_subsys)

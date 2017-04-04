@@ -44,6 +44,7 @@
 /dev/socket/ims_datad                           u:object_r:ims_socket:s0
 /dev/socket/ims_rtpd                            u:object_r:ims_socket:s0
 /dev/socket/cnd                                 u:object_r:cnd_socket:s0
+/dev/socket/chre                                u:object_r:chre_socket:s0
 /dev/socket/thermal-send-client                 u:object_r:thermal_socket:s0
 /dev/socket/thermal-recv-client                 u:object_r:thermal_socket:s0
 /dev/socket/thermal-recv-passive-client         u:object_r:thermal_socket:s0
@@ -54,13 +55,14 @@
 
 # dev block nodes
 /dev/block/sdc[0-9]+                            u:object_r:sdc_block_device:s0
-/dev/block/sdb[01]                              u:object_r:sdb_block_device:s0
+/dev/block/sdb[01]*                             u:object_r:sdb_block_device:s0
 /dev/block/sdd[0-9]+                            u:object_r:sdd_block_device:s0
 /dev/block/sdf[0-9]+                            u:object_r:sdf_block_device:s0
 /dev/block/sda[0-9]*                            u:object_r:sda_block_device:s0
 
 # files in sysfs
 /sys/class/uio(/.*)?                                                u:object_r:sysfs_uio:s0
+sys/devices/bt_wcn[0-9]+/rfkill/rfkill0/state                       u:object_r:sysfs_bluetooth_writable:s0
 /sys/devices/soc/a1800000\.qcom,rmtfs_rtel_sharedmem(/.*)?          u:object_r:sysfs_rmtfs:s0
 /sys/devices/soc/800f000\.qcom,spmi(/.*)?                           u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/4080000\.qcom,mss(/.*)?                            u:object_r:sysfs_msm_subsys:s0

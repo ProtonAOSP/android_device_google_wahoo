@@ -1,3 +1,4 @@
+allow hal_power_default perfd:unix_stream_socket connectto;
 allow hal_power_default perfd_socket:sock_file write;
 
 allow hal_power_default debugfs_rpm:file { open read getattr };

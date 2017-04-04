@@ -17,6 +17,7 @@ type smlog_dump_file, file_type, data_file_type;
 # /proc
 type proc_wifi_dbg, fs_type;
 
+type chre_socket, file_type;
 type qmuxd_socket, file_type;
 type netmgrd_socket, file_type;
 type thermal_socket, file_type;

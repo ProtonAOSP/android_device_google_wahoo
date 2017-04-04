@@ -3,6 +3,8 @@ type init_power_exec, exec_type, file_type;
 
 init_daemon_domain(init_power)
 
+set_prop(init_power, post_boot_prop)
+
 allow init_power shell_exec:file rx_file_perms;
 allow init_power toolbox_exec:file rx_file_perms;
 
