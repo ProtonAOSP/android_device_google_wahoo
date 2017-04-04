@@ -44,7 +44,6 @@
 /dev/socket/ims_datad                           u:object_r:ims_socket:s0
 /dev/socket/ims_rtpd                            u:object_r:ims_socket:s0
 /dev/socket/cnd                                 u:object_r:cnd_socket:s0
-/dev/socket/chre                                u:object_r:chre_socket:s0
 /dev/socket/thermal-send-client                 u:object_r:thermal_socket:s0
 /dev/socket/thermal-recv-client                 u:object_r:thermal_socket:s0
 /dev/socket/thermal-recv-passive-client         u:object_r:thermal_socket:s0
