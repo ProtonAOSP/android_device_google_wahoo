@@ -439,9 +439,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
 # Share fstab between devices
-# enables File Based Encryption (FBE)
-PRODUCT_COPY_FILES += \
-    device/google/wahoo/fstab.hardware:root/fstab.$(PRODUCT_HARDWARE)
+# TODO
 
 # Provide meaningful APN configuration
 PRODUCT_COPY_FILES += \
