@@ -1,1 +1,3 @@
 type per_mgr_service,             service_manager_type;
+type cne_service,                 service_manager_type;
+type imscm_service,               service_manager_type;
