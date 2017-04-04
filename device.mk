@@ -301,6 +301,11 @@ PRODUCT_PACKAGES += \
     fs_config_dirs \
     fs_config_files
 
+# Context hub HAL
+PRODUCT_PACKAGES += \
+    android.hardware.contexthub@1.0-impl.generic \
+    android.hardware.contexthub@1.0-service
+
 # Boot control HAL
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl \
