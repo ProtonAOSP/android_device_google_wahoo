@@ -53,11 +53,17 @@
 /dev/ttyHS0                                     u:object_r:hci_attach_dev:s0
 
 # dev block nodes
-/dev/block/sdc[0-9]+                            u:object_r:sdc_block_device:s0
-/dev/block/sdb[01]*                             u:object_r:sdb_block_device:s0
 /dev/block/sdd[0-9]+                            u:object_r:sdd_block_device:s0
 /dev/block/sdf[0-9]+                            u:object_r:sdf_block_device:s0
-/dev/block/sda[0-9]*                            u:object_r:sda_block_device:s0
+
+# A/B partitions
+/dev/block/sda[0-9]+                            u:object_r:sda_block_device:s0
+
+# Block device holding the GPT, where the A/B attributes are stored.
+/dev/block/sda                                  u:object_r:gpt_block_device:s0
+
+# Block devices for the drive that holds the xbl_a and xbl_b partitions.
+/dev/block/sd[bc]1?                             u:object_r:xbl_block_device:s0
 
 # files in sysfs
 /sys/class/uio(/.*)?                                                u:object_r:sysfs_uio:s0
