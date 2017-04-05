@@ -27,12 +27,24 @@ using android::hardware::joinRpcThreadpool;
 using android::hardware::usb::V1_0::IUsb;
 using android::hardware::usb::V1_0::implementation::Usb;
 
+using android::status_t;
+using android::OK;
+
 int main() {
     android::sp<IUsb> service = new Usb();
 
     configureRpcThreadpool(1, true /*callerWillJoin*/);
-    service->registerAsService();
+    status_t status = service->registerAsService();
+
+    if (status != OK) {
+        ALOGE("Cannot register USB HAL service");
+        return 1;
+    }
 
     ALOGI("USB HAL Ready.");
     joinRpcThreadpool();
+    // Under noraml cases, execution will not reach this line.
+    ALOGI("USB HAL failed to join thread pool.");
+    return 1;
+
 }
