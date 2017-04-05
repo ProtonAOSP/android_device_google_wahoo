@@ -489,3 +489,7 @@ PRODUCT_PACKAGES += \
 # Use daemon to detect folio open/close
 PRODUCT_PACKAGES += \
     folio_daemon
+
+# Storage: for factory reset protection feature
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.frp.pst=/dev/block/platform/soc/1da4000.ufshc/by-name/frp
