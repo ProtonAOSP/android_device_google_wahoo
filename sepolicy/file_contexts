@@ -61,7 +61,9 @@
 
 # files in sysfs
 /sys/class/uio(/.*)?                                                u:object_r:sysfs_uio:s0
-sys/devices/bt_wcn[0-9]+/rfkill/rfkill0/state                       u:object_r:sysfs_bluetooth_writable:s0
+/sys/class/rfkill(/.*)?                                             u:object_r:sysfs_bluetooth_writable:s0
+/sys/devices/bt_wcn3990/rfkill(/.*)?                                u:object_r:sysfs_bluetooth_writable:s0
+/sys/devices/bt_wcn3990/extldo                                      u:object_r:sysfs_bluetooth_writable:s0
 /sys/devices/soc/a1800000\.qcom,rmtfs_rtel_sharedmem(/.*)?          u:object_r:sysfs_rmtfs:s0
 /sys/devices/soc/800f000\.qcom,spmi(/.*)?                           u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/4080000\.qcom,mss(/.*)?                            u:object_r:sysfs_msm_subsys:s0
