@@ -90,6 +90,8 @@ sys/devices/bt_wcn[0-9]+/rfkill/rfkill0/state                       u:object_r:s
 /sys/devices/soc/caa4000\.qcom,fd(/.*)?                             u:object_r:sysfs_camera:s0
 /sys/bus/msm_subsys(/.*)?                                           u:object_r:sysfs_msm_subsys:s0
 /sys/module/subsystem_restart                                       u:object_r:sysfs_msm_subsys_restart:s0
+/sys/kernel/boot_adsp/boot                                          u:object_r:sysfs_msm_subsys:s0
+/sys/kernel/boot_slpi/boot                                          u:object_r:sysfs_msm_subsys:s0
 
 # files in debugfs
 /sys/kernel/debug/rpm_stats                      u:object_r:debugfs_rpm:s0
@@ -137,6 +139,10 @@ sys/devices/bt_wcn[0-9]+/rfkill/rfkill0/state                       u:object_r:s
 /vendor/bin/chre                u:object_r:chre_exec:s0
 /vendor/bin/folio_daemon        u:object_r:folio_daemon_exec:s0
 /vendor/bin/time_daemon         u:object_r:time_daemon_exec:s0
+/vendor/bin/init\.qcom\.devstart\.sh                                 u:object_r:init-qcom-devstart-sh_exec:s0
+/vendor/bin/init\.qcom\.ipastart\.sh                                 u:object_r:init-qcom-ipastart-sh_exec:s0
+/vendor/bin/init\.insmod\.sh                                         u:object_r:init-insmod-sh_exec:s0
+/vendor/etc/init\.insmod\.cfg                                        u:object_r:init-insmod-sh_exec:s0
 
 # data files
 /data/misc/radio(/.*)?                 u:object_r:radio_data_file:s0

@@ -1,0 +1,9 @@
+type init-qcom-ipastart-sh, domain;
+type init-qcom-ipastart-sh_exec, exec_type, file_type;
+
+init_daemon_domain(init-qcom-ipastart-sh)
+
+allow init-qcom-ipastart-sh shell_exec:file rx_file_perms;
+
+# Set /dev/ipa to 1
+allow init-qcom-ipastart-sh ipa_dev:chr_file w_file_perms;

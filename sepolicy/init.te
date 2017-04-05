@@ -2,14 +2,10 @@
 allow init tmpfs:lnk_file create;
 allow init configfs:lnk_file create;
 
-allow init self:capability sys_module;
-
 allow init sda_block_device:blk_file relabelto;
-allow init system_file:system module_load;
 allow init firmware_file:dir mounton;
 allow init configfs:file w_file_perms;
 
 allow init tty_device:chr_file rw_file_perms;
-allow init ipa_dev:chr_file w_file_perms;
 
 allow init persist_file:dir mounton;
