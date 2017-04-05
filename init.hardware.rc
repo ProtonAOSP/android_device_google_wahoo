@@ -71,6 +71,59 @@ on init
     write /dev/stune/top-app/schedtune.boost 10
     write /dev/stune/top-app/schedtune.prefer_idle 1
 
+    # Setup cpusets used by the VR services.
+    mkdir /dev/cpuset/kernel 0750 root system
+    write /dev/cpuset/kernel/cpus 0
+    write /dev/cpuset/kernel/mems 0
+    chown system system /dev/cpuset/kernel/tasks
+    chmod 0660 /dev/cpuset/kernel/tasks
+
+    mkdir /dev/cpuset/system 0750 root system
+    write /dev/cpuset/system/cpus 0
+    write /dev/cpuset/system/mems 0
+    chown system system /dev/cpuset/system/tasks
+    chmod 0660 /dev/cpuset/system/tasks
+
+    mkdir /dev/cpuset/system/performance 0750 root system
+    write /dev/cpuset/system/performance/cpus 0
+    write /dev/cpuset/system/performance/mems 0
+    chown system system /dev/cpuset/system/performance/tasks
+    chmod 0660 /dev/cpuset/system/performance/tasks
+
+    mkdir /dev/cpuset/system/background 0750 root system
+    write /dev/cpuset/system/background/cpus 0
+    write /dev/cpuset/system/background/mems 0
+    chown system system /dev/cpuset/system/background/tasks
+    chmod 0660 /dev/cpuset/system/background/tasks
+
+    mkdir /dev/cpuset/application 0750 root system
+    write /dev/cpuset/application/cpus 0
+    write /dev/cpuset/application/mems 0
+    chown system system /dev/cpuset/application/tasks
+    chmod 0660 /dev/cpuset/application/tasks
+
+    mkdir /dev/cpuset/application/performance 0750 root system
+    write /dev/cpuset/application/performance/cpus 0
+    write /dev/cpuset/application/performance/mems 0
+    chown system system /dev/cpuset/application/performance/tasks
+    chmod 0660 /dev/cpuset/application/performance/tasks
+
+    mkdir /dev/cpuset/application/background 0750 root system
+    write /dev/cpuset/application/background/cpus 0
+    write /dev/cpuset/application/background/mems 0
+    chown system system /dev/cpuset/application/background/tasks
+    chmod 0660 /dev/cpuset/application/background/tasks
+
+    # Create UDS structure for base VR services.
+    mkdir /dev/socket/pdx 0775 system system
+    mkdir /dev/socket/pdx/system 0775 system system
+    mkdir /dev/socket/pdx/system/buffer_hub 0775 system system
+    mkdir /dev/socket/pdx/system/performance 0775 system system
+    mkdir /dev/socket/pdx/system/vr 0775 system system
+    mkdir /dev/socket/pdx/system/vr/display 0775 system system
+    mkdir /dev/socket/pdx/system/vr/pose 0775 system system
+    mkdir /dev/socket/pdx/system/vr/sensors 0775 system system
+
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
@@ -270,6 +323,17 @@ on boot
     # Increased technology maximums should be reflected here.
     write /proc/sys/net/core/rmem_max  8388608
 
+    # Update DVR cpusets to boot-time values.
+    write /dev/cpuset/kernel/cpus 0-3
+    write /dev/cpuset/system/cpus 0-3
+    write /dev/cpuset/system/performance/cpus 0-3
+    write /dev/cpuset/system/background/cpus 0-3
+    write /dev/cpuset/system/cpus 0-3
+    write /dev/cpuset/application/cpus 0-3
+    write /dev/cpuset/application/performance/cpus 0-3
+    write /dev/cpuset/application/background/cpus 0-3
+    write /dev/cpuset/application/cpus 0-3
+
     # Bluetooth
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/state
@@ -351,6 +415,15 @@ on property:sys.boot_completed=1
     write /dev/cpuset/foreground/cpus 0-5
     write /dev/cpuset/background/cpus 0-1
     write /dev/cpuset/system-background/cpus 0-3
+
+    # Update DVR cpusets to runtime values.
+    write /dev/cpuset/kernel/cpus 0,1
+    write /dev/cpuset/system/performance/cpus 2
+    write /dev/cpuset/system/background/cpus 0
+    write /dev/cpuset/system/cpus 0,2
+    write /dev/cpuset/application/performance/cpus 3
+    write /dev/cpuset/application/background/cpus 1
+    write /dev/cpuset/application/cpus 1,3
 
 on property:init.svc.per_mgr=running
     start per_proxy
