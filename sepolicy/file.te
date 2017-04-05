@@ -38,4 +38,6 @@ type netmgr_data_file, file_type, data_file_type;
 
 type nfc_vendor_data_file, file_type, data_file_type;
 
+type radio_vendor_data_file, file_type, data_file_type, mlstrustedobject;
+
 type ramdump_data_file, file_type, data_file_type, mlstrustedobject;

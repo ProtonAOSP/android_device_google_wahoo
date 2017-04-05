@@ -16,7 +16,8 @@
 
 on post-fs-data
     # Modem logging collection
-    mkdir /data/diag_logs 0777 system system
+    mkdir /data/vendor/radio 0775 radio radio
+    mkdir /data/vendor/radio/diag_logs 0777 system system
     # WLAN logging collection
     mkdir /data/cnss_diag 0777 system system
 
