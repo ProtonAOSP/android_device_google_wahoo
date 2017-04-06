@@ -1,0 +1,12 @@
+type logger_app, domain;
+
+userdebug_or_eng(`
+  app_domain(logger_app)
+  net_domain(logger_app)
+
+  allow logger_app app_api_service:service_manager find;
+  allow logger_app surfaceflinger_service:service_manager find;
+
+  allow logger_app radio_vendor_data_file:file { create open unlink getattr setattr read write };
+  allow logger_app radio_vendor_data_file:dir { create open rmdir add_name remove_name getattr setattr search read write };
+')

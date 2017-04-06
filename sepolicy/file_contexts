@@ -150,6 +150,7 @@
 
 # data files
 /data/misc/radio(/.*)?                 u:object_r:radio_data_file:s0
+/data/vendor/radio(/.*)?               u:object_r:radio_vendor_data_file:s0
 /data/misc/netmgr(/.*)?                u:object_r:netmgr_data_file:s0
 /data/misc/location(/.*)?              u:object_r:location_data_file:s0
 /data/ramdump(/.*)?                    u:object_r:ramdump_data_file:s0
