@@ -49,37 +49,57 @@
 #include "performance.h"
 #include "power-common.h"
 
-#define PLATFORM_SLEEP_MODES 2
-#define XO_VOTERS 4
-#define VMIN_VOTERS 0
-
-#define RPM_PARAMETERS 4
-#define NUM_PARAMETERS 12
-
-#ifndef RPM_STAT
-#define RPM_STAT "/d/rpm_stats"
-#endif
-
-#ifndef RPM_MASTER_STAT
-#define RPM_MASTER_STAT "/d/rpm_master_stats"
+#ifndef RPM_SYSTEM_STAT
+#define RPM_SYSTEM_STAT "/d/system_stats"
 #endif
 
 /* RPM runs at 19.2Mhz. Divide by 19200 for msec */
 #define RPM_CLK 19200
 
-const char *parameter_names[] = {
-    "vlow_count",
-    "accumulated_vlow_time",
-    "vmin_count",
-    "accumulated_vmin_time",
-    "xo_accumulated_duration",
-    "xo_count",
-    "xo_accumulated_duration",
-    "xo_count",
-    "xo_accumulated_duration",
-    "xo_count",
-    "xo_accumulated_duration",
-    "xo_count"
+#define ARRAY_SIZE(x) (sizeof((x))/sizeof((x)[0]))
+#define LINE_SIZE 128
+
+#define MAX_RPM_PARAMS 2
+#define PLATFORM_SLEEP_MODES RPM_MODE_MAX
+#define XO_VOTERS (MAX_STATS - XO_VOTERS_START)
+#define VMIN_VOTERS 0
+
+enum stats_type {
+    RPM_MODE_XO,
+    RPM_MODE_VMIN,
+    RPM_MODE_MAX,
+    XO_VOTERS_START = RPM_MODE_MAX,
+    VOTER_APSS = XO_VOTERS_START,
+    VOTER_MPSS,
+    VOTER_ADSP,
+    VOTER_SLPI,
+    MAX_STATS,
+};
+
+struct stat_pair {
+    enum stats_type stat;
+    const char *label;
+    const char **parameters;
+    size_t num_parameters;
+};
+
+const char *rpm_stat_params[MAX_RPM_PARAMS] = {
+    "count",
+    "actual last sleep(msec)",
+};
+
+const char *master_stat_params[MAX_RPM_PARAMS] = {
+    "Accumulated XO duration",
+    "XO Count",
+};
+
+struct stat_pair rpm_stat_map[] = {
+    { RPM_MODE_XO,   "RPM Mode:vlow", rpm_stat_params, ARRAY_SIZE(rpm_stat_params) },
+    { RPM_MODE_VMIN, "RPM Mode:vmin", rpm_stat_params, ARRAY_SIZE(rpm_stat_params) },
+    { VOTER_APSS,    "APSS",    master_stat_params, ARRAY_SIZE(master_stat_params) },
+    { VOTER_MPSS,    "MPSS",    master_stat_params, ARRAY_SIZE(master_stat_params) },
+    { VOTER_ADSP,    "ADSP",    master_stat_params, ARRAY_SIZE(master_stat_params) },
+    { VOTER_SLPI,    "SLPI",    master_stat_params, ARRAY_SIZE(master_stat_params) },
 };
 
 static int saved_dcvs_cpu0_slack_max = -1;
@@ -470,109 +490,126 @@ static int get_voter_list(struct power_module *UNUSED(module), size_t *voter) {
    return 0;
 }
 
-static int extract_stats(uint64_t *list, char *file,
-    unsigned int num_parameters, unsigned int index) {
-    FILE *fp;
-    ssize_t read;
-    size_t len;
+static int parse_stats(const char **params, size_t params_size,
+                       uint64_t *list, FILE *fp) {
+    ssize_t nread;
+    size_t len = LINE_SIZE;
     char *line;
-    int ret;
+    size_t params_read = 0;
+    size_t i;
 
-    fp = fopen(file, "r");
-    if (fp == NULL) {
-        ret = -errno;
-        ALOGE("%s: failed to open: %s", __func__, strerror(errno));
-        return ret;
+    line = malloc(len);
+    if (!line) {
+        ALOGE("%s: no memory to hold line", __func__);
+        return -ENOMEM;
     }
 
-    for (line = NULL, len = 0;
-         ((read = getline(&line, &len, fp) != -1) && (index < num_parameters));
-         free(line), line = NULL, len = 0) {
-        uint64_t value;
-        char* offset;
-
-        size_t begin = strspn(line, " \t");
-        if (strncmp(line + begin, parameter_names[index], strlen(parameter_names[index]))) {
+    while ((params_read < params_size) &&
+        (nread = getline(&line, &len, fp) > 0)) {
+        char *key = line + strspn(line, " \t");
+        char *value = strchr(key, ':');
+        if (!value || (value > (line + len)))
             continue;
-        }
+        *value++ = '\0';
 
-        offset = memchr(line, ':', len);
-        if (!offset) {
-            continue;
-        }
-
-        if (!strcmp(file, RPM_MASTER_STAT)) {
-            /* RPM_MASTER_STAT is reported in hex */
-            sscanf(offset, ":%" SCNx64, &value);
-            /* Duration is reported in rpm SLEEP TICKS */
-            if (!strcmp(parameter_names[index], "xo_accumulated_duration")) {
-                value /= RPM_CLK;
+        for (i = 0; i < params_size; i++) {
+            if (!strcmp(key, params[i])) {
+                list[i] = strtoull(value, NULL, 0);
+                params_read++;
+                break;
             }
-        } else {
-            /* RPM_STAT is reported in decimal */
-            sscanf(offset, ":%" SCNu64, &value);
         }
-        list[index] = value;
-        index++;
     }
     free(line);
 
-    fclose(fp);
     return 0;
+}
+
+static int extract_stats(uint64_t *list, char *file,
+                         struct stat_pair *map, size_t map_size) {
+    FILE *fp;
+    ssize_t read;
+    size_t len = LINE_SIZE;
+    char *line;
+    size_t i, stats_read = 0;
+    int ret = 0;
+
+    fp = fopen(file, "re");
+    if (fp == NULL) {
+        ALOGE("%s: failed to open '%s': %s", __func__, file, strerror(errno));
+        return -errno;
+    }
+
+    line = malloc(len);
+    if (!line) {
+        ALOGE("%s: no memory to hold line", __func__);
+        fclose(fp);
+        return -ENOMEM;
+    }
+
+    while ((stats_read < map_size) && (read = getline(&line, &len, fp) != -1)) {
+        size_t begin = strspn(line, " \t");
+
+        for (i = 0; i < map_size; i++) {
+            if (!strncmp(line + begin, map[i].label, strlen(map[i].label))) {
+                stats_read++;
+                break;
+            }
+        }
+
+        if (i == map_size)
+            continue;
+
+        ret = parse_stats(map[i].parameters, map[i].num_parameters,
+                          &list[map[i].stat * MAX_RPM_PARAMS], fp);
+        if (ret < 0)
+            break;
+    }
+    free(line);
+    fclose(fp);
+
+    return ret;
 }
 
 static int get_platform_low_power_stats(struct power_module *UNUSED(module),
     power_state_platform_sleep_state_t *list) {
-    uint64_t stats[sizeof(parameter_names)] = {0};
+    uint64_t stats[MAX_STATS * MAX_RPM_PARAMS] = {0};
+    uint64_t *values;
     int ret;
+    unsigned i;
 
     if (!list) {
         return -EINVAL;
     }
 
-    ret = extract_stats(stats, RPM_STAT, RPM_PARAMETERS, 0);
-
-    if (ret) {
-        return ret;
-    }
-
-    ret = extract_stats(stats, RPM_MASTER_STAT, NUM_PARAMETERS, RPM_PARAMETERS);
-
+    ret = extract_stats(stats, RPM_SYSTEM_STAT,
+                        rpm_stat_map, ARRAY_SIZE(rpm_stat_map));
     if (ret) {
         return ret;
     }
 
     /* Update statistics for XO_shutdown */
     strcpy(list[0].name, "XO_shutdown");
-    list[0].total_transitions = stats[0];
-    list[0].residency_in_msec_since_boot = stats[1];
+    values = stats + (RPM_MODE_XO * MAX_RPM_PARAMS);
+    list[0].total_transitions = values[0];
+    list[0].residency_in_msec_since_boot = values[1];
     list[0].supported_only_in_suspend = false;
     list[0].number_of_voters = XO_VOTERS;
 
-    /* Update statistics for APSS voter */
-    strcpy(list[0].voters[0].name, "APSS");
-    list[0].voters[0].total_time_in_msec_voted_for_since_boot = stats[4];
-    list[0].voters[0].total_number_of_times_voted_since_boot = stats[5];
-
-    /* Update statistics for MPSS voter */
-    strcpy(list[0].voters[1].name, "MPSS");
-    list[0].voters[1].total_time_in_msec_voted_for_since_boot = stats[6];
-    list[0].voters[1].total_number_of_times_voted_since_boot = stats[7];
-
-    /* Update statistics for ADSP voter */
-    strcpy(list[0].voters[2].name, "ADSP");
-    list[0].voters[2].total_time_in_msec_voted_for_since_boot = stats[8];
-    list[0].voters[2].total_number_of_times_voted_since_boot = stats[9];
-
-    /* Update statistics for SLPI voter */
-    strcpy(list[0].voters[3].name, "SLPI");
-    list[0].voters[3].total_time_in_msec_voted_for_since_boot = stats[10];
-    list[0].voters[3].total_number_of_times_voted_since_boot = stats[11];
+    for (i = 0; i < XO_VOTERS; i++) {
+        int voter = i + XO_VOTERS_START;
+        strlcpy(list[0].voters[i].name, rpm_stat_map[voter].label,
+                POWER_STATE_VOTER_NAME_MAX_LENGTH);
+        values = stats + (voter * MAX_RPM_PARAMS);
+        list[0].voters[i].total_time_in_msec_voted_for_since_boot = values[0] / RPM_CLK;
+        list[0].voters[i].total_number_of_times_voted_since_boot = values[1];
+    }
 
     /* Update statistics for VMIN state */
     strcpy(list[1].name, "VMIN");
-    list[1].total_transitions = stats[2];
-    list[1].residency_in_msec_since_boot = stats[3];
+    values = stats + (RPM_MODE_VMIN * MAX_RPM_PARAMS);
+    list[1].total_transitions = values[0];
+    list[1].residency_in_msec_since_boot = values[1];
     list[1].supported_only_in_suspend = false;
     list[1].number_of_voters = VMIN_VOTERS;
 
