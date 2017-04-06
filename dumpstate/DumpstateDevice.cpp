@@ -58,6 +58,7 @@ static void getModemLogs(int fd)
         CommandOptions options = CommandOptions::WithTimeout(120).Build();
         std::string modemLogAllDir = modemLogDir + "/modem_log";
         std::string qdbFile = "/firmware/image/qdsp6m.qdb";
+        std::string alwaysOnLogs = "/data/vendor/radio/diag_logs/always_on";
         std::vector<std::string> rilAndNetmgrLogs
             {
               "/data/misc/radio/ril_log",
@@ -75,6 +76,10 @@ static void getModemLogs(int fd)
             std::string copyCmd= "/system/bin/cp " + qdbFile + " " + modemLogAllDir;
             RunCommandToFd(fd, "CP QDB FILE", { "/system/bin/sh", "-c", copyCmd.c_str()}, options);
         }
+
+        // Get always on logs
+        std::string copyCmd= "/system/bin/cp -rf " + alwaysOnLogs + " " + modemLogAllDir;
+        RunCommandToFd(fd, "CP ALWAYS ON LOGS", { "/system/bin/sh", "-c", copyCmd.c_str()}, options);
 
         for (std::string logFile : rilAndNetmgrLogs)
         {
