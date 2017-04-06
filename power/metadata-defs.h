@@ -47,7 +47,7 @@ struct video_decode_metadata_t {
 };
 
 int parse_metadata(char *metadata, char **metadata_saveptr,
-    char *attribute, int attribute_size, char *value, int value_size);
+    char *attribute, unsigned int attribute_size, char *value, unsigned int value_size);
 int parse_video_encode_metadata(char *metadata,
     struct video_encode_metadata_t *video_encode_metadata);
 int parse_video_decode_metadata(char *metadata,

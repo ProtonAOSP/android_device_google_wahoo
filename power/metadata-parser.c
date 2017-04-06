@@ -34,7 +34,7 @@
 #include "metadata-defs.h"
 
 int parse_metadata(char *metadata, char **metadata_saveptr,
-        char *attribute, int attribute_size, char *value, int value_size)
+        char *attribute, unsigned int attribute_size, char *value, unsigned int value_size)
 {
     char *attribute_string;
     char *attribute_value_delim;
@@ -50,19 +50,12 @@ int parse_metadata(char *metadata, char **metadata_saveptr,
 
     if ((attribute_value_delim = strchr(attribute_string,
                     ATTRIBUTE_VALUE_DELIM)) != NULL) {
-        bytes_to_copy = MIN((attribute_value_delim - attribute_string),
-                attribute_size - 1);
-        /* Replace strncpy with strlcpy
-         * Add +1 to bytes_to_copy as strlcpy copies size-1 bytes */
-        strlcpy(attribute, attribute_string,
-                bytes_to_copy+1);
+        unsigned int attribute_len = (unsigned int) (attribute_value_delim - attribute_string);
+        /* copy only attribute len + NUL character, or as much as can be fit */
+        bytes_to_copy = MIN(attribute_len + 1, attribute_size);
 
-        bytes_to_copy = MIN(strlen(attribute_string) - strlen(attribute) - 1,
-                value_size - 1);
-        /* Replace strncpy with strlcpy
-         * Add +1 to bytes_to_copy as strlcpy copies size-1 bytes */
-        strlcpy(value, attribute_value_delim + 1,
-                bytes_to_copy+1);
+        strlcpy(attribute, attribute_string, bytes_to_copy);
+        strlcpy(value, attribute_value_delim + 1, value_size);
     }
 
     return METADATA_PARSING_CONTINUE;

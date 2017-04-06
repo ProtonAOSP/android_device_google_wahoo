@@ -90,7 +90,7 @@ static int saved_interactive_mode = -1;
 static int slack_node_rw_failed = 0;
 static int display_hint_sent;
 
-static void power_init(struct power_module *module)
+static void power_init(struct power_module *UNUSED(module))
 {
     ALOGI("QCOM power HAL initing.");
 }
@@ -201,8 +201,9 @@ static void process_video_encode_hint(void *metadata)
     }
 }
 
-int __attribute__ ((weak)) power_hint_override(struct power_module *module, power_hint_t hint,
-        void *data)
+int __attribute__ ((weak)) power_hint_override(struct power_module *UNUSED(module),
+                                               power_hint_t UNUSED(hint),
+                                               void *UNUSED(data))
 {
     return HINT_NONE;
 }
@@ -247,7 +248,8 @@ static void power_hint(struct power_module *module, power_hint_t hint,
     }
 }
 
-int __attribute__ ((weak)) set_interactive_override(struct power_module *module, int on)
+int __attribute__ ((weak)) set_interactive_override(struct power_module *UNUSED(module),
+                                                    int UNUSED(on))
 {
     return HINT_NONE;
 }
@@ -457,11 +459,11 @@ void set_interactive(struct power_module *module, int on)
     saved_interactive_mode = !!on;
 }
 
-static ssize_t get_number_of_platform_modes(struct power_module *module) {
+static ssize_t get_number_of_platform_modes(struct power_module *UNUSED(module)) {
    return PLATFORM_SLEEP_MODES;
 }
 
-static int get_voter_list(struct power_module *module, size_t *voter) {
+static int get_voter_list(struct power_module *UNUSED(module), size_t *voter) {
    voter[0] = XO_VOTERS;
    voter[1] = VMIN_VOTERS;
 
@@ -519,7 +521,7 @@ static int extract_stats(uint64_t *list, char *file,
     return 0;
 }
 
-static int get_platform_low_power_stats(struct power_module *module,
+static int get_platform_low_power_stats(struct power_module *UNUSED(module),
     power_state_platform_sleep_state_t *list) {
     uint64_t stats[sizeof(parameter_names)] = {0};
     int ret;
@@ -577,7 +579,7 @@ static int get_platform_low_power_stats(struct power_module *module,
     return 0;
 }
 
-static int power_open(const hw_module_t* module, const char* name,
+static int power_open(const hw_module_t* UNUSED(module), const char* name,
                     hw_device_t** device)
 {
     ALOGD("%s: enter; name=%s", __FUNCTION__, name);
