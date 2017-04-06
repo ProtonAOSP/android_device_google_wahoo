@@ -26,6 +26,8 @@ allow netmgrd sysfs_soc:file r_file_perms;
 allow netmgrd sysfs_msm_subsys:dir r_dir_perms;
 allow netmgrd sysfs_msm_subsys:file r_file_perms;
 
+allow netmgrd system_file:file lock;
+
 r_dir_file(netmgrd, sysfs_msm_subsys)
 
 wakelock_use(netmgrd)

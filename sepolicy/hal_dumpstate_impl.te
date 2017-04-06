@@ -31,6 +31,12 @@ r_dir_file(hal_dumpstate_impl, sysfs_uio)
 r_dir_file(hal_dumpstate_impl, sysfs_rmtfs)
 r_dir_file(hal_dumpstate_impl, sysfs_msm_subsys)
 
+allow hal_dumpstate_impl sysfs_thermal:dir search;
+allow hal_dumpstate_impl sysfs_thermal:file r_file_perms;
+
+allow hal_dumpstate_impl debugfs_ion:dir r_dir_perms;
+allow hal_dumpstate_impl debugfs_ion:file r_file_perms;
+
 # Access to files for dumping
 allow hal_dumpstate_impl  sysfs:dir r_dir_perms;
 # rpm stat

@@ -68,6 +68,7 @@
 
 # files in sysfs
 /sys/class/uio(/.*)?                                                u:object_r:sysfs_uio:s0
+/sys/class/devfreq(/.*)?                                            u:object_r:sysfs_msm_subsys:s0
 /sys/class/rfkill(/.*)?                                             u:object_r:sysfs_bluetooth_writable:s0
 /sys/devices/bt_wcn3990/rfkill(/.*)?                                u:object_r:sysfs_bluetooth_writable:s0
 /sys/devices/bt_wcn3990/extldo                                      u:object_r:sysfs_bluetooth_writable:s0
@@ -79,6 +80,7 @@
 /sys/devices/soc/5c00000\.qcom,ssc(/.*)?                            u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/c900000\.qcom,mdss_rotator(/.*)?                   u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/c900000\.qcom,mdss_mdp/caps                        u:object_r:sysfs_mdss_mdp_caps:s0
+/sys/devices/soc/c17a000\.i2c/i2c-6/6-005a/leds(/.*)?               u:object_r:sysfs_leds:s0
 /sys/devices/soc/c900000\.qcom,mdss_mdp/c900000\.qcom,mdss_mdp:qcom,mdss_fb_primary/leds(/.*)? u:object_r:sysfs_leds:s0
 /sys/devices/soc/800f000\.qcom,spmi/spmi-0/spmi0-03/800f000\.qcom,spmi:qcom,pmi8998@3:qcom,leds@d000/leds(/.*)? u:object_r:sysfs_leds:s0
 /sys/devices/soc/5000000\.qcom,kgsl-3d0(/.*)?                       u:object_r:sysfs_msm_subsys:s0
@@ -105,6 +107,7 @@
 # files in debugfs
 /sys/kernel/debug/rpm_stats                      u:object_r:debugfs_rpm:s0
 /sys/kernel/debug/rpm_master_stats               u:object_r:debugfs_rpm:s0
+/sys/kernel/debug/ion(/.*)?                      u:object_r:debugfs_ion:s0
 
 # files in /system
 /system/bin/init\.power\.sh            u:object_r:init_power_exec:s0

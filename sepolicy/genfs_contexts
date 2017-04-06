@@ -3,5 +3,6 @@ genfscon proc /debugdriver/driverdump                 u:object_r:proc_wifi_dbg:s
 
 genfscon sysfs /devices/soc/soc:qcom,cpubw            u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/soc/soc:qcom,mincpubw         u:object_r:sysfs_msm_subsys:s0
+genfscon sysfs /class/devfreq                         u:object_r:sysfs_msm_subsys:s0
 
 genfscon debugfs /kgsl/proc                           u:object_r:debugfs_kgsl:s0

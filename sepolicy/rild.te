@@ -9,6 +9,8 @@ allow rild qmuxd_socket:sock_file create;
 
 unix_socket_connect(rild, netmgrd, netmgrd)
 
+allow rild vendor_file:file { execute_no_trans lock };
+
 allow rild per_mgr_service:service_manager find;
 allow rild audioserver_service:service_manager find;
 

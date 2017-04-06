@@ -18,3 +18,14 @@ allow system_server persist_sensors_file:file r_file_perms;
 allow system_server location_data_file:dir create_dir_perms;
 allow system_server location_data_file:file create_file_perms;
 allow system_server wlan_device:chr_file rw_file_perms;
+
+# TODO(b/30675296): Remove following dontaudit's upon resolution of this bug
+# The timerslack_ns denials spam the system really horribly
+dontaudit system_server untrusted_app_25:file write;
+dontaudit system_server platform_app:file write;
+dontaudit system_server system_app:file write;
+dontaudit system_server audioserver:file write;
+dontaudit system_server priv_app:file write;
+dontaudit system_server untrusted_app:file write;
+dontaudit system_server radio:file write;
+dontaudit system_server hal_audio_default:file write;
