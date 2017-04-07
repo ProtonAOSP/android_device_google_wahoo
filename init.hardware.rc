@@ -565,7 +565,6 @@ service port-bridge /vendor/bin/port-bridge
     class main
     user radio
     group radio system inet
-    disabled
     oneshot
 
 service qti /vendor/bin/qti
