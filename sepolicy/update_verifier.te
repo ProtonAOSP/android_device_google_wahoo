@@ -1,2 +1,1 @@
 allow update_verifier block_device:dir r_dir_perms;
-allow update_verifier sda_block_device:blk_file rw_file_perms;

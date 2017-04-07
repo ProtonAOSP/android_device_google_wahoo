@@ -2,7 +2,6 @@
 allow init tmpfs:lnk_file create;
 allow init configfs:lnk_file create;
 
-allow init sda_block_device:blk_file relabelto;
 allow init firmware_file:dir mounton;
 allow init configfs:file w_file_perms;
 
