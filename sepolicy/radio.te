@@ -3,7 +3,14 @@ get_prop(radio, ims_prop)
 allow radio qmuxd_socket:dir search;
 allow radio qmuxd_socket:sock_file write;
 
+allow radio vendor_file:lnk_file r_file_perms;
+allow radio vendor_framework_file:file r_file_perms;
+
 add_service(radio, radio_service)
+
+# TODO(b/37212952): Remove this once imscm_service switches over to using
+# vendorservicemanager
 add_service(radio, imscm_service)
+auditallow radio imscm_service:service_manager { add find };
 
 r_dir_file(radio, sysfs_msm_subsys)

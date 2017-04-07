@@ -18,6 +18,7 @@ allow perfd post_boot_prop:file r_file_perms;
 allow perfd proc:file rw_file_perms;
 allow perfd sysfs_soc:dir search;
 allow perfd sysfs_soc:file r_file_perms;
+allow perfd sysfs_msm_subsys:file w_file_perms;
 
 allow perfd perfd_socket:sock_file write;
 

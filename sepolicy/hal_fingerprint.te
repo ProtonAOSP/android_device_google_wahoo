@@ -7,4 +7,4 @@ allow hal_fingerprint sysfs_msm_subsys:dir search;
 allow hal_fingerprint sysfs_msm_subsys:file r_file_perms;
 allow hal_fingerprint tee_device:file rw_file_perms;
 allow hal_fingerprint tee_device:chr_file rw_file_perms;
-allow hal_fingerprint uhid_device:chr_file w_file_perms;
+allow hal_fingerprint uhid_device:chr_file rw_file_perms;
