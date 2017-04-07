@@ -385,7 +385,7 @@ service perfd /vendor/bin/perfd
    group root readproc
    socket perfd seqpacket 0666 root system
 
-service thermal-engine /vendor/bin/thermal-engine
+service thermal-engine /vendor/bin/thermal-engine -c /vendor/etc/thermal-engine.conf
    class main
    user root
    group root system
