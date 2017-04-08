@@ -7,8 +7,7 @@ wakelock_use(rmt_storage)
 
 allow rmt_storage self:capability { net_bind_service setgid setpcap setuid };
 
-allow rmt_storage sdd_block_device:blk_file rw_file_perms;
-allow rmt_storage sdf_block_device:blk_file rw_file_perms;
+allow rmt_storage modem_block_device:blk_file rw_file_perms;
 allow rmt_storage uio_device:chr_file rw_file_perms;
 
 allow rmt_storage sysfs_uio:dir r_dir_perms;

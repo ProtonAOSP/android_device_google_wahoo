@@ -5,11 +5,12 @@
 # partition names in the block_device directory /dev/block/.../by-name
 allow hal_bootctl block_device:dir r_dir_perms;
 
-# Get attributes on all the A/B partitions.
-allow hal_bootctl sda_block_device:blk_file getattr;
-
 # Edit the attributes stored in the GPT.
 allow hal_bootctl gpt_block_device:blk_file rw_file_perms;
+allow hal_bootctl ab_block_device:blk_file getattr;
+allow hal_bootctl boot_block_device:blk_file getattr;
+allow hal_bootctl modem_block_device:blk_file getattr;
+allow hal_bootctl system_block_device:blk_file getattr;
 
 # Access /dev/sgN devices (generic SCSI) to write the
 # A/B slot selection for the XBL partition. Allow also to issue a

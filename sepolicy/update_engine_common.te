@@ -1,6 +1,3 @@
 # Allow update_engine and update_engine_sideload (recovery) read/write on the
 # device-specific partitions it should update.
-allow update_engine_common {
-  sda_block_device
-  xbl_block_device
-}:blk_file rw_file_perms;
+allow update_engine_common xbl_block_device:blk_file rw_file_perms;
