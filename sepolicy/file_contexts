@@ -9,6 +9,7 @@
 /dev/ipa                                        u:object_r:ipa_dev:s0
 /dev/wwan_ioctl                                 u:object_r:ipa_dev:s0
 /dev/ipaNatTable                                u:object_r:ipa_dev:s0
+/dev/cpu_dma_latency                            u:object_r:latency_device:s0
 /dev/rmnet_ctrl.*                               u:object_r:rmnet_device:s0
 /dev/at_.*                                      u:object_r:at_device:s0
 /dev/video([0-9])+                              u:object_r:video_device:s0
@@ -104,11 +105,10 @@
 /sys/class/thermal(/.*)?                                            u:object_r:sysfs_thermal:s0
 /sys/class/uio(/.*)?                                                u:object_r:sysfs_uio:s0
 /sys/class/devfreq(/.*)?                                            u:object_r:sysfs_msm_subsys:s0
-/sys/class/rfkill(/.*)?                                             u:object_r:sysfs_bluetooth_writable:s0
-/sys/devices/bt_wcn3990/rfkill(/.*)?                                u:object_r:sysfs_bluetooth_writable:s0
-/sys/devices/bt_wcn3990/extldo                                      u:object_r:sysfs_bluetooth_writable:s0
+/sys/devices/soc/soc:bt_wcn3990(/.*)?                               u:object_r:sysfs_bluetooth_writable:s0
 /sys/devices/soc/a1800000\.qcom,rmtfs_rtel_sharedmem(/.*)?          u:object_r:sysfs_rmtfs:s0
 /sys/devices/soc/c17a000\.i2c(/.*)?                                 u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/soc:qcom,gpubw(/.*)?                               u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/800f000\.qcom,spmi(/.*)?                           u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/4080000\.qcom,mss(/.*)?                            u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/17300000\.qcom,lpass(/.*)?                         u:object_r:sysfs_msm_subsys:s0

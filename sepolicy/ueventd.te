@@ -7,4 +7,6 @@ allow ueventd sysfs_soc:file w_file_perms;
 allow ueventd sysfs_net:file w_file_perms;
 allow ueventd sysfs_msm_subsys:file w_file_perms;
 allow ueventd sysfs_bluetooth_writable:file w_file_perms;
+allow ueventd firmware_file:dir search;
+allow ueventd firmware_file:file r_file_perms;
 allow ueventd tmpfs:blk_file getattr;

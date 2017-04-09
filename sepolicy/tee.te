@@ -5,6 +5,7 @@ allow tee device:dir r_dir_perms;
 set_prop(tee, tee_listener_prop)
 set_prop(tee, keymaster_prop)
 
+allow tee firmware_file:dir search;
 allow tee block_device:dir { getattr search };
 allow tee ssd_block_device:blk_file rw_file_perms;
 allow tee sg_device:chr_file { rw_file_perms setattr };

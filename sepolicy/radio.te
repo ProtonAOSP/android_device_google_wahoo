@@ -3,8 +3,10 @@ get_prop(radio, ims_prop)
 allow radio qmuxd_socket:dir search;
 allow radio qmuxd_socket:sock_file write;
 
+
 allow radio vendor_file:lnk_file r_file_perms;
 allow radio vendor_framework_file:file r_file_perms;
+allow radio vendor_framework_file:dir search;
 
 add_service(radio, radio_service)
 

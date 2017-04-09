@@ -5,4 +5,6 @@ genfscon sysfs /devices/soc/soc:qcom,cpubw            u:object_r:sysfs_msm_subsy
 genfscon sysfs /devices/soc/soc:qcom,mincpubw         u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /class/devfreq                         u:object_r:sysfs_msm_subsys:s0
 
+genfscon sysfs /class/rfkill/rfkill0/state            u:object_r:sysfs_bluetooth_writable:s0
+
 genfscon debugfs /kgsl/proc                           u:object_r:debugfs_kgsl:s0

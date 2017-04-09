@@ -12,6 +12,9 @@ userdebug_or_eng(`
   allow ramdump ramdump_data_file:file create_file_perms;
   allow ramdump proc:file r_file_perms;
 
+  allow ramdump misc_block_device:blk_file rw_file_perms;
+  allow ramdump userdata_block_device:blk_file w_file_perms;
+
   # read from /fstab.taimen
   allow ramdump rootfs:file r_file_perms;
 
