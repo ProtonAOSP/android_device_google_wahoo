@@ -178,11 +178,11 @@
       <version>1.0</version>
       <interface>
         <name>ICryptoFactory</name>
-        <instance>crypto</instance>
+        <instance>default</instance>
       </interface>
       <interface>
         <name>IDrmFactory</name>
-        <instance>drm</instance>
+        <instance>default</instance>
       </interface>
     </hal>
     <hal>
