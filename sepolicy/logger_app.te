@@ -7,6 +7,11 @@ userdebug_or_eng(`
   allow logger_app app_api_service:service_manager find;
   allow logger_app surfaceflinger_service:service_manager find;
 
-  allow logger_app radio_vendor_data_file:file { create open unlink getattr setattr read write };
-  allow logger_app radio_vendor_data_file:dir { create open rmdir add_name remove_name getattr setattr search read write };
+  allow logger_app diag_device:chr_file rw_file_perms;
+
+  allow logger_app radio_vendor_data_file:file create_file_perms;
+  allow logger_app radio_vendor_data_file:dir create_dir_perms;
+
+  allow logger_app cnss_vendor_data_file:dir create_dir_perms;
+  allow logger_app cnss_vendor_data_file:file create_file_perms;
 ')

@@ -1,3 +1,0 @@
-userdebug_or_eng(`
-  get_prop(platform_app, ramdump_prop)
-')

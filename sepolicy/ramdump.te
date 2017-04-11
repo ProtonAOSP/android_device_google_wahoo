@@ -8,8 +8,8 @@ userdebug_or_eng(`
 
   allow ramdump self:capability sys_rawio;
 
-  allow ramdump ramdump_data_file:dir w_dir_perms;
-  allow ramdump ramdump_data_file:file create_file_perms;
+  allow ramdump ramdump_vendor_data_file:dir create_dir_perms;
+  allow ramdump ramdump_vendor_data_file:file create_file_perms;
   allow ramdump proc:file r_file_perms;
 
   allow ramdump misc_block_device:blk_file rw_file_perms;
