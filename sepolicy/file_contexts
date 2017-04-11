@@ -193,6 +193,26 @@
 /vendor/etc/init\.insmod\.cfg                                        u:object_r:init-insmod-sh_exec:s0
 /vendor/bin/hw/android\.hardware\.vibrator@1\.0-service.wahoo        u:object_r:hal_vibrator_default_exec:s0
 
+###############################################
+# same-process HAL files and their dependencies
+#
+/vendor/lib(64)?/hw/gralloc\.msm8998\.so   u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libqdMetaData\.so         u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libqservice\.so           u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libqdutils\.so            u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libadreno_utils\.so       u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libgsl\.so                u:object_r:same_process_hal_file:s0
+
+/vendor/lib(64)?/libdrmutils\.so           u:object_r:same_process_hal_file:s0
+
+# libGLESv2_adreno depends on this
+/vendor/lib(64)?/libllvm-glnext\.so         u:object_r:same_process_hal_file:s0
+
+# Loaded by native loader (zygote) for all processes
+/vendor/lib(64)?/libhalide_hexagon_host\.so u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libadsprpc\.so             u:object_r:same_process_hal_file:s0
+###############################################
+
 # data files
 /data/misc/radio(/.*)?                 u:object_r:radio_data_file:s0
 /data/misc/netmgr(/.*)?                u:object_r:netmgr_data_file:s0
