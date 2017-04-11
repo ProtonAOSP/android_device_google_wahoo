@@ -19,7 +19,8 @@ on post-fs-data
     mkdir /data/vendor/radio 0775 radio radio
     mkdir /data/vendor/radio/diag_logs 0777 system system
     # WLAN logging collection
-    mkdir /data/cnss_diag 0777 system system
+    mkdir /data/vendor/wifi 0777 system system
+    mkdir /data/vendor/wifi/cnss_diag 0777 system system
 
 on boot
     chmod 666 /dev/diag

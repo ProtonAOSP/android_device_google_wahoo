@@ -1,18 +1,17 @@
-type subsystem_ramdump, domain;
 type subsystem_ramdump_exec, exec_type, file_type;
 
-init_daemon_domain(subsystem_ramdump);
-
 userdebug_or_eng(`
-permissive subsystem_ramdump;
+  type subsystem_ramdump, domain;
 
-allow subsystem_ramdump device:dir r_dir_perms;
-allow subsystem_ramdump ramdump_device:chr_file r_file_perms;
+  init_daemon_domain(subsystem_ramdump);
 
-r_dir_file(subsystem_ramdump, sysfs_type);
+  allow subsystem_ramdump device:dir r_dir_perms;
+  allow subsystem_ramdump ramdump_device:chr_file r_file_perms;
 
-allow subsystem_ramdump ramdump_data_file:dir rw_dir_perms;
-allow subsystem_ramdump ramdump_data_file:file create_file_perms;
+  r_dir_file(subsystem_ramdump, sysfs_type);
 
-set_prop(subsystem_ramdump, ssr_prop);
+  allow subsystem_ramdump ramdump_vendor_data_file:dir rw_dir_perms;
+  allow subsystem_ramdump ramdump_vendor_data_file:file create_file_perms;
+
+  set_prop(subsystem_ramdump, ssr_prop);
 ')
