@@ -6,5 +6,7 @@ allow hal_wifi_default location_data_file:sock_file write;
 allow hal_wifi_default location_data_file:dir create_dir_perms;
 allow hal_wifi_default location_data_file:{ file fifo_file } create_file_perms;
 
+allow hal_wifi_default wlan_device:chr_file w_file_perms;
+
 # Allow wifi hal to read debug info from the driver.
 r_dir_file(hal_wifi_default, proc_wifi_dbg)

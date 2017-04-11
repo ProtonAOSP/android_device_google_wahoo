@@ -8,8 +8,9 @@ set_prop(init_power, post_boot_prop)
 allow init_power shell_exec:file rx_file_perms;
 allow init_power toolbox_exec:file rx_file_perms;
 
-allow init_power sysfs_msm_subsys:dir r_dir_perms;
-allow init_power sysfs_msm_subsys:file w_file_perms;
+r_dir_file(init_power, sysfs_msm_subsys)
+
+allow init_power sysfs_msm_subsys:file write;
 allow init_power sysfs_thermal:dir search;
 allow init_power sysfs_thermal:file w_file_perms;
 allow init_power sysfs_devices_system_cpu:file w_file_perms;
