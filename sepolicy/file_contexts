@@ -33,6 +33,7 @@
 /dev/sensors                                    u:object_r:sensors_device:s0
 /dev/mnh_sm                                     u:object_r:easel_device:s0
 /dev/easelcomm-client                           u:object_r:easel_device:s0
+/dev/pn81a                                      u:object_r:pn81a_device:s0
 
 # dev socket nodes
 /dev/socket/chre                                u:object_r:chre_socket:s0
@@ -184,6 +185,7 @@
 /vendor/bin/imscmservice        u:object_r:imscm_exec:s0
 /vendor/bin/qmuxd               u:object_r:qmuxd_exec:s0
 /vendor/bin/cnd                 u:object_r:cnd_exec:s0
+/vendor/bin/esed                u:object_r:esed_exec:s0
 /vendor/bin/hw/android\.hardware\.usb@1\.0-service.device            u:object_r:hal_usb_default_exec:s0
 /vendor/bin/chre                u:object_r:chre_exec:s0
 /vendor/bin/folio_daemon        u:object_r:folio_daemon_exec:s0
