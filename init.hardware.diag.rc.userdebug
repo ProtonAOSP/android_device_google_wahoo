@@ -332,3 +332,28 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag,adb,serial_cdev 
     symlink /config/usb_gadget/g1/functions/cser.dun.0 /config/usb_gadget/g1/configs/b.1/f3
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${sys.usb.config}
+
+on property:persist.sys.cnss.diag_qxdm=true
+    start cnss_diag
+
+on property:persist.sys.cnss.diag_qxdm=false
+    stop cnss_diag
+
+on property:persist.sys.cnss.diag_txt=true
+    start cnss_diag_txt
+
+on property:persist.sys.cnss.diag_txt=false
+    stop cnss_diag_txt
+
+service cnss_diag /vendor/bin/cnss_diag -q -u
+    class late_start
+    user system
+    group system
+    oneshot
+
+service cnss_diag_txt /vendor/bin/cnss_diag -s -f -m /data/vendor/wifi/cnss_diag/cnss_diag.conf
+    class late_start
+    user system
+    group system
+    disabled
+    oneshot

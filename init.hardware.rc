@@ -503,12 +503,6 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     disabled
     oneshot
 
-service cnss_diag /vendor/bin/cnss_diag -q -f
-    class main
-    user root
-    group root
-    oneshot
-
 service cnss-daemon /vendor/bin/cnss-daemon -n -l
    class late_start
    user system
