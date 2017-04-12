@@ -1,0 +1,4 @@
+type qlogd, domain;
+type qlogd_exec, exec_type, file_type;
+
+# TODO(b/37115787): Add permissions when diag_mdlog is moved to qlogd domain
