@@ -156,9 +156,7 @@ PRODUCT_COPY_FILES += \
 
 # power HAL
 PRODUCT_PACKAGES += \
-    power.$(PRODUCT_HARDWARE) \
-    android.hardware.power@1.0-impl \
-    android.hardware.power@1.0-service
+    android.hardware.power@1.1-service.wahoo
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml

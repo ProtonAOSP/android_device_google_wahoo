@@ -1,4 +1,10 @@
 allow hal_power_default perfd:unix_stream_socket connectto;
 allow hal_power_default perfd_socket:sock_file write;
 
+userdebug_or_eng(`
+# debugfs entries are only needed in user-debug or eng builds
 allow hal_power_default debugfs_rpm:file { open read getattr };
+
+allow hal_power_default debugfs_wlan:dir search;
+allow hal_power_default debugfs_wlan:file { open read getattr };
+')
