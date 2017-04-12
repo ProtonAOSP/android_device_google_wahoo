@@ -1,0 +1,25 @@
+type hal_rcsservice, binder_in_vendor_violators, domain;
+type hal_rcsservice_exec, exec_type, file_type;
+
+# Started by init
+init_daemon_domain(hal_rcsservice)
+net_domain(hal_rcsservice)
+
+# To make VT call
+hwbinder_use(hal_rcsservice)
+
+# allow hal to read sysfs file
+allow hal_rcsservice sysfs:file r_file_perms;
+
+#Add uce service hal
+allow hal_rcsservice imsuce_service:hwservice_manager add;
+
+unix_socket_connect(hal_rcsservice, ims, ims)
+
+# rcs_hal needs to communicate with UceShim app
+# using binder call
+binder_call(hal_rcsservice, system_app)
+binder_service(hal_rcsservice)
+
+# imsrcsd needs read/write access to devpts
+allow hal_rcsservice devpts:chr_file rw_file_perms;
