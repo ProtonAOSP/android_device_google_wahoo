@@ -551,9 +551,16 @@ service imscmservice /vendor/bin/imscmservice
    group radio diag inet log
    disabled
 
+service imsrcsservice /vendor/bin/imsrcsd
+   class hal
+   user system
+   group radio diag inet log
+   disabled
+
 on property:sys.ims.DATA_DAEMON_STATUS=1
    start ims_rtp_daemon
    start imscmservice
+   start imsrcsservice
 
 service qmuxd /vendor/bin/qmuxd
    class main

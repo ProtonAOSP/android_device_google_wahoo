@@ -195,4 +195,11 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <!-- IMS UCE Service -->
+    <hal format="hidl">
+        <name>com.qualcomm.qti.uceservice</name>
+        <transport>hwbinder</transport>
+        <impl level="generic"></impl>
+        <version>1.0</version>
+    </hal>
 </manifest>
