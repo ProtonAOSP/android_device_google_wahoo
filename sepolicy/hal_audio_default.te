@@ -1,9 +1,5 @@
 r_dir_file(hal_audio_default, sysfs_soc)
 
-# TODO(b/34980020): after this treble policy violation is fixed, remove the following line from here and
-# from master/system/sepolicy/vendor/hal_audio_default.te
-typeattribute hal_audio_default coredata_in_vendor_violators;
-
 allow hal_audio_default audio_data_file:dir w_dir_perms;
 allow hal_audio_default audio_data_file:file create_file_perms;
 
