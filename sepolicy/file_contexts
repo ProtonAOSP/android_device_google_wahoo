@@ -150,7 +150,6 @@
 /system/bin/init\.radio\.sh            u:object_r:init_radio_exec:s0
 /system/bin/location-mq-s              u:object_r:location_exec:s0
 /system/bin/lowi-server                u:object_r:location_exec:s0
-/vendor/bin/ramdump                    u:object_r:ramdump_exec:s0
 
 # files in /vendor
 /vendor/bin/hw/android\.hardware\.dumpstate@1\.0-service.wahoo      u:object_r:hal_dumpstate_impl_exec:s0
@@ -170,9 +169,11 @@
 /vendor/bin/tftp_server         u:object_r:rfs_access_exec:s0
 /vendor/bin/cnss-daemon         u:object_r:wcnss_service_exec:s0
 /vendor/bin/cnss_diag           u:object_r:wcnss_service_exec:s0
+/vendor/bin/diag_mdlog          u:object_r:qlogd_exec:s0
 /vendor/bin/netmgrd             u:object_r:netmgrd_exec:s0
 /vendor/bin/port-bridge         u:object_r:port-bridge_exec:s0
 /vendor/bin/qti                 u:object_r:qti_exec:s0
+/vendor/bin/ramdump             u:object_r:ramdump_exec:s0
 /vendor/bin/wcnss_filter        u:object_r:wcnss_filter_exec:s0
 /vendor/bin/loc_launcher        u:object_r:location_exec:s0
 /vendor/bin/lowi-server         u:object_r:location_exec:s0
