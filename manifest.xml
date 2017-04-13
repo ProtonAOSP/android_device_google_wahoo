@@ -148,7 +148,7 @@
         <version>2.0</version>
         <interface>
             <name>ISoundTriggerHw</name>
-            <instance>sound_trigger.primary</instance>
+            <instance>default</instance>
         </interface>
     </hal>
     <hal format="hidl">
