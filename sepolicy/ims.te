@@ -10,7 +10,7 @@ unix_socket_connect(ims, netmgrd, netmgrd)
 
 allow ims sysfs_soc:dir search;
 allow ims sysfs_soc:file r_file_perms;
-
+allow ims self:capability { net_raw net_bind_service};
 allow ims self:socket create_socket_perms;
 allow ims self:netlink_generic_socket create_socket_perms_no_ioctl;
 allow ims netmgrd_socket:dir search;
