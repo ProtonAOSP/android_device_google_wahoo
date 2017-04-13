@@ -168,7 +168,8 @@ PRODUCT_COPY_FILES += \
 
 # graphics
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=196610
+    ro.opengles.version=196610 \
+    ro.gfx.driver.0=com.google.pixel.wahoo.gfxdriver
 
 # Enable low power video mode for 4K encode
 PRODUCT_PROPERTY_OVERRIDES += \
