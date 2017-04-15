@@ -7150,7 +7150,7 @@
       type="mms"
   />
 
-  <apn carrier="Videotron Mobile"
+  <apn carrier="Videotron"
       mcc="302"
       mnc="500"
       apn="media.ng"
@@ -7158,6 +7158,27 @@
       mmsproxy="10.208.89.17"
       mmsport="8080"
       type="default,supl,mms"
+      user_editable="false"
+  />
+
+  <apn carrier="LTE IMS"
+      mcc="302"
+      mnc="500"
+      apn="ims"
+      type="ims"
+      protocol="IPV6"
+      roaming_protocol="IPV6"
+      user_visible="false"
+  />
+
+  <apn carrier="Emergency"
+      mcc="302"
+      mnc="500"
+      apn="sos"
+      type="emergency"
+      protocol="IPV6"
+      roaming_protocol="IPV6"
+      user_visible="false"
   />
 
   <apn carrier="Videotron Mobile"
