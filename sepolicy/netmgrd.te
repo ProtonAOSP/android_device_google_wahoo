@@ -1,5 +1,5 @@
 type netmgrd, domain;
-type netmgrd_exec, exec_type, file_type;
+type netmgrd_exec, exec_type, vendor_file_type, file_type;
 
 net_domain(netmgrd)
 init_daemon_domain(netmgrd)

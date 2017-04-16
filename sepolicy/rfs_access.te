@@ -1,5 +1,5 @@
 type rfs_access, domain;
-type rfs_access_exec, exec_type, file_type;
+type rfs_access_exec, exec_type, vendor_file_type, file_type;
 
 init_daemon_domain(rfs_access)
 
