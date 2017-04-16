@@ -1,4 +1,4 @@
-type init-insmod-sh, domain;
+type init-insmod-sh, domain, vendor_executes_system_violators;
 type init-insmod-sh_exec, exec_type, vendor_file_type, file_type;
 
 init_daemon_domain(init-insmod-sh)
