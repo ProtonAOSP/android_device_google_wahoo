@@ -213,6 +213,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
   persist.camera.max.previewfps=60 \
   persist.camera.sensor.hdr=2
 
+# camera TNR controls
+PRODUCT_PROPERTY_OVERRIDES += \
+  persist.camera.tnr.video=1 \
+  persist.camera.tnr.preview=1
+
 # WLAN driver configuration files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
