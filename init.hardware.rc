@@ -148,6 +148,7 @@ on fs
     mount ext4 /dev/block/bootdevice/by-name/persist /persist nosuid nodev noatime barrier=1
     restorecon_recursive /persist
     mkdir /persist/data 0700 system system
+    mkdir /persist/display 0770 system graphics
 
     # Start HW service manager early
     start hwservicemanager
