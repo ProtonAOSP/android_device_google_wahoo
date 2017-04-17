@@ -2,3 +2,5 @@
 userdebug_or_eng(`
   allow kernel self:socket create;
 ')
+
+allow kernel vendor_firmware_file:file r_file_perms;

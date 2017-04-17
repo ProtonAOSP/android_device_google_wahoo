@@ -3,6 +3,11 @@ type port-bridge_exec, exec_type, vendor_file_type, file_type;
 
 init_daemon_domain(port-bridge)
 
+r_dir_file(port-bridge, sysfs_msm_subsys)
+
+allow port-bridge sysfs_soc:dir search;
+allow port-bridge sysfs_soc:file r_file_perms;
+
 allowxperm port-bridge at_device:chr_file ioctl IPC_ROUTER_IOCTL_GET_VERSION;
 
 userdebug_or_eng(`
