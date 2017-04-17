@@ -366,6 +366,14 @@ PRODUCT_PACKAGES += \
 LIB_NL := libnl_2
 PRODUCT_PACKAGES += $(LIB_NL)
 
+# Audio effects
+PRODUCT_PACKAGES += \
+    libvolumelistener \
+    libqcomvisualizer \
+    libqcomvoiceprocessing \
+    libqcomvoiceprocessingdescriptors \
+    libqcompostprocbundle
+
 PRODUCT_PACKAGES += \
     audio.primary.msm8998 \
     audio.a2dp.default \
