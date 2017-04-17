@@ -388,6 +388,10 @@ PRODUCT_PACKAGES += \
     android.hardware.soundtrigger@2.0-impl \
     android.hardware.audio@2.0-service
 
+# stereo speakers: orientation changes swap L/R channels
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.audio.monitorRotation=true
+
 # Thermal packages
 PRODUCT_PACKAGES += \
     thermal.default
