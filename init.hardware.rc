@@ -59,12 +59,6 @@ on init
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor "sched"
 
     start power_sh
-    # enable all cores for all cpuset during boot
-    write /dev/cpuset/top-app/cpus 0-7
-    write /dev/cpuset/foreground/cpus 0-7
-    write /dev/cpuset/foreground/boost/cpus 0-7
-    write /dev/cpuset/background/cpus 0-7
-    write /dev/cpuset/system-background/cpus 0-7
 
     # set default schedTune value for foreground/top-app
     write /dev/stune/foreground/schedtune.prefer_idle 1
