@@ -40,51 +40,8 @@
         <param DEVICE_HANDSET_MIC_ECPP_CPE="128" />
         <param DEVICE_HEADSET_MIC_CPE="139" />
     </acdb_ids>
-    <!-- Multiple sound_model_config tags can be listed, each with unique   -->
-    <!-- vendor_uuid. The below tag represents QTI SVA engine sound model   -->
-    <!-- configuration. ISV must use their own unique vendor_uuid.          -->
-    <sound_model_config>
-        <param vendor_uuid="68ab2d40-e860-11e3-95ef-0002a5d5c51b" />
-        <param execution_type="WDSP" /> <!-- value: "WDSP" "ADSP" "DYNAMIC" -->
-        <param app_type="2" /> <!-- app type used in ACDB -->
-        <param library="libsmwrapper.so" />
-        <param max_cpe_phrases="6" />
-        <param max_cpe_users="3" />
-        <param max_ape_phrases="10" />
-        <param max_ape_users="10" />
-        <!-- Profile specific data which the algorithm can support -->
-        <param sample_rate="16000" />
-        <param bit_width="16" />
-        <param channel_count="1"/>
-        <!-- adm_cfg_profile should match with the one defined under adm_config -->
-        <!-- Set it to NONE if LSM directly connects to AFE -->
-        <param adm_cfg_profile="NONE" />
-        <gcs_usecase>
-            <param uid="0x1" />
-            <!-- module_id, instance_id, param_id -->
-            <param load_sound_model_ids="0x00012C0D, 0x2, 0x00012C14" />
-            <param confidence_levels_ids="0x00012C0D, 0x2, 0x00012C28" />
-            <param detection_event_ids="0x00012C0D, 0x2, 0x00012C29" />
-            <param read_cmd_ids="0x00020013, 0x2, 0x00020015" />
-            <param read_rsp_ids="0x00020013, 0x2, 0x00020016" />
-            <param custom_config_ids="0x00012C0D, 0x2, 0x00012C20" />
-        </gcs_usecase>
-
-        <!-- Module and param ids with which the algorithm is integrated
-            in non-graphite firmware (note these must come after gcs params) -->
-        <param load_sound_model_ids="0x00012C0D, 0x00012C14" />
-        <param unload_sound_model_ids="0x00012C0D, 0x00012C15" />
-        <param confidence_levels_ids="0x00012C0D, 0x00012C07" />
-        <param operation_mode_ids="0x00012C0D, 0x00012C02" />
-
-        <!-- format: "ADPCM_packet" or "PCM_packet" !-->
-        <!-- transfer_mode: "FTRT" or "RT" -->
-        <!--  kw_duration is in milli seconds. It is valid only for FTRT
-            transfer mode -->
-        <param capture_keyword="PCM_packet, RT, 2000" />
-        <param client_capture_read_delay="2000" />
-    </sound_model_config>
-
+    <!-- Multiple sound_model_config tags can be listed, each with unique
+         vendor_uuid. -->
     <sound_model_config>
         <param vendor_uuid="7038ddc8-30f2-11e6-b0ac-40a8f03d3f15" />
         <param execution_type="WDSP" /> <!-- value: "WDSP" "ADSP" "DYNAMIC" -->
@@ -98,6 +55,29 @@
             <param confidence_levels_ids="0x18000001, 0x3, 0x00012C28" />
             <param detection_event_ids="0x18000001, 0x3, 0x00012C29" />
             <param read_cmd_ids="0x00020013, 0x3, 0x00020015" />
+            <param read_rsp_ids="0x00020013, 0x3, 0x00020016" />
+        </gcs_usecase>
+        <param load_sound_model_ids="0x18000001, 0x00012C14" />
+        <param unload_sound_model_ids="0x18000001, 0x00012C15" />
+        <!--  kw_duration is in milli seconds. It is valid only for FTRT
+            transfer mode -->
+        <param capture_keyword="PCM_packet, RT, 2000" />
+        <param client_capture_read_delay="2000" />
+    </sound_model_config>
+
+    <sound_model_config>
+        <param vendor_uuid="9f6ad62a-1f0b-11e7-87c5-40a8f03d3f15" />
+        <param execution_type="WDSP" /> <!-- value: "WDSP" "ADSP" "DYNAMIC" -->
+        <param library="none" />
+        <param max_cpe_phrases="1" />
+        <param max_cpe_users="1" />
+
+        <gcs_usecase>
+            <param uid="0x2" />
+            <param load_sound_model_ids="0x18000001, 0x4, 0x00012C14" />
+            <param confidence_levels_ids="0x18000001, 0x4, 0x00012C28" />
+            <param detection_event_ids="0x18000001, 0x4, 0x00012C29" />
+            <param read_cmd_ids="0x00020013, 0x3, 0x00020015" />  <!-- Use the hotword sink for now. -->
             <param read_rsp_ids="0x00020013, 0x3, 0x00020016" />
         </gcs_usecase>
         <param load_sound_model_ids="0x18000001, 0x00012C14" />
