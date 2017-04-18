@@ -242,6 +242,10 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.mapper@2.0-impl \
     libbt-vendor
 
+# RenderScript HAL
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0-impl
+
 # Light HAL
 PRODUCT_PACKAGES += \
     lights.$(PRODUCT_HARDWARE) \
