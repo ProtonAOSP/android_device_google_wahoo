@@ -130,6 +130,9 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "cpu2-3 time-in-state", "/sys/devices/system/cpu/cpu2/cpufreq/stats/time_in_state");
     RunCommandToFd(fd, "cpu2-3 cpuidle", {"/system/bin/sh", "-c", "for d in $(ls -d /sys/devices/system/cpu/cpu2/cpuidle/state*); do echo \"$d: `cat $d/name` `cat $d/desc` `cat $d/time` `cat $d/usage`\"; done"});
     DumpFileToFd(fd, "MDP xlogs", "/d/mdp/xlog/dump");
+    DumpFileToFd(fd, "TCPM logs", "/d/tcpm/usbpd0");
+    DumpFileToFd(fd, "PD Engine", "/d/pd_engine/usbpd0");
+    DumpFileToFd(fd, "smblib-usb logs", "/d/ipc_logging/smblib/log");
 
     /* Check if qsee_logger tool exists */
     if (!access("/system/bin/qsee_logger", X_OK)) {
