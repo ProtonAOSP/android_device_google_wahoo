@@ -7133,21 +7133,42 @@
       mvno_type="gid"
   />
 
-  <apn carrier="Wind Mobile Internet"
+  <apn carrier="Internet"
       mcc="302"
       mnc="490"
-      apn="internet.windmobile.ca"
-      type="default,hipri,dun,supl"
+      apn="internet.freedommobile.ca"
+      type="default,dun,supl"
+      protocol="IPV4V6"
+      user_editable="false"
   />
 
-  <apn carrier="Wind Mobile MMS"
+  <apn carrier="MMS"
       mcc="302"
       mnc="490"
-      apn="mms.windmobile.ca"
+      apn="mms.freedommobile.ca"
       mmsc="http://mms.windmobile.ca"
       mmsproxy="74.115.197.70"
       mmsport="8080"
       type="mms"
+      user_editable="false"
+  />
+
+  <apn carrier="VoLTE"
+      mcc="302"
+      mnc="490"
+      apn="volte.mobilefrdm.ca"
+      type="ims"
+      protocol="IPV4V6"
+      user_visible="false"
+  />
+
+  <apn carrier="E911"
+      mcc="302"
+      mnc="490"
+      apn="e911.mobilefrdm.ca"
+      type="emergency"
+      protocol="IPV4V6"
+      user_visible="false"
   />
 
   <apn carrier="Videotron Mobile"
