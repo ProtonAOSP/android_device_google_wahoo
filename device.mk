@@ -76,10 +76,6 @@ endif
 MSM_VIDC_TARGET_LIST := msm8998 # Get the color format from kernel headers
 MASTER_SIDE_CP_TARGET_LIST := msm8998 # ION specific settings
 
-# Vendor Interface Manifest
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/manifest.xml
-
 # A/B support
 PRODUCT_PACKAGES += \
     otapreopt_script \
