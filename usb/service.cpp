@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#define LOG_TAG "android.hardware.usb@1.1-service.wahoo"
+
 #include <hidl/HidlTransportSupport.h>
 #include "Usb.h"
 
@@ -25,7 +27,7 @@ using android::hardware::joinRpcThreadpool;
 
 // Generated HIDL files
 using android::hardware::usb::V1_0::IUsb;
-using android::hardware::usb::V1_0::implementation::Usb;
+using android::hardware::usb::V1_1::implementation::Usb;
 
 using android::status_t;
 using android::OK;

@@ -1,27 +1,30 @@
-#ifndef ANDROID_HARDWARE_USB_V1_0_USB_H
-#define ANDROID_HARDWARE_USB_V1_0_USB_H
+#ifndef ANDROID_HARDWARE_USB_V1_1_USB_H
+#define ANDROID_HARDWARE_USB_V1_1_USB_H
 
-#include <android/hardware/usb/1.0/IUsb.h>
-#include <hidl/MQDescriptor.h>
+#include <android/hardware/usb/1.1/IUsb.h>
+#include <android/hardware/usb/1.1/types.h>
+#include <android/hardware/usb/1.1/IUsbCallback.h>
 #include <hidl/Status.h>
 #include <utils/Log.h>
 
-#ifdef LOG_TAG
-#undef LOG_TAG
-#endif
-
-#define LOG_TAG "android.hardware.usb@1.0-service.device"
 #define UEVENT_MSG_LEN 2048
 
 namespace android {
 namespace hardware {
 namespace usb {
-namespace V1_0 {
+namespace V1_1 {
 namespace implementation {
 
-using ::android::hardware::usb::V1_0::IUsb;
-using ::android::hardware::usb::V1_0::IUsbCallback;
 using ::android::hardware::usb::V1_0::PortRole;
+using ::android::hardware::usb::V1_0::PortRoleType;
+using ::android::hardware::usb::V1_0::PortDataRole;
+using ::android::hardware::usb::V1_0::PortPowerRole;
+using ::android::hardware::usb::V1_0::Status;
+using ::android::hardware::usb::V1_0::IUsb;
+using ::android::hardware::usb::V1_1::IUsbCallback;
+using ::android::hardware::usb::V1_1::PortMode_1_1;
+using ::android::hardware::usb::V1_1::PortStatus_1_1;
+using ::android::hidl::base::V1_0::DebugInfo;
 using ::android::hidl::base::V1_0::IBase;
 using ::android::hardware::hidl_array;
 using ::android::hardware::hidl_memory;
@@ -33,8 +36,9 @@ using ::android::sp;
 
 struct Usb : public IUsb {
     Return<void> switchRole(const hidl_string& portName, const PortRole& role) override;
-    Return<void> setCallback(const sp<IUsbCallback>& callback) override;
+    Return<void> setCallback(const sp<::android::hardware::usb::V1_0::IUsbCallback>& callback) override;
     Return<void> queryPortStatus() override;
+
 
     sp<IUsbCallback> mCallback;
     pthread_mutex_t mLock = PTHREAD_MUTEX_INITIALIZER;
@@ -49,4 +53,4 @@ struct Usb : public IUsb {
 }  // namespace hardware
 }  // namespace android
 
-#endif  // ANDROID_HARDWARE_USB_V1_0_USB_H
+#endif  // ANDROID_HARDWARE_USB_V1_1_USB_H
