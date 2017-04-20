@@ -73,12 +73,12 @@
         <param max_cpe_users="1" />
 
         <gcs_usecase>
-            <param uid="0x2" />
+            <param uid="0x1" />
             <param load_sound_model_ids="0x18000001, 0x4, 0x00012C14" />
             <param confidence_levels_ids="0x18000001, 0x4, 0x00012C28" />
             <param detection_event_ids="0x18000001, 0x4, 0x00012C29" />
-            <param read_cmd_ids="0x00020013, 0x3, 0x00020015" />  <!-- Use the hotword sink for now. -->
-            <param read_rsp_ids="0x00020013, 0x3, 0x00020016" />
+            <param read_cmd_ids="0x00020013, 0x4, 0x00020015" />
+            <param read_rsp_ids="0x00020013, 0x4, 0x00020016" />
         </gcs_usecase>
         <param load_sound_model_ids="0x18000001, 0x00012C14" />
         <param unload_sound_model_ids="0x18000001, 0x00012C15" />
