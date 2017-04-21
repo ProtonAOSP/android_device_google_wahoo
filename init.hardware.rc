@@ -38,6 +38,7 @@ on early-init
 on init
     # Loading kernel modules in background
     start insmod_sh
+
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
@@ -153,6 +154,10 @@ on fs
     # Start HW service manager early
     start hwservicemanager
 
+    # qseecomd needs /dev/block/bootdevice
+    # vold needs keymaster that needs qseecomd
+    start qseecomd
+
 on late-fs
     # Start devices by sysfs trigger
     start devstart_sh
@@ -177,6 +182,10 @@ on post-fs
     chmod 0664 /sys/devices/virtual/graphics/fb0/idle_time
     chown system graphics /sys/devices/virtual/graphics/fb0/idle_time
 
+    # Wait qseecomd started
+    wait_for_prop sys.listeners.registered true
+
+
 on property:sys.listeners.registered=true
     # load IPA FWs
     start ipastart_sh
@@ -184,8 +193,6 @@ on property:sys.listeners.registered=true
 on post-fs-data
     # We can start netd here before in is launched in common init.rc on zygote-start
     start netd
-    # Start qseecomd once we have /data/
-    start qseecomd
 
 # zygote need to be started after otapreopt which will be done on post-fs-data
 on zygote-start
