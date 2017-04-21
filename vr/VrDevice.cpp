@@ -16,6 +16,8 @@
 
 #define LOG_TAG "VrDevice"
 
+#include <android-base/logging.h>
+#include <android-base/properties.h>
 #include "VrDevice.h"
 
 namespace android {
@@ -31,8 +33,21 @@ Return<void> VrDevice::init() {
     return Void();
 }
 
-Return<void> VrDevice::setVrMode(bool /* enabled */) {
-    // TODO(b/36514493): start or stop using thermal engine VR profile.
+Return<void> VrDevice::setVrMode(bool enabled) {
+    if (enabled) {
+        if (!android::base::SetProperty("sys.qcom.thermalcfg", "/vendor/etc/thermal-engine-vr.conf")) {
+            LOG(ERROR) << "Couldn't set thermal_engine enable property";
+            return Void();
+        }
+    } else {
+        if (!android::base::SetProperty("sys.qcom.thermalcfg", "/vendor/etc/thermal-engine.conf")) {
+            LOG(ERROR) << "Couldn't set thermal_engine disable property";
+            return Void();
+        }
+    }
+    if (!android::base::SetProperty("ctl.restart", "thermal-engine")) {
+        LOG(ERROR) << "Couldn't set thermal_engine restart property";
+    }
     return Void();
 }
 
