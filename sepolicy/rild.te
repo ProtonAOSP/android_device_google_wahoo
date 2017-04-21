@@ -15,6 +15,9 @@ allow rild vendor_file:file { execute_no_trans lock };
 allow rild per_mgr_service:service_manager find;
 allow rild audioserver_service:service_manager find;
 
+add_hwservice(rild, vnd_ims_radio_hwservice)
+add_hwservice(rild, vnd_qcrilhook_hwservice)
+
 allow rild self:socket ioctl;
 allowxperm rild self:socket ioctl msm_sock_ipc_ioctls;
 

@@ -1,0 +1,3 @@
+type vnd_ims_radio_hwservice, hwservice_manager_type;
+type vnd_qcrilhook_hwservice, hwservice_manager_type;
+type vnd_uce_hwservice, hwservice_manager_type;

@@ -5,3 +5,5 @@ unix_socket_connect(system_app, cnd, cnd)
 get_prop(system_app, cnd_prop)
 add_service(system_app, cne_service)
 add_service(system_app, uce_service)
+
+allow system_app vnd_uce_hwservice:hwservice_manager find;
