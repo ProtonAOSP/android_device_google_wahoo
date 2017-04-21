@@ -163,6 +163,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
 
+# Audio fluence, ns, aec property, voice volume steps
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qc.sdk.audio.fluencetype=fluencepro \
+    persist.audio.fluence.voicecall=true \
+    persist.audio.fluence.speaker=true \
+    persist.audio.fluence.voicecomm=true \
+    persist.audio.fluence.voicerec=false \
+    ro.config.vc_call_vol_steps=7
+
 # graphics
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196610 \
