@@ -252,15 +252,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     esed
 
-# gatekeeper HAL
-PRODUCT_PACKAGES +=                         \
-    android.hardware.gatekeeper@1.0-impl    \
-    android.hardware.gatekeeper@1.0-service
-
-# Keymaster HAL
-PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-impl
-
 # Memtrack HAL
 PRODUCT_PACKAGES += \
     memtrack.msm8998 \
@@ -498,3 +489,7 @@ PRODUCT_PACKAGES += \
 # Use daemon to detect folio open/close
 PRODUCT_PACKAGES += \
     folio_daemon
+
+# Storage: for factory reset protection feature
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.frp.pst=/dev/block/platform/soc/1da4000.ufshc/by-name/frp
