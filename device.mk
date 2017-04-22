@@ -319,7 +319,7 @@ PRODUCT_PACKAGES += \
     android.hardware.sensors@1.0-service
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/sensors/hals.conf:system/etc/sensors/hals.conf
+    $(LOCAL_PATH)/sensors/hals.conf:vendor/etc/sensors/hals.conf
 
 PRODUCT_PACKAGES += \
     fs_config_dirs \
