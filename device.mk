@@ -454,8 +454,7 @@ PRODUCT_COPY_FILES += \
 
 # Fingerprint HIDL implementation
 PRODUCT_PACKAGES += \
-    fingerprint.fpc \
-    android.hardware.biometrics.fingerprint@2.1-service
+    android.hardware.biometrics.fingerprint@2.1-service.wahoo
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:system/etc/permissions/android.hardware.fingerprint.xml
