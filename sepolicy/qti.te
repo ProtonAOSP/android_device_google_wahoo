@@ -13,7 +13,3 @@ allow qti self:socket create_socket_perms;
 allowxperm qti self:socket ioctl msm_sock_ipc_ioctls;
 
 r_dir_file(qti, sysfs_msm_subsys)
-
-userdebug_or_eng(`
-permissive qti;
-')
