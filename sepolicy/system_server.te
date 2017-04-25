@@ -19,6 +19,10 @@ allow system_server location_data_file:dir create_dir_perms;
 allow system_server location_data_file:file create_file_perms;
 allow system_server wlan_device:chr_file rw_file_perms;
 
+userdebug_or_eng(`
+  permissive system_server;
+')
+
 # TODO(b/30675296): Remove following dontaudit's upon resolution of this bug
 # The timerslack_ns denials spam the system really horribly
 dontaudit system_server audioserver:file write;
