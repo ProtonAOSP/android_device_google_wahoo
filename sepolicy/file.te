@@ -13,9 +13,6 @@ type debugfs_rpm, debugfs_type, fs_type;
 type debugfs_rmt_storage, debugfs_type, fs_type;
 type debugfs_usb, debugfs_type, fs_type;
 
-type smlog_dump_file, file_type, data_file_type;
-
-
 # /proc
 type proc_wifi_dbg, fs_type;
 
@@ -43,6 +40,7 @@ type nfc_vendor_data_file, file_type, data_file_type;
 type radio_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 type cnss_vendor_data_file, file_type, data_file_type, mlstrustedobject;
 type ramdump_vendor_data_file, file_type, data_file_type, mlstrustedobject;
+type modem_dump_file, file_type, data_file_type;
 
 type vendor_firmware_file, vendor_file_type, file_type;
 
