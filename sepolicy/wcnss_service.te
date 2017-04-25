@@ -31,7 +31,3 @@ r_dir_file(wcnss_service, sysfs_msm_subsys)
 
 allow wcnss_service sysfs_soc:dir search;
 allow wcnss_service sysfs_soc:file r_file_perms;
-
-userdebug_or_eng(`
-permissive wcnss_service;
-')
