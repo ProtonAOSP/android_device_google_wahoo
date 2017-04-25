@@ -99,6 +99,9 @@ TARGET_NO_RPC := true
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := default
 BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
 
+# RenderScript
+OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
+
 # Sensors
 USE_SENSOR_MULTI_HAL := true
 
