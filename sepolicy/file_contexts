@@ -81,6 +81,8 @@
 
 /dev/block/platform/soc/1da4000\.ufshc/by-name/misc            u:object_r:misc_block_device:s0
 
+/dev/block/platform/soc/1da4000\.ufshc/by-name/frp             u:object_r:frp_block_device:s0
+
 /dev/block/platform/soc/1da4000\.ufshc/by-name/fsc             u:object_r:modem_block_device:s0
 /dev/block/platform/soc/1da4000\.ufshc/by-name/fsg             u:object_r:modem_block_device:s0
 /dev/block/platform/soc/1da4000\.ufshc/by-name/modem_[ab]      u:object_r:modem_block_device:s0
