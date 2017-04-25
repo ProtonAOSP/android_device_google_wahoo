@@ -13,22 +13,6 @@ function copy() {
 
 ################################################################################
 
-# disable thermal hotplug to switch governor
-write /sys/module/msm_thermal/core_control/enabled 0
-
-# bring back main cores CPU 0,4
-write /sys/devices/system/cpu/cpu0/online 1
-write /sys/devices/system/cpu/cpu4/online 1
-
-# configure governor settings for little cluster
-write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "sched"
-
-# configure governor settings for big cluster
-write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor "sched"
-
-# re-enable thermal hotplug
-write /sys/module/msm_thermal/core_control/enabled 1
-
 # Enable bus-dcvs
 for cpubw in /sys/class/devfreq/*qcom,cpubw*
 do
