@@ -9,6 +9,7 @@ allow rmt_storage self:capability { net_bind_service setgid setpcap setuid };
 
 allow rmt_storage modem_block_device:blk_file rw_file_perms;
 allow rmt_storage uio_device:chr_file rw_file_perms;
+allow rmt_storage block_device:dir search;
 
 allow rmt_storage sysfs_uio:dir r_dir_perms;
 allow rmt_storage sysfs_uio:lnk_file r_file_perms;
