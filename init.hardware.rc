@@ -134,6 +134,9 @@ on init
     write /sys/module/lpm_levels/system/perf/perf-l2-ret/idle_enabled N
     write /sys/module/lpm_levels/parameters/sleep_disabled N
 
+    # b/37682684 Enable suspend clock reporting
+    write /sys/kernel/debug/clk/debug_suspend 1
+
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
