@@ -1,0 +1,9 @@
+type hal_gnss_qti, domain;
+hal_server_domain(hal_gnss_qti, hal_gnss)
+
+type hal_gnss_qti_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_gnss_qti)
+
+userdebug_or_eng(`
+  permissive hal_gnss_qti;
+')
