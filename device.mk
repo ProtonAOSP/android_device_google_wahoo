@@ -222,7 +222,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # camera TNR controls
 PRODUCT_PROPERTY_OVERRIDES += \
   persist.camera.tnr.video=1 \
-  persist.camera.tnr.preview=1
 
 # WLAN driver configuration files
 PRODUCT_COPY_FILES += \
