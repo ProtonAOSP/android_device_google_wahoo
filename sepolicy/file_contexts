@@ -15,6 +15,7 @@
 /dev/video([0-9])+                              u:object_r:video_device:s0
 /dev/media([0-9])+                              u:object_r:video_device:s0
 /dev/v4l-subdev.*                               u:object_r:video_device:s0
+/dev/input(/.*)?                                u:object_r:input_device:s0
 /dev/qseecom                                    u:object_r:tee_device:s0
 /dev/qsee_ipc_irq_spss                          u:object_r:qsee_ipc_irq_spss_device:s0
 /dev/seemplog                                   u:object_r:seemplog_device:s0
@@ -130,6 +131,7 @@
 /sys/devices/soc/0\.qcom,rmtfs_sharedmem(/.*)?                      u:object_r:sysfs_rmtfs:s0
 /sys/devices/soc/soc:fp_fpc1020(/.*)?                               u:object_r:sysfs_fingerprint:s0
 /sys/devices/virtual/thermal(/.*)?                                  u:object_r:sysfs_thermal:s0
+/sys/devices/virtual/wahoo_laser(/.*)?                              u:object_r:sysfs_laser:s0
 /sys/kernel/debug/rmt_storage(/.*)?                                 u:object_r:debugfs_rmt_storage:s0
 /sys/module/msm_thermal(/.*)?                                       u:object_r:sysfs_thermal:s0
 /sys/module/tcp_cubic/parameters(/.*)?                              u:object_r:sysfs_net:s0
