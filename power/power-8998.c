@@ -36,7 +36,7 @@
 #include <dlfcn.h>
 #include <stdlib.h>
 
-#define LOG_TAG "QTI PowerHAL"
+#define LOG_TAG "QCOM PowerHAL"
 #include <utils/Log.h>
 #include <hardware/hardware.h>
 #include <hardware/power.h>
@@ -53,8 +53,10 @@
 
 static int sustained_mode_handle = 0;
 static int vr_mode_handle = 0;
-int sustained_performance_mode = 0;
-int vr_mode = 0;
+static int launch_handle = 0;
+static int sustained_performance_mode = 0;
+static int vr_mode = 0;
+static int launch_mode = 0;
 static pthread_mutex_t s_interaction_lock = PTHREAD_MUTEX_INITIALIZER;
 #define CHECK_HANDLE(x) (((x)>0) && ((x)!=-1))
 
@@ -188,10 +190,29 @@ static int process_vr_mode_hint(void *data)
     return HINT_HANDLED;
 }
 
+static int process_boost(int boost_handle, int duration)
+{
+    int *resource_values;
+    int resources;
+
+    resource_values = getPowerhint(BOOST_HINT_ID, &resources);
+
+    if (resource_values != NULL) {
+        boost_handle = interaction_with_handle(
+            boost_handle, duration, resources, resource_values);
+        if (!CHECK_HANDLE(boost_handle)) {
+            ALOGE("Failed interaction_with_handle for boost_handle");
+        }
+    }
+
+    return boost_handle;
+}
+
 static int process_video_encode_hint(void *metadata)
 {
     char governor[80];
     struct video_encode_metadata_t video_encode_metadata;
+    static int boost_handle = -1;
 
     if(!metadata)
        return HINT_NONE;
@@ -214,7 +235,10 @@ static int process_video_encode_hint(void *metadata)
     }
 
     if (video_encode_metadata.state == 1) {
-          if (is_interactive_governor(governor)) {
+        int duration = 2000; // boosts 2s for starting encoding
+        boost_handle = process_boost(boost_handle, duration);
+        ALOGD("LAUNCH ENCODER-ON: %d MS", duration);
+        if (is_interactive_governor(governor)) {
 
             int *resource_values;
             int resources;
@@ -226,13 +250,41 @@ static int process_video_encode_hint(void *metadata)
                perform_hint_action(video_encode_metadata.hint_id, resource_values, resources);
             ALOGI("Video Encode hint start");
             return HINT_HANDLED;
+        } else {
+            return HINT_HANDLED;
         }
     } else if (video_encode_metadata.state == 0) {
-          if (is_interactive_governor(governor)) {
+        if (is_interactive_governor(governor)) {
             undo_hint_action(video_encode_metadata.hint_id);
             ALOGI("Video Encode hint stop");
             return HINT_HANDLED;
         }
+    }
+    return HINT_NONE;
+}
+
+static int process_activity_launch_hint(void *data)
+{
+    // boost will timeout in 5s
+    int duration = 5000;
+    if (sustained_performance_mode || vr_mode) {
+        return HINT_HANDLED;
+    }
+
+    ALOGD("LAUNCH HINT: %s", data ? "ON" : "OFF");
+    if (data && launch_mode == 0) {
+        launch_handle = process_boost(launch_handle, duration);
+        if (launch_handle > 0) {
+            launch_mode = 1;
+            ALOGI("Activity launch hint handled");
+            return HINT_HANDLED;
+        } else {
+            return HINT_NONE;
+        }
+    } else if (data == NULL  && launch_mode == 1) {
+        release_request(launch_handle);
+        launch_mode = 0;
+        return HINT_HANDLED;
     }
     return HINT_NONE;
 }
@@ -298,6 +350,9 @@ int power_hint_override(struct power_module *UNUSED(module), power_hint_t hint, 
             pthread_mutex_lock(&s_interaction_lock);
             ret_val = interaction_hint(data);
             pthread_mutex_unlock(&s_interaction_lock);
+            break;
+        case POWER_HINT_LAUNCH:
+            ret_val = process_activity_launch_hint(data);
             break;
         default:
             break;

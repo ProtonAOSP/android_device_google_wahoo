@@ -37,6 +37,7 @@
 #define VR_MODE_HINT_ID                 (0x1000)
 #define VR_MODE_SUSTAINED_PERF_HINT_ID  (0x1001)
 #define INTERACTION_HINT_ID             (0x1A00)
+#define BOOST_HINT_ID                   (0x1B00)
 
 struct hint_data {
     unsigned long hint_id; /* This is our key. */
