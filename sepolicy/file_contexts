@@ -223,6 +223,11 @@
 /vendor/lib(64)?/libadreno_utils\.so       u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libgsl\.so                u:object_r:same_process_hal_file:s0
 
+/vendor/lib(64)?/hw/vulkan\.msm8998\.so    u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libEGL_adreno\.so         u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libGLESv1_CM_adreno\.so   u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libGLESv2_adreno\.so      u:object_r:same_process_hal_file:s0
+
 /vendor/lib(64)?/libdrmutils\.so           u:object_r:same_process_hal_file:s0
 
 # /vendor/app/TimeService/TimeService.apk
@@ -233,6 +238,7 @@
 # To test: run cts -m CtsRenderscriptTestCases
 /vendor/lib(64)?/libRSDriver_adreno\.so     u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libCB\.so                  u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libllvm-qgl\.so            u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libbccQTI\.so              u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libllvm-qcom\.so           u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/librs_adreno\.so           u:object_r:same_process_hal_file:s0
