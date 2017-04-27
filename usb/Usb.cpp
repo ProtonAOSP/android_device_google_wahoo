@@ -13,6 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+#define LOG_TAG "android.hardware.usb@1.1-service.wahoo"
+
+#include <android-base/logging.h>
 #include <assert.h>
 #include <dirent.h>
 #include <pthread.h>
@@ -31,7 +35,7 @@
 namespace android {
 namespace hardware {
 namespace usb {
-namespace V1_0 {
+namespace V1_1 {
 namespace implementation {
 
 // Set by the signal handler to destroy the thread
@@ -85,8 +89,8 @@ std::string convertRoletoString(PortRole role) {
     if (role.role == static_cast<uint32_t>(PortDataRole::DEVICE))
       return "device";
   } else if (role.type == PortRoleType::MODE) {
-    if (role.role == static_cast<uint32_t>(PortMode::UFP)) return "ufp";
-    if (role.role == static_cast<uint32_t>(PortMode::DFP)) return "dfp";
+    if (role.role == static_cast<uint32_t>(PortMode_1_1::UFP)) return "ufp";
+    if (role.role == static_cast<uint32_t>(PortMode_1_1::DFP)) return "dfp";
   }
   return "none";
 }
@@ -155,10 +159,24 @@ Return<void> Usb::switchRole(const hidl_string &portName,
   return Void();
 }
 
+Status getAccessoryConnected(std::string portName, std::string *accessory) {
+  std::string filename =
+    "/sys/class/typec/" + portName + "-partner/accessory_mode";
+
+  if (readFile(filename, accessory)) {
+    ALOGE("getAccessoryConnected: Failed to open filesystem node: %s",
+          filename.c_str());
+    return Status::ERROR;
+  }
+
+  return Status::SUCCESS;
+}
+
 Status getCurrentRoleHelper(std::string portName, bool connected,
                             PortRoleType type, uint32_t *currentRole) {
   std::string filename;
   std::string roleName;
+  std::string accessory;
 
   // Mode
 
@@ -170,12 +188,25 @@ Status getCurrentRoleHelper(std::string portName, bool connected,
     *currentRole = static_cast<uint32_t>(PortDataRole::NONE);
   } else if (type == PortRoleType::MODE) {
     filename = "/sys/class/typec/" + portName + "/current_data_role";
-    *currentRole = static_cast<uint32_t>(PortMode::NONE);
+    *currentRole = static_cast<uint32_t>(PortMode_1_1::NONE);
   } else {
     return Status::ERROR;
   }
 
   if (!connected) return Status::SUCCESS;
+
+  if (type == PortRoleType::MODE) {
+    if (getAccessoryConnected(portName, &accessory) != Status::SUCCESS) {
+      return Status::ERROR;
+    }
+    if (accessory == "Audio Adapter Accessory Mode") {
+      *currentRole = static_cast<uint32_t>(PortMode_1_1::AUDIO_ACCESSORY);
+      return Status::SUCCESS;
+    } else if (accessory == "Debug Accessory Mode") {
+      *currentRole = static_cast<uint32_t>(PortMode_1_1::DEBUG_ACCESSORY);
+      return Status::SUCCESS;
+    }
+  }
 
   if (readFile(filename, &roleName)) {
     ALOGE("getCurrentRole: Failed to open filesystem node: %s",
@@ -193,12 +224,12 @@ Status getCurrentRoleHelper(std::string portName, bool connected,
     if (type == PortRoleType::DATA_ROLE)
       *currentRole = static_cast<uint32_t>(PortDataRole::HOST);
     else
-      *currentRole = static_cast<uint32_t>(PortMode::DFP);
+      *currentRole = static_cast<uint32_t>(PortMode_1_1::DFP);
   } else if (roleName == "device") {
     if (type == PortRoleType::DATA_ROLE)
       *currentRole = static_cast<uint32_t>(PortDataRole::DEVICE);
     else
-      *currentRole = static_cast<uint32_t>(PortMode::UFP);
+      *currentRole = static_cast<uint32_t>(PortMode_1_1::UFP);
   } else if (roleName != "none") {
     /* case for none has already been addressed.
      * so we check if the role isnt none.
@@ -253,23 +284,23 @@ bool canSwitchRoleHelper(const std::string portName, PortRoleType /*type*/) {
   return false;
 }
 
-Status getPortStatusHelper(hidl_vec<PortStatus> *currentPortStatus) {
+Status getPortStatus_1_1Helper(hidl_vec<PortStatus_1_1> *currentPortStatus_1_1) {
   std::unordered_map<std::string, bool> names;
   Status result = getTypeCPortNamesHelper(&names);
   int i = -1;
 
   if (result == Status::SUCCESS) {
-    currentPortStatus->resize(names.size());
+    currentPortStatus_1_1->resize(names.size());
     for (std::pair<std::string, bool> port : names) {
       i++;
       ALOGI("%s", port.first.c_str());
-      (*currentPortStatus)[i].portName = port.first;
+      (*currentPortStatus_1_1)[i].status.portName = port.first;
 
       uint32_t currentRole;
       if (getCurrentRoleHelper(port.first, port.second,
                                PortRoleType::POWER_ROLE,
                                &currentRole) == Status::SUCCESS) {
-        (*currentPortStatus)[i].currentPowerRole =
+        (*currentPortStatus_1_1)[i].status.currentPowerRole =
             static_cast<PortPowerRole>(currentRole);
       } else {
         ALOGE("Error while retreiving portNames");
@@ -278,7 +309,7 @@ Status getPortStatusHelper(hidl_vec<PortStatus> *currentPortStatus) {
 
       if (getCurrentRoleHelper(port.first, port.second, PortRoleType::DATA_ROLE,
                                &currentRole) == Status::SUCCESS) {
-        (*currentPortStatus)[i].currentDataRole =
+        (*currentPortStatus_1_1)[i].status.currentDataRole =
             static_cast<PortDataRole>(currentRole);
       } else {
         ALOGE("Error while retreiving current port role");
@@ -287,28 +318,31 @@ Status getPortStatusHelper(hidl_vec<PortStatus> *currentPortStatus) {
 
       if (getCurrentRoleHelper(port.first, port.second, PortRoleType::MODE,
                                &currentRole) == Status::SUCCESS) {
-        (*currentPortStatus)[i].currentMode =
-            static_cast<PortMode>(currentRole);
+        (*currentPortStatus_1_1)[i].currentMode =
+            static_cast<PortMode_1_1>(currentRole);
       } else {
         ALOGE("Error while retreiving current data role");
         goto done;
       }
 
-      (*currentPortStatus)[i].canChangeMode = false;
-      (*currentPortStatus)[i].canChangeDataRole =
+      (*currentPortStatus_1_1)[i].status.canChangeMode = false;
+      (*currentPortStatus_1_1)[i].status.canChangeDataRole =
           port.second ? canSwitchRoleHelper(port.first, PortRoleType::DATA_ROLE)
                       : false;
-      (*currentPortStatus)[i].canChangePowerRole =
+      (*currentPortStatus_1_1)[i].status.canChangePowerRole =
           port.second
               ? canSwitchRoleHelper(port.first, PortRoleType::POWER_ROLE)
               : false;
 
       ALOGI("connected:%d canChangeMode: %d canChagedata: %d canChangePower:%d",
-            port.second, (*currentPortStatus)[i].canChangeMode,
-            (*currentPortStatus)[i].canChangeDataRole,
-            (*currentPortStatus)[i].canChangePowerRole);
+            port.second, (*currentPortStatus_1_1)[i].status.canChangeMode,
+            (*currentPortStatus_1_1)[i].status.canChangeDataRole,
+            (*currentPortStatus_1_1)[i].status.canChangePowerRole);
 
-      (*currentPortStatus)[i].supportedModes = PortMode::DRP;
+      (*currentPortStatus_1_1)[i].supportedModes = PortMode_1_1::UFP | PortMode_1_1::DFP;
+
+      (*currentPortStatus_1_1)[i].status.supportedModes = V1_0::PortMode::NONE;
+      (*currentPortStatus_1_1)[i].status.currentMode = V1_0::PortMode::NONE;
     }
     return Status::SUCCESS;
   }
@@ -317,17 +351,17 @@ done:
 }
 
 Return<void> Usb::queryPortStatus() {
-  hidl_vec<PortStatus> currentPortStatus;
+  hidl_vec<PortStatus_1_1> currentPortStatus_1_1;
   Status status;
 
-  status = getPortStatusHelper(&currentPortStatus);
+  status = getPortStatus_1_1Helper(&currentPortStatus_1_1);
 
   pthread_mutex_lock(&mLock);
   if (mCallback != NULL) {
     Return<void> ret =
-        mCallback->notifyPortStatusChange(currentPortStatus, status);
+        mCallback->notifyPortStatusChange_1_1(currentPortStatus_1_1, status);
     if (!ret.isOk())
-      ALOGE("queryPortStatus error %s", ret.description().c_str());
+      ALOGE("queryPortStatus_1_1 error %s", ret.description().c_str());
   } else {
     ALOGI("Notifying userspace skipped. Callback is NULL");
   }
@@ -337,7 +371,7 @@ Return<void> Usb::queryPortStatus() {
 }
 struct data {
   int uevent_fd;
-  android::hardware::usb::V1_0::implementation::Usb *usb;
+  android::hardware::usb::V1_1::implementation::Usb *usb;
 };
 
 static void uevent_event(uint32_t /*epevents*/, struct data *payload) {
@@ -359,10 +393,10 @@ static void uevent_event(uint32_t /*epevents*/, struct data *payload) {
       ALOGI("uevent received %s", cp);
       pthread_mutex_lock(&payload->usb->mLock);
       if (payload->usb->mCallback != NULL) {
-        hidl_vec<PortStatus> currentPortStatus;
-        Status status = getPortStatusHelper(&currentPortStatus);
-        Return<void> ret = payload->usb->mCallback->notifyPortStatusChange(
-            currentPortStatus, status);
+        hidl_vec<PortStatus_1_1> currentPortStatus_1_1;
+        Status status = getPortStatus_1_1Helper(&currentPortStatus_1_1);
+        Return<void> ret = payload->usb->mCallback->notifyPortStatusChange_1_1(
+            currentPortStatus_1_1, status);
         if (!ret.isOk()) ALOGE("error %s", ret.description().c_str());
       } else {
         ALOGI("Notifying userspace skipped. Callback is NULL");
@@ -391,7 +425,7 @@ void *work(void *param) {
   }
 
   payload.uevent_fd = uevent_fd;
-  payload.usb = (android::hardware::usb::V1_0::implementation::Usb *)param;
+  payload.usb = (android::hardware::usb::V1_1::implementation::Usb *)param;
 
   fcntl(uevent_fd, F_SETFL, O_NONBLOCK);
 
@@ -444,7 +478,13 @@ void sighandler(int sig) {
   signal(SIGUSR1, sighandler);
 }
 
-Return<void> Usb::setCallback(const sp<IUsbCallback> &callback) {
+Return<void> Usb::setCallback(const sp<::android::hardware::usb::V1_0::IUsbCallback> &callback) {
+
+  sp<IUsbCallback> callback_V1_1 = IUsbCallback::castFrom(callback);
+
+  if (callback != NULL)
+    CHECK(callback_V1_1 != NULL);
+
   pthread_mutex_lock(&mLock);
   /*
    * When both the old callback and new callback values are NULL,
@@ -455,12 +495,12 @@ Return<void> Usb::setCallback(const sp<IUsbCallback> &callback) {
    */
   if ((mCallback == NULL && callback == NULL) ||
       (mCallback != NULL && callback != NULL)) {
-    mCallback = callback;
+    mCallback = callback_V1_1;
     pthread_mutex_unlock(&mLock);
     return Void();
   }
 
-  mCallback = callback;
+  mCallback = callback_V1_1;
   ALOGI("registering callback");
 
   // Kill the worker thread if the new callback is NULL.

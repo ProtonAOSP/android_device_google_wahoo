@@ -289,7 +289,7 @@ PRODUCT_COPY_FILES += \
     device/google/wahoo/nfc/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm.conf \
 
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service.device
+    android.hardware.usb@1.1-service.wahoo
 
 PRODUCT_PACKAGES += \
     libmm-omxcore \
