@@ -325,6 +325,8 @@ on early-boot
     wait_for_prop sys.qcom.devup 1
     # wait for insmod_sh to finish all modules
     wait_for_prop sys.all.modules.ready 1
+    # Update dm-verity state and set partition.*.verified properties
+    verity_update_state
 
 on boot
     mkdir /dev/socket/qmux_radio 0770 radio radio
