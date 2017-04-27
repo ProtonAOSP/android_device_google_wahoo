@@ -318,8 +318,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/sensors/hals.conf:system/etc/sensors/hals.conf
 
 PRODUCT_PACKAGES += \
-    fs_config_dirs_vendor \
-    fs_config_files_vendor
+    fs_config_dirs \
+    fs_config_files
 
 # Context hub HAL
 PRODUCT_PACKAGES += \
