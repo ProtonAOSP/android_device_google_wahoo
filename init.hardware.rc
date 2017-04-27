@@ -198,6 +198,12 @@ on post-fs-data
     # We can start netd here before in is launched in common init.rc on zygote-start
     start netd
 
+    # Restart qseecomd once we have /data
+    # qseecomd being started vey early it needs to restarted once /data
+    # is mounted else storing secure content such as fingerprint data
+    # will fail
+    restart qseecomd
+
 # zygote need to be started after otapreopt which will be done on post-fs-data
 on zygote-start
     # zygote is started in common init.rc
