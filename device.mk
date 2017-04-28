@@ -235,6 +235,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi_concurrency_cfg.txt:system/etc/wifi/wifi_concurrency_cfg.txt \
     $(LOCAL_PATH)/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/qca_cld/WCNSS_qcom_cfg.ini
 
+PRODUCT_FULL_TREBLE_OVERRIDE := true
+
 PRODUCT_PACKAGES += \
     hwcomposer.msm8998 \
     android.hardware.graphics.composer@2.1-impl \
