@@ -84,7 +84,7 @@
     </path>
 
     <path name="listen-cpe-handset-mic">
-        <ctl name="MAD Input" value="DMIC2" />
+        <ctl name="MAD Input" value="DMIC1" />
         <ctl name="MAD_SEL MUX" value="SPE" />
         <ctl name="MAD_INP MUX" value="MAD" />
         <ctl name="MAD_CPE1 Switch" value="1" />
@@ -101,19 +101,19 @@
         <ctl name="CLK MODE" value="INTERNAL" />
         <ctl name="EC BUF MUX INP" value="DEC1" />
         <ctl name="ADC MUX1" value="DMIC" />
-        <ctl name="DMIC MUX1" value="DMIC2" />
+        <ctl name="DMIC MUX1" value="DMIC1" />
     </path>
 
     <!-- path name used for low bandwidth FTRT codec interface -->
     <path name="listen-cpe-handset-mic low-speed-intf">
         <ctl name="MADONOFF Switch" value="1" />
         <ctl name="AIF4_MAD Mixer SLIM TX12" value="1" />
-        <ctl name="MAD Input" value="DMIC2" />
+        <ctl name="MAD Input" value="DMIC1" />
         <ctl name="CPE AFE MAD Enable" value="1"/>
     </path>
 
     <path name="listen-ape-handset-mic">
-        <ctl name="MAD Input" value="DMIC2" />
+        <ctl name="MAD Input" value="DMIC1" />
         <ctl name="MAD_SEL MUX" value="MSM" />
         <ctl name="MAD_INP MUX" value="MAD" />
         <ctl name="MAD_BROADCAST Switch" value="1" />
