@@ -203,6 +203,9 @@ on post-fs-data
     # will fail
     restart qseecomd
 
+    # Set indication (checked by vold) that we have finished this action
+    setprop vold.post_fs_data_done 1
+
 # zygote need to be started after otapreopt which will be done on post-fs-data
 on zygote-start
     # zygote is started in common init.rc
@@ -314,10 +317,6 @@ on zygote-start
     mkdir /data/nfc 0770 nfc nfc
     mkdir /data/nfc/param 0770 nfc nfc
     mkdir /data/vendor/nfc 0770 nfc nfc
-
-
-    # Set indication (checked by vold) that we have finished this action
-    setprop vold.post_fs_data_done 1
 
 on early-boot
     # wait for devices
