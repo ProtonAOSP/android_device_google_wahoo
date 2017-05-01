@@ -166,7 +166,6 @@ on late-fs
     # Start devices by sysfs trigger
     start devstart_sh
     # Start services for bootanim
-    start vr_wm
     start surfaceflinger
     start bootanim
     start hwcomposer-2-1
