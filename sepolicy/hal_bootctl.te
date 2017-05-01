@@ -17,6 +17,7 @@ allow hal_bootctl system_block_device:blk_file getattr;
 # UFS_IOCTL_QUERY ioctl.
 allow hal_bootctl sg_device:chr_file rw_file_perms;
 allow hal_bootctl self:capability sys_admin;
+allow hal_bootctl tmpfs:lnk_file r_file_perms;
 
 # Read the sysfs to lookup what /dev/sgN device
 # corresponds to the XBL partitions.
