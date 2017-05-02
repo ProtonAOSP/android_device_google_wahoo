@@ -4,6 +4,16 @@ hal_server_domain(hal_gnss_qti, hal_gnss)
 type hal_gnss_qti_exec, exec_type, vendor_file_type, file_type;
 init_daemon_domain(hal_gnss_qti)
 
+r_dir_file(hal_gnss_qti, sysfs_msm_subsys)
+
+allow hal_gnss_qti sysfs_soc:dir search;
+allow hal_gnss_qti sysfs_soc:file r_file_perms;
+
+allow hal_gnss_qti location_data_file:dir w_dir_perms;
+
+allow hal_gnss_qti self:socket create_socket_perms;
+allowxperm hal_gnss_qti self:socket ioctl IPC_ROUTER_IOCTL_LOOKUP_SERVER;
+
 userdebug_or_eng(`
   permissive hal_gnss_qti;
 ')
