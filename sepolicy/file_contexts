@@ -148,6 +148,7 @@
 /sys/module/subsystem_restart                                       u:object_r:sysfs_msm_subsys_restart:s0
 /sys/kernel/boot_adsp/boot                                          u:object_r:sysfs_msm_subsys:s0
 /sys/kernel/boot_slpi/boot                                          u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/c1b7000\.i2c/i2c-9/9-0008(/.*)?                    u:object_r:sysfs_easel:s0
 
 # files in debugfs
 /sys/kernel/debug/rpm_stats                      u:object_r:debugfs_rpm:s0
