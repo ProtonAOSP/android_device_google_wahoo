@@ -32,7 +32,7 @@ public:
     Vibrator(std::ofstream&& activate, std::ofstream&& duration,
             std::ofstream&& state, std::ofstream&& rtpinput,
             std::ofstream&& mode, std::ofstream&& sequencer,
-            std::ofstream&& scale);
+            std::ofstream&& scale, std::ofstream&& ctrlloop);
 
     // Methods from ::android::hardware::vibrator::V1_0::IVibrator follow.
     Return<Status> on(uint32_t timeoutMs)  override;
@@ -49,6 +49,7 @@ private:
     std::ofstream mMode;
     std::ofstream mSequencer;
     std::ofstream mScale;
+    std::ofstream mCtrlLoop;
 };
 }  // namespace implementation
 }  // namespace V1_0

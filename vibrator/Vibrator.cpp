@@ -43,27 +43,39 @@ static constexpr char WAVEFORM_MODE[] = "waveform";
 
 // Use effect #1 in the waveform library
 static constexpr char WAVEFORM_CLICK_EFFECT_SEQ[] = "1 0";
-static constexpr uint32_t WAVEFORM_CLICK_EFFECT_MS = 45;
+static constexpr uint32_t WAVEFORM_CLICK_EFFECT_MS = 6;
 
 // Make double click a single click and loop once
 static constexpr char WAVEFORM_DOUBLE_CLICK_EFFECT_SEQ[] = "1 1";
 static constexpr uint32_t WAVEFORM_DOUBLE_CLICK_EFFECT_MS = WAVEFORM_CLICK_EFFECT_MS * 2;
 
+// Timeout threshold for selecting open or closed loop mode
+static constexpr int8_t LOOP_MODE_THRESHOLD_MS = 20;
+
 Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration,
         std::ofstream&& state, std::ofstream&& rtpinput,
         std::ofstream&& mode, std::ofstream&& sequencer,
-        std::ofstream&& scale) :
+        std::ofstream&& scale, std::ofstream&& ctrlloop) :
     mActivate(std::move(activate)),
     mDuration(std::move(duration)),
     mState(std::move(state)),
     mRtpInput(std::move(rtpinput)),
     mMode(std::move(mode)),
     mSequencer(std::move(sequencer)),
-    mScale(std::move(scale)) {}
+    mScale(std::move(scale)),
+    mCtrlLoop(std::move(ctrlloop)) {}
 
 // Methods from ::android::hardware::vibrator::V1_0::IVibrator follow.
 Return<Status> Vibrator::on(uint32_t timeout_ms) {
+    uint32_t loop_mode = 1;
 
+    // Open-loop mode is used for short click for over-drive
+    // Close-loop mode is used for long notification for stability
+    if (timeout_ms > LOOP_MODE_THRESHOLD_MS) {
+        loop_mode = 0;
+    }
+
+    mCtrlLoop <<  loop_mode << std::endl;
     mDuration << timeout_ms << std::endl;
     if (!mDuration) {
         ALOGE("Failed to set duration (%d): %s", errno, strerror(errno));
@@ -109,7 +121,7 @@ Return<Status> Vibrator::setAmplitude(uint8_t amplitude) {
             std::round((amplitude - 1) / 254.0 * (MAX_RTP_INPUT - MIN_RTP_INPUT) +
             MIN_RTP_INPUT);
 
-    mRtpInput << rtp_input;
+    mRtpInput << rtp_input << std::endl;
     if (!mRtpInput) {
         ALOGE("Failed to set amplitude (%d): %s", errno, strerror(errno));
         return Status::UNKNOWN_ERROR;
@@ -123,12 +135,9 @@ static uint8_t convertEffectStrength(EffectStrength strength) {
 
     switch (strength) {
     case EffectStrength::LIGHT:
-        scale = 2; // 50%
+        scale = 1; // 50%
         break;
     case EffectStrength::MEDIUM:
-        scale = 1; // 75%
-        break;
-    default:
     case EffectStrength::STRONG:
         scale = 0; // 100%
         break;
