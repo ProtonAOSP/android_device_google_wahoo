@@ -14,6 +14,14 @@ VNDK_SP_LIBRARIES := \
     libhidltransport\
     libutils\
     libc++\
+    libRS_internal\
+    libRSDriver\
+    libRSCpuRef\
+    libbcinfo\
+    libblas\
+    libft2\
+    libpng\
+    libcompiler_rt\
     libbacktrace\
     libunwind\
     liblzma\
@@ -27,7 +35,6 @@ LOCAL_MULTILIB := 32
 LOCAL_MODULE_TAGS := optional
 LOCAL_INSTALLED_MODULE_STEM := $1.so
 LOCAL_MODULE_SUFFIX := .so
-LOCAL_VENDOR_MODULE := true
 LOCAL_MODULE_RELATIVE_PATH := vndk-sp
 include $$(BUILD_PREBUILT)
 
@@ -39,7 +46,6 @@ LOCAL_MULTILIB := 64
 LOCAL_MODULE_TAGS := optional
 LOCAL_INSTALLED_MODULE_STEM := $1.so
 LOCAL_MODULE_SUFFIX := .so
-LOCAL_VENDOR_MODULE := true
 LOCAL_MODULE_RELATIVE_PATH := vndk-sp
 include $$(BUILD_PREBUILT)
 endef
