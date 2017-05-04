@@ -4,6 +4,7 @@ allow init configfs:lnk_file create;
 
 allow init firmware_file:dir mounton;
 allow init configfs:file w_file_perms;
+allow init debugfs_clk:file w_file_perms;
 
 allow init tty_device:chr_file rw_file_perms;
 
