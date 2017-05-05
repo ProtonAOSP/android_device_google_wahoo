@@ -53,11 +53,23 @@ persist.fuse_sdcard=true
 # system prop for Bluetooth SOC type
 qcom.bluetooth.soc=cherokee
 
-# settings to enable PMD and Device Orientation Sensors
+# settings to enable Device Orientation Sensors
 ro.qti.sensors.dev_ori=true
-ro.qti.sensors.pmd=true
-ro.qti.sensors.sta_detect=true
-ro.qti.sensors.mot_detect=true
+
+# settings to disable sensors not needed
+# all secondary wakeup
+ro.qti.sensors.wu=false
+# unused algorithms
+ro.qti.sdk.sensors.gestures=false
+ro.qti.sensors.amd=false
+ro.qti.sensors.cmc=false
+ro.qti.sensors.facing=false
+ro.qti.sensors.pedometer=false
+ro.qti.sensors.rmd=false
+ro.qti.sensors.scrn_ortn=false
+# use SMGR supplied verison
+ro.qti.sensors.step_counter=false
+ro.qti.sensors.step_detector=false
 
 #system prop for RmNet Data
 persist.rmnet.data.enable=true
