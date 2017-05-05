@@ -153,6 +153,7 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "TCPM logs", "/d/tcpm/usbpd0");
     DumpFileToFd(fd, "PD Engine", "/d/pd_engine/usbpd0");
     DumpFileToFd(fd, "smblib-usb logs", "/d/ipc_logging/smblib/log");
+    DumpFileToFd(fd, "ipc-local-ports", "/d/msm_ipc_router/dump_local_ports");
 
     /* Check if qsee_logger tool exists */
     if (!access("/system/bin/qsee_logger", X_OK)) {
