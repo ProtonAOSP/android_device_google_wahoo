@@ -12,7 +12,7 @@ allow hal_gnss_qti sysfs_soc:file r_file_perms;
 allow hal_gnss_qti location_data_file:dir w_dir_perms;
 
 allow hal_gnss_qti self:socket create_socket_perms;
-allowxperm hal_gnss_qti self:socket ioctl IPC_ROUTER_IOCTL_LOOKUP_SERVER;
+allowxperm hal_gnss_qti self:socket ioctl msm_sock_ipc_ioctls;
 
 userdebug_or_eng(`
   permissive hal_gnss_qti;
