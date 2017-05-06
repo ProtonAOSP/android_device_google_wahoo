@@ -6,3 +6,9 @@ allow hal_camera_default qdisplay_service:service_manager { find };
 
 binder_call(hal_camera_default, hal_graphics_composer)
 binder_call(hal_camera_default, system_server)
+
+# For camera team debugging
+userdebug_or_eng(`
+  allow hal_camera_default camera_vendor_data_file:dir create_dir_perms;
+  allow hal_camera_default camera_vendor_data_file:file create_file_perms;
+')
