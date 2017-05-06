@@ -83,8 +83,6 @@ PRODUCT_PACKAGES += \
     update_engine \
     update_verifier
 
-PRODUCT_PACKAGES += SSRestartDetector
-
 PRODUCT_PACKAGES += \
     bootctrl.msm8998
 
