@@ -1,0 +1,17 @@
+type dataservice_app, domain, coredomain;
+app_domain(dataservice_app)
+net_domain(dataservice_app)
+
+get_prop(dataservice_app, cnd_prop)
+add_service(dataservice_app, cne_service)
+add_service(dataservice_app, uce_service)
+allow dataservice_app { app_api_service system_api_service audioserver_service radio_service } :service_manager find;
+
+r_dir_file(dataservice_app, sysfs_msm_subsys)
+allow dataservice_app vnd_uce_hwservice:hwservice_manager find;
+
+# TODO: Remove this when b/38043081 is resolved
+unix_socket_connect(dataservice_app, cnd, cnd)
+
+# imsrcsd to bind with UceShimService.apk
+binder_call(dataservice_app, hal_rcsservice)

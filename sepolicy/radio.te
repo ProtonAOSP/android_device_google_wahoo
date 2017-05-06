@@ -14,11 +14,6 @@ allow radio vnd_qcrilhook_hwservice:hwservice_manager find;
 
 add_service(radio, radio_service)
 
-# TODO(b/37212952): Remove this once imscm_service switches over to using
-# vendorservicemanager
-add_service(radio, imscm_service)
-auditallow radio imscm_service:service_manager { add find };
-
 r_dir_file(radio, sysfs_msm_subsys)
 
 userdebug_or_eng(`

@@ -199,7 +199,6 @@
 /vendor/bin/imsqmidaemon        u:object_r:ims_exec:s0
 /vendor/bin/imsdatadaemon       u:object_r:ims_exec:s0
 /vendor/bin/ims_rtp_daemon      u:object_r:ims_exec:s0
-/vendor/bin/imscmservice        u:object_r:imscm_exec:s0
 /vendor/bin/qmuxd               u:object_r:qmuxd_exec:s0
 /vendor/bin/cnd                 u:object_r:cnd_exec:s0
 /vendor/bin/esed                u:object_r:esed_exec:s0
