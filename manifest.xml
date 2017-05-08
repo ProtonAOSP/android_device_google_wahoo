@@ -50,6 +50,15 @@
         </interface>
     </hal>
     <hal format="hidl">
+        <name>android.hardware.configstore</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ISurfaceFlingerConfigs</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
         <name>android.hardware.contexthub</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
