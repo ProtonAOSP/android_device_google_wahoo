@@ -9,6 +9,7 @@ type sysfs_msm_subsys_restart, sysfs_type, fs_type;
 type sysfs_net, sysfs_type, fs_type;
 type sysfs_rmtfs, sysfs_type, fs_type;
 type sysfs_soc, sysfs_type, fs_type;
+type sysfs_usb_c, sysfs_type, fs_type;
 
 type debugfs_ion, debugfs_type, fs_type;
 type debugfs_kgsl, debugfs_type, fs_type;
