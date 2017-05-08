@@ -345,6 +345,7 @@ on early-boot
     chown system system /sys/class/leds/red/rgb_start
     chown system system /sys/class/leds/green/rgb_start
     chown system system /sys/class/leds/blue/rgb_start
+    chown system system /sys/class/graphics/fb0/msm_fb_persist_mode
 
 on boot
     mkdir /dev/socket/qmux_radio 0770 radio radio
