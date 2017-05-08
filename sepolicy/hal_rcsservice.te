@@ -5,6 +5,8 @@ type hal_rcsservice_exec, exec_type, vendor_file_type, file_type;
 init_daemon_domain(hal_rcsservice)
 net_domain(hal_rcsservice)
 
+get_prop(hal_rcsservice, hwservicemanager_prop)
+
 # To register imsrcsd to hwBinder
 hwbinder_use(hal_rcsservice)
 add_hwservice(hal_rcsservice, imsuce_service)
