@@ -402,8 +402,8 @@ service init-radio-sh /system/bin/init.radio.sh
 
 service folio_daemon /vendor/bin/folio_daemon
     class late_start
-    user root
-    group root
+    user system
+    group system
 
 service perfd /vendor/bin/perfd
    class main
