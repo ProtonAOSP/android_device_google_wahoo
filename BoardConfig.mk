@@ -49,6 +49,9 @@ BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 
 # Partitions (listed in the file) to be wiped under recovery.
 TARGET_RECOVERY_WIPE := device/google/wahoo/recovery.wipe
+TARGET_RECOVERY_FSTAB := device/google/wahoo/fstab.hardware
+
+BOARD_AVB_ENABLE := true
 
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2147483648
 BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0

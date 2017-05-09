@@ -478,8 +478,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
-# Share fstab between devices
-# TODO
+PRODUCT_COPY_FILES += \
+    device/google/wahoo/fstab.hardware:root/fstab.$(PRODUCT_HARDWARE)
 
 # Provide meaningful APN configuration
 PRODUCT_COPY_FILES += \
