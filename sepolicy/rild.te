@@ -20,6 +20,7 @@ add_hwservice(rild, vnd_qcrilhook_hwservice)
 
 allow rild self:socket ioctl;
 allowxperm rild self:socket ioctl msm_sock_ipc_ioctls;
+allow rild time_daemon:unix_stream_socket connectto;
 
 # TODO(b/36613472): Remove this once system_server, mediaserver, radio, and bluetooth no longer
 # communicate with rild over sockets.
