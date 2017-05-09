@@ -8,7 +8,7 @@ allow hal_bootctl block_device:dir r_dir_perms;
 # Edit the attributes stored in the GPT.
 allow hal_bootctl gpt_block_device:blk_file rw_file_perms;
 allow hal_bootctl ab_block_device:blk_file getattr;
-allow hal_bootctl boot_block_device:blk_file getattr;
+allow hal_bootctl boot_block_device:blk_file rw_file_perms;
 allow hal_bootctl modem_block_device:blk_file getattr;
 allow hal_bootctl system_block_device:blk_file getattr;
 
