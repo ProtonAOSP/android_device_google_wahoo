@@ -203,11 +203,13 @@ on post-fs-data
     # will fail
     restart qseecomd
 
+    # b/38048356 Setup debug folders for camera
+    mkdir /data/vendor/camera 0770 camera camera
+
+    # keep that at the end of on post-fs-data
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
 
-    # b/38048356 Setup debug folders for camera
-    mkdir /data/vendor/camera 0770 camera camera
 
 # zygote need to be started after otapreopt which will be done on post-fs-data
 on zygote-start
