@@ -68,6 +68,7 @@
 /dev/block/platform/soc/1da4000\.ufshc/by-name/hyp_[ab]        u:object_r:ab_block_device:s0
 /dev/block/platform/soc/1da4000\.ufshc/by-name/keymaster_[ab]  u:object_r:ab_block_device:s0
 /dev/block/platform/soc/1da4000\.ufshc/by-name/lockbooter_[ab] u:object_r:ab_block_device:s0
+/dev/block/platform/soc/1da4000\.ufshc/by-name/laf_[ab]        u:object_r:ab_block_device:s0
 /dev/block/platform/soc/1da4000\.ufshc/by-name/msadp_[ab]      u:object_r:ab_block_device:s0
 /dev/block/platform/soc/1da4000\.ufshc/by-name/pmic_[ab]       u:object_r:ab_block_device:s0
 /dev/block/platform/soc/1da4000\.ufshc/by-name/rpm_[ab]        u:object_r:ab_block_device:s0
