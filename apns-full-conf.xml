@@ -7092,10 +7092,27 @@
       mmsproxy="mmsproxy.fido.ca"
       mmsc="http://mms.fido.ca"
       mmsport="80"
+      bearer_bitmask="1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17"
       mvno_match_data="DD"
       mvno_type="gid"
       protocol="IPV4V6"
       roaming_protocol="IP"
+  />
+
+  <apn carrier="Fido Netsvcs"
+      mcc="302"
+      mnc="370"
+      apn="netsvcs"
+      type="mms"
+      mmsproxy="mmsproxy.fido.ca"
+      mmsc="http://mms.fido.ca"
+      mmsport="80"
+      bearer_bitmask="18"
+      mvno_match_data="DD"
+      mvno_type="gid"
+      protocol="IPV4V6"
+      roaming_protocol="IP"
+      user_visible="false"
   />
 
   <apn carrier="Fido IMS"
@@ -7107,6 +7124,7 @@
       mvno_type="gid"
       protocol="IPV4V6"
       roaming_protocol="IPV4V6"
+      user_visible="false"
   />
 
   <apn carrier="Fido Tethering"
@@ -7335,15 +7353,6 @@
       mvno_match_data="CITYFONE"
   />
 
-  <apn carrier="Rogers Internet"
-      mcc="302"
-      mnc="720"
-      apn="ltemobile.apn"
-      type="default,supl,hipri,ia"
-      protocol="IPV4V6"
-      roaming_protocol="IPV4V6"
-  />
-
   <apn carrier="Rogers IMS"
       mcc="302"
       mnc="720"
@@ -7354,11 +7363,11 @@
       user_visible="false"
   />
 
-  <apn carrier="Rogers MMS"
+  <apn carrier="Rogers Internet"
       mcc="302"
       mnc="720"
       apn="ltemobile.apn"
-      type="mms"
+      type="default,mms,supl,hipri,ia"
       mmsproxy="mmsproxy.rogers.com"
       mmsc="http://mms.gprs.rogers.com"
       mmsport="80"
@@ -7367,7 +7376,7 @@
       roaming_protocol="IPV4V6"
   />
 
-  <apn carrier="Rogers MMS"
+  <apn carrier="Rogers Netsvcs"
       mcc="302"
       mnc="720"
       apn="netsvcs"
