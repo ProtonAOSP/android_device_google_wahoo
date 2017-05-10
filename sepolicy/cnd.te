@@ -8,6 +8,7 @@ allow cnd self:capability { chown fsetid setgid setuid };
 allow cnd self:udp_socket create_socket_perms;
 allowxperm cnd self:udp_socket ioctl SIOCGIFMTU;
 
+# TODO(b/38227967): Potentially remove following 3 lines upon resolution of this bug
 allow cnd wpa_socket:dir w_dir_perms;
 allow cnd wpa_socket:sock_file create_file_perms;
 allow cnd wifi_data_file:dir search;
@@ -22,6 +23,9 @@ set_prop(cnd, cnd_prop)
 
 allow cnd self:socket create_socket_perms;
 allowxperm cnd self:socket ioctl msm_sock_ipc_ioctls;
+
+# TODO(b/38227967): Potentially remove following line upon resolution of this bug
+allow cnd hal_wifi_supplicant_default:unix_dgram_socket sendto;
 
 init_daemon_domain(cnd)
 

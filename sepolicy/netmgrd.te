@@ -5,6 +5,7 @@ net_domain(netmgrd)
 init_daemon_domain(netmgrd)
 
 set_prop(netmgrd, net_radio_prop)
+set_prop(netmgrd, net_rmnet_prop)
 
 # communicate with netd
 unix_socket_connect(netmgrd, netd, netd)
