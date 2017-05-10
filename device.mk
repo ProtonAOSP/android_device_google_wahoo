@@ -220,12 +220,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # camera TNR controls
 PRODUCT_PROPERTY_OVERRIDES += \
-  persist.camera.tnr.video=1
-
-# Enable full mode face detection by default
-PRODUCT_PROPERTY_OVERRIDES += \
-  persist.camera.facedetect=3
-
+  persist.camera.tnr.video=1 \
 
 # WLAN driver configuration files
 PRODUCT_COPY_FILES += \
