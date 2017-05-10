@@ -14,9 +14,14 @@
 # limitations under the License.
 #
 
-import init.${ro.hardware}.usb.rc
-import init.${ro.hardware}.diag.rc
-import init.${ro.hardware}.logging.rc
+#
+# Following imports have been moved to /vendor/etc/init and will be
+# loaded by /init automatically, so are commented out to reduce the
+# noise in the log.
+#
+#import init.${ro.hardware}.usb.rc
+#import init.${ro.hardware}.diag.rc
+#import init.${ro.hardware}.logging.rc
 
 on charger
     write /sys/devices/system/cpu/cpu2/online 0
@@ -142,8 +147,8 @@ on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
-    mount_all fstab.${ro.hardware} --early
-    swapon_all fstab.${ro.hardware}
+    mount_all /vendor/etc/fstab.${ro.hardware} --early
+    swapon_all /vendor/etc/fstab.${ro.hardware}
 
     # Keeping following partitions outside fstab file. As user may not have
     # these partition flashed on the device. Failure to mount any partition in fstab file
@@ -173,7 +178,7 @@ on late-fs
     start gralloc-2-0
 
     # Mount RW partitions which need run fsck
-    mount_all fstab.${ro.hardware} --late
+    mount_all /vendor/etc/fstab.${ro.hardware} --late
 
 on post-fs
     # set RLIMIT_MEMLOCK to 64MB
@@ -397,7 +402,7 @@ on boot
     mkdir /persist/time 0770 system system
     mkdir /data/time/ 0700 system system
 
-service init-radio-sh /system/bin/init.radio.sh
+service init-radio-sh /vendor/bin/init.radio.sh
     class late_start
     user radio
     group root radio
@@ -633,7 +638,7 @@ service chre /vendor/bin/chre
     class late_start
     socket chre seqpacket 0660 root system
 
-service power_sh /system/bin/init.power.sh
+service power_sh /vendor/bin/init.power.sh
     class main
     user root
     group root system
