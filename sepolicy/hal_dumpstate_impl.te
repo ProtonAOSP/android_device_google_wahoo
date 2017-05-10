@@ -19,6 +19,8 @@ userdebug_or_eng(`
   allow hal_dumpstate_impl radio_data_file:file r_file_perms;
   allow hal_dumpstate_impl radio_vendor_data_file:file r_file_perms;
   allow hal_dumpstate_impl netmgr_data_file:file r_file_perms;
+
+  set_prop(hal_dumpstate_impl, modem_diag_prop)
 ')
 
 allow hal_dumpstate_impl uio_device:chr_file rw_file_perms;
