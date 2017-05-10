@@ -31,6 +31,9 @@
 #define MODEM_LOG_LOC_PROPERTY "ro.radio.log_loc"
 #define MODEM_LOGGING_SWITCH "persist.radio.smlog_switch"
 
+#define DIAG_MDLOG_PROPERTY "persist.sys.modem.diag.mdlog"
+#define DIAG_MDLOG_STATUS_PROPERTY "sys.modem.diag.mdlog"
+
 using android::os::dumpstate::CommandOptions;
 using android::os::dumpstate::DumpFileToFd;
 using android::os::dumpstate::PropertiesHelper;
@@ -56,9 +59,11 @@ static void getModemLogs(int fd)
         bool smlogEnabled = android::base::GetBoolProperty(MODEM_LOGGING_SWITCH, false) &&
                 !access("/vendor/bin/smlog_dump", X_OK);
 
+        bool diagLogEnabled = android::base::GetBoolProperty(DIAG_MDLOG_PROPERTY, false);
+
         CommandOptions options = CommandOptions::WithTimeout(120).Build();
         std::string modemLogAllDir = modemLogDir + "/modem_log";
-        std::string alwaysOnLogs = "/data/vendor/radio/diag_logs/always_on";
+        std::string diagLogDir = "/data/vendor/radio/diag_logs/logs";
         std::vector<std::string> rilAndNetmgrLogs
             {
               "/data/misc/radio/ril_log",
@@ -72,9 +77,24 @@ static void getModemLogs(int fd)
 
         if (smlogEnabled) {
             RunCommandToFd(fd, "SMLOG DUMP", { "smlog_dump", "-d", "-o", modemLogAllDir.c_str() }, options);
-        } else {
-            std::string copyCmd= "/system/bin/cp -rf " + alwaysOnLogs + " " + modemLogAllDir;
-            RunCommandToFd(fd, "CP ALWAYS ON LOGS", { "/system/bin/sh", "-c", copyCmd.c_str()}, options);
+        } else if (diagLogEnabled) {
+            std::string copyCmd= "/system/bin/cp -rf " + diagLogDir + " " + modemLogAllDir;
+
+            android::base::SetProperty(DIAG_MDLOG_PROPERTY, "false");
+
+            ALOGD("Waiting for diag log to exit\n");
+            for (int i = 0; i < 10; i++) {
+                if (!android::base::GetBoolProperty(DIAG_MDLOG_STATUS_PROPERTY, false)) {
+                    ALOGD("diag log exited\n");
+                    break;
+                }
+
+                sleep(1);
+            }
+
+            RunCommandToFd(fd, "CP DIAG LOGS", { "/system/bin/sh", "-c", copyCmd.c_str()}, options);
+
+            android::base::SetProperty(DIAG_MDLOG_PROPERTY, "true");
         }
 
         for (const auto& logFile : rilAndNetmgrLogs)

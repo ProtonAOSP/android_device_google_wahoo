@@ -9,3 +9,4 @@ type cnss_diag_prop, property_type;
 type tee_listener_prop, property_type;
 type wc_prop, property_type;
 type thermal_prop, property_type;
+type modem_diag_prop, property_type;
