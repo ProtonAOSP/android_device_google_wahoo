@@ -165,7 +165,6 @@
 /sys/kernel/debug/pd_engine/usbpd0               u:object_r:debugfs_usb:s0
 /sys/kernel/debug/ipc_logging/smblib/log         u:object_r:debugfs_usb:s0
 
-
 # files in /system
 /system/bin/init\.power\.sh            u:object_r:init_power_exec:s0
 /system/bin/init\.radio\.sh            u:object_r:init_radio_exec:s0
@@ -208,7 +207,8 @@
 /vendor/bin/qmuxd               u:object_r:qmuxd_exec:s0
 /vendor/bin/cnd                 u:object_r:cnd_exec:s0
 /vendor/bin/esed                u:object_r:esed_exec:s0
-/vendor/bin/hw/android\.hardware\.usb@1\.1-service.wahoo            u:object_r:hal_usb_default_exec:s0
+/vendor/bin/hw/android\.hardware\.usb@1\.1-service.wahoo             u:object_r:hal_usb_default_exec:s0
+/vendor/bin/hw/android\.hardware\.power@1\.1-service.wahoo           u:object_r:hal_power_default_exec:s0
 /vendor/bin/chre                u:object_r:chre_exec:s0
 /vendor/bin/folio_daemon        u:object_r:folio_daemon_exec:s0
 /vendor/bin/time_daemon         u:object_r:time_daemon_exec:s0

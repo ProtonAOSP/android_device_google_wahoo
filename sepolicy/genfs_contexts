@@ -8,3 +8,4 @@ genfscon sysfs /class/devfreq                         u:object_r:sysfs_msm_subsy
 genfscon sysfs /class/rfkill/rfkill0/state            u:object_r:sysfs_bluetooth_writable:s0
 
 genfscon debugfs /kgsl/proc                           u:object_r:debugfs_kgsl:s0
+genfscon debugfs /wlan0                               u:object_r:debugfs_wlan:s0

@@ -40,7 +40,6 @@
 
 #define LOG_TAG "QCOM PowerHAL"
 #include <utils/Log.h>
-#include <hardware/hardware.h>
 #include <hardware/power.h>
 
 #include "utils.h"
@@ -48,40 +47,18 @@
 #include "hint-data.h"
 #include "performance.h"
 #include "power-common.h"
+#include "power-helper.h"
 
 #ifndef RPM_SYSTEM_STAT
 #define RPM_SYSTEM_STAT "/d/system_stats"
 #endif
 
-/* RPM runs at 19.2Mhz. Divide by 19200 for msec */
-#define RPM_CLK 19200
+#ifndef WLAN_POWER_STAT
+#define WLAN_POWER_STAT "/d/wlan0/power_stats"
+#endif
 
 #define ARRAY_SIZE(x) (sizeof((x))/sizeof((x)[0]))
 #define LINE_SIZE 128
-
-#define MAX_RPM_PARAMS 2
-#define PLATFORM_SLEEP_MODES RPM_MODE_MAX
-#define XO_VOTERS (MAX_STATS - XO_VOTERS_START)
-#define VMIN_VOTERS 0
-
-enum stats_type {
-    RPM_MODE_XO,
-    RPM_MODE_VMIN,
-    RPM_MODE_MAX,
-    XO_VOTERS_START = RPM_MODE_MAX,
-    VOTER_APSS = XO_VOTERS_START,
-    VOTER_MPSS,
-    VOTER_ADSP,
-    VOTER_SLPI,
-    MAX_STATS,
-};
-
-struct stat_pair {
-    enum stats_type stat;
-    const char *label;
-    const char **parameters;
-    size_t num_parameters;
-};
 
 const char *rpm_stat_params[MAX_RPM_PARAMS] = {
     "count",
@@ -102,6 +79,18 @@ struct stat_pair rpm_stat_map[] = {
     { VOTER_SLPI,    "SLPI",    master_stat_params, ARRAY_SIZE(master_stat_params) },
 };
 
+
+const char *wlan_power_stat_params[] = {
+    "cumulative_sleep_time_ms",
+    "cumulative_total_on_time_ms",
+    "deep_sleep_enter_counter",
+    "last_deep_sleep_enter_tstamp_ms"
+};
+
+struct stat_pair wlan_stat_map[] = {
+    { WLAN_POWER_DEBUG_STATS, "POWER DEBUG STATS", wlan_power_stat_params, ARRAY_SIZE(wlan_power_stat_params) },
+};
+
 static int saved_dcvs_cpu0_slack_max = -1;
 static int saved_dcvs_cpu0_slack_min = -1;
 static int saved_mpdecision_slack_max = -1;
@@ -110,7 +99,7 @@ static int saved_interactive_mode = -1;
 static int slack_node_rw_failed = 0;
 static int display_hint_sent;
 
-static void power_init(struct power_module *UNUSED(module))
+void power_init(void)
 {
     ALOGI("QCOM power HAL initing.");
 }
@@ -221,8 +210,7 @@ static void process_video_encode_hint(void *metadata)
     }
 }
 
-int __attribute__ ((weak)) power_hint_override(struct power_module *UNUSED(module),
-                                               power_hint_t UNUSED(hint),
+int __attribute__ ((weak)) power_hint_override(power_hint_t UNUSED(hint),
                                                void *UNUSED(data))
 {
     return HINT_NONE;
@@ -231,11 +219,10 @@ int __attribute__ ((weak)) power_hint_override(struct power_module *UNUSED(modul
 /* Declare function before use */
 void interaction(int duration, int num_args, int opt_list[]);
 
-static void power_hint(struct power_module *module, power_hint_t hint,
-        void *data)
+void power_hint(power_hint_t hint, void *data)
 {
     /* Check if this hint has been overridden. */
-    if (power_hint_override(module, hint, data) == HINT_HANDLED) {
+    if (power_hint_override(hint, data) == HINT_HANDLED) {
         /* The power_hint has been handled. We can skip the rest. */
         return;
     }
@@ -268,20 +255,19 @@ static void power_hint(struct power_module *module, power_hint_t hint,
     }
 }
 
-int __attribute__ ((weak)) set_interactive_override(struct power_module *UNUSED(module),
-                                                    int UNUSED(on))
+int __attribute__ ((weak)) set_interactive_override(int UNUSED(on))
 {
     return HINT_NONE;
 }
 
-void set_interactive(struct power_module *module, int on)
+void power_set_interactive(int on)
 {
     char governor[80];
     char tmp_str[NODE_MAX];
     struct video_encode_metadata_t video_encode_metadata;
     int rc = 0;
 
-    if (set_interactive_override(module, on) == HINT_HANDLED) {
+    if (set_interactive_override(on) == HINT_HANDLED) {
         return;
     }
 
@@ -479,16 +465,6 @@ void set_interactive(struct power_module *module, int on)
     saved_interactive_mode = !!on;
 }
 
-static ssize_t get_number_of_platform_modes(struct power_module *UNUSED(module)) {
-   return PLATFORM_SLEEP_MODES;
-}
-
-static int get_voter_list(struct power_module *UNUSED(module), size_t *voter) {
-   voter[0] = XO_VOTERS;
-   voter[1] = VMIN_VOTERS;
-
-   return 0;
-}
 
 static int parse_stats(const char **params, size_t params_size,
                        uint64_t *list, FILE *fp) {
@@ -525,6 +501,7 @@ static int parse_stats(const char **params, size_t params_size,
     return 0;
 }
 
+
 static int extract_stats(uint64_t *list, char *file,
                          struct stat_pair *map, size_t map_size) {
     FILE *fp;
@@ -536,7 +513,7 @@ static int extract_stats(uint64_t *list, char *file,
 
     fp = fopen(file, "re");
     if (fp == NULL) {
-        ALOGE("%s: failed to open '%s': %s", __func__, file, strerror(errno));
+        ALOGE("%s: failed to open: %s Error = %s", __func__, file, strerror(errno));
         return -errno;
     }
 
@@ -571,104 +548,10 @@ static int extract_stats(uint64_t *list, char *file,
     return ret;
 }
 
-static int get_platform_low_power_stats(struct power_module *UNUSED(module),
-    power_state_platform_sleep_state_t *list) {
-    uint64_t stats[MAX_STATS * MAX_RPM_PARAMS] = {0};
-    uint64_t *values;
-    int ret;
-    unsigned i;
-
-    if (!list) {
-        return -EINVAL;
-    }
-
-    ret = extract_stats(stats, RPM_SYSTEM_STAT,
-                        rpm_stat_map, ARRAY_SIZE(rpm_stat_map));
-    if (ret) {
-        return ret;
-    }
-
-    /* Update statistics for XO_shutdown */
-    strcpy(list[0].name, "XO_shutdown");
-    values = stats + (RPM_MODE_XO * MAX_RPM_PARAMS);
-    list[0].total_transitions = values[0];
-    list[0].residency_in_msec_since_boot = values[1];
-    list[0].supported_only_in_suspend = false;
-    list[0].number_of_voters = XO_VOTERS;
-
-    for (i = 0; i < XO_VOTERS; i++) {
-        int voter = i + XO_VOTERS_START;
-        strlcpy(list[0].voters[i].name, rpm_stat_map[voter].label,
-                POWER_STATE_VOTER_NAME_MAX_LENGTH);
-        values = stats + (voter * MAX_RPM_PARAMS);
-        list[0].voters[i].total_time_in_msec_voted_for_since_boot = values[0] / RPM_CLK;
-        list[0].voters[i].total_number_of_times_voted_since_boot = values[1];
-    }
-
-    /* Update statistics for VMIN state */
-    strcpy(list[1].name, "VMIN");
-    values = stats + (RPM_MODE_VMIN * MAX_RPM_PARAMS);
-    list[1].total_transitions = values[0];
-    list[1].residency_in_msec_since_boot = values[1];
-    list[1].supported_only_in_suspend = false;
-    list[1].number_of_voters = VMIN_VOTERS;
-
-    return 0;
+int extract_platform_stats(uint64_t *list) {
+    return extract_stats(list, RPM_SYSTEM_STAT, rpm_stat_map, ARRAY_SIZE(rpm_stat_map));
 }
 
-static int power_open(const hw_module_t* UNUSED(module), const char* name,
-                    hw_device_t** device)
-{
-    ALOGD("%s: enter; name=%s", __FUNCTION__, name);
-    int retval = 0; /* 0 is ok; -1 is error */
-
-    if (strcmp(name, POWER_HARDWARE_MODULE_ID) == 0) {
-        power_module_t *dev = (power_module_t *)calloc(1,
-                sizeof(power_module_t));
-
-        if (dev) {
-            /* Common hw_device_t fields */
-            dev->common.tag = HARDWARE_MODULE_TAG;
-            dev->common.module_api_version = POWER_MODULE_API_VERSION_0_5;
-            dev->common.module_api_version = HARDWARE_HAL_API_VERSION;
-
-            dev->init = power_init;
-            dev->powerHint = power_hint;
-            dev->setInteractive = set_interactive;
-            dev->get_number_of_platform_modes = get_number_of_platform_modes;
-            dev->get_platform_low_power_stats = get_platform_low_power_stats;
-            dev->get_voter_list = get_voter_list;
-
-            *device = (hw_device_t*)dev;
-        } else
-            retval = -ENOMEM;
-    } else {
-        retval = -EINVAL;
-    }
-
-    ALOGD("%s: exit %d", __FUNCTION__, retval);
-    return retval;
+int extract_wlan_stats(uint64_t *list) {
+    return extract_stats(list, WLAN_POWER_STAT, wlan_stat_map, ARRAY_SIZE(wlan_stat_map));
 }
-
-static struct hw_module_methods_t power_module_methods = {
-    .open = power_open,
-};
-
-struct power_module HAL_MODULE_INFO_SYM = {
-    .common = {
-        .tag = HARDWARE_MODULE_TAG,
-        .module_api_version = POWER_MODULE_API_VERSION_0_5,
-        .hal_api_version = HARDWARE_HAL_API_VERSION,
-        .id = POWER_HARDWARE_MODULE_ID,
-        .name = "QCOM Power HAL",
-        .author = "Qualcomm",
-        .methods = &power_module_methods,
-    },
-
-    .init = power_init,
-    .powerHint = power_hint,
-    .setInteractive = set_interactive,
-    .get_number_of_platform_modes = get_number_of_platform_modes,
-    .get_platform_low_power_stats = get_platform_low_power_stats,
-    .get_voter_list = get_voter_list
-};
