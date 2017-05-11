@@ -29,10 +29,6 @@ allowxperm location self:socket ioctl msm_sock_ipc_ioctls;
 # files in /sys
 r_dir_file(location, sysfs_type)
 
-userdebug_or_eng(`
-permissive location;
-')
-
 # TODO(b/34274385): Remove this once Wi-Fi HAL is guaranteed to not be run in passthrough mode
 # What's going on here is that Wi-Fi HAL is talking over sockets to location daemon, which is
 # permitted. However, those rules target hal_wifi rather than hal_wifi_server and thus are also
