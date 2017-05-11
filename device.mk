@@ -175,10 +175,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196610 \
     ro.gfx.driver.0=com.google.pixel.wahoo.gfxdriver
 
-# Enable low power video mode for 4K encode
-PRODUCT_PROPERTY_OVERRIDES += \
-    vidc.debug.perf.mode=2
-
 # NFC/camera interaction workaround - DO NOT COPY TO NEW DEVICES
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.camera.notify_nfc=1
