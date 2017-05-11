@@ -399,6 +399,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.audio.monitorRotation=true
 
+# Bug 37532694
+PRODUCT_PROPERTY_OVERRIDES += audio.adm.buffering.ms=4
+
 # Thermal packages
 PRODUCT_PACKAGES += \
     thermal.default
