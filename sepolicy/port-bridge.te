@@ -9,7 +9,3 @@ allow port-bridge sysfs_soc:dir search;
 allow port-bridge sysfs_soc:file r_file_perms;
 
 allow port-bridge at_device:chr_file rw_file_perms;
-
-userdebug_or_eng(`
-permissive port-bridge;
-')
