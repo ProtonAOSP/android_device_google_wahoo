@@ -111,6 +111,9 @@
 /dev/block/sde13                                u:object_r:boot_block_device:s0
 /dev/block/sde27                                u:object_r:boot_block_device:s0
 
+# Block device for ZRAM
+/dev/block/zram0                                u:object_r:swap_block_device:s0
+
 # files in sysfs
 /sys/class/thermal(/.*)?                                            u:object_r:sysfs_thermal:s0
 /sys/class/uio(/.*)?                                                u:object_r:sysfs_uio:s0
