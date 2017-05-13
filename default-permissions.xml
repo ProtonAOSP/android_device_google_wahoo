@@ -51,4 +51,10 @@
         <permission name="android.permission.WRITE_CONTACTS" fixed="false"/>
     </exception>
 
+    <exception
+            package="com.verizon.mips.services">
+        <!-- Phone -->
+        <permission name="android.permission.READ_PHONE_STATE" fixed="false"/>
+    </exception>
+
 </exceptions>
