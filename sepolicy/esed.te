@@ -5,5 +5,7 @@ hal_server_domain(esed, hal_oemlock)
 hal_server_domain(esed, hal_weaver)
 
 allow esed pn81a_device:chr_file rw_file_perms;
+allow esed ese_vendor_data_file:dir create_dir_perms;
+allow esed ese_vendor_data_file:file create_file_perms;
 
 init_daemon_domain(esed)
