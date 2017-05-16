@@ -8,10 +8,6 @@ set_prop(wcnss_filter, bluetooth_prop)
 
 allow wcnss_filter hci_attach_dev:chr_file rw_file_perms;
 
-userdebug_or_eng(`
-permissive wcnss_filter;
-')
-
 # allow wcnss to set threads to RT priority
 allow wcnss_filter self:capability sys_nice;
 
