@@ -168,6 +168,7 @@
 /sys/kernel/debug/tcpm/usbpd0                    u:object_r:debugfs_usb:s0
 /sys/kernel/debug/pd_engine/usbpd0               u:object_r:debugfs_usb:s0
 /sys/kernel/debug/ipc_logging/smblib/log         u:object_r:debugfs_usb:s0
+/sys/kernel/debug/msm_ipc_router(/.*)?           u:object_r:debugfs_ipc:s0
 
 # files in /system
 /system/bin/init\.power\.sh            u:object_r:init_power_exec:s0
