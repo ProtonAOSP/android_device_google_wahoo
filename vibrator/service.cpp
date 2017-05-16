@@ -72,31 +72,31 @@ status_t registerVibratorService() {
 
     // ostreams below are optional
     std::ofstream rtpinput{RTP_INPUT_PATH};
-    if (!state) {
+    if (!rtpinput) {
         int error = errno;
         ALOGW("Failed to open %s (%d): %s", RTP_INPUT_PATH, error, strerror(error));
     }
 
     std::ofstream mode{MODE_PATH};
-    if (!state) {
+    if (!mode) {
         int error = errno;
         ALOGW("Failed to open %s (%d): %s", MODE_PATH, error, strerror(error));
     }
 
     std::ofstream sequencer{SEQUENCER_PATH};
-    if (!state) {
+    if (!sequencer) {
         int error = errno;
         ALOGW("Failed to open %s (%d): %s", SEQUENCER_PATH, error, strerror(error));
     }
 
     std::ofstream scale{SCALE_PATH};
-    if (!state) {
+    if (!scale) {
         int error = errno;
         ALOGW("Failed to open %s (%d): %s", SCALE_PATH, error, strerror(error));
     }
 
     std::ofstream ctrlloop{CTRL_LOOP_PATH};
-    if (!state) {
+    if (!ctrlloop) {
         int error = errno;
         ALOGW("Failed to open %s (%d): %s", CTRL_LOOP_PATH, error, strerror(error));
     }
