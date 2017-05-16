@@ -6,6 +6,8 @@ init_daemon_domain(hal_gnss_qti)
 
 r_dir_file(hal_gnss_qti, sysfs_msm_subsys)
 
+vndbinder_use(hal_gnss_qti)
+
 allow hal_gnss_qti sysfs_soc:dir search;
 allow hal_gnss_qti sysfs_soc:file r_file_perms;
 
