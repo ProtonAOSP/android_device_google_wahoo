@@ -306,6 +306,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/sensors/hals.conf:vendor/etc/sensors/hals.conf
 
+# Default permission grant exceptions
+PRODUCT_COPY_FILES += \
+    device/google/wahoo/default-permissions.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default-permissions/default-permissions.xml
+
 PRODUCT_PACKAGES += \
     fs_config_dirs \
     fs_config_files
