@@ -89,3 +89,6 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hard
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/wifi/wpa_supplicant_overlay.conf)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/wifi/p2p_supplicant_overlay.conf)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/wifi/wifi_concurrency_cfg.txt)
+
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib/hw/lights.$(PRODUCT_HARDWARE).so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib64/hw/lights.$(PRODUCT_HARDWARE).so)
