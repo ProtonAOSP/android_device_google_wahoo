@@ -1,4 +1,4 @@
-# /system/bin/init.radio.sh
+# /vendor/bin/init.radio.sh
 type init_radio, domain, vendor_executes_system_violators;
 type init_radio_exec, exec_type, vendor_file_type, file_type;
 
