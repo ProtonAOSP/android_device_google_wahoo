@@ -11,6 +11,7 @@ r_dir_file(perfd, sysfs_msm_subsys)
 dontaudit perfd self:capability kill;
 
 allow perfd mediacodec:process signull;
+allow perfd hal_power_default:process signull;
 
 allow perfd cgroup:file r_file_perms;
 allow perfd post_boot_prop:file r_file_perms;
