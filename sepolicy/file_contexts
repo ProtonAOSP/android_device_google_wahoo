@@ -210,8 +210,11 @@
 /vendor/bin/ims_rtp_daemon      u:object_r:ims_exec:s0
 /vendor/bin/qmuxd               u:object_r:qmuxd_exec:s0
 /vendor/bin/cnd                 u:object_r:cnd_exec:s0
+# Remove after b/38447389
 /vendor/bin/esed                u:object_r:esed_exec:s0
-/vendor/bin/ese_load            u:object_r:esed_exec:s0
+# Rename to android.hardware.[XXX] after b/38447431
+/vendor/bin/hw/esed             u:object_r:esed_exec:s0
+/vendor/bin/ese_load            u:object_r:init_ese_exec:s0
 /vendor/bin/ese-replay          u:object_r:esed_exec:s0
 /vendor/bin/ese-ls-provision    u:object_r:esed_exec:s0
 /vendor/bin/hw/android\.hardware\.usb@1\.1-service.wahoo             u:object_r:hal_usb_default_exec:s0

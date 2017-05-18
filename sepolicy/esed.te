@@ -1,3 +1,5 @@
+# android.hardware.oemlock and weaver HAL implementation
+# Clean up naming after via b/38447431
 type esed, domain;
 type esed_exec, exec_type, vendor_file_type, file_type;
 
