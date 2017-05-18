@@ -34,6 +34,6 @@ cc_binary {
         "android.hardware.wifi.offload@1.0",
     ],
     static_libs: ["chre_client"],
-    proprietary: true,
+    vendor: true,
 }
 
