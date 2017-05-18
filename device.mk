@@ -188,6 +188,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.VT_ENABLE=1 \
     persist.radio.VT_HYBRID_ENABLE=1 \
     persist.radio.apm_sim_not_pwdn=1 \
+    persist.radio.custom_ecc=1 \
     persist.radio.data_ltd_sys_ind=1 \
     persist.radio.is_wps_enabled=true \
     persist.radio.videopause.mode=1 \
