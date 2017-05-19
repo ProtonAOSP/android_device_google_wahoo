@@ -14,14 +14,7 @@
 # limitations under the License.
 #
 
-#
-# Following imports have been moved to /vendor/etc/init and will be
-# loaded by /init automatically, so are commented out to reduce the
-# noise in the log.
-#
-#import init.${ro.hardware}.usb.rc
-#import init.${ro.hardware}.diag.rc
-#import init.${ro.hardware}.logging.rc
+import /vendor/etc/init/hw/init.${ro.hardware}.usb.rc
 
 on charger
     write /sys/devices/system/cpu/cpu2/online 0
