@@ -26,6 +26,7 @@ on boot
     chmod 666 /dev/diag
 
 on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "diag"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -39,9 +40,12 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag && property:sys.
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=diag,adb && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     start adbd
 
+
 on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag,adb && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "diag_adb"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -56,10 +60,12 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag,adb && property:
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=diag,serial_cdev,rmnet_gsi,adb && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     start adbd
     start port-bridge
 
 on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag,serial_cdev,rmnet_gsi,adb && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "Default composition"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -77,6 +83,7 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag,serial_cdev,rmne
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=diag,serial_cdev,rmnet_gsi && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "Default comp without ADB"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -94,6 +101,7 @@ on property:sys.usb.config=diag,serial_cdev,rmnet_gsi && property:sys.usb.config
     start port-bridge
 
 on property:sys.usb.config=rndis,diag && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "rndis_diag"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -108,9 +116,11 @@ on property:sys.usb.config=rndis,diag && property:sys.usb.configfs=1
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=rndis,diag,adb && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     start adbd
 
 on property:sys.usb.ffs.ready=1 && property:sys.usb.config=rndis,diag,adb && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "rndis_diag_adb"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -126,6 +136,7 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=rndis,diag,adb && pro
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=rndis,serial_cdev,diag && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "rndis_dun_diag"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -142,10 +153,12 @@ on property:sys.usb.config=rndis,serial_cdev,diag && property:sys.usb.configfs=1
     start port-bridge
 
 on property:sys.usb.config=rndis,serial_cdev,diag,adb && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     start adbd
     start port-bridge
 
 on property:sys.usb.ffs.ready=1 && property:sys.usb.config=rndis,serial_cdev,diag,adb && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "rndis_dun_diag"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -162,6 +175,7 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=rndis,serial_cdev,dia
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=mtp,diag && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "mtp_diag"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -176,9 +190,11 @@ on property:sys.usb.config=mtp,diag && property:sys.usb.configfs=1
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=mtp,diag,adb && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     start adbd
 
 on property:sys.usb.ffs.ready=1 && property:sys.usb.config=mtp,diag,adb && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "mtp_diag_adb"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -194,6 +210,7 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=mtp,diag,adb && prope
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=diag,qdss && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "diag_qdss"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -209,9 +226,11 @@ on property:sys.usb.config=diag,qdss && property:sys.usb.configfs=1
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=diag,qdss,adb && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     start adbd
 
 on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag,qdss,adb && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "diag_qdss_adb"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -228,6 +247,7 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag,qdss,adb && prop
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=diag,qdss,rmnet_gsi && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "diag_qdss_rmnet"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -244,9 +264,11 @@ on property:sys.usb.config=diag,qdss,rmnet_gsi && property:sys.usb.configfs=1
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=diag,qdss,rmnet_gsi,adb && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     start adbd
 
 on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag,qdss,rmnet_gsi,adb && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "diag_qdss_rmnet_adb"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -264,6 +286,7 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag,qdss,rmnet_gsi,a
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=rndis,diag,qdss && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "rndis_diag_qdss"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -280,9 +303,11 @@ on property:sys.usb.config=rndis,diag,qdss && property:sys.usb.configfs=1
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=rndis,diag,qdss,adb && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     start adbd
 
 on property:sys.usb.ffs.ready=1 && property:sys.usb.config=rndis,diag,qdss,adb && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "rndis_diag_qdss_adb"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -300,6 +325,7 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=rndis,diag,qdss,adb &
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=diag,serial_cdev && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "diag_dun"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
@@ -315,10 +341,12 @@ on property:sys.usb.config=diag,serial_cdev && property:sys.usb.configfs=1
     start port-bridge
 
 on property:sys.usb.config=diag,adb,serial_cdev && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     start adbd
     start port-bridge
 
 on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag,adb,serial_cdev && property:sys.usb.configfs=1
+    setprop persist.sys.modem.diag.mdlog false
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "diag_adb_dun"
     rm /config/usb_gadget/g1/configs/b.1/f1
     rm /config/usb_gadget/g1/configs/b.1/f2
