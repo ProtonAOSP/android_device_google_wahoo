@@ -239,7 +239,7 @@
         <transport>hwbinder</transport>
         <version>3.0</version>
         <interface>
-            <name>IKeymaster</name>
+            <name>IKeymasterDevice</name>
             <instance>default</instance>
         </interface>
     </hal>
