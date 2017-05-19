@@ -348,7 +348,7 @@ PRODUCT_PACKAGES += \
     android.hardware.vr@1.0-service.wahoo \
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/sec_config:system/etc/sec_config
+    $(LOCAL_PATH)/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
 
 
 HOSTAPD := hostapd
