@@ -43,6 +43,15 @@ typedef struct perflock_param_t {
 static perflock_param_t powerhint[MAX_HINT];
 
 int parsePowerhintXML();
-int *getPowerhint(int, int*);
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int *getPowerhint(int, int *);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __POWERHINTPARSER__ */

@@ -44,6 +44,7 @@ using ::android::hardware::Void;
 
 Power::Power() {
     power_init();
+    mInteractionHandler.Init();
 }
 
 // Methods from ::android::hardware::power::V1_0::IPower follow.
@@ -53,9 +54,12 @@ Return<void> Power::setInteractive(bool interactive)  {
 }
 
 Return<void> Power::powerHint(PowerHint hint, int32_t data) {
-
-    power_hint(static_cast<power_hint_t>(hint), data ? (&data) : NULL);
-
+    power_hint_t h = static_cast<power_hint_t>(hint);
+    if (h == POWER_HINT_INTERACTION) {
+        mInteractionHandler.Acquire(data);
+        return Void();
+    }
+    power_hint(h, data ? &data : NULL);
     return Void();
 }
 
@@ -90,7 +94,7 @@ Return<void> Power::getPlatformLowPowerStats(getPlatformLowPowerStats_cb _hidl_c
     state->supportedOnlyInSuspend = false;
     state->voters.resize(XO_VOTERS);
     for(size_t i = 0; i < XO_VOTERS; i++) {
-        int voter = i + XO_VOTERS_START;
+        int voter = static_cast<int>(i + XO_VOTERS_START);
         state->voters[i].name = rpm_stat_map[voter].label;
         values = stats + (voter * MAX_RPM_PARAMS);
         state->voters[i].totalTimeInMsecVotedForSinceBoot = values[0] / RPM_CLK;
