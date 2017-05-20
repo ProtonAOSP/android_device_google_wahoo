@@ -420,7 +420,7 @@ service folio_daemon /vendor/bin/folio_daemon
 service perfd /vendor/bin/perfd
    class main
    user root
-   group root readproc
+   group root readproc system
    socket perfd seqpacket 0666 root system
 
 service thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg:-/vendor/etc/thermal-engine.conf}
