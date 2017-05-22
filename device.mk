@@ -539,3 +539,6 @@ PRODUCT_ENFORCE_RRO_TARGETS := framework-res
 # Override heap growth limit due to high display density on device
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapgrowthlimit=256m
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    qcom.bluetooth.soc=cherokee
