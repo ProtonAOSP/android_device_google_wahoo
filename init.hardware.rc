@@ -510,7 +510,7 @@ service adsprpcd /vendor/bin/adsprpcd
    user media
    group media
 
-service irsc_util /vendor/bin/irsc_util "/etc/sec_config"
+service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
     class core
     user root
     oneshot

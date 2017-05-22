@@ -92,3 +92,5 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/wifi/wifi_concurrency_cf
 
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib/hw/lights.$(PRODUCT_HARDWARE).so)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib64/hw/lights.$(PRODUCT_HARDWARE).so)
+
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/sec_config)
