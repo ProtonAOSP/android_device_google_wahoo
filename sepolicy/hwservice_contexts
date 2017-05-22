@@ -1,3 +1,4 @@
 com.qualcomm.qti.ims.radio::IImsRadio                           u:object_r:vnd_ims_radio_hwservice:s0
 com.qualcomm.qti.qcril.qcrilhook::IQtiOemHook                   u:object_r:vnd_qcrilhook_hwservice:s0
 com.qualcomm.qti.uceservice::IUceService                        u:object_r:vnd_uce_hwservice:s0
+vendor.qti.qcril.am::IQcRilAudio                                u:object_r:vnd_qcrilhook_hwservice:s0
