@@ -158,6 +158,9 @@
 /sys/kernel/boot_adsp/boot                                          u:object_r:sysfs_msm_subsys:s0
 /sys/kernel/boot_slpi/boot                                          u:object_r:sysfs_msm_subsys:s0
 /sys/devices/soc/c1b7000\.i2c/i2c-9/9-0008(/.*)?                    u:object_r:sysfs_easel:s0
+/sys/class/typec(/.*)?                                              u:object_r:sysfs_usb_c:s0
+/sys/class/typec/usbc0(/.*)?                                        u:object_r:sysfs_usb_c:s0
+/sys/devices/soc/800f000\.qcom,spmi/spmi-0/spmi0-02/800f000\.qcom,spmi:qcom,pmi8998@2:qcom,usb-pdphy@1700/usbpd0/typec(/.*)?     u:object_r:sysfs_usb_c:s0
 
 # files in debugfs
 /sys/kernel/debug/clk(/.*)?                      u:object_r:debugfs_clk:s0
