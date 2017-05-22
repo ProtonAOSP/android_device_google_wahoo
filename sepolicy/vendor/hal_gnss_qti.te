@@ -13,6 +13,8 @@ allow hal_gnss_qti sysfs_soc:file r_file_perms;
 
 allow hal_gnss_qti location_data_file:dir create_dir_perms;
 allow hal_gnss_qti location_data_file:file create_file_perms;
+allow hal_gnss_qti location_data_file:sock_file write;
+allow hal_gnss_qti location:unix_stream_socket connectto;
 
 unix_socket_connect(hal_gnss_qti, netmgrd, netmgrd)
 allow hal_gnss_qti netmgrd_socket:dir search;
