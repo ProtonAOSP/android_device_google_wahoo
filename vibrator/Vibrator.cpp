@@ -117,7 +117,7 @@ Return<Status> Vibrator::setAmplitude(uint8_t amplitude) {
         return Status::BAD_VALUE;
     }
 
-    int8_t rtp_input =
+    int32_t rtp_input =
             std::round((amplitude - 1) / 254.0 * (MAX_RTP_INPUT - MIN_RTP_INPUT) +
             MIN_RTP_INPUT);
 
