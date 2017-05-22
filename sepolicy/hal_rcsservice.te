@@ -16,6 +16,8 @@ get_prop(hal_rcsservice, hwservicemanager_prop)
 # allow hal to read sysfs file
 r_dir_file(hal_rcsservice, sysfs_msm_subsys)
 
+allow hal_rcsservice sysfs_timestamp_switch:file r_file_perms;
+
 unix_socket_connect(hal_rcsservice, ims, ims)
 
 # imsrcsd to bind with UceShimService.apk

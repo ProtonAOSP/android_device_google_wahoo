@@ -145,6 +145,7 @@
 /sys/kernel/debug/rmt_storage(/.*)?                                 u:object_r:debugfs_rmt_storage:s0
 /sys/module/msm_thermal(/.*)?                                       u:object_r:sysfs_thermal:s0
 /sys/module/tcp_cubic/parameters(/.*)?                              u:object_r:sysfs_net:s0
+/sys/module/diagchar/parameters/timestamp_switch                    u:object_r:sysfs_timestamp_switch:s0
 /sys/devices/virtual/graphics/fb([0-2])+(/.*)?                      u:object_r:sysfs_graphics:s0
 /sys/devices/virtual/net(/.*)?                                      u:object_r:sysfs_net:s0
 /sys/devices/soc/8c0000\.qcom,msm-cam(/.*)?                         u:object_r:sysfs_camera:s0
