@@ -114,3 +114,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/media_codecs_performance
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/media_codecs_google_audio.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/media_codecs_google_telephony.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/media_codecs_google_video.xml)
+
+# Move /system/lib/vndk-sp to /system/lib/vndk-sp-26.1.0
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib/vndk-sp)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib64/vndk-sp)
