@@ -346,6 +346,8 @@ on early-boot
     chown system system /sys/class/leds/vibrator/device/set_sequencer
     chown system system /sys/class/leds/vibrator/device/autocal_result
     chown system system /sys/class/leds/vibrator/device/ctrl_loop
+    chown system system /sys/class/leds/vibrator/device/ol_lra_period
+    chown system system /sys/class/leds/vibrator/device/autocal
 
     # Permission for LED driver
     chown system system /sys/class/leds/red/on_off_ms

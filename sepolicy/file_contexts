@@ -308,6 +308,7 @@
 /persist/data(/.*)?       u:object_r:persist_data_file:s0
 /persist/display(/.*)?    u:object_r:persist_display_file:s0
 /persist/sensors(/.*)?    u:object_r:persist_sensors_file:s0
+/persist/haptics(/.*)?    u:object_r:persist_haptics_file:s0
 
 /metadata                 u:object_r:rootfs:s0
 /metadata/.*              u:object_r:vold_data_file:s0
