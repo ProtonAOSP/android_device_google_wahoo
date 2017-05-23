@@ -30,6 +30,10 @@
         <name>android.hardware.boot</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
+        <interface>
+            <name>IBootControl</name>
+            <instance>default</instance>
+        </interface>
     </hal>
     <hal format="hidl">
         <name>android.hardware.light</name>
@@ -71,6 +75,10 @@
         <name>android.hardware.contexthub</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
+        <interface>
+            <name>IContexthub</name>
+            <instance>default</instance>
+        </interface>
     </hal>
     <hal format="hidl">
         <name>android.hardware.graphics.allocator</name>
@@ -197,7 +205,7 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal>
+    <hal format="hidl">
         <name>android.hardware.thermal</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
@@ -206,7 +214,6 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <!-- IMS UCE Service -->
     <hal format="hidl">
         <name>com.qualcomm.qti.uceservice</name>
         <transport>hwbinder</transport>
@@ -320,15 +327,31 @@
             <instance>slot2</instance>
         </interface>
     </hal>
-    <!-- IMS RTP Service -->
+    <hal format="hidl">
+        <name>com.qualcomm.qti.qcril.qcrilhook</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IQtiOemHook</name>
+            <instance>oemhook0</instance>
+        </interface>
+    </hal>
     <hal format="hidl">
         <name>com.qualcomm.qti.imsrtpservice</name>
         <transport>hwbinder</transport>
-        <impl level="generic"></impl>
         <version>1.0</version>
         <interface>
             <name>IRTPService</name>
             <instance>rtpservice0</instance>
+        </interface>
+    </hal>
+    <hal format="hidl">
+        <name>com.qualcomm.qti.ims.radio</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IImsRadio</name>
+            <instance>imsradio0</instance>
         </interface>
     </hal>
     <hal format="hidl">
