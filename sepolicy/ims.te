@@ -10,6 +10,7 @@ unix_socket_connect(ims, netmgrd, netmgrd)
 
 allow ims sysfs_soc:dir search;
 allow ims sysfs_soc:file r_file_perms;
+allow ims sysfs_timestamp_switch:file r_file_perms;
 
 # TODO(b/38228603): Remove net_raw upon resolution of this bug
 allow ims self:capability { net_raw net_bind_service};
@@ -19,6 +20,7 @@ allow ims ion_device:chr_file r_file_perms;
 unix_socket_connect(ims, cnd, cnd)
 
 allow ims self:socket create_socket_perms;
+allow ims ims_socket:sock_file write;
 allow ims self:netlink_generic_socket create_socket_perms_no_ioctl;
 allow ims netmgrd_socket:dir search;
 allow ims netmgrd_socket:sock_file w_file_perms;
