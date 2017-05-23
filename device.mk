@@ -406,6 +406,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Bug 37532694
 PRODUCT_PROPERTY_OVERRIDES += audio.adm.buffering.ms=4
 
+# MIDI feature
+# PRODUCT_COPY_FILES += \
+#    frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml
+
+# Audio low latency feature
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.audio.low_latency.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.low_latency.xml
+
+# Pro audio feature
+# PRODUCT_COPY_FILES += \
+#   frameworks/native/data/etc/android.hardware.audio.pro.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.pro.xml
+
 # Thermal packages
 PRODUCT_PACKAGES += \
     thermal.default
