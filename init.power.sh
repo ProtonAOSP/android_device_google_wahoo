@@ -34,6 +34,14 @@ done
 
 write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
 
+# Enable memlat governor
+for memlat in /sys/class/devfreq/*qcom,memlat-cpu*
+do
+    write $memlat/governor "mem_latency"
+    write $memlat/polling_interval 10
+    write $memlat/mem_latency/ratio_ceil 400
+done
+
 # Signal perfd that boot has completed
 setprop sys.post_boot.parsed 1
 
