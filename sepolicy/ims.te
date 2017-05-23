@@ -4,6 +4,7 @@ type ims_exec, exec_type, vendor_file_type, file_type;
 init_daemon_domain(ims)
 net_domain(ims)
 
+get_prop(ims, hwservicemanager_prop)
 set_prop(ims, ims_prop)
 
 unix_socket_connect(ims, netmgrd, netmgrd)
