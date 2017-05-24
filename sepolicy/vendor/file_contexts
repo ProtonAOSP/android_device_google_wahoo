@@ -227,6 +227,7 @@
 /data/vendor/location(/.*)?            u:object_r:location_data_file:s0
 /data/ramdump(/.*)?                    u:object_r:ramdump_data_file:s0
 /data/nfc(/.*)?                        u:object_r:nfc_data_file:s0
+/data/time(/.*)?                       u:object_r:time_data_file:s0
 /data/vendor/camera(/.*)?              u:object_r:camera_vendor_data_file:s0
 /data/vendor/display(/.*)?             u:object_r:display_vendor_data_file:s0
 /data/vendor/nfc(/.*)?                 u:object_r:nfc_vendor_data_file:s0
@@ -247,8 +248,9 @@
 /persist(/.*)?            u:object_r:persist_file:s0
 /persist/data(/.*)?       u:object_r:persist_data_file:s0
 /persist/display(/.*)?    u:object_r:persist_display_file:s0
-/persist/sensors(/.*)?    u:object_r:persist_sensors_file:s0
 /persist/haptics(/.*)?    u:object_r:persist_haptics_file:s0
+/persist/sensors(/.*)?    u:object_r:persist_sensors_file:s0
+/persist/time(/.*)?       u:object_r:persist_time_file:s0
 
 /metadata                 u:object_r:rootfs:s0
 /metadata/.*              u:object_r:vold_data_file:s0
