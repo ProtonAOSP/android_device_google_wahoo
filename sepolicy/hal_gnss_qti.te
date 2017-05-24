@@ -25,7 +25,3 @@ vndbinder_use(hal_gnss_qti)
 binder_call(hal_gnss_qti, per_mgr)
 
 allow hal_gnss_qti per_mgr_service:service_manager find;
-
-userdebug_or_eng(`
-  permissive hal_gnss_qti;
-')
