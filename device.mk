@@ -561,3 +561,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     device/google/wahoo/tango_permissions.xml:system/etc/permissions/tango_permissions.xml \
     device/google/wahoo/libtango_device2.jar:system/framework/libtango_device2.jar
+
+PRODUCT_PACKAGES += \
+    ipacm
