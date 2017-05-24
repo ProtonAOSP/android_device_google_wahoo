@@ -565,7 +565,6 @@ on property:sys.ims.QMI_DAEMON_STATUS=1
 service ims_rtp_daemon /vendor/bin/ims_rtp_daemon
    class main
    user system
-   socket ims_rtpd stream 0660 system radio
    group radio diag inet log
    disabled
 
