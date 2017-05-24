@@ -43,9 +43,11 @@ type location_data_file, file_type, data_file_type;
 type persist_file, file_type;
 type persist_data_file, file_type;
 type persist_display_file, file_type;
-type persist_sensors_file, file_type;
 type persist_haptics_file, file_type;
+type persist_sensors_file, file_type;
+type persist_time_file, file_type;
 
+type time_data_file, file_type, data_file_type;
 type netmgr_data_file, file_type, data_file_type;
 type ipacm_vendor_data_file, file_type, data_file_type;
 
