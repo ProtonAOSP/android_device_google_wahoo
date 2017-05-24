@@ -8,17 +8,23 @@ r_dir_file(hal_gnss_qti, sysfs_msm_subsys)
 
 vndbinder_use(hal_gnss_qti)
 
-allow hal_gnss_qti sysfs_soc:dir search;
+allow hal_gnss_qti sysfs_soc:dir r_dir_perms;
 allow hal_gnss_qti sysfs_soc:file r_file_perms;
 
 allow hal_gnss_qti location_data_file:dir create_dir_perms;
 allow hal_gnss_qti location_data_file:file create_file_perms;
 
 unix_socket_connect(hal_gnss_qti, netmgrd, netmgrd)
+allow hal_gnss_qti netmgrd_socket:dir search;
 
 allow hal_gnss_qti self:socket create_socket_perms;
 allowxperm hal_gnss_qti self:socket ioctl msm_sock_ipc_ioctls;
-allow hal_gnss_qti self:netlink_generic_socket { bind create };
+allow hal_gnss_qti self:netlink_generic_socket { bind create read };
+
+vndbinder_use(hal_gnss_qti)
+binder_call(hal_gnss_qti, per_mgr)
+
+allow hal_gnss_qti per_mgr_service:service_manager find;
 
 userdebug_or_eng(`
   permissive hal_gnss_qti;

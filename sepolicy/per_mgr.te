@@ -7,6 +7,7 @@ init_daemon_domain(per_mgr);
 add_service(per_mgr, per_mgr_service)
 
 vndbinder_use(per_mgr)
+binder_call(per_mgr, hal_gnss)
 
 # TODO(b/36570300): Remove this once per_mgr stops using Binder
 typeattribute per_mgr binder_in_vendor_violators;
