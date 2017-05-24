@@ -4,6 +4,8 @@ genfscon proc /debugdriver/driverdump                 u:object_r:proc_wifi_dbg:s
 genfscon sysfs /devices/soc/soc:qcom,cpubw            u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/soc/soc:qcom,mincpubw         u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /class/devfreq                         u:object_r:sysfs_msm_subsys:s0
+genfscon sysfs /devices/soc/soc:qcom,memlat-cpu0      u:object_r:sysfs_msm_subsys:s0
+genfscon sysfs /devices/soc/soc:qcom,memlat-cpu4      u:object_r:sysfs_msm_subsys:s0
 
 genfscon sysfs /class/rfkill/rfkill0/state            u:object_r:sysfs_bluetooth_writable:s0
 
