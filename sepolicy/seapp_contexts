@@ -5,3 +5,9 @@ user=_app seinfo=platform name=com.android.ramdump domain=ramdump_app type=app_d
 #Add new domain for DataServices
 #TODO Remove user "system" when b/38043081 is resolved
 user=system seinfo=platform name=.dataservices domain=dataservice_app type=system_app_data_file
+
+# The default domain for tango_core process
+user=_app seinfo=tango name=com.google.tango domain=tango_core type=app_data_file levelFrom=user
+
+# A fallback in case tango_core is missing something critical that untrusted_app provides
+user=_app seinfo=tango name=com.google.tango:app domain=untrusted_app type=app_data_file levelFrom=user
