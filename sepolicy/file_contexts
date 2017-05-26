@@ -108,8 +108,6 @@
 
 # Block device for hal_bootctl
 /dev/block/sde                                  u:object_r:boot_block_device:s0
-/dev/block/sde13                                u:object_r:boot_block_device:s0
-/dev/block/sde27                                u:object_r:boot_block_device:s0
 
 # Block device for ZRAM
 /dev/block/zram0                                u:object_r:swap_block_device:s0
