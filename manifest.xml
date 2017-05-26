@@ -359,7 +359,7 @@
         <version>1.0</version>
         <interface>
             <name>IUceService</name>
-            <instance>uceservice0</instance>
+            <instance>com.qualcomm.qti.uceservice</instance>
         </interface>
     </hal>
     <hal format="hidl">
