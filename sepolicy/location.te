@@ -17,14 +17,14 @@ allow location location_data_file:file w_file_perms;
 allow location location_data_file:dir w_dir_perms;
 allow location location_data_file:sock_file create_file_perms;
 
-allow location self:netlink_route_socket create_socket_perms_no_ioctl;
 allow location self:netlink_generic_socket create_socket_perms_no_ioctl;
 allow location self:netlink_socket create_socket_perms_no_ioctl;
 allow location self:socket create_socket_perms;
-allow location self:udp_socket create_socket_perms;
-allow location self:udp_socket create_socket_perms;
 allowxperm location self:udp_socket ioctl { SIOCGIFHWADDR SIOCIWFIRSTPRIV_05 };
 allowxperm location self:socket ioctl msm_sock_ipc_ioctls;
+
+# Enable network access (for XTRA download)
+net_domain(location)
 
 # files in /sys
 r_dir_file(location, sysfs_type)
