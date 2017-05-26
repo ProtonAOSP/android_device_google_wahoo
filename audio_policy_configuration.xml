@@ -21,7 +21,6 @@
         <module name="primary" halVersion="2.0">
             <attachedDevices>
                 <item>Speaker</item>
-                <item>Speaker Safe</item>
                 <item>Earpiece</item>
                 <item>Telephony Tx</item>
                 <item>Built-In Mic</item>
@@ -84,7 +83,11 @@
                 </devicePort>
                 <devicePort tagName="Speaker" type="AUDIO_DEVICE_OUT_SPEAKER" role="sink">
                 </devicePort>
-                <devicePort tagName="Speaker Safe" type="AUDIO_DEVICE_OUT_SPEAKER_SAFE" role="sink">
+                <devicePort tagName="Wired Headset" type="AUDIO_DEVICE_OUT_WIRED_HEADSET" role="sink">
+                </devicePort>
+                <devicePort tagName="Wired Headphones" type="AUDIO_DEVICE_OUT_WIRED_HEADPHONE" role="sink">
+                </devicePort>
+                <devicePort tagName="Line Out" type="AUDIO_DEVICE_OUT_LINE" role="sink">
                 </devicePort>
                 <devicePort tagName="BT SCO" type="AUDIO_DEVICE_OUT_BLUETOOTH_SCO" role="sink">
                 </devicePort>
@@ -97,9 +100,12 @@
                 <!-- TODO: Enable dynamic USB profile -->
                 <devicePort tagName="USB Device Out" type="AUDIO_DEVICE_OUT_USB_DEVICE" role="sink">
                 </devicePort>
+
                 <devicePort tagName="Built-In Mic" type="AUDIO_DEVICE_IN_BUILTIN_MIC" role="source">
                 </devicePort>
                 <devicePort tagName="Built-In Back Mic" type="AUDIO_DEVICE_IN_BACK_MIC" role="source">
+                </devicePort>
+                <devicePort tagName="Wired Headset Mic" type="AUDIO_DEVICE_IN_WIRED_HEADSET" role="source">
                 </devicePort>
                 <devicePort tagName="BT SCO Headset Mic" type="AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET" role="source">
                 </devicePort>
@@ -114,7 +120,11 @@
                        sources="primary output,raw,deep_buffer"/>
                 <route type="mix" sink="Speaker"
                        sources="primary output,raw,deep_buffer,compressed_offload"/>
-                <route type="mix" sink="Speaker Safe"
+                <route type="mix" sink="Wired Headset"
+                       sources="primary output,raw,deep_buffer,compressed_offload"/>
+                <route type="mix" sink="Wired Headphones"
+                       sources="primary output,raw,deep_buffer,compressed_offload"/>
+                <route type="mix" sink="Line Out"
                        sources="primary output,raw,deep_buffer,compressed_offload"/>
                 <route type="mix" sink="BT SCO"
                        sources="primary output,raw,deep_buffer"/>
@@ -127,9 +137,9 @@
                 <route type="mix" sink="Telephony Tx"
                        sources="voice_tx"/>
                 <route type="mix" sink="primary input"
-                       sources="Built-In Mic,Built-In Back Mic,BT SCO Headset Mic,USB Device In"/>
+                       sources="Built-In Mic,Built-In Back Mic,Wired Headset Mic,BT SCO Headset Mic,USB Device In"/>
                 <route type="mix" sink="fast input"
-                       sources="Built-In Mic,Built-In Back Mic,BT SCO Headset Mic"/>
+                       sources="Built-In Mic,Built-In Back Mic,Wired Headset Mic,BT SCO Headset Mic"/>
                 <route type="mix" sink="voice_rx"
                        sources="Telephony Rx"/>
             </routes>
