@@ -29,5 +29,9 @@ allow cnd hal_wifi_supplicant_default:unix_dgram_socket sendto;
 
 init_daemon_domain(cnd)
 
+userdebug_or_eng(`
+  permissive cnd;
+')
+
 # TODO(b/36613996): Remove this once system_app no longer communicates over sockets with cnd
 typeattribute cnd socket_between_core_and_vendor_violators;
