@@ -161,7 +161,6 @@
 /sys/devices/soc/800f000\.qcom,spmi/spmi-0/spmi0-02/800f000\.qcom,spmi:qcom,pmi8998@2:qcom,usb-pdphy@1700/usbpd0/typec(/.*)?     u:object_r:sysfs_usb_c:s0
 
 # files in debugfs
-/sys/kernel/debug/clk(/.*)?                      u:object_r:debugfs_clk:s0
 /sys/kernel/debug/rpm_stats                      u:object_r:debugfs_rpm:s0
 /sys/kernel/debug/rpm_master_stats               u:object_r:debugfs_rpm:s0
 /sys/kernel/debug/ion(/.*)?                      u:object_r:debugfs_ion:s0
