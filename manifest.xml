@@ -350,7 +350,7 @@
         <version>1.0</version>
         <interface>
             <name>IRTPService</name>
-            <instance>rtpservice0</instance>
+            <instance>imsrtpservice</instance>
         </interface>
     </hal>
     <hal format="hidl">
