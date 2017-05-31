@@ -174,8 +174,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # graphics
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=196610 \
-    ro.gfx.driver.0=com.google.pixel.wahoo.gfxdriver
+    ro.opengles.version=196610
 
 # NFC/camera interaction workaround - DO NOT COPY TO NEW DEVICES
 PRODUCT_PROPERTY_OVERRIDES += \
