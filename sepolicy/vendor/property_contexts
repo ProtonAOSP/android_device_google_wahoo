@@ -8,6 +8,7 @@ net.r_rmnet_data0          u:object_r:net_rmnet_prop:s0
 persist.net.doxlat         u:object_r:net_radio_prop:s0
 sys.post_boot.             u:object_r:post_boot_prop:s0
 radio.                     u:object_r:radio_prop:s0
+rcs.publish.status         u:object_r:radio_prop:s0
 debug.htc.hrdump           u:object_r:ramdump_prop:s0
 debug.htc.ramdump          u:object_r:ramdump_prop:s0
 persist.sys.crash_rcu      u:object_r:ramdump_prop:s0
