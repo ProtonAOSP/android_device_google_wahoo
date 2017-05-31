@@ -42,6 +42,7 @@ public:
     Return<void> perform(Effect effect, EffectStrength strength, perform_cb _hidl_cb) override;
 
 private:
+    Return<Status> on(uint32_t timeoutMs, bool forceOpenLoop);
     std::ofstream mActivate;
     std::ofstream mDuration;
     std::ofstream mState;
@@ -50,6 +51,7 @@ private:
     std::ofstream mSequencer;
     std::ofstream mScale;
     std::ofstream mCtrlLoop;
+    int32_t mClickDuration;
 };
 }  // namespace implementation
 }  // namespace V1_0

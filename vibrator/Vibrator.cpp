@@ -20,6 +20,7 @@
 
 #include <hardware/hardware.h>
 #include <hardware/vibrator.h>
+#include <cutils/properties.h>
 
 #include "Vibrator.h"
 
@@ -43,11 +44,11 @@ static constexpr char WAVEFORM_MODE[] = "waveform";
 
 // Use effect #1 in the waveform library
 static constexpr char WAVEFORM_CLICK_EFFECT_SEQ[] = "1 0";
-static constexpr uint32_t WAVEFORM_CLICK_EFFECT_MS = 6;
+static constexpr int32_t WAVEFORM_CLICK_EFFECT_MS = 6;
 
-// Make double click a single click and loop once
-static constexpr char WAVEFORM_DOUBLE_CLICK_EFFECT_SEQ[] = "1 1";
-static constexpr uint32_t WAVEFORM_DOUBLE_CLICK_EFFECT_MS = WAVEFORM_CLICK_EFFECT_MS * 2;
+// Use effect #3 in the waveform library
+static constexpr char WAVEFORM_DOUBLE_CLICK_EFFECT_SEQ[] = "3 0";
+static constexpr uint32_t WAVEFORM_DOUBLE_CLICK_EFFECT_MS = 135;
 
 // Timeout threshold for selecting open or closed loop mode
 static constexpr int8_t LOOP_MODE_THRESHOLD_MS = 20;
@@ -63,20 +64,22 @@ Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration,
     mMode(std::move(mode)),
     mSequencer(std::move(sequencer)),
     mScale(std::move(scale)),
-    mCtrlLoop(std::move(ctrlloop)) {}
+    mCtrlLoop(std::move(ctrlloop)) {
 
-// Methods from ::android::hardware::vibrator::V1_0::IVibrator follow.
-Return<Status> Vibrator::on(uint32_t timeout_ms) {
-    uint32_t loop_mode = 1;
+    mClickDuration = property_get_int32("ro.vibrator.hal.click.duration", WAVEFORM_CLICK_EFFECT_MS);
+}
+
+Return<Status> Vibrator::on(uint32_t timeoutMs, bool forceOpenLoop) {
+    uint32_t loopMode = 1;
 
     // Open-loop mode is used for short click for over-drive
     // Close-loop mode is used for long notification for stability
-    if (timeout_ms > LOOP_MODE_THRESHOLD_MS) {
-        loop_mode = 0;
+    if (!forceOpenLoop && timeoutMs > LOOP_MODE_THRESHOLD_MS) {
+        loopMode = 0;
     }
 
-    mCtrlLoop <<  loop_mode << std::endl;
-    mDuration << timeout_ms << std::endl;
+    mCtrlLoop << loopMode << std::endl;
+    mDuration << timeoutMs << std::endl;
     if (!mDuration) {
         ALOGE("Failed to set duration (%d): %s", errno, strerror(errno));
         return Status::UNKNOWN_ERROR;
@@ -88,7 +91,12 @@ Return<Status> Vibrator::on(uint32_t timeout_ms) {
         return Status::UNKNOWN_ERROR;
     }
 
-    return Status::OK;
+   return Status::OK;
+}
+
+// Methods from ::android::hardware::vibrator::V1_0::IVibrator follow.
+Return<Status> Vibrator::on(uint32_t timeoutMs) {
+    return on(timeoutMs, false);
 }
 
 Return<Status> Vibrator::off()  {
@@ -152,7 +160,7 @@ Return<void> Vibrator::perform(Effect effect, EffectStrength strength, perform_c
 
     if (effect == Effect::CLICK) {
         mSequencer << WAVEFORM_CLICK_EFFECT_SEQ << std::endl;
-        timeMS = WAVEFORM_CLICK_EFFECT_MS;
+        timeMS = mClickDuration;
     } else if (effect == Effect::DOUBLE_CLICK) {
         mSequencer << WAVEFORM_DOUBLE_CLICK_EFFECT_SEQ << std::endl;
         timeMS = WAVEFORM_DOUBLE_CLICK_EFFECT_MS;
@@ -163,7 +171,7 @@ Return<void> Vibrator::perform(Effect effect, EffectStrength strength, perform_c
 
     mMode << WAVEFORM_MODE << std::endl;
     mScale << convertEffectStrength(strength) << std::endl;
-    on(timeMS);
+    on(timeMS, true);
 
     _hidl_cb(status, timeMS);
     return Void();

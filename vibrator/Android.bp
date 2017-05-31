@@ -19,6 +19,7 @@ cc_binary {
     srcs: ["service.cpp", "Vibrator.cpp"],
     shared_libs: [
         "libhidlbase",
+        "libcutils",
         "libhidltransport",
         "liblog",
         "libhwbinder",
