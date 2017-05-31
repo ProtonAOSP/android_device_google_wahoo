@@ -118,3 +118,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/media_codecs_google_vide
 # Move /system/lib/vndk-sp to /system/lib/vndk-sp-26.1.0
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib/vndk-sp)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib64/vndk-sp)
+
+# Revert: Move /system/lib/vndk-sp to /system/lib/vndk-sp-26.1.0
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib/vndk-sp-*)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib64/vndk-sp-*)
