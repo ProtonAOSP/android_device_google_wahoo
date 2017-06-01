@@ -404,7 +404,7 @@ on boot
 
     # Required for time_daemon
     mkdir /persist/time 0770 system system
-    mkdir /data/time/ 0700 system system
+    mkdir /data/vendor/time 0700 system system
 
     # default country code
     setprop ro.boot.wificountrycode 00
