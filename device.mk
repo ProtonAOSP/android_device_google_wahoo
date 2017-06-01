@@ -109,7 +109,7 @@ AB_OTA_POSTINSTALL_CONFIG += \
 PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     bootctrl.msm8998 \
     libgptutils \
-    libsparse
+    libz
 
 PRODUCT_PACKAGES += \
     update_engine_sideload
