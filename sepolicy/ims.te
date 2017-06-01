@@ -29,7 +29,3 @@ allowxperm ims self:socket ioctl msm_sock_ipc_ioctls;
 allowxperm ims self:udp_socket ioctl RMNET_IOCTL_EXTENDED;
 
 r_dir_file(ims, sysfs_msm_subsys)
-
-userdebug_or_eng(`
-  permissive ims;
-')
