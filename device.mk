@@ -564,3 +564,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     ipacm
+
+#Set default CDMA subscription to RUIM
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.default_cdma_sub=0
