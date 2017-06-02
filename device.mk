@@ -461,7 +461,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio.snd_card.open.retries=50
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/lowi.conf:system/etc/lowi.conf
+    $(LOCAL_PATH)/lowi.conf:$(TARGET_COPY_OUT_VENDOR)/etc/lowi.conf
 
 # Fingerprint HIDL implementation
 PRODUCT_PACKAGES += \
