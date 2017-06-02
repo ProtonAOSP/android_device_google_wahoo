@@ -72,13 +72,13 @@ static void getModemLogs(int fd)
               "/data/misc/netmgr/netmgr_log_old"
             };
 
-        std::string modemLogMkDirCmd= "/system/bin/mkdir -p " + modemLogAllDir;
-        RunCommandToFd(fd, "MKDIR MODEM LOG", { "/system/bin/sh", "-c", modemLogMkDirCmd.c_str()}, options);
+        std::string modemLogMkDirCmd= "/vendor/bin/mkdir -p " + modemLogAllDir;
+        RunCommandToFd(fd, "MKDIR MODEM LOG", { "/vendor/bin/sh", "-c", modemLogMkDirCmd.c_str()}, options);
 
         if (smlogEnabled) {
             RunCommandToFd(fd, "SMLOG DUMP", { "smlog_dump", "-d", "-o", modemLogAllDir.c_str() }, options);
         } else if (diagLogEnabled) {
-            std::string copyCmd= "/system/bin/cp -rf " + diagLogDir + " " + modemLogAllDir;
+            std::string copyCmd= "/vendor/bin/cp -rf " + diagLogDir + " " + modemLogAllDir;
 
             android::base::SetProperty(DIAG_MDLOG_PROPERTY, "false");
 
@@ -92,29 +92,29 @@ static void getModemLogs(int fd)
                 sleep(1);
             }
 
-            RunCommandToFd(fd, "CP DIAG LOGS", { "/system/bin/sh", "-c", copyCmd.c_str()}, options);
+            RunCommandToFd(fd, "CP DIAG LOGS", { "/vendor/bin/sh", "-c", copyCmd.c_str()}, options);
 
             android::base::SetProperty(DIAG_MDLOG_PROPERTY, "true");
         }
 
         for (const auto& logFile : rilAndNetmgrLogs)
         {
-            std::string copyCmd= "/system/bin/cp " + logFile + " " + modemLogAllDir;
-            RunCommandToFd(fd, "CP MODEM LOG", { "/system/bin/sh", "-c", copyCmd.c_str()}, options);
+            std::string copyCmd= "/vendor/bin/cp " + logFile + " " + modemLogAllDir;
+            RunCommandToFd(fd, "CP MODEM LOG", { "/vendor/bin/sh", "-c", copyCmd.c_str()}, options);
         }
 
         std::string filePrefix = android::base::GetProperty(MODEM_LOG_PREFIX_PROPERTY, "");
 
         if (!filePrefix.empty()) {
             std::string modemLogCombined = modemLogDir + "/" + filePrefix + "all.tar";
-            std::string modemLogTarCmd= "/system/bin/tar cvf " + modemLogCombined + " -C " + modemLogAllDir + " .";
-            RunCommandToFd(fd, "TAR LOG", { "/system/bin/sh", "-c", modemLogTarCmd.c_str()}, options);
+            std::string modemLogTarCmd= "/vendor/bin/tar cvf " + modemLogCombined + " -C " + modemLogAllDir + " .";
+            RunCommandToFd(fd, "TAR LOG", { "/vendor/bin/sh", "-c", modemLogTarCmd.c_str()}, options);
 
-            std::string modemLogPermCmd= "/system/bin/chmod a+rw " + modemLogCombined;
-            RunCommandToFd(fd, "CHG PERM", { "/system/bin/sh", "-c", modemLogPermCmd.c_str()}, options);
+            std::string modemLogPermCmd= "/vendor/bin/chmod a+rw " + modemLogCombined;
+            RunCommandToFd(fd, "CHG PERM", { "/vendor/bin/sh", "-c", modemLogPermCmd.c_str()}, options);
 
-            std::string modemLogClearCmd= "/system/bin/rm -r " + modemLogAllDir;
-            RunCommandToFd(fd, "RM MODEM DIR", { "/system/bin/sh", "-c", modemLogClearCmd.c_str()}, options);
+            std::string modemLogClearCmd= "/vendor/bin/rm -r " + modemLogAllDir;
+            RunCommandToFd(fd, "RM MODEM DIR", { "/vendor/bin/sh", "-c", modemLogClearCmd.c_str()}, options);
         }
     }
 }
@@ -142,13 +142,13 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "RPM Stats", "/d/rpm_stats");
     DumpFileToFd(fd, "Power Management Stats", "/d/rpm_master_stats");
     DumpFileToFd(fd, "SMD Log", "/d/ipc_logging/smd/log");
-    RunCommandToFd(fd, "ION HEAPS", {"/system/bin/sh", "-c", "for d in $(ls -d /d/ion/*); do for f in $(ls $d); do echo --- $d/$f; cat $d/$f; done; done"});
+    RunCommandToFd(fd, "ION HEAPS", {"/vendor/bin/sh", "-c", "for d in $(ls -d /d/ion/*); do for f in $(ls $d); do echo --- $d/$f; cat $d/$f; done; done"});
     DumpFileToFd(fd, "dmabuf info", "/d/dma_buf/bufinfo");
-    RunCommandToFd(fd, "Temperatures", {"/system/bin/sh", "-c", "for f in `ls /sys/class/thermal` ; do type=`cat /sys/class/thermal/$f/type` ; temp=`cat /sys/class/thermal/$f/temp` ; echo \"$type: $temp\" ; done"});
+    RunCommandToFd(fd, "Temperatures", {"/vendor/bin/sh", "-c", "for f in `ls /sys/class/thermal` ; do type=`cat /sys/class/thermal/$f/type` ; temp=`cat /sys/class/thermal/$f/temp` ; echo \"$type: $temp\" ; done"});
     DumpFileToFd(fd, "cpu0-1 time-in-state", "/sys/devices/system/cpu/cpu0/cpufreq/stats/time_in_state");
-    RunCommandToFd(fd, "cpu0-1 cpuidle", {"/system/bin/sh", "-c", "for d in $(ls -d /sys/devices/system/cpu/cpu0/cpuidle/state*); do echo \"$d: `cat $d/name` `cat $d/desc` `cat $d/time` `cat $d/usage`\"; done"});
+    RunCommandToFd(fd, "cpu0-1 cpuidle", {"/vendor/bin/sh", "-c", "for d in $(ls -d /sys/devices/system/cpu/cpu0/cpuidle/state*); do echo \"$d: `cat $d/name` `cat $d/desc` `cat $d/time` `cat $d/usage`\"; done"});
     DumpFileToFd(fd, "cpu2-3 time-in-state", "/sys/devices/system/cpu/cpu2/cpufreq/stats/time_in_state");
-    RunCommandToFd(fd, "cpu2-3 cpuidle", {"/system/bin/sh", "-c", "for d in $(ls -d /sys/devices/system/cpu/cpu2/cpuidle/state*); do echo \"$d: `cat $d/name` `cat $d/desc` `cat $d/time` `cat $d/usage`\"; done"});
+    RunCommandToFd(fd, "cpu2-3 cpuidle", {"/vendor/bin/sh", "-c", "for d in $(ls -d /sys/devices/system/cpu/cpu2/cpuidle/state*); do echo \"$d: `cat $d/name` `cat $d/desc` `cat $d/time` `cat $d/usage`\"; done"});
     DumpFileToFd(fd, "MDP xlogs", "/d/mdp/xlog/dump");
     DumpFileToFd(fd, "TCPM logs", "/d/tcpm/usbpd0");
     DumpFileToFd(fd, "PD Engine", "/d/pd_engine/usbpd0");
@@ -156,7 +156,7 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "ipc-local-ports", "/d/msm_ipc_router/dump_local_ports");
 
     /* Check if qsee_logger tool exists */
-    if (!access("/system/bin/qsee_logger", X_OK)) {
+    if (!access("/vendor/bin/qsee_logger", X_OK)) {
       RunCommandToFd(fd, "FP LOGS", {"qsee_logger", "-d"});
     }
 
