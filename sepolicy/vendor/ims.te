@@ -13,8 +13,7 @@ allow ims sysfs_soc:dir search;
 allow ims sysfs_soc:file r_file_perms;
 allow ims sysfs_timestamp_switch:file r_file_perms;
 
-# TODO(b/38228603): Remove net_raw upon resolution of this bug
-allow ims self:capability { net_raw net_bind_service};
+allow ims self:capability net_bind_service;
 
 allow ims ion_device:chr_file r_file_perms;
 
