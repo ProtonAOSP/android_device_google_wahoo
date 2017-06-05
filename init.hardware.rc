@@ -556,7 +556,7 @@ service imsdatadaemon /vendor/bin/imsdatadaemon
    class main
    user system
    socket ims_datad stream 0660 system radio
-   group system wifi radio inet net_raw log net_admin
+   group system wifi radio inet log
    disabled
 
 on property:sys.ims.QMI_DAEMON_STATUS=1
