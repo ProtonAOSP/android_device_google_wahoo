@@ -196,57 +196,26 @@ static int process_boost(int boost_handle, int duration)
     return boost_handle;
 }
 
-static int process_video_encode_hint(void *metadata)
+static int process_video_encode_hint(void *data)
 {
-    char governor[80];
-    struct video_encode_metadata_t video_encode_metadata;
     static int boost_handle = -1;
 
-    if(!metadata)
-       return HINT_NONE;
-
-    if (get_scaling_governor(governor, sizeof(governor)) == -1) {
-        ALOGE("Can't obtain scaling governor.");
-
-        return HINT_NONE;
-    }
-
-    /* Initialize encode metadata struct fields */
-    memset(&video_encode_metadata, 0, sizeof(struct video_encode_metadata_t));
-    video_encode_metadata.state = -1;
-    video_encode_metadata.hint_id = DEFAULT_VIDEO_ENCODE_HINT_ID;
-
-    if (parse_video_encode_metadata((char *)metadata, &video_encode_metadata) ==
-            -1) {
-       ALOGE("Error occurred while parsing metadata.");
-       return HINT_NONE;
-    }
-
-    if (video_encode_metadata.state == 1) {
-        int duration = 2000; // boosts 2s for starting encoding
+    if (data) {
+        // TODO: remove the launch boost based on camera launch time
+        int duration = 1500; // boosts 1.5s for starting encoding
         boost_handle = process_boost(boost_handle, duration);
         ALOGD("LAUNCH ENCODER-ON: %d MS", duration);
-        if (is_interactive_governor(governor)) {
-
-            int *resource_values;
-            int resources;
-
-            /* extract perflock resources */
-            resource_values = getPowerhint(video_encode_metadata.hint_id, &resources);
-
-            if (resource_values != NULL)
-               perform_hint_action(video_encode_metadata.hint_id, resource_values, resources);
-            ALOGI("Video Encode hint start");
-            return HINT_HANDLED;
-        } else {
-            return HINT_HANDLED;
-        }
-    } else if (video_encode_metadata.state == 0) {
-        if (is_interactive_governor(governor)) {
-            undo_hint_action(video_encode_metadata.hint_id);
-            ALOGI("Video Encode hint stop");
-            return HINT_HANDLED;
-        }
+        int *resource_values = NULL;
+        int resources = 0;
+        resource_values = getPowerhint(DEFAULT_VIDEO_ENCODE_HINT_ID, &resources);
+        if (resource_values != NULL)
+            perform_hint_action(DEFAULT_VIDEO_ENCODE_HINT_ID, resource_values, resources);
+        ALOGI("Video Encode hint start");
+        return HINT_HANDLED;
+    } else {
+        undo_hint_action(DEFAULT_VIDEO_ENCODE_HINT_ID);
+        ALOGI("Video Encode hint stop");
+        return HINT_HANDLED;
     }
     return HINT_NONE;
 }
