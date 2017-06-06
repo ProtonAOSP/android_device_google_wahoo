@@ -568,3 +568,7 @@ PRODUCT_PACKAGES += \
 #Set default CDMA subscription to RUIM
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_cdma_sub=0
+
+# Add an extra 10% saturation to display colors
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.sf.color_saturation=1.1
