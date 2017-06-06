@@ -48,20 +48,17 @@
         <param library="none" />
         <param max_cpe_phrases="1" />
         <param max_cpe_users="1" />
-
         <gcs_usecase>
-            <param uid="0x2" />
-            <param load_sound_model_ids="0x18000001, 0x3, 0x00012C14" />
-            <param confidence_levels_ids="0x18000001, 0x3, 0x00012C28" />
-            <param detection_event_ids="0x18000001, 0x3, 0x00012C29" />
-            <param read_cmd_ids="0x00020013, 0x3, 0x00020015" />
-            <param read_rsp_ids="0x00020013, 0x3, 0x00020016" />
+            <param uid="0x1" />
+            <param load_sound_model_ids="0x18000001, 0x1, 0x18000100" />
+            <param start_engine_ids="0x18000001, 0x1, 0x18000101" />
+            <param detection_event_ids="0x18000001, 0x1, 0x00012C29" />
+            <param read_cmd_ids="0x00020013, 0x1, 0x00020015" />
+            <param read_rsp_ids="0x00020013, 0x1, 0x00020016" />
         </gcs_usecase>
-        <param load_sound_model_ids="0x18000001, 0x00012C14" />
-        <param unload_sound_model_ids="0x18000001, 0x00012C15" />
         <!--  kw_duration is in milli seconds. It is valid only for FTRT
             transfer mode -->
-        <param capture_keyword="PCM_packet, RT, 2000" />
+        <param capture_keyword="PCM_raw, FTRT, 2000" />
         <param client_capture_read_delay="2000" />
     </sound_model_config>
 
@@ -69,23 +66,36 @@
         <param vendor_uuid="9f6ad62a-1f0b-11e7-87c5-40a8f03d3f15" />
         <param execution_type="WDSP" /> <!-- value: "WDSP" "ADSP" "DYNAMIC" -->
         <param library="none" />
-        <param max_cpe_phrases="1" />
-        <param max_cpe_users="1" />
-
         <gcs_usecase>
-            <param uid="0x1" />
-            <param load_sound_model_ids="0x18000001, 0x4, 0x00012C14" />
-            <param confidence_levels_ids="0x18000001, 0x4, 0x00012C28" />
-            <param detection_event_ids="0x18000001, 0x4, 0x00012C29" />
-            <param read_cmd_ids="0x00020013, 0x4, 0x00020015" />
-            <param read_rsp_ids="0x00020013, 0x4, 0x00020016" />
+            <param uid="0x2" />
+            <param load_sound_model_ids="0x18000001, 0x1, 0x18000102" />
+            <param start_engine_ids="0x18000001, 0x1, 0x18000103" />
+            <param detection_event_ids="0x18000001, 0x1, 0x00012C29" />
+            <param read_cmd_ids="0x00020013, 0x2, 0x00020015" />
+            <param read_rsp_ids="0x00020013, 0x2, 0x00020016" />
         </gcs_usecase>
-        <param load_sound_model_ids="0x18000001, 0x00012C14" />
-        <param unload_sound_model_ids="0x18000001, 0x00012C15" />
         <!--  kw_duration is in milli seconds. It is valid only for FTRT
             transfer mode -->
-        <param capture_keyword="PCM_packet, RT, 2000" />
+        <param capture_keyword="MULAW_raw, FTRT, 5000" />
         <param client_capture_read_delay="2000" />
+    </sound_model_config>
+
+    <sound_model_config>
+        <param vendor_uuid="2fc815fa-4a42-11e7-99bd-40a8f03d3f15" />
+        <param execution_type="WDSP" /> <!-- value: "WDSP" "ADSP" "DYNAMIC" -->
+        <param library="none" />
+        <gcs_usecase>
+            <param uid="0x3" />
+            <param load_sound_model_ids="0x18000001, 0x1, 0x18000104" />
+            <param start_engine_ids="0x18000001, 0x1, 0x18000105" />
+            <param detection_event_ids="0x18000001, 0x1, 0x00012C29" />
+            <param read_cmd_ids="0x00020013, 0x3, 0x00020015" />
+            <param read_rsp_ids="0x00020013, 0x3, 0x00020016" />
+        </gcs_usecase>
+        <!--  kw_duration is in milli seconds. It is valid only for FTRT
+            transfer mode -->
+        <param capture_keyword="PCM_raw, FTRT, 0" />
+        <param client_capture_read_delay="0" />
     </sound_model_config>
 
     <!-- Multiple adm_config tags can be listed, each with unique profile name. -->
