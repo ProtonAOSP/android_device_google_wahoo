@@ -124,3 +124,8 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib/vndk-sp-*)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib64/vndk-sp-*)
 
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/lowi.conf)
+
+# Vibrator HAL 1.0
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.vibrator@1.0-service.wahoo.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.vibrator@1.0-service.wahoo)
+

@@ -33,7 +33,7 @@
 namespace android {
 namespace hardware {
 namespace vibrator {
-namespace V1_0 {
+namespace V1_1 {
 namespace implementation {
 
 static constexpr int8_t MAX_RTP_INPUT = 127;
@@ -46,12 +46,19 @@ static constexpr char WAVEFORM_MODE[] = "waveform";
 static constexpr char WAVEFORM_CLICK_EFFECT_SEQ[] = "1 0";
 static constexpr int32_t WAVEFORM_CLICK_EFFECT_MS = 6;
 
+// Use effect #2 in the waveform library
+static constexpr char WAVEFORM_TICK_EFFECT_SEQ[] = "2 0";
+static constexpr int32_t WAVEFORM_TICK_EFFECT_MS = 2;
+
 // Use effect #3 in the waveform library
 static constexpr char WAVEFORM_DOUBLE_CLICK_EFFECT_SEQ[] = "3 0";
 static constexpr uint32_t WAVEFORM_DOUBLE_CLICK_EFFECT_MS = 135;
 
 // Timeout threshold for selecting open or closed loop mode
 static constexpr int8_t LOOP_MODE_THRESHOLD_MS = 20;
+
+using Status = ::android::hardware::vibrator::V1_0::Status;
+using EffectStrength = ::android::hardware::vibrator::V1_0::EffectStrength;
 
 Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration,
         std::ofstream&& state, std::ofstream&& rtpinput,
@@ -67,6 +74,7 @@ Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration,
     mCtrlLoop(std::move(ctrlloop)) {
 
     mClickDuration = property_get_int32("ro.vibrator.hal.click.duration", WAVEFORM_CLICK_EFFECT_MS);
+    mTickDuration = property_get_int32("ro.vibrator.hal.tick.duration", WAVEFORM_TICK_EFFECT_MS);
 }
 
 Return<Status> Vibrator::on(uint32_t timeoutMs, bool forceOpenLoop) {
@@ -94,7 +102,7 @@ Return<Status> Vibrator::on(uint32_t timeoutMs, bool forceOpenLoop) {
    return Status::OK;
 }
 
-// Methods from ::android::hardware::vibrator::V1_0::IVibrator follow.
+// Methods from ::android::hardware::vibrator::V1_1::IVibrator follow.
 Return<Status> Vibrator::on(uint32_t timeoutMs) {
     return on(timeoutMs, false);
 }
@@ -177,8 +185,31 @@ Return<void> Vibrator::perform(Effect effect, EffectStrength strength, perform_c
     return Void();
 }
 
+Return<void> Vibrator::perform_1_1(Effect_1_1 effect, EffectStrength strength,
+        perform_cb _hidl_cb) {
+    Status status = Status::OK;
+    uint32_t timeMS;
+
+    if (effect == Effect_1_1::TICK) {
+        mSequencer << WAVEFORM_TICK_EFFECT_SEQ << std::endl;
+        timeMS = mTickDuration;
+    } else if (effect < Effect_1_1::TICK) {
+        return perform(static_cast<Effect>(effect), strength, _hidl_cb);
+    } else {
+        _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
+        return Void();
+    }
+
+    mMode << WAVEFORM_MODE << std::endl;
+    mScale << convertEffectStrength(strength) << std::endl;
+    on(timeMS, true);
+
+    _hidl_cb(status, timeMS);
+    return Void();
+}
+
 } // namespace implementation
-}  // namespace V1_0
+}  // namespace V1_1
 }  // namespace vibrator
 }  // namespace hardware
 }  // namespace android
