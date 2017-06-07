@@ -163,3 +163,6 @@ DEVICE_MANIFEST_FILE := device/google/wahoo/manifest.xml
 DEVICE_MATRIX_FILE := device/google/wahoo/compatibility_matrix.xml
 
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
+
+# Use mke2fs to create ext4 images
+TARGET_USES_MKE2FS := true
