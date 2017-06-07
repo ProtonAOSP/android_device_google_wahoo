@@ -136,6 +136,7 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     }
 
     getModemLogs(fd);
+    DumpFileToFd(fd, "SoC serial number", "/sys/devices/soc0/serial_number");
     DumpFileToFd(fd, "CPU present", "/sys/devices/system/cpu/present");
     DumpFileToFd(fd, "CPU online", "/sys/devices/system/cpu/online");
     DumpFileToFd(fd, "INTERRUPTS", "/proc/interrupts");
