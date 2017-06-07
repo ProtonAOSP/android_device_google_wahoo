@@ -317,7 +317,7 @@
             <instance>default</instance>
         </interface>
     </hal>
-    <hal format="hild">
+    <hal format="hidl">
         <name>android.hardware.wifi.offload</name>
         <transport>hwbinder</transport>
         <version>1.0</version>
