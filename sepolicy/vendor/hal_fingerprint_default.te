@@ -1,2 +1,0 @@
-# TODO(b/36587860): Remove once Fingerprint HAL no longer uses Binder
-typeattribute hal_fingerprint_default binder_in_vendor_violators;
