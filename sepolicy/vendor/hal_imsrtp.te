@@ -20,6 +20,12 @@ allowxperm hal_imsrtp self:socket ioctl msm_sock_ipc_ioctls;
 
 allow hal_imsrtp self:capability net_bind_service;
 
+allow hal_imsrtp sysfs_timestamp_switch:file r_file_perms;
+allow hal_imsrtp ion_device:chr_file r_file_perms;
+r_dir_file(hal_imsrtp, sysfs_msm_subsys)
+r_dir_file(hal_imsrtp, sysfs_diag)
+r_dir_file(hal_imsrtp, sysfs_soc)
+
 allow hal_imsrtp ion_device:chr_file r_file_perms;
 get_prop(hal_imsrtp, ims_prop)
 binder_call(hal_imsrtp, radio)
