@@ -48,7 +48,7 @@ else
 endif
 
 PRODUCT_CHARACTERISTICS := nosdcard
-PRODUCT_SHIPPING_API_LEVEL := 24
+PRODUCT_SHIPPING_API_LEVEL := 26
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
@@ -230,8 +230,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
     $(LOCAL_PATH)/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/wifi_concurrency_cfg.txt:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wifi_concurrency_cfg.txt
-
-PRODUCT_FULL_TREBLE_OVERRIDE := true
 
 PRODUCT_PACKAGES += \
     hwcomposer.msm8998 \
