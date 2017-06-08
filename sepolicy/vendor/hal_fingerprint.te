@@ -1,6 +1,3 @@
-# TODO(b/36587860): Remove once Fingerprint HAL no longer uses Binder
-binder_use(hal_fingerprint)
-
 allow hal_fingerprint sysfs_fingerprint:dir r_dir_perms;
 allow hal_fingerprint sysfs_fingerprint:file rw_file_perms;
 allow hal_fingerprint sysfs_msm_subsys:dir search;
