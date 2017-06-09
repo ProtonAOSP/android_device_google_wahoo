@@ -1,4 +1,4 @@
-# TODO(b/36443535): Remove this once rild stops using Binder
+# TODO(b/36565056, b/36651714): Remove this once rild stops using Binder
 typeattribute rild binder_in_vendor_violators;
 binder_use(rild)
 binder_call(rild, per_mgr)
@@ -24,8 +24,7 @@ allow rild self:socket ioctl;
 allowxperm rild self:socket ioctl msm_sock_ipc_ioctls;
 allow rild time_daemon:unix_stream_socket connectto;
 
-# TODO(b/36613472): Remove this once system_server, mediaserver, radio, and bluetooth no longer
-# communicate with rild over sockets.
+# TODO(b/36718031): Remove this once radio no longer communicates with rild over sockets.
 typeattribute rild socket_between_core_and_vendor_violators;
 
 userdebug_or_eng(`
