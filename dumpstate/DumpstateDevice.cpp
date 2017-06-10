@@ -68,8 +68,8 @@ static void getModemLogs(int fd)
             {
               "/data/misc/radio/ril_log",
               "/data/misc/radio/ril_log_old",
-              "/data/misc/netmgr/netmgr_log",
-              "/data/misc/netmgr/netmgr_log_old"
+              "/data/vendor/netmgr/netmgr_log",
+              "/data/vendor/netmgr/netmgr_log_old"
             };
 
         std::string modemLogMkDirCmd= "/vendor/bin/mkdir -p " + modemLogAllDir;
