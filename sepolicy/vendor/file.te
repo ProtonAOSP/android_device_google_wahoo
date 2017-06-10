@@ -31,6 +31,7 @@ type thermal_socket, file_type;
 type perfd_socket, file_type;
 
 type ims_socket, file_type;
+type ipacm_socket, file_type;
 type cnd_socket, file_type;
 type chre_socket, file_type;
 type hal_bootctl_socket, file_type;
@@ -46,6 +47,7 @@ type persist_sensors_file, file_type;
 type persist_haptics_file, file_type;
 
 type netmgr_data_file, file_type, data_file_type;
+type ipacm_vendor_data_file, file_type, data_file_type;
 
 type camera_vendor_data_file, file_type, data_file_type;
 type display_vendor_data_file, file_type, data_file_type;
