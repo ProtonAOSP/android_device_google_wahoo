@@ -77,7 +77,7 @@ Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration,
     mTickDuration = property_get_int32("ro.vibrator.hal.tick.duration", WAVEFORM_TICK_EFFECT_MS);
 }
 
-Return<Status> Vibrator::on(uint32_t timeoutMs, bool forceOpenLoop) {
+Return<Status> Vibrator::on(uint32_t timeoutMs, bool forceOpenLoop, bool isWaveform) {
     uint32_t loopMode = 1;
 
     // Open-loop mode is used for short click for over-drive
@@ -93,6 +93,12 @@ Return<Status> Vibrator::on(uint32_t timeoutMs, bool forceOpenLoop) {
         return Status::UNKNOWN_ERROR;
     }
 
+    if (isWaveform) {
+        mMode << WAVEFORM_MODE << std::endl;
+    } else {
+        mMode << RTP_MODE << std::endl;
+    }
+
     mActivate << 1 << std::endl;
     if (!mActivate) {
         ALOGE("Failed to activate (%d): %s", errno, strerror(errno));
@@ -104,20 +110,13 @@ Return<Status> Vibrator::on(uint32_t timeoutMs, bool forceOpenLoop) {
 
 // Methods from ::android::hardware::vibrator::V1_1::IVibrator follow.
 Return<Status> Vibrator::on(uint32_t timeoutMs) {
-    return on(timeoutMs, false);
+    return on(timeoutMs, false /* forceOpenLoop */, false /* isWaveform */);
 }
 
 Return<Status> Vibrator::off()  {
-
     mActivate << 0 << std::endl;
     if (!mActivate) {
         ALOGE("Failed to turn vibrator off (%d): %s", errno, strerror(errno));
-        return Status::UNKNOWN_ERROR;
-    }
-
-    mMode << RTP_MODE << std::endl;
-    if (!mMode) {
-        ALOGE("Failed to set RTP mode (%d): %s", errno, strerror(errno));
         return Status::UNKNOWN_ERROR;
     }
     return Status::OK;
@@ -177,9 +176,8 @@ Return<void> Vibrator::perform(Effect effect, EffectStrength strength, perform_c
         return Void();
     }
 
-    mMode << WAVEFORM_MODE << std::endl;
     mScale << convertEffectStrength(strength) << std::endl;
-    on(timeMS, true);
+    on(timeMS, true /* forceOpenLoop */, true /* isWaveform */);
 
     _hidl_cb(status, timeMS);
     return Void();
@@ -200,9 +198,8 @@ Return<void> Vibrator::perform_1_1(Effect_1_1 effect, EffectStrength strength,
         return Void();
     }
 
-    mMode << WAVEFORM_MODE << std::endl;
     mScale << convertEffectStrength(strength) << std::endl;
-    on(timeMS, true);
+    on(timeMS, true /* forceOpenLoop */, true /* isWaveform */);
 
     _hidl_cb(status, timeMS);
     return Void();
