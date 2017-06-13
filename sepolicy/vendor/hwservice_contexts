@@ -3,3 +3,5 @@ com.qualcomm.qti.qcril.qcrilhook::IQtiOemHook                   u:object_r:vnd_q
 com.qualcomm.qti.uceservice::IUceService                        u:object_r:vnd_uce_hwservice:s0
 vendor.qti.qcril.am::IQcRilAudio                                u:object_r:vnd_qcrilhook_hwservice:s0
 com.qualcomm.qti.imsrtpservice::IRTPService                     u:object_r:hal_imsrtp_hwservice:s0
+android.hardware.tetheroffload.config::IOffloadConfig           u:object_r:hal_ipacm_hwservice:s0
+android.hardware.tetheroffload.control::IOffloadControl         u:object_r:hal_ipacm_hwservice:s0

@@ -22,9 +22,9 @@
 /dev/ion                  0664   system     system
 /dev/rtc0                 0660   system     system
 /dev/smd7                 0660   bluetooth  bluetooth
-/dev/ipa                  0660   system     net_admin
-/dev/wwan_ioctl           0660   system     net_admin
-/dev/ipaNatTable          0660   net_admin  net_admin
+/dev/ipa                  0660   system     radio
+/dev/wwan_ioctl           0660   system     radio
+/dev/ipaNatTable          0660   system     radio
 /dev/rmnet_ctrl           0660   usb        usb
 
 #permissions for CSVT
