@@ -47,7 +47,7 @@ public:
     Return<void> perform_1_1(Effect_1_1 effect, EffectStrength strength, perform_cb _hidl_cb) override;
 
 private:
-    Return<Status> on(uint32_t timeoutMs, bool forceOpenLoop);
+    Return<Status> on(uint32_t timeoutMs, bool forceOpenLoop, bool isWaveform);
     std::ofstream mActivate;
     std::ofstream mDuration;
     std::ofstream mState;
