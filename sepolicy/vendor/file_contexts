@@ -47,6 +47,7 @@
 /dev/socket/qmux_radio(/.*)?                    u:object_r:qmuxd_socket:s0
 /dev/socket/ims_qmid                            u:object_r:ims_socket:s0
 /dev/socket/ims_datad                           u:object_r:ims_socket:s0
+/dev/socket/ipacm_log_file                      u:object_r:ipacm_socket:s0
 /dev/socket/cnd                                 u:object_r:cnd_socket:s0
 /dev/socket/thermal-send-client                 u:object_r:thermal_socket:s0
 /dev/socket/thermal-recv-client                 u:object_r:thermal_socket:s0
@@ -147,6 +148,8 @@
 /vendor/bin/imsqmidaemon        u:object_r:ims_exec:s0
 /vendor/bin/imsdatadaemon       u:object_r:ims_exec:s0
 /vendor/bin/ims_rtp_daemon      u:object_r:hal_imsrtp_exec:s0
+/vendor/bin/ipacm               u:object_r:ipacm_exec:s0
+/vendor/bin/ipacm-diag          u:object_r:ipacm_exec:s0
 /vendor/bin/qmuxd               u:object_r:qmuxd_exec:s0
 /vendor/bin/cnd                 u:object_r:cnd_exec:s0
 # Remove after b/38447389
@@ -236,7 +239,7 @@
 /data/vendor/ramdump(/.*)?             u:object_r:ramdump_vendor_data_file:s0
 /data/vendor/modem_dump(/.*)?          u:object_r:modem_dump_file:s0
 /data/vendor/ese(/.*)?                 u:object_r:ese_vendor_data_file:s0
-
+/data/vendor/ipa(/.*)?                 u:object_r:ipacm_vendor_data_file:s0
 # /
 /tombstones             u:object_r:rootfs:s0
 /dsp                    u:object_r:rootfs:s0
