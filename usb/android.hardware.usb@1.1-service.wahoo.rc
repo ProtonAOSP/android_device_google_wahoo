@@ -4,7 +4,9 @@ service usb-hal-1-1 /vendor/bin/hw/android.hardware.usb@1.1-service.wahoo
     group system
 
 on boot
-    chown root system /sys/class/typec/usbc0/current_power_role
-    chown root system /sys/class/typec/usbc0/current_data_role
-    chmod 664 /sys/class/typec/usbc0/current_power_role
-    chmod 664 /sys/class/typec/usbc0/current_data_role
+    chown root system /sys/class/typec/port0/power_role
+    chown root system /sys/class/typec/port0/data_role
+    chown root system /sys/class/typec/port0/port_type
+    chmod 664 /sys/class/typec/port0/power_role
+    chmod 664 /sys/class/typec/port0/data_role
+    chmod 664 /sys/class/typec/port0/port_type
