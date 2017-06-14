@@ -8,6 +8,11 @@
 #include <utils/Log.h>
 
 #define UEVENT_MSG_LEN 2048
+// The type-c stack waits for 4.5 - 5.5 secs before declaring a port non-pd.
+// The -partner directory would not be created until this is done.
+// Having a margin of ~3 secs for the directory and other related bookeeping
+// structures created and uvent fired.
+#define PORT_TYPE_TIMEOUT 8
 
 namespace android {
 namespace hardware {
@@ -36,12 +41,21 @@ using ::android::sp;
 
 struct Usb : public IUsb {
     Return<void> switchRole(const hidl_string& portName, const PortRole& role) override;
-    Return<void> setCallback(const sp<::android::hardware::usb::V1_0::IUsbCallback>& callback) override;
+    Return<void> setCallback(const sp<V1_0::IUsbCallback>& callback) override;
     Return<void> queryPortStatus() override;
 
 
-    sp<IUsbCallback> mCallback;
+    sp<V1_0::IUsbCallback> mCallback_1_0;
+    // Protects mCallback variable
     pthread_mutex_t mLock = PTHREAD_MUTEX_INITIALIZER;
+    // Protects roleSwitch operation
+    pthread_mutex_t mRoleSwitchLock = PTHREAD_MUTEX_INITIALIZER;
+    // Threads waiting for the partner to come back wait here
+    pthread_cond_t mPartnerCV = PTHREAD_COND_INITIALIZER;
+    // lock protecting mPartnerCV
+    pthread_mutex_t mPartnerLock = PTHREAD_MUTEX_INITIALIZER;
+    // Variable to signal partner coming back online after type switch
+    bool mPartnerUp;
 
     private:
         pthread_t mPoll;
