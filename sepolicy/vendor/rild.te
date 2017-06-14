@@ -26,6 +26,10 @@ allow rild time_daemon:unix_stream_socket connectto;
 
 # TODO(b/36718031): Remove this once radio no longer communicates with rild over sockets.
 typeattribute rild socket_between_core_and_vendor_violators;
+# TODO(b/62343727): Remove this once radio<->rild is hidlized
+# This is added so we don't regress after the exact same rule is removed
+# from system/sepolicy/public/radio.te for treble devices.
+unix_socket_connect(radio, rild, rild)
 
 userdebug_or_eng(`
   domain_auto_trans(rild, smlog_dump_exec, smlog_dump)
