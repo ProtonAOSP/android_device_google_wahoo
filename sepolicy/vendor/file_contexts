@@ -175,6 +175,7 @@
 /vendor/bin/init\.power\.sh     u:object_r:init_power_exec:s0
 /vendor/bin/init\.radio\.sh     u:object_r:init_radio_exec:s0
 
+/vendor/bin/hw/android\.hardware\.drm@1\.0-service.widevine          u:object_r:hal_drm_widevine_exec:s0
 /vendor/bin/hw/android\.hardware\.vibrator@1\.1-service.wahoo        u:object_r:hal_vibrator_default_exec:s0
 /vendor/bin/hw/android\.hardware\.keymaster@3\.0-service-qti         u:object_r:hal_keymaster_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service-qti        u:object_r:hal_gatekeeper_qti_exec:s0
