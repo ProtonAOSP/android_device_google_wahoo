@@ -21,6 +21,9 @@
       - The default tag is consulted last if needed.
 -->
     <!-- google apps key -->
+    <signer signature="@GOOGLE" >
+      <seinfo value="google" />
+    </signer>
     <signer signature="@TANGO" >
       <seinfo value="tango" />
     </signer>
