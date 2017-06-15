@@ -10,6 +10,8 @@ genfscon sysfs /devices/soc/soc:qcom,memlat-cpu4      u:object_r:sysfs_msm_subsy
 genfscon sysfs /android_touch                         u:object_r:sysfs_touch:s0
 genfscon sysfs /devices/virtual/input/ftm4_touch      u:object_r:sysfs_touch:s0
 
+genfscon sysfs /devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:0 u:object_r:sysfs_scsi_devices_0000:s0
+
 genfscon sysfs /class/rfkill/rfkill0/state            u:object_r:sysfs_bluetooth_writable:s0
 
 genfscon debugfs /kgsl/proc                           u:object_r:debugfs_kgsl:s0
