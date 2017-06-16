@@ -9,12 +9,14 @@ get_prop(hal_rcsservice, hwservicemanager_prop)
 
 # To register imsrcsd to hwBinder
 hwbinder_use(hal_rcsservice)
-add_hwservice(hal_rcsservice, imsuce_service)
-add_hwservice(hal_rcsservice, vnd_uce_hwservice)
+# add IUceSerive Hidl interface
+add_hwservice(hal_rcsservice, hal_imsrcsd_hwservice)
+
 get_prop(hal_rcsservice, hwservicemanager_prop)
 
 # allow hal to read sysfs file
 r_dir_file(hal_rcsservice, sysfs_msm_subsys)
+r_dir_file(hal_rcsservice, sysfs_diag)
 
 allow hal_rcsservice sysfs_timestamp_switch:file r_file_perms;
 
