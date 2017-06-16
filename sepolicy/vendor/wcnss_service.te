@@ -30,6 +30,10 @@ allow wcnss_service cnss_vendor_data_file:file create_file_perms;
 allow wcnss_service proc_net:file getattr;
 
 r_dir_file(wcnss_service, sysfs_msm_subsys)
+# pkt logging for cnss_diag
+userdebug_or_eng(`
+  r_dir_file(wcnss_service, proc_wifi_dbg)
+')
 
 allow wcnss_service sysfs_soc:dir search;
 allow wcnss_service sysfs_soc:file r_file_perms;
