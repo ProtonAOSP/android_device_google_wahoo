@@ -9,3 +9,5 @@ allow init debugfs_clk:file w_file_perms;
 allow init tty_device:chr_file rw_file_perms;
 
 allow init persist_file:dir mounton;
+
+dontaudit init kernel:system module_request;

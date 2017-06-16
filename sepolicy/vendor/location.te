@@ -36,3 +36,5 @@ r_dir_file(location, sysfs_type)
 # socket communications between system components and vendor components are not permted.
 # Once we switch full Treble devices to binderized only mode, this issue will disappear.
 typeattribute location socket_between_core_and_vendor_violators;
+
+dontaudit location kernel:system module_request;
