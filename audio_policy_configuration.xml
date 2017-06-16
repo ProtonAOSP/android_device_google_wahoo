@@ -83,8 +83,7 @@
                              channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO,AUDIO_CHANNEL_IN_FRONT_BACK,AUDIO_CHANNEL_INDEX_MASK_3"/>
                 </mixPort>
                 <mixPort name="hifi_input" role="sink" />
-                <mixPort name="voice_rx" role="sink"
-                         flags="AUDIO_INPUT_FLAG_VOIP_TX">
+                <mixPort name="voice_rx" role="sink">
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="8000,16000,48000" channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO"/>
                 </mixPort>
