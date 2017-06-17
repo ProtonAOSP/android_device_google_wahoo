@@ -179,6 +179,9 @@ on late-fs
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.${ro.hardware} --late
 
+    # Start time daemon early so that the system time can be set early
+    start time_daemon
+
 on post-fs
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
@@ -217,6 +220,8 @@ on post-fs-data
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
 
+    # Wait until the system time is set
+    wait_for_prop sys.time.set true
 
 # zygote need to be started after otapreopt which will be done on post-fs-data
 on zygote-start
@@ -485,7 +490,7 @@ service qseecomd /vendor/bin/qseecomd
    group root
 
 service time_daemon /vendor/bin/time_daemon
-   class late_start
+   class core
    user root
    group root
 
