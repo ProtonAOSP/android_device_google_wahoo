@@ -1,37 +1,31 @@
 type cnd, domain;
 type cnd_exec, exec_type, vendor_file_type, file_type;
-
 file_type_auto_trans(cnd, socket_device, cnd_socket);
 
-allow cnd self:capability { chown fsetid setgid setuid };
+# cnd is started by init, type transit from init domain to cnd domain
+init_daemon_domain(cnd)
+
+#TODO remove chown fsetid setgid setuid once b/62571088 is resolved
+allow cnd self:capability { chown fsetid setgid setuid net_bind_service };
 
 allow cnd self:udp_socket create_socket_perms;
 allowxperm cnd self:udp_socket ioctl SIOCGIFMTU;
 
-# TODO(b/38227967): Potentially remove following 3 lines upon resolution of this bug
-allow cnd wpa_socket:dir w_dir_perms;
-allow cnd wpa_socket:sock_file create_file_perms;
-allow cnd wifi_data_file:dir search;
-
-allow cnd sysfs_soc:dir search;
-allow cnd sysfs_soc:file r_file_perms;
+allow cnd sysfs_timestamp_switch:file r_file_perms;
+r_dir_file(cnd, sysfs_msm_subsys)
+r_dir_file(cnd, sysfs_diag)
+r_dir_file(cnd, sysfs_soc)
 
 allow cnd proc_meminfo:file r_file_perms;
 
-r_dir_file(cnd, sysfs_msm_subsys)
 set_prop(cnd, cnd_prop)
 
 allow cnd self:socket create_socket_perms;
 allowxperm cnd self:socket ioctl msm_sock_ipc_ioctls;
 
-# TODO(b/38227967): Potentially remove following line upon resolution of this bug
-allow cnd hal_wifi_supplicant_default:unix_dgram_socket sendto;
-
-init_daemon_domain(cnd)
-
-userdebug_or_eng(`
-  permissive cnd;
-')
-
-# TODO(b/36613996): Remove this once system_app no longer communicates over sockets with cnd
-typeattribute cnd socket_between_core_and_vendor_violators;
+# To register cnd to hwbinder
+add_hwservice(cnd, hal_cne_hwservice)
+hwbinder_use(cnd)
+get_prop(cnd, hwservicemanager_prop)
+binder_call(cnd, dataservice_app)
+binder_call(cnd, ims)
