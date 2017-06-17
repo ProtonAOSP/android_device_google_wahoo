@@ -13,3 +13,4 @@ genfscon sysfs /class/rfkill/rfkill0/state            u:object_r:sysfs_bluetooth
 genfscon debugfs /kgsl/proc                           u:object_r:debugfs_kgsl:s0
 genfscon debugfs /clk/debug_suspend                   u:object_r:debugfs_clk:s0
 genfscon debugfs /wlan0                               u:object_r:debugfs_wlan:s0
+genfscon debugfs /icnss                               u:object_r:debugfs_icnss:s0
