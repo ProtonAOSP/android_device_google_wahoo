@@ -155,12 +155,6 @@ on fs
     mount_all /vendor/etc/fstab.${ro.hardware} --early
     swapon_all /vendor/etc/fstab.${ro.hardware}
 
-    # Keeping following partitions outside fstab file. As user may not have
-    # these partition flashed on the device. Failure to mount any partition in fstab file
-    # results in failure to launch late-start class.
-
-    wait /dev/block/bootdevice/by-name/persist
-    mount ext4 /dev/block/bootdevice/by-name/persist /persist nosuid nodev noatime barrier=1
     restorecon_recursive /persist
     mkdir /persist/data 0700 system system
     mkdir /persist/display 0770 system graphics
