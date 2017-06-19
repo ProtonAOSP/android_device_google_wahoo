@@ -69,3 +69,5 @@ type sysfs_data, fs_type, sysfs_type;
 
 #diag sysfs files
 type sysfs_diag, fs_type, sysfs_type;
+
+type hexagon_halide_file, vendor_file_type, file_type;

@@ -14,3 +14,6 @@ user=_app seinfo=tango name=com.google.tango.* domain=tango_core type=app_data_f
 user=_app seinfo=tango name=com.google.tango:app domain=untrusted_app type=app_data_file levelFrom=user
 
 user=_app seinfo=platform name=com.google.android.hardwareinfo domain=hardware_info_app type=app_data_file levelFrom=user
+
+# Use a custom domain for GoogleCamera, to allow for Hexagon DSP access
+user=_app seinfo=google name=com.google.android.GoogleCamera domain=google_camera_app type=app_data_file levelFrom=user
