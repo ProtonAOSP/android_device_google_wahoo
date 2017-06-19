@@ -15,8 +15,14 @@ allow time_daemon sysfs_soc:file r_file_perms;
 # Set sys.time.set property
 set_prop(time_daemon, sys_time_prop);
 
-allow time_daemon persist_file:dir w_dir_perms;
-allow time_daemon persist_file:file rw_file_perms;
+allow time_daemon persist_time_file:dir w_dir_perms;
+allow time_daemon persist_time_file:file create_file_perms;
+allow time_daemon persist_time_file:dir search;
+
+allow time_daemon persist_file:dir search;
+
+allow time_daemon time_vendor_data_file:dir w_dir_perms;
+allow time_daemon time_vendor_data_file:file create_file_perms;
 
 allow time_daemon persist_time_file:dir w_dir_perms;
 allow time_daemon persist_time_file:file create_file_perms;

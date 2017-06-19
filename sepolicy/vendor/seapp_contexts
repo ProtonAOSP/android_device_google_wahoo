@@ -17,3 +17,6 @@ user=_app seinfo=platform name=com.google.android.hardwareinfo domain=hardware_i
 
 # Use a custom domain for GoogleCamera, to allow for Hexagon DSP access
 user=_app seinfo=google name=com.google.android.GoogleCamera domain=google_camera_app type=app_data_file levelFrom=user
+
+#Needed for time service apk
+user=system seinfo=platform name=com.qualcomm.timeservice domain=timeservice_app type=system_app_data_file
