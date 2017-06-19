@@ -20,3 +20,6 @@ user=_app seinfo=google name=com.google.android.GoogleCamera domain=google_camer
 
 #Needed for time service apk
 user=system seinfo=platform name=com.qualcomm.timeservice domain=timeservice_app type=system_app_data_file
+
+# Domain for easelservice app
+user=_app seinfo=easel name=com.google.android.imaging.easel.service domain=easelservice_app type=app_data_file levelFrom=user
