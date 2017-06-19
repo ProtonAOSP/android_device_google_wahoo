@@ -241,6 +241,8 @@
 /data/vendor/modem_dump(/.*)?          u:object_r:modem_dump_file:s0
 /data/vendor/ese(/.*)?                 u:object_r:ese_vendor_data_file:s0
 /data/vendor/ipa(/.*)?                 u:object_r:ipacm_vendor_data_file:s0
+/data/vendor/time(/.*)?                u:object_r:time_vendor_data_file:s0
+
 # /
 /tombstones             u:object_r:rootfs:s0
 /dsp                    u:object_r:rootfs:s0
