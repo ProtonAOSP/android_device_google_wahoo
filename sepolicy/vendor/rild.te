@@ -1,8 +1,4 @@
-# TODO(b/36565056, b/36651714): Remove this once rild stops using Binder
-typeattribute rild binder_in_vendor_violators;
-binder_use(rild)
 binder_call(rild, per_mgr)
-binder_call(rild, audioserver)
 
 vndbinder_use(rild)
 
@@ -15,7 +11,6 @@ unix_socket_connect(rild, netmgrd, netmgrd)
 allow rild vendor_file:file { execute_no_trans lock };
 
 allow rild per_mgr_service:service_manager find;
-allow rild audioserver_service:service_manager find;
 
 add_hwservice(rild, vnd_ims_radio_hwservice)
 add_hwservice(rild, vnd_qcrilhook_hwservice)
