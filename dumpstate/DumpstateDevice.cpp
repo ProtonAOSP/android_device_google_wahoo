@@ -119,6 +119,19 @@ static void getModemLogs(int fd)
     }
 }
 
+static void DumpTouch(int fd) {
+    if (!access("/sys/android_touch", R_OK)) {
+        DumpFileToFd(fd, "Synaptics touch firmware version",
+                     "/sys/android_touch/vendor");
+        DumpFileToFd(fd, "Synaptics touch firmware config",
+                     "/sys/android_touch/config");
+    }
+    if (!access("/sys/class/input/ftm4_touch", R_OK)) {
+        DumpFileToFd(fd, "STM touch firmware config",
+                     "/sys/class/input/ftm4_touch/version");
+    }
+}
+
 } // unnamed namespace
 
 
@@ -155,6 +168,7 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "PD Engine", "/d/pd_engine/usbpd0");
     DumpFileToFd(fd, "smblib-usb logs", "/d/ipc_logging/smblib/log");
     DumpFileToFd(fd, "ipc-local-ports", "/d/msm_ipc_router/dump_local_ports");
+    DumpTouch(fd);
 
     /* Check if qsee_logger tool exists */
     if (!access("/vendor/bin/qsee_logger", X_OK)) {
