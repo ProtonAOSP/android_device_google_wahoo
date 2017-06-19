@@ -12,10 +12,6 @@ allow hal_camera self:capability sys_nice;
 allow hal_camera gpu_device:chr_file rw_file_perms;
 
 allow hal_camera perfd_socket:sock_file w_file_perms;
-# TODO(b/34274385): Remove this once Camera HAL is guaranteed to be binderized on full Treble
-# devices. Passthrough Camera HAL makes cameraserver use perfd socket which is a vendor socket.
-# cameraserver, being a non-vendor component, is not permitted to use that socket.
-typeattribute cameraserver socket_between_core_and_vendor_violators;
 
 # access to /dev/input/event{5,10}
 allow hal_camera input_device:dir r_dir_perms;

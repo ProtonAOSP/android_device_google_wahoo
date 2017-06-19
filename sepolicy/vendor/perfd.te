@@ -29,12 +29,3 @@ allow perfd sysfs_devices_system_cpu:file w_file_perms;
 allow perfd perfd_socket:sock_file write;
 
 allow perfd latency_device:chr_file w_file_perms;
-
-# TODO(b/34274385): Remove this once HALs are guaranteed to not be run in passthrough mode
-# What's going on here is that Audio HAL, Power and DRM HAL are talking over sockets to perfd,
-# which is permitted. However, those rules target hal_x rather than hal_x_server and thus are also
-# granted to all clients of these HALs (e.g., system_server) which are core components, and
-# socket communications between system components and vendor components are not permted.
-# Once we switch full Treble devices to binderized only mode, this issue will disappear.
-typeattribute perfd socket_between_core_and_vendor_violators;
-
