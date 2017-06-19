@@ -1,2 +1,0 @@
-# For the camera app
-get_prop(untrusted_app, camera_prop)
