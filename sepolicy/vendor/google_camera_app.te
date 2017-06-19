@@ -36,6 +36,3 @@ allow google_camera_app system_app_data_file:file { read write getattr };
 # Allow GoogleCamera access to necessary vendor libraries to execute
 # Halide code
 allow google_camera_app hexagon_halide_file:file { execute read open getattr };
-
-# Access to persist.camera.* system properties
-get_prop(google_camera_app, camera_prop)
