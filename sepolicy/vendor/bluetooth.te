@@ -1,5 +1,3 @@
-allow bluetooth wcnss_filter:unix_stream_socket connectto;
-
 set_prop(bluetooth, wc_prop)
 
 # Allow access to net_admin ioctls
