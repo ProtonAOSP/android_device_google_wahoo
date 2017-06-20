@@ -30,4 +30,7 @@
     <signer signature="@TANGO_DEV" >
       <seinfo value="tango" />
     </signer>
+    <signer signature="@EASEL" >
+      <seinfo value="easel" />
+    </signer>
 </policy>
