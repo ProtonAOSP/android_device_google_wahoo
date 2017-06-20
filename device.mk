@@ -580,6 +580,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.sf.color_saturation=1.1
 
+# Easel device feature
+PRODUCT_COPY_FILES += \
+    device/google/wahoo/permissions/com.google.hardware.camera.easel.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.google.hardware.camera.easel.xml
+
 # Add minidebug info to the system server to support diagnosing native crashes.
 ifneq (,$(filter user userdebug, $(TARGET_BUILD_VARIANT)))
     # System server and some of its services.
