@@ -35,7 +35,6 @@ genfscon sysfs /devices/soc/0.qcom,rmtfs_sharedmem                      u:object
 genfscon sysfs /devices/soc/soc:fp_fpc1020                              u:object_r:sysfs_fingerprint:s0
 genfscon sysfs /devices/virtual/thermal                                 u:object_r:sysfs_thermal:s0
 genfscon sysfs /devices/virtual/wahoo_laser                             u:object_r:sysfs_laser:s0
-genfscon sysfs /kernel/debug/rmt_storage                                u:object_r:debugfs_rmt_storage:s0
 genfscon sysfs /module/msm_thermal                                      u:object_r:sysfs_thermal:s0
 genfscon sysfs /module/tcp_cubic/parameters                             u:object_r:sysfs_net:s0
 genfscon sysfs /module/diagchar/parameters/timestamp_switch             u:object_r:sysfs_timestamp_switch:s0
@@ -72,3 +71,4 @@ genfscon debugfs /pd_engine/usbpd0                    u:object_r:debugfs_usb:s0
 genfscon debugfs /ipc_logging/smblib/log              u:object_r:debugfs_usb:s0
 genfscon debugfs /msm_ipc_router                      u:object_r:debugfs_ipc:s0
 genfscon debugfs /mdp                                 u:object_r:debugfs_mdp:s0
+genfscon debugfs /rmt_storage                         u:object_r:debugfs_rmt_storage:s0
