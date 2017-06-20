@@ -163,6 +163,7 @@
 /sys/devices/soc/800f000\.qcom,spmi/spmi-0/spmi0-02/800f000\.qcom,spmi:qcom,pmi8998@2:qcom,usb-pdphy@1700/usbpd0/typec(/.*)?     u:object_r:sysfs_usb_c:s0
 /sys/devices/soc/soc:qcom,ipa_fws@[a-f0-9]+/subsys0/name            u:object_r:sysfs_data:s0
 /sys/module/diagchar(/.*)?                                          u:object_r:sysfs_diag:s0
+/sys/devices/soc/a800000\.ssusb/a800000\.dwc3/xhci-hcd\.0\.auto/usb\d+(/.*)? u:object_r:sysfs_usb_device:s0
 
 # files in debugfs
 /sys/kernel/debug/rpm_stats                      u:object_r:debugfs_rpm:s0
