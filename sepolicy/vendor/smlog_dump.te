@@ -8,7 +8,7 @@ userdebug_or_eng(`
   r_dir_file(smlog_dump, sysfs_rmtfs)
 
   allow smlog_dump diag_device:chr_file rw_file_perms;
-  allow smlog_dump radio_data_file:file { append read write };
+  allow smlog_dump radio_vendor_data_file:file { append read write };
   allow smlog_dump rild:fd use;
   allow smlog_dump rild:fifo_file { read write };
   allow smlog_dump rild:unix_stream_socket { read write };
