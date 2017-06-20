@@ -1,4 +1,4 @@
-type netmgrd, domain, vendor_executes_system_violators;
+type netmgrd, domain;
 type netmgrd_exec, exec_type, vendor_file_type, file_type;
 
 net_domain(netmgrd)
@@ -51,7 +51,7 @@ allow netmgrd system_file:file execute_no_trans;
 
 allow netmgrd self:capability { net_admin net_raw setgid setpcap setuid };
 
-allow netmgrd toolbox_exec:file rx_file_perms;
+allow netmgrd vendor_toolbox_exec:file rx_file_perms;
 
 dontaudit netmgrd kernel:system module_request;
 dontaudit netmgrd self:system module_request;
