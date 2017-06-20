@@ -4,5 +4,3 @@ allow audioserver perfd_socket:sock_file write;
 
 allow audioserver sysfs_soc:file r_file_perms;
 allow audioserver sysfs_soc:dir search;
-
-binder_call(audioserver, rild)
