@@ -579,3 +579,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Add an extra 10% saturation to display colors
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.sf.color_saturation=1.1
+
+# Add minidebug info to the system server to support diagnosing native crashes.
+ifneq (,$(filter user userdebug, $(TARGET_BUILD_VARIANT)))
+    # System server and some of its services.
+    # Note: we cannot use PRODUCT_SYSTEM_SERVER_JARS, as it has not been expanded at this point.
+    $(call add-product-dex-preopt-module-config,services,--generate-mini-debug-info)
+    $(call add-product-dex-preopt-module-config,wifi-service,--generate-mini-debug-info)
+endif
