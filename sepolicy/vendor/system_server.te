@@ -3,8 +3,6 @@ allowxperm system_server self:socket ioctl msm_sock_ipc_ioctls;
 
 # TODO(b/36867326): Remove this once system_server no longer communicates over binder
 binder_call(system_server, per_mgr)
-binder_call(system_server, folio_daemon)
-
 binder_call(system_server, hal_camera_default)
 
 allow system_server persist_file:dir search;
