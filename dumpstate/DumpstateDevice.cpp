@@ -32,8 +32,8 @@
 #define MODEM_LOG_LOC_PROPERTY "ro.radio.log_loc"
 #define MODEM_LOGGING_SWITCH "persist.radio.smlog_switch"
 
-#define DIAG_MDLOG_PROPERTY "persist.sys.modem.diag.mdlog"
-#define DIAG_MDLOG_STATUS_PROPERTY "sys.modem.diag.mdlog"
+#define DIAG_MDLOG_PROPERTY "sys.modem.diag.mdlog"
+#define DIAG_MDLOG_STATUS_PROPERTY "sys.modem.diag.mdlog_on"
 
 using android::os::dumpstate::CommandOptions;
 using android::os::dumpstate::DumpFileToFd;
@@ -82,9 +82,10 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
             android::base::SetProperty(DIAG_MDLOG_PROPERTY, "false");
 
             ALOGD("Waiting for diag log to exit\n");
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 30; i++) {
                 if (!android::base::GetBoolProperty(DIAG_MDLOG_STATUS_PROPERTY, false)) {
                     ALOGD("diag log exited\n");
+                    sleep(1);
                     break;
                 }
 
