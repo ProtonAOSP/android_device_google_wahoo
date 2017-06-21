@@ -115,7 +115,67 @@
 /dev/block/zram0                                u:object_r:swap_block_device:s0
 
 # files in sysfs
+/sys/class/thermal(/.*)?                                            u:object_r:sysfs_thermal:s0
+/sys/class/uio(/.*)?                                                u:object_r:sysfs_uio:s0
+/sys/class/devfreq(/.*)?                                            u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/soc:bt_wcn3990(/.*)?                               u:object_r:sysfs_bluetooth_writable:s0
+/sys/devices/soc/a1800000\.qcom,rmtfs_rtel_sharedmem(/.*)?          u:object_r:sysfs_rmtfs:s0
+/sys/devices/soc/c17a000\.i2c(/.*)?                                 u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/soc:qcom,gpubw(/.*)?                               u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/800f000\.qcom,spmi(/.*)?                           u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/4080000\.qcom,mss(/.*)?                            u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/17300000\.qcom,lpass(/.*)?                         u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/1d0101c\.qcom,spss(/.*)?                           u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/5c00000\.qcom,ssc(/.*)?                            u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/c900000\.qcom,mdss_rotator(/.*)?                   u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/c900000\.qcom,mdss_mdp/caps                        u:object_r:sysfs_mdss_mdp_caps:s0
+/sys/devices/soc/c17a000\.i2c/i2c-6/6-005a/leds(/.*)?               u:object_r:sysfs_leds:s0
+/sys/devices/soc/c1b5000\.i2c/i2c-7/7-0030/leds(/.*)?               u:object_r:sysfs_leds:s0
+/sys/devices/soc/c900000\.qcom,mdss_mdp/c900000\.qcom,mdss_mdp:qcom,mdss_fb_primary/leds(/.*)? u:object_r:sysfs_leds:s0
+/sys/devices/soc/800f000\.qcom,spmi/spmi-0/spmi0-03/800f000\.qcom,spmi:qcom,pmi8998@3:qcom,leds@d000/leds(/.*)? u:object_r:sysfs_leds:s0
+/sys/devices/soc/5000000\.qcom,kgsl-3d0(/.*)?                       u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/soc:qcom,kgsl-hyp(/.*)?                            u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/soc:qcom,ipa_fws@1e08000(/.*)?                     u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/cce0000\.qcom,venus(/.*)?                          u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/0\.qcom,rmtfs_sharedmem(/.*)?                      u:object_r:sysfs_rmtfs:s0
+/sys/devices/soc/soc:fp_fpc1020(/.*)?                               u:object_r:sysfs_fingerprint:s0
+/sys/devices/virtual/thermal(/.*)?                                  u:object_r:sysfs_thermal:s0
+/sys/devices/virtual/wahoo_laser(/.*)?                              u:object_r:sysfs_laser:s0
+/sys/kernel/debug/rmt_storage(/.*)?                                 u:object_r:debugfs_rmt_storage:s0
+/sys/module/msm_thermal(/.*)?                                       u:object_r:sysfs_thermal:s0
+/sys/module/tcp_cubic/parameters(/.*)?                              u:object_r:sysfs_net:s0
+/sys/module/diagchar/parameters/timestamp_switch                    u:object_r:sysfs_timestamp_switch:s0
+/sys/devices/virtual/graphics/fb([0-2])+(/.*)?                      u:object_r:sysfs_graphics:s0
+/sys/devices/virtual/net(/.*)?                                      u:object_r:sysfs_net:s0
+/sys/devices/soc/8c0000\.qcom,msm-cam(/.*)?                         u:object_r:sysfs_camera:s0
+/sys/devices/soc0(/.*)?                                             u:object_r:sysfs_soc:s0
+/sys/devices/soc/caa0000\.qcom,jpeg(/.*)?                           u:object_r:sysfs_camera:s0
+/sys/devices/soc/caa4000\.qcom,fd(/.*)?                             u:object_r:sysfs_camera:s0
+/sys/devices/soc/800f000\.qcom,spmi/spmi-0/spmi0-02/800f000\.qcom,spmi:qcom,pmi8998@2:qpnp,fg/power_supply/bms/capacity               u:object_r:sysfs_batteryinfo:s0
+/sys/devices/soc/800f000\.qcom,spmi/spmi-0/spmi0-02/800f000\.qcom,spmi:qcom,pmi8998@2:qcom,qpnp-smb2/power_supply/battery/capacity    u:object_r:sysfs_batteryinfo:s0
+/sys/bus/msm_subsys(/.*)?                                           u:object_r:sysfs_msm_subsys:s0
+/sys/module/subsystem_restart                                       u:object_r:sysfs_msm_subsys_restart:s0
+/sys/kernel/boot_adsp/boot                                          u:object_r:sysfs_msm_subsys:s0
+/sys/kernel/boot_slpi/boot                                          u:object_r:sysfs_msm_subsys:s0
+/sys/devices/soc/c1b7000\.i2c/i2c-9/9-0008(/.*)?                    u:object_r:sysfs_easel:s0
+/sys/class/typec(/.*)?                                              u:object_r:sysfs_usb_c:s0
+/sys/class/typec/usbc0(/.*)?                                        u:object_r:sysfs_usb_c:s0
+/sys/devices/soc/800f000\.qcom,spmi/spmi-0/spmi0-02/800f000\.qcom,spmi:qcom,pmi8998@2:qcom,usb-pdphy@1700/usbpd0/typec(/.*)?     u:object_r:sysfs_usb_c:s0
+/sys/devices/soc/soc:qcom,ipa_fws@[a-f0-9]+/subsys0/name            u:object_r:sysfs_data:s0
+/sys/module/diagchar(/.*)?                                          u:object_r:sysfs_diag:s0
 /sys/devices/soc/a800000\.ssusb/a800000\.dwc3/xhci-hcd\.0\.auto/usb\d+(/.*)? u:object_r:sysfs_usb_device:s0
+
+# files in debugfs
+/sys/kernel/debug/rpm_stats                      u:object_r:debugfs_rpm:s0
+/sys/kernel/debug/rpm_master_stats               u:object_r:debugfs_rpm:s0
+/sys/kernel/debug/ion(/.*)?                      u:object_r:debugfs_ion:s0
+/sys/kernel/debug/ipc_logging(/.*)?              u:object_r:debugfs_ipc:s0
+/sys/kernel/debug/system_stats                   u:object_r:debugfs_rpm:s0
+/sys/kernel/debug/tcpm/usbpd0                    u:object_r:debugfs_usb:s0
+/sys/kernel/debug/pd_engine/usbpd0               u:object_r:debugfs_usb:s0
+/sys/kernel/debug/ipc_logging/smblib/log         u:object_r:debugfs_usb:s0
+/sys/kernel/debug/msm_ipc_router(/.*)?           u:object_r:debugfs_ipc:s0
+/sys/kernel/debug/mdp(/.*)?                      u:object_r:debugfs_mdp:s0
 
 # files in /vendor
 /vendor/firmware(/.*)?          u:object_r:vendor_firmware_file:s0
