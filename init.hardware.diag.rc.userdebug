@@ -41,6 +41,7 @@ on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag && property:sys.
 on property:sys.usb.config=diag,adb && property:sys.usb.configfs=1
     start adbd
 
+
 on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag,adb && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "diag_adb"
     rm /config/usb_gadget/g1/configs/b.1/f1
@@ -347,10 +348,13 @@ service diag_mdlog_stop /vendor/bin/diag_mdlog -k
     disabled
     oneshot
 
-on property:persist.sys.modem.diag.mdlog=true
+on boot && property:persist.sys.modem.diag.mdlog=*
+    setprop sys.modem.diag.mdlog ${persist.sys.modem.diag.mdlog}
+
+on property:sys.modem.diag.mdlog=true
     start diag_mdlog_start
 
-on property:persist.sys.modem.diag.mdlog=false
+on property:sys.modem.diag.mdlog=false
     start diag_mdlog_stop
 
 on property:persist.sys.cnss.diag_qxdm=true
