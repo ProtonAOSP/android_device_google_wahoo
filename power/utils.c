@@ -239,7 +239,7 @@ void perform_hint_action(int hint_id, int resource_values[], int num_resources)
                     num_resources);
 
             if (lock_handle == -1) {
-                ALOGE("Failed to acquire lock.");
+                ALOGE("%s: Failed to acquire lock.", __func__);
             } else {
                 /* Add this handle to our internal hint-list. */
                 struct hint_data *new_hint =

@@ -100,6 +100,7 @@ void power_set_interactive(int on);
 int extract_platform_stats(uint64_t *list);
 int extract_wlan_stats(uint64_t *list);
 
+int is_perf_hint_active(int hint);
 
 #ifdef __cplusplus
 }
