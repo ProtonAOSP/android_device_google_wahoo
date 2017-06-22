@@ -137,7 +137,6 @@
         <item>1</item>
         <item>5</item>
         <item>7</item>
-        <item>9</item>
     </integer-array>
 
     <!-- This string array should be overridden by the device to present a list of network
