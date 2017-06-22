@@ -188,6 +188,7 @@ on post-fs
 
     chmod 0664 /sys/devices/virtual/graphics/fb0/idle_time
     chown system graphics /sys/devices/virtual/graphics/fb0/idle_time
+    write /sys/devices/virtual/graphics/fb0/idle_time 100
 
     # Wait qseecomd started
     wait_for_prop sys.listeners.registered true

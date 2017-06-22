@@ -48,9 +48,6 @@
 #include "power-common.h"
 #include "powerhintparser.h"
 
-#define USINSEC 1000000L
-#define NSINUS 1000L
-
 static int sustained_mode_handle = 0;
 static int vr_mode_handle = 0;
 static int launch_handle = 0;
@@ -59,10 +56,18 @@ static int vr_mode = 0;
 static int launch_mode = 0;
 #define CHECK_HANDLE(x) (((x)>0) && ((x)!=-1))
 
-static struct timespec s_previous_boost_timespec;
-static int s_previous_duration;
-
-void interaction(int duration, int num_args, int opt_list[]);
+int is_perf_hint_active(int hint)
+{
+    switch (hint) {
+        case SUSTAINED_PERF_HINT_ID:
+            return sustained_performance_mode != 0;
+        case VR_MODE_HINT_ID:
+            return vr_mode != 0;
+        case VR_MODE_SUSTAINED_PERF_HINT_ID:
+            return vr_mode != 0 && sustained_performance_mode != 0;
+    }
+    return 0;
+}
 
 static int process_sustained_perf_hint(void *data)
 {
@@ -272,50 +277,6 @@ static int process_activity_launch_hint(void *data)
     return HINT_NONE;
 }
 
-static long long calc_timespan_us(struct timespec start, struct timespec end) {
-    long long diff_in_us = 0;
-    diff_in_us += (end.tv_sec - start.tv_sec) * USINSEC;
-    diff_in_us += (end.tv_nsec - start.tv_nsec) / NSINUS;
-    return diff_in_us;
-}
-
-static int interaction_hint(void *data)
-{
-    if (sustained_performance_mode || vr_mode) {
-        ALOGW("%s: already handled?", __FUNCTION__);
-        return HINT_HANDLED;
-    }
-
-    int duration = 1500; // 1.5s by default
-    if (data) {
-        int input_duration = *((int*)data) + 750;
-        if (input_duration > duration) {
-            duration = (input_duration > 5750) ? 5750 : input_duration;
-        }
-    }
-
-    struct timespec cur_boost_timespec;
-    clock_gettime(CLOCK_MONOTONIC, &cur_boost_timespec);
-
-    long long elapsed_time = calc_timespan_us(s_previous_boost_timespec, cur_boost_timespec);
-    // don't hint if previous hint's duration covers this hint's duration
-    if ((s_previous_duration * 1000) > (elapsed_time + duration * 1000)) {
-        return HINT_HANDLED;
-    }
-    s_previous_boost_timespec = cur_boost_timespec;
-    s_previous_duration = duration;
-
-    int *resource_values;
-    int num_resources;
-
-    /* extract perflock resources */
-    resource_values = getPowerhint(INTERACTION_HINT_ID, &num_resources);
-    if (resource_values != NULL)
-        interaction(duration, num_resources, resource_values);
-
-    return HINT_HANDLED;
-}
-
 int power_hint_override(power_hint_t hint, void *data)
 {
     int ret_val = HINT_NONE;
@@ -328,9 +289,6 @@ int power_hint_override(power_hint_t hint, void *data)
             break;
         case POWER_HINT_VR_MODE:
             ret_val = process_vr_mode_hint(data);
-            break;
-        case POWER_HINT_INTERACTION:
-            ret_val = interaction_hint(data);
             break;
         case POWER_HINT_LAUNCH:
             ret_val = process_activity_launch_hint(data);

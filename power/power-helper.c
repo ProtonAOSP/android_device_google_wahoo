@@ -255,6 +255,11 @@ void power_hint(power_hint_t hint, void *data)
     }
 }
 
+int __attribute__ ((weak)) is_perf_hint_active(int UNUSED(hint))
+{
+    return 0;
+}
+
 int __attribute__ ((weak)) set_interactive_override(int UNUSED(on))
 {
     return HINT_NONE;
