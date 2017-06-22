@@ -65,8 +65,8 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
         std::string diagLogDir = "/data/vendor/radio/diag_logs/logs";
         std::vector<std::string> rilAndNetmgrLogs
             {
-              "/data/misc/radio/ril_log",
-              "/data/misc/radio/ril_log_old",
+              "/data/vendor/radio/ril_log",
+              "/data/vendor/radio/ril_log_old",
               "/data/vendor/netmgr/netmgr_log",
               "/data/vendor/netmgr/netmgr_log_old"
             };
