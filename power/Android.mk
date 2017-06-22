@@ -23,7 +23,16 @@ LOCAL_MODULE_TAGS := optional
 
 LOCAL_MODULE := android.hardware.power@1.1-service.wahoo
 LOCAL_INIT_RC := android.hardware.power@1.1-service.wahoo.rc
-LOCAL_SRC_FILES := service.cpp Power.cpp power-helper.c metadata-parser.c utils.c list.c hint-data.c powerhintparser.c
+LOCAL_SRC_FILES := service.cpp \
+    Power.cpp \
+    InteractionHandler.cpp \
+    power-helper.c \
+    metadata-parser.c \
+    utils.c \
+    list.c \
+    hint-data.c \
+    powerhintparser.c
+
 LOCAL_C_INCLUDES := external/libxml2/include \
                     external/icu/icu4c/source/common
 
@@ -32,7 +41,7 @@ LOCAL_SRC_FILES += power-8998.c
 
 
 # Enable interaction boost all the time
-LOCAL_CFLAGS += -DINTERACTION_BOOST
+LOCAL_CFLAGS += -DINTERACTION_BOOST -Werror
 
 LOCAL_SHARED_LIBRARIES := \
     liblog \

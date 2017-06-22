@@ -22,6 +22,8 @@
 #include <hidl/Status.h>
 #include <hardware/power.h>
 
+#include "InteractionHandler.h"
+
 namespace android {
 namespace hardware {
 namespace power {
@@ -33,6 +35,7 @@ using ::android::hardware::power::V1_0::PowerHint;
 using ::android::hardware::power::V1_1::IPower;
 using ::android::hardware::Return;
 using ::android::hardware::Void;
+using ::InteractionHandler;
 
 struct Power : public IPower {
     // Methods from ::android::hardware::power::V1_0::IPower follow.
@@ -49,6 +52,8 @@ struct Power : public IPower {
 
     // Methods from ::android::hidl::base::V1_0::IBase follow.
 
+ private:
+    InteractionHandler mInteractionHandler;
 };
 
 }  // namespace implementation
