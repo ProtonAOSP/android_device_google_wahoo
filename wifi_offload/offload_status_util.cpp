@@ -13,11 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef WIFI_OFFLOAD_CHRE_INTERFACE_FACTORY_H_
-#define WIFI_OFFLOAD_CHRE_INTERFACE_FACTORY_H_
 
-#include "chre_interface.h"
-#include "chre_interface_callbacks.h"
+#include "offload_status_util.h"
 
 namespace android {
 namespace hardware {
@@ -26,12 +23,13 @@ namespace offload {
 namespace V1_0 {
 namespace implementation {
 
-class ChreInterfaceFactory {
-  public:
-    ChreInterfaceFactory() = default;
-    virtual ~ChreInterfaceFactory() = default;
-    virtual ChreInterface* getChreInterface(ChreInterfaceCallbacks* server);
-};
+OffloadStatus createOffloadStatus(OffloadStatusCode code, const std::string &description) {
+    return {code, description};
+}
+
+OffloadStatus createOffloadStatus(OffloadStatusCode code) {
+    return createOffloadStatus(code, "");
+}
 
 }  // namespace implementation
 }  // namespace V1_0
@@ -39,5 +37,3 @@ class ChreInterfaceFactory {
 }  // namespace wifi
 }  // namespace hardware
 }  // namespace android
-
-#endif  // WIFI_OFFLOAD_CHRE_INTERFACE_FACTORY_H_
