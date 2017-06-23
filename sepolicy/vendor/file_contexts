@@ -317,6 +317,8 @@
 /persist/display(/.*)?    u:object_r:persist_display_file:s0
 /persist/drm(/.*)?        u:object_r:persist_drm_file:s0
 /persist/haptics(/.*)?    u:object_r:persist_haptics_file:s0
+/persist/hlos_rfs(/.*)?   u:object_r:persist_rfs_file:s0
+/persist/rfs(/.*)?        u:object_r:persist_rfs_file:s0
 /persist/sensors(/.*)?    u:object_r:persist_sensors_file:s0
 /persist/time(/.*)?       u:object_r:persist_time_file:s0
 
