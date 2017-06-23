@@ -155,9 +155,13 @@ on fs
     mount_all /vendor/etc/fstab.${ro.hardware} --early
     swapon_all /vendor/etc/fstab.${ro.hardware}
 
-    restorecon_recursive /persist
     mkdir /persist/data 0700 system system
     mkdir /persist/display 0770 system graphics
+    mkdir /persist/rfs 0770 root system
+    mkdir /persist/hlos_rfs 0770 root system
+    chmod 0770 /persist/rfs
+    chmod 0770 /persist/hlos_rfs
+    restorecon_recursive /persist
 
     # Start HW service manager early
     start hwservicemanager
@@ -531,6 +535,7 @@ service rmt_storage /vendor/bin/rmt_storage
 service tftp_server /vendor/bin/tftp_server
    class core
    user root
+   group root system
 
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
