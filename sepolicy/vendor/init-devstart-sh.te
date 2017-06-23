@@ -6,6 +6,9 @@ init_daemon_domain(init-qcom-devstart-sh)
 allow init-qcom-devstart-sh vendor_shell_exec:file rx_file_perms;
 allow init-qcom-devstart-sh vendor_toolbox_exec:file rx_file_perms;
 
+# execute grep
+allow init-qcom-devstart-sh vendor_file:file rx_file_perms;
+
 # Set the sys.qcom.devup property
 set_prop(init-qcom-devstart-sh, system_prop)
 
