@@ -6,6 +6,7 @@ allow ueventd sysfs_fingerprint:file w_file_perms;
 allow ueventd sysfs_graphics:file w_file_perms;
 allow ueventd sysfs_laser:file w_file_perms;
 allow ueventd sysfs_rmtfs:file w_file_perms;
+allow ueventd sysfs_scsi_devices_0000:file write;
 allow ueventd sysfs_soc:file w_file_perms;
 allow ueventd sysfs_net:file w_file_perms;
 allow ueventd sysfs_msm_subsys:file w_file_perms;
