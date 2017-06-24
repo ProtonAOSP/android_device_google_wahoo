@@ -153,7 +153,6 @@ on fs
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
     mount_all /vendor/etc/fstab.${ro.hardware} --early
-    swapon_all /vendor/etc/fstab.${ro.hardware}
 
     mkdir /persist/data 0700 system system
     mkdir /persist/display 0770 system graphics
@@ -473,6 +472,10 @@ service per_proxy /vendor/bin/pm-proxy
     disabled
 
 on property:sys.boot_completed=1
+    # Enable ZRAM on boot_complete
+    swapon_all /vendor/etc/fstab.${ro.hardware}
+
+    # Setup final cpuset
     write /dev/cpuset/top-app/cpus 0-7
     write /dev/cpuset/foreground/boost/cpus 0-3,6-7
     write /dev/cpuset/foreground/cpus 0-3,6-7
