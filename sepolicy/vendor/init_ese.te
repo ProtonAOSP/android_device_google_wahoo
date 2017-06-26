@@ -15,3 +15,5 @@ allow init_ese esed_exec:file rx_file_perms;
 allow init_ese pn81a_device:chr_file rw_file_perms;
 allow init_ese ese_vendor_data_file:dir create_dir_perms;
 allow init_ese ese_vendor_data_file:file create_file_perms;
+
+allow init_ese vendor_file:file execute_no_trans;
