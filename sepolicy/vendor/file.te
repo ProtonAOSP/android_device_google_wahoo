@@ -42,12 +42,14 @@ type hal_bootctl_socket, file_type;
 
 type firmware_file, fs_type, contextmount_type;
 
+type elabel_data_file, file_type, data_file_type;
 type location_data_file, file_type, data_file_type;
 
 type persist_file, file_type;
 type persist_data_file, file_type;
 type persist_display_file, file_type;
 type persist_drm_file, file_type;
+type persist_elabel_file, file_type;
 type persist_haptics_file, file_type;
 type persist_rfs_file, file_type;
 type persist_sensors_file, file_type;
