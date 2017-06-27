@@ -337,13 +337,8 @@ on zygote-start
 on early-boot
     # wait for devices
     wait_for_prop sys.qcom.devup 1
-
-    # Start CHRE which need SLPI completed in sys.qcom.devup
-    start chre
-
     # wait for insmod_sh to finish all modules
     wait_for_prop sys.all.modules.ready 1
-
     # Update dm-verity state and set partition.*.verified properties
     verity_update_state
 
