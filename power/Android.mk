@@ -44,6 +44,7 @@ LOCAL_SRC_FILES += power-8998.c
 LOCAL_CFLAGS += -DINTERACTION_BOOST -Werror
 
 LOCAL_SHARED_LIBRARIES := \
+    libbase \
     liblog \
     libcutils \
     libdl \
