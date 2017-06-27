@@ -54,6 +54,7 @@ struct Power : public IPower {
 
  private:
     InteractionHandler mInteractionHandler;
+    static bool isSupportedGovernor();
 };
 
 }  // namespace implementation

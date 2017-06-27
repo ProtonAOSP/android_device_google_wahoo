@@ -17,6 +17,8 @@
 #define LOG_TAG "android.hardware.power@1.1-service.wahoo"
 
 #include <android/log.h>
+#include <android-base/file.h>
+#include <android-base/strings.h>
 #include <utils/Log.h>
 #include "Power.h"
 #include "power-common.h"
@@ -49,12 +51,18 @@ Power::Power() {
 
 // Methods from ::android::hardware::power::V1_0::IPower follow.
 Return<void> Power::setInteractive(bool interactive)  {
+    if (!isSupportedGovernor()) {
+        return Void();
+    }
     power_set_interactive(interactive ? 1 : 0);
     return Void();
 }
 
 Return<void> Power::powerHint(PowerHint hint, int32_t data) {
     power_hint_t h = static_cast<power_hint_t>(hint);
+    if (!isSupportedGovernor()) {
+        return Void();
+    }
     if (h == POWER_HINT_INTERACTION) {
         mInteractionHandler.Acquire(data);
         return Void();
@@ -167,6 +175,20 @@ Return<void> Power::getSubsystemLowPowerStats(getSubsystemLowPowerStats_cb _hidl
 done:
     _hidl_cb(subsystems, Status::SUCCESS);
     return Void();
+}
+
+bool Power::isSupportedGovernor() {
+    std::string buf;
+    if (android::base::ReadFileToString(SCALING_GOVERNOR_PATH, &buf)) {
+        buf = android::base::Trim(buf);
+    }
+    // Only support EAS 1.2, legacy EAS and HMP
+    if (buf == SCHEDUTIL_GOVERNOR || buf == SCHED_GOVERNOR || buf == INTERACTIVE_GOVERNOR) {
+        return true;
+    } else {
+        ALOGE("Governor not supported by powerHAL, skipping");
+        return false;
+    }
 }
 
 }  // namespace implementation
