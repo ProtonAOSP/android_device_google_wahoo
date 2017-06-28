@@ -410,8 +410,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.audio.monitorRotation=true
 
-# Bug 37532694
-PRODUCT_PROPERTY_OVERRIDES += audio.adm.buffering.ms=4
+# Bug 62375603
+# PRODUCT_PROPERTY_OVERRIDES += audio.adm.buffering.ms=4
 
 # MIDI feature
 PRODUCT_COPY_FILES += \
