@@ -209,10 +209,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.rcs.supported=1 \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
 
-# Set snapshot timer to 3 second
+# Disable snapshot timer
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.snapshot_enabled=1 \
-    persist.radio.snapshot_timer=3
+    persist.radio.snapshot_enabled=0 \
+    persist.radio.snapshot_timer=0
 
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.vendor.extension_library=libqti-perfd-client.so
