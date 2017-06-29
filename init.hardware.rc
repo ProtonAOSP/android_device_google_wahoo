@@ -162,11 +162,16 @@ on fs
     chmod 0770 /persist/rfs/shared
     chmod 0770 /persist/rfs/msm
     chmod 0770 /persist/rfs/msm/adsp
+    chown system system /persist/rfs/msm/adsp
     chmod 0770 /persist/rfs/msm/mpss
+    chown system system /persist/rfs/msm/mpss
     chmod 0770 /persist/rfs/mdm
     chmod 0770 /persist/rfs/mdm/adsp
+    chown system system /persist/rfs/mdm/adsp
     chmod 0770 /persist/rfs/mdm/mpss
+    chown system system /persist/rfs/mdm/mpss
     chmod 0770 /persist/rfs/mdm/sparrow
+    chown system system /persist/rfs/mdm/sparrow
     chmod 0770 /persist/rfs/apq
     chmod 0770 /persist/rfs/apq/gnss
     chmod 0770 /persist/hlos_rfs
