@@ -199,7 +199,6 @@ on late-fs
 
     # Required for time_daemon
     mkdir /persist/time 0770 system system
-    mkdir /data/vendor/time 0700 system system
 
     # Start time daemon early so that the system time can be set early
     start time_daemon
