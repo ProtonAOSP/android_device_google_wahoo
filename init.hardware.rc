@@ -330,6 +330,8 @@ on zygote-start
     mkdir /data/misc/sensors
     chmod 775 /data/misc/sensors
 
+    mkdir /data/vendor/sensors 0770
+
     # Mark the copy complete flag to not completed
     write /data/vendor/radio/copy_complete 0
     chown radio radio /data/vendor/radio/copy_complete
