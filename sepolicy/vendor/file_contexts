@@ -181,6 +181,7 @@
 /vendor/bin/hw/android\.hardware\.keymaster@3\.0-service-qti         u:object_r:hal_keymaster_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service-qti        u:object_r:hal_gatekeeper_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.gnss@1\.0-service-qti              u:object_r:hal_gnss_qti_exec:s0
+/vendor/bin/hw/android\.hardware\.neuralnetworks@1\.0-service-hvx    u:object_r:hal_neuralnetworks_hvx_exec:s0
 
 ###############################################
 # same-process HAL files and their dependencies
