@@ -129,3 +129,6 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/lowi.conf)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.vibrator@1.0-service.wahoo.rc)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.vibrator@1.0-service.wahoo)
 
+# Broadcast Radio HAL impl 1.0
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/android.hardware.broadcastradio@1.0-impl.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib64/hw/android.hardware.broadcastradio@1.0-impl.so)
