@@ -34,8 +34,8 @@ mm.enable.qcom_parser=13631487
 persist.mm.enable.prefetch=true
 
 # Additional buffers shared between Camera and Video
-vidc.enc.dcvs.extra-buff-count=2
-vidc.enc.disable.pq=1
+vendor.vidc.enc.dcvs.extra-buff-count=2
+vendor.vidc.enc.disable.pq=1
 
 # system props for the data netmgrd
 persist.data.netmgrd.qos.enable=true
