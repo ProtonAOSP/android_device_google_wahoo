@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+on init
+    chmod 666 /dev/diag
+
 on post-fs-data
     # Modem logging collection
     mkdir /data/vendor/radio 0777 radio radio
@@ -21,9 +24,6 @@ on post-fs-data
     # WLAN logging collection
     mkdir /data/vendor/wifi 0777 system system
     mkdir /data/vendor/wifi/cnss_diag 0777 system system
-
-on boot
-    chmod 666 /dev/diag
 
 on property:sys.usb.ffs.ready=1 && property:sys.usb.config=diag && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration "diag"
