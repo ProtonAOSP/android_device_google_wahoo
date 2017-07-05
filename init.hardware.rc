@@ -158,6 +158,7 @@ on fs
     mkdir /persist/display 0770 system graphics
     mkdir /persist/rfs 0770 root system
     mkdir /persist/hlos_rfs 0770 root system
+    mkdir /persist/elabel 0700 system system
     chmod 0770 /persist/rfs
     chmod 0770 /persist/rfs/shared
     chmod 0770 /persist/rfs/msm
@@ -351,6 +352,10 @@ on zygote-start
     mkdir /data/nfc/param 0770 nfc nfc
     mkdir /data/vendor/nfc 0770 nfc nfc
 
+    # b/62837579 elabel directory
+    mkdir /data/misc/elabel 0700 system system
+
+
 on early-boot
     # wait for devices
     wait_for_prop sys.qcom.devup 1
@@ -428,6 +433,12 @@ on boot
 
     # default country code
     setprop ro.boot.wificountrycode 00
+
+service init-elabel-sh /system/bin/init.elabel.sh
+    class late_start
+    user system
+    group system
+    oneshot
 
 service init-radio-sh /vendor/bin/init.radio.sh
     class late_start
