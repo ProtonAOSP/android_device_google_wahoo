@@ -132,3 +132,10 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.vibr
 # Broadcast Radio HAL impl 1.0
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/android.hardware.broadcastradio@1.0-impl.so)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib64/hw/android.hardware.broadcastradio@1.0-impl.so)
+
+# Revert /system/lib[64]/vndk-sp/libz.so
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/SHARED_LIBRARIES/libz.vndk-sp_*)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/symbols/system/lib/vndk-sp/libz.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/symbols/system/lib64/vndk-sp/libz.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib/vndk-sp/libz.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib64/vndk-sp/libz.so)
