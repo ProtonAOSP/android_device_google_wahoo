@@ -502,8 +502,10 @@ on property:sys.boot_completed=1
 on property:init.svc.per_mgr=running
     start per_proxy
 
-on property:sys.shutdown.requested=*
+on shutdown
     stop per_proxy
+    # Disable subsystem restart
+    write /sys/module/subsystem_restart/parameters/disable_restart_work 0x9889deed
 
 service qseecomd /vendor/bin/qseecomd
    class core
