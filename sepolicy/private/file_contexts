@@ -1,1 +1,4 @@
+/system/bin/e2fsdroid		u:object_r:e2fs_exec:s0
+/system/bin/mke2fs		u:object_r:e2fs_exec:s0
+/sys/fs/ext4/features(/.*)?    u:object_r:sysfs_fs_ext4_features:s0
 /system/bin/folio_daemon        u:object_r:folio_daemon_exec:s0
