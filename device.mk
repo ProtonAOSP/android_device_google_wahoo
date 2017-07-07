@@ -591,3 +591,8 @@ endif
 # QC time-daemon to use persist
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.delta_time.enable=true
+
+# Do not drop packets based upon enqueue sequence
+# to avoid freeze
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.radio.DROPSETENABLE=0
