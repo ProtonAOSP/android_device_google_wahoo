@@ -39,6 +39,8 @@
 #define LIGHTS_SUPPORT_BATTERY 0
 #define CG_COLOR_ID_PROPERTY "ro.boot.hardware.color"
 
+#define LP_MODE_BRIGHTNESS_PROPERTY "sys.display.low_persistence_mode_brightness"
+
 static pthread_once_t g_init = PTHREAD_ONCE_INIT;
 static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
 static struct light_state_t g_notification;
@@ -195,8 +197,10 @@ set_light_backlight(struct light_device_t* dev,
                     strerror(errno));
         }
         if (lpEnabled != 0) {
-            // This is defined in BoardConfig.mk.
-            brightness = DEFAULT_LOW_PERSISTENCE_MODE_BRIGHTNESS;
+            // Try to get the brigntess though property, otherwise it will
+            // set the default brightness, which is defined in BoardConfig.mk.
+            brightness = property_get_int32(LP_MODE_BRIGHTNESS_PROPERTY,
+                    DEFAULT_LOW_PERSISTENCE_MODE_BRIGHTNESS);
         }
     }
 
