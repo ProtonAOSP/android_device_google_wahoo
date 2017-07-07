@@ -229,12 +229,6 @@ on post-fs-data
     # We can start netd here before in is launched in common init.rc on zygote-start
     start netd
 
-    # Restart qseecomd once we have /data
-    # qseecomd being started vey early it needs to restarted once /data
-    # is mounted else storing secure content such as fingerprint data
-    # will fail
-    restart qseecomd
-
     # b/38048356 Setup debug folders for camera
     mkdir /data/vendor/camera 0770 camera camera
 
