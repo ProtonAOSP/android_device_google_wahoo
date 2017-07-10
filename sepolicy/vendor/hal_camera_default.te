@@ -11,6 +11,9 @@ binder_call(hal_camera_default, hal_graphics_composer)
 binder_call(hal_camera_default, system_server)
 binder_call(hal_camera_default, hal_graphics_allocator)
 
+# For interfacing with PowerHAL
+hal_client_domain(hal_camera_default, hal_power)
+
 # For camera team debugging
 userdebug_or_eng(`
   allow hal_camera_default camera_vendor_data_file:dir create_dir_perms;

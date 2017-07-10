@@ -31,43 +31,8 @@
 -->
 
 <Powerhint>
-    <Hint type="0x0E00"> <!--preview-->
-        <Resource opcode="0x41400000" value="0x4"  />   <!-- B CPU - above_hispeed_delay of 40 ms -->
-        <Resource opcode="0x41410000" value="0x5F" />   <!-- B CPU - go hispeed load 95 -->
-        <Resource opcode="0x41414000" value="0x22C"/>   <!-- B CPU - hispeed freq of 556 MHz -->
-        <Resource opcode="0x41420000" value="0x5A" />   <!-- B CPU - target load of 90 -->
-        <Resource opcode="0x41400100" value="0x4"  />   <!-- L CPU - above_hispeed_delay of 40 ms -->
-        <Resource opcode="0x41410100" value="0x5F" />   <!-- L CPU - go hispeed load 95 -->
-        <Resource opcode="0x41414100" value="0x22C"/>   <!-- L CPU - hispeed freq of 556 MHz- -->
-        <Resource opcode="0x41420100" value="0x5A" />   <!-- L CPU - target load of 90 -->
-        <Resource opcode="0x41810000" value="0x9C4"/>   <!-- CPUBW low power ceil mpbs of 2500 -->
-        <Resource opcode="0x41814000" value="0x32" />   <!-- CPUBW low power io percent of 50 -->
-    </Hint>
     <Hint type="0x0A00"> <!--video encode 30 fps-->
-        <Resource opcode="0x41400000" value="0x4"  />   <!-- B CPU - above_hispeed_delay of 40 ms -->
-        <Resource opcode="0x41410000" value="0x5F" />   <!-- B CPU - go hispeed load 95 -->
-        <Resource opcode="0x41414000" value="0x326"/>   <!-- B CPU - hispeed freq of 806 MHz -->
-        <Resource opcode="0x41420000" value="0x5A" />   <!-- B CPU - target load of 90 -->
-        <Resource opcode="0x41400100" value="0x4"  />   <!-- L CPU - above_hispeed_delay of 40 ms -->
-        <Resource opcode="0x41410100" value="0x5F" />   <!-- L CPU - go hispeed load 95 -->
-        <Resource opcode="0x41414100" value="0x22C"/>   <!-- L CPU - hispeed freq of 556 MHz- -->
-        <Resource opcode="0x41420100" value="0x5A" />   <!-- L CPU - target load of 90 -->
-        <Resource opcode="0x41810000" value="0x9C4"/>   <!-- CPUBW low power ceil mpbs of 2500 -->
-        <Resource opcode="0x41814000" value="0x32" />   <!-- CPUBW low power io percent of 50 -->
-        <Resource opcode="0x4180C000" value="0x0"  />   <!-- CPUBW disable hysteresis -->
-        <Resource opcode="0x41820000" value="0xA"  />   <!-- CPUBW sample_ms of 10ms -->
-        <Resource opcode="0x41438100" value="0x0"  />   <!-- L CPU - disable ignore_hispeed_notif -->
-        <Resource opcode="0x41438000" value="0x0"  />   <!-- B CPU - disable ignore_hispeed_notif -->
-    </Hint>
-    <Hint type="0x0B00"> <!--video decode-->
-        <Resource opcode="0x41400100" value="0x4"  />   <!-- L CPU - Above Hispeed Delay of 40ms -->
-        <Resource opcode="0x41410100" value="0x5F" />   <!-- L CPU - Go Hispeed Delay of 95 -->
-        <Resource opcode="0x41414100" value="0x2D9"/>   <!-- L CPU - Hispeed Freq of 768 MHz -->
-        <Resource opcode="0x41420100" value="0x5A" />   <!-- L CPU - Target Loads of 90 -->
-        <Resource opcode="0x41400000" value="0x4"  />   <!-- B CPU - Above Hispeed Delay of 40ms -->
-        <Resource opcode="0x41410000" value="0x5F" />   <!-- B CPU - Go Hispeed Load of 95 -->
-        <Resource opcode="0x41414000" value="0x2D9"/>   <!-- B CPU - Hispeed Freq of 729 MHz -->
-        <Resource opcode="0x41420000" value="0x5A" />   <!-- B CPU - Target Load of 90 -->
+        <Resource opcode="0x40804000" value="0x7A6"/>   <!-- B CPU - Cluster max freq ~1.958 Ghz -->
     </Hint>
     <Hint type="0x0F00"> <!--sustained performance-->
         <Resource opcode="0x40800000" value="0x0"/>     <!-- B CPU - Cluster min freq uncapped -->
