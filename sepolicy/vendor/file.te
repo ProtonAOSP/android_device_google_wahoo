@@ -78,3 +78,7 @@ type sysfs_data, fs_type, sysfs_type;
 type sysfs_diag, fs_type, sysfs_type;
 
 type hexagon_halide_file, vendor_file_type, file_type;
+
+# input files
+type idc_file, file_type, vendor_file_type;
+type keylayout_file, file_type, vendor_file_type;
