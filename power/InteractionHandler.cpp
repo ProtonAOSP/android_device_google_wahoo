@@ -148,7 +148,7 @@ void InteractionHandler::Acquire(int32_t duration) {
 
     struct timespec cur_timespec;
     clock_gettime(CLOCK_MONOTONIC, &cur_timespec);
-    if (finalDuration <= mDurationMs) {
+    if (mState != INTERACTION_STATE_IDLE && finalDuration <= mDurationMs) {
         long long elapsed_time = CalcTimespecDiffMs(mLastTimespec, cur_timespec);
         // don't hint if previous hint's duration covers this hint's duration
         if (elapsed_time <= (mDurationMs - finalDuration)) {
