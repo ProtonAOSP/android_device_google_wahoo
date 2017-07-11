@@ -210,11 +210,11 @@ static int process_video_encode_hint(void *data)
         resource_values = getPowerhint(DEFAULT_VIDEO_ENCODE_HINT_ID, &resources);
         if (resource_values != NULL)
             perform_hint_action(DEFAULT_VIDEO_ENCODE_HINT_ID, resource_values, resources);
-        ALOGI("Video Encode hint start");
+        ALOGD("Video Encode hint start");
         return HINT_HANDLED;
     } else {
         undo_hint_action(DEFAULT_VIDEO_ENCODE_HINT_ID);
-        ALOGI("Video Encode hint stop");
+        ALOGD("Video Encode hint stop");
         return HINT_HANDLED;
     }
     return HINT_NONE;
@@ -233,7 +233,7 @@ static int process_activity_launch_hint(void *data)
         launch_handle = process_boost(launch_handle, duration);
         if (launch_handle > 0) {
             launch_mode = 1;
-            ALOGI("Activity launch hint handled");
+            ALOGD("Activity launch hint handled");
             return HINT_HANDLED;
         } else {
             return HINT_NONE;
