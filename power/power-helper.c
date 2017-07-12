@@ -125,10 +125,10 @@ void power_hint(power_hint_t hint, void *data)
         case POWER_HINT_VSYNC:
         break;
         case POWER_HINT_SUSTAINED_PERFORMANCE:
-            ALOGI("Sustained perf power hint not handled in power_hint_override");
+            ALOGD("Sustained perf power hint not handled in power_hint_override");
             break;
         case POWER_HINT_VR_MODE:
-            ALOGI("VR mode power hint not handled in power_hint_override");
+            ALOGD("VR mode power hint not handled in power_hint_override");
             break;
         case POWER_HINT_INTERACTION:
         {
@@ -164,7 +164,7 @@ void power_set_interactive(int on)
         return;
     }
 
-    ALOGI("Got set_interactive hint");
+    ALOGD("Got set_interactive hint");
 
     if (get_scaling_governor(governor, sizeof(governor)) == -1) {
         ALOGE("Can't obtain scaling governor.");
