@@ -170,8 +170,5 @@ int* getPowerhint(int hint_id, int *params) {
        }
     }
 
-    /*for (int j = 0; j < *params; j++)
-        ALOGI("Powerhal resource again%x = \n", result[j]);*/
-
-       return result;
+    return result;
 }
