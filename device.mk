@@ -207,6 +207,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.videopause.mode=1 \
     persist.radio.sib16_support=1 \
     persist.radio.data_con_rprt=true \
+    persist.radio.always_send_plmn=true \
     persist.rcs.supported=1 \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
 
