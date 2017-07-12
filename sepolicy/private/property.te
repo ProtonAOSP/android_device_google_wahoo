@@ -1,0 +1,2 @@
+# TODO: delete this once it's in common sepolicy.
+type netd_stable_secret_prop, property_type;
