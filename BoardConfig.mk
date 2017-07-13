@@ -119,9 +119,6 @@ BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
 # RenderScript
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
-# Sensors
-USE_SENSOR_MULTI_HAL := true
-
 # wlan
 BOARD_WLAN_DEVICE := qcwcn
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
