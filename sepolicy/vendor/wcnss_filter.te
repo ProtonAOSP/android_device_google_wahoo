@@ -21,5 +21,8 @@ userdebug_or_eng(`
   r_dir_file(wcnss_filter, debugfs_ipc)
 ')
 
+#allow wakelock
+wakelock_use(wcnss_filter)
+
 # allow wcnss to set threads to RT priority
 allow wcnss_filter self:capability sys_nice;
