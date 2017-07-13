@@ -1,2 +1,0 @@
-# TODO: delete this once it's in common sepolicy.
-persist.netd.stable_secret    u:object_r:netd_stable_secret_prop:s0
