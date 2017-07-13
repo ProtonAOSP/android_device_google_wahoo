@@ -13,6 +13,12 @@ userdebug_or_eng(`
   allow wcnss_filter ramdump_vendor_data_file:dir create_dir_perms;
   allow wcnss_filter ramdump_vendor_data_file:file create_file_perms;
   r_dir_file(wcnss_filter, debugfs_ipc)
+
+  allow wcnss_filter bluetooth_data_file:dir search;
+  allow wcnss_filter bluetooth_logs_data_file:dir rw_dir_perms;
+  allow wcnss_filter bluetooth_logs_data_file:file create_file_perms;
+
+  r_dir_file(wcnss_filter, debugfs_ipc)
 ')
 
 # allow wcnss to set threads to RT priority
