@@ -601,3 +601,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # to avoid freeze
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.DROPSETENABLE=0
+
+# Enable CameraHAL perfd usage
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.perfd.enable=true
