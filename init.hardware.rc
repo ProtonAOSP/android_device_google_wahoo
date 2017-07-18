@@ -689,6 +689,18 @@ service loc_launcher /vendor/bin/loc_launcher
 service pd_mapper /vendor/bin/pd-mapper
      class core
 
+service atfwd /vendor/bin/ATFWD-daemon
+    class late_start
+    user system
+    group system radio
+    disabled
+
+on property:persist.radio.atfwd.start=true
+    start atfwd
+
+on property:persist.radio.atfwd.start=false
+    stop atfwd
+
 # bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/dumpstate -d -p -B -z \
         -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
