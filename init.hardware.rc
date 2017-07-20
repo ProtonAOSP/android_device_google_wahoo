@@ -440,6 +440,9 @@ on boot
     # default country code
     setprop ro.boot.wificountrycode 00
 
+    # Make the ftm4 command node writeable from dumpstate
+    chown system system /sys/devices/virtual/input/ftm4_touch/cmd
+
 service init-elabel-sh /system/bin/init.elabel.sh
     class late_start
     user system
