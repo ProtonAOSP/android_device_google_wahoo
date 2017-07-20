@@ -193,8 +193,8 @@
     <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
 
     <!-- Integer thresholds, do not connect to APs with RSSI lower than these values  -->
-    <integer translatable="false" name="config_wifi_framework_wifi_score_bad_rssi_threshold_5GHz">-82</integer>
-    <integer translatable="false" name="config_wifi_framework_wifi_score_bad_rssi_threshold_24GHz">-85</integer>
+    <integer translatable="false" name="config_wifi_framework_wifi_score_bad_rssi_threshold_5GHz">-77</integer>
+    <integer translatable="false" name="config_wifi_framework_wifi_score_bad_rssi_threshold_24GHz">-80</integer>
 
 
     <!-- Vibrator pattern for feedback about a long screen/key press -->
