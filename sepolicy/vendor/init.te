@@ -12,5 +12,6 @@ allow init persist_file:dir mounton;
 
 allow init ab_block_device:lnk_file relabelto;
 allow init boot_block_device:lnk_file relabelto;
+allow init persist_block_device:lnk_file relabelto;
 
 dontaudit init kernel:system module_request;
