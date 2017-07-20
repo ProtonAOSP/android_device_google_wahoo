@@ -1,4 +1,5 @@
 type sysfs_camera, sysfs_type, fs_type;
+type sysfs_console_suspend, sysfs_type, fs_type;
 type sysfs_easel, sysfs_type, fs_type;
 type sysfs_fingerprint, sysfs_type, fs_type;
 type sysfs_graphics, sysfs_type, fs_type;
