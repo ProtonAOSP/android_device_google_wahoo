@@ -24,6 +24,11 @@ on charger
     write /sys/devices/system/cpu/cpu6/online 0
     write /sys/devices/system/cpu/cpu7/online 0
     wait /dev/block/bootdevice
+    # Enable UFS powersaving
+    write /sys/devices/soc/1da4000.ufshc/clkscale_enable 1
+    write /sys/devices/soc/1da4000.ufshc/clkgate_enable 1
+    write /sys/devices/soc/1da4000.ufshc/hibern8_on_idle_enable 1
+    write /sys/module/lpm_levels/parameters/sleep_disabled N
 
 service charger /charger
     class charger
@@ -34,10 +39,11 @@ on early-init
     chmod 0755 /sys/kernel/debug
 
 on init
-    # Disable UFS clk scaling
+    # Disable UFS powersaving
     write /sys/devices/soc/1da4000.ufshc/clkscale_enable 0
     write /sys/devices/soc/1da4000.ufshc/clkgate_enable 0
     write /sys/devices/soc/1da4000.ufshc/hibern8_on_idle_enable 0
+    write /sys/module/lpm_levels/parameters/sleep_disabled Y
 
     # Loading kernel modules in background
     start insmod_sh
@@ -67,8 +73,6 @@ on init
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor "schedutil"
     write /sys/devices/system/cpu/cpufreq/policy4/schedutil/up_rate_limit_us 500
     write /sys/devices/system/cpu/cpufreq/policy4/schedutil/down_rate_limit_us 20000
-
-    start power_sh
 
     # set default schedTune value for foreground/top-app
     write /dev/stune/foreground/schedtune.prefer_idle 1
@@ -141,7 +145,6 @@ on init
     write /sys/module/lpm_levels/system/pwr/pwr-l2-ret/idle_enabled N
     write /sys/module/lpm_levels/system/perf/perf-l2-dynret/idle_enabled N
     write /sys/module/lpm_levels/system/perf/perf-l2-ret/idle_enabled N
-    write /sys/module/lpm_levels/parameters/sleep_disabled N
 
     # b/37682684 Enable suspend clock reporting
     write /sys/kernel/debug/clk/debug_suspend 1
@@ -245,7 +248,7 @@ on post-fs-data
 # zygote need to be started after otapreopt which will be done on post-fs-data
 on zygote-start
     # zygote is started in common init.rc
-    # and now we can continue initialize /data/
+    # and now we can continue to initialize /data/
     mkdir /data/tombstones 0771 system system
     mkdir /tombstones/modem 0771 system system
     mkdir /tombstones/lpass 0771 system system
@@ -456,6 +459,7 @@ service perfd /vendor/bin/perfd
    user root
    group root readproc system
    socket perfd seqpacket 0666 root system
+   disabled
 
 service thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg:-/vendor/etc/thermal-engine.conf}
    class main
@@ -490,11 +494,19 @@ service per_proxy /vendor/bin/pm-proxy
     group system
     disabled
 
+on property:sys.post_boot.parsed=1
+    start perfd
+
 on property:sys.boot_completed=1
-    # Enable UFS clk scaling
+    # Enable power setting and set sys.post_boot.parsed to 1
+    # to start perfd
+    start power_sh
+
+    # Enable UFS powersaving
     write /sys/devices/soc/1da4000.ufshc/clkscale_enable 1
     write /sys/devices/soc/1da4000.ufshc/clkgate_enable 1
     write /sys/devices/soc/1da4000.ufshc/hibern8_on_idle_enable 1
+    write /sys/module/lpm_levels/parameters/sleep_disabled N
 
     # Enable ZRAM on boot_complete
     swapon_all /vendor/etc/fstab.${ro.hardware}

@@ -18,6 +18,7 @@
 
 #include <android/log.h>
 #include <android-base/file.h>
+#include <android-base/properties.h>
 #include <android-base/strings.h>
 #include <utils/Log.h>
 #include "Power.h"
@@ -59,6 +60,11 @@ Return<void> Power::setInteractive(bool interactive)  {
 }
 
 Return<void> Power::powerHint(PowerHint hint, int32_t data) {
+    if (android::base::GetProperty("init.svc.perfd", "") != "running") {
+        ALOGW("perfd is not started");
+        return Void();
+    }
+
     power_hint_t h = static_cast<power_hint_t>(hint);
     if (!isSupportedGovernor()) {
         return Void();
