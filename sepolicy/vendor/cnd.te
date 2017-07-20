@@ -5,8 +5,8 @@ file_type_auto_trans(cnd, socket_device, cnd_socket);
 # cnd is started by init, type transit from init domain to cnd domain
 init_daemon_domain(cnd)
 
-#TODO remove chown fsetid setgid setuid once b/62571088 is resolved
-allow cnd self:capability { chown fsetid setgid setuid net_bind_service };
+allow cnd self:capability { net_bind_service };
+wakelock_use(cnd)
 
 allow cnd self:udp_socket create_socket_perms;
 allowxperm cnd self:udp_socket ioctl SIOCGIFMTU;

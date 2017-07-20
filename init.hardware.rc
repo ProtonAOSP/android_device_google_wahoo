@@ -608,16 +608,10 @@ service imsdatadaemon /vendor/bin/imsdatadaemon
    group system wifi radio inet log
    disabled
 
-on property:sys.ims.QMI_DAEMON_STATUS=1
+on property:vendor.ims.QMI_DAEMON_STATUS=1
    start imsdatadaemon
 
 service ims_rtp_daemon /vendor/bin/ims_rtp_daemon
-   class main
-   user system
-   group radio diag inet log
-   disabled
-
-service imscmservice /vendor/bin/imscmservice
    class main
    user system
    group radio diag inet log
@@ -629,9 +623,8 @@ service imsrcsservice /vendor/bin/imsrcsd
    group radio diag inet log
    disabled
 
-on property:sys.ims.DATA_DAEMON_STATUS=1
+on property:vendor.ims.DATA_DAEMON_STATUS=1
    start ims_rtp_daemon
-   start imscmservice
    start imsrcsservice
 
 service qmuxd /vendor/bin/qmuxd
@@ -639,9 +632,11 @@ service qmuxd /vendor/bin/qmuxd
    user root
    group radio audio bluetooth gps nfc qcom_diag
 
+#TODO evaluate group system once b/62571088 is resolved
 service cnd /vendor/bin/cnd
    class main
-   socket cnd stream 660 root inet
+   user system
+   group inet system wifi radio wakelock
 
 service netmgrd /vendor/bin/netmgrd
     class main
