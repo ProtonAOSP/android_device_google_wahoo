@@ -227,6 +227,12 @@ on post-fs
     # Wait qseecomd started
     wait_for_prop sys.listeners.registered true
 
+on property:sys.user.0.ce_available=true
+    mkdir /data/misc_ce/0/ramoops
+    start ramoops_sh
+
+on property:sys.ramoops.decrypted=true
+    mount pstore pstore /sys/fs/pstore
 
 on property:sys.listeners.registered=true
     # load IPA FWs
@@ -459,6 +465,13 @@ on boot
 
     # default country code
     setprop ro.boot.wificountrycode 00
+
+    # Encrypted ramoops
+    umount /sys/fs/pstore
+    chmod 770 /dev/access-ramoops
+    chown system system /dev/access-ramoops
+    chmod 770 /dev/access-metadata
+    chown system system /dev/access-metadata
 
     # Make the ftm4 command node writeable from dumpstate
     chown system system /sys/devices/virtual/input/ftm4_touch/cmd
@@ -783,3 +796,11 @@ service insmod_sh /vendor/bin/init.insmod.sh
     group root system
     disabled
     oneshot
+
+service ramoops_sh /system/bin/init.ramoops.sh
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
+
