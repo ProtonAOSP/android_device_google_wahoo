@@ -36,8 +36,10 @@
 #include <dlfcn.h>
 #include <stdlib.h>
 
+#define ATRACE_TAG (ATRACE_TAG_POWER | ATRACE_TAG_HAL)
 #define LOG_TAG "QCOM PowerHAL"
 #include <utils/Log.h>
+#include <cutils/trace.h>
 #include <hardware/hardware.h>
 #include <hardware/power.h>
 
@@ -224,7 +226,9 @@ static int process_activity_launch_hint(void *data)
 {
     // boost will timeout in 5s
     int duration = 5000;
+    ATRACE_BEGIN("launch");
     if (sustained_performance_mode || vr_mode) {
+        ATRACE_END();
         return HINT_HANDLED;
     }
 
@@ -234,15 +238,21 @@ static int process_activity_launch_hint(void *data)
         if (launch_handle > 0) {
             launch_mode = 1;
             ALOGD("Activity launch hint handled");
+            ATRACE_INT("launch_lock", 1);
+            ATRACE_END();
             return HINT_HANDLED;
         } else {
+            ATRACE_END();
             return HINT_NONE;
         }
     } else if (data == NULL  && launch_mode == 1) {
         release_request(launch_handle);
+        ATRACE_INT("launch_lock", 0);
         launch_mode = 0;
+        ATRACE_END();
         return HINT_HANDLED;
     }
+    ATRACE_END();
     return HINT_NONE;
 }
 
