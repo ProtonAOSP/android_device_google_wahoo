@@ -5,6 +5,8 @@ app_domain(tango_core)
 allow tango_core persist_file:dir search;
 allow tango_core persist_sensors_file:dir search;
 allow tango_core persist_sensors_file:file { getattr open read };
+allow tango_core shell_data_file:dir search;
+allow tango_core shell_data_file:file { open read };
 allow tango_core qdsp_device:chr_file { ioctl open read };
 allow tango_core vendor_file:file { getattr open read };
 
