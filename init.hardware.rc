@@ -171,13 +171,16 @@ on fs
     chown system system /persist/rfs/msm/adsp
     chmod 0770 /persist/rfs/msm/mpss
     chown system system /persist/rfs/msm/mpss
+    mkdir /persist/rfs/msm/slpi 0770 system system
     chmod 0770 /persist/rfs/mdm
     chmod 0770 /persist/rfs/mdm/adsp
     chown system system /persist/rfs/mdm/adsp
     chmod 0770 /persist/rfs/mdm/mpss
     chown system system /persist/rfs/mdm/mpss
+    mkdir /persist/rfs/mdm/slpi 0770 system system
     chmod 0770 /persist/rfs/mdm/sparrow
     chown system system /persist/rfs/mdm/sparrow
+    mkdir /persist/rfs/mdm/tn 0770 system system
     chmod 0770 /persist/rfs/apq
     chmod 0770 /persist/rfs/apq/gnss
     chmod 0770 /persist/hlos_rfs
