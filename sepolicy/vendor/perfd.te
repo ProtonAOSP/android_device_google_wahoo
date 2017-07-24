@@ -17,6 +17,7 @@ allow perfd cgroup:file r_file_perms;
 allow perfd post_boot_prop:file r_file_perms;
 
 allow perfd proc:file rw_file_perms;
+allow perfd sysfs_clkscale:file r_file_perms;
 allow perfd sysfs_graphics:dir search;
 allow perfd sysfs_graphics:file r_file_perms;
 allow perfd sysfs_soc:dir search;
