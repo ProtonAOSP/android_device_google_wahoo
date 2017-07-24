@@ -202,18 +202,6 @@
         <item>8</item>
     </integer-array>
 
-    <!-- Vibrator pattern for feedback about booting with safe mode disabled -->
-    <integer-array name="config_safeModeDisabledVibePattern">
-        <item>0</item>
-        <item>20</item>
-        <item>150</item>
-        <item>20</item>
-        <item>300</item>
-        <item>20</item>
-        <item>150</item>
-        <item>20</item>
-    </integer-array>
-
     <!-- Make things go fast -->
     <bool name="config_ui_enableFadingMarquee">false</bool>
 
