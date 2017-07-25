@@ -508,6 +508,7 @@ service per_mgr /vendor/bin/pm-service
     user system
     group system
     ioprio rt 4
+    shutdown critical
 
 service per_proxy /vendor/bin/pm-proxy
     class core
@@ -560,6 +561,7 @@ service qseecomd /vendor/bin/qseecomd
    class core
    user root
    group root
+   shutdown critical
 
 service time_daemon /vendor/bin/time_daemon
    class core
@@ -740,6 +742,7 @@ service chre /vendor/bin/chre
     user system
     group system
     socket chre seqpacket 0660 root system
+    shutdown critical
 
 service power_sh /vendor/bin/init.power.sh
     class main
