@@ -153,6 +153,30 @@ static void DumpTouch(int fd) {
     if (!access("/sys/class/input/ftm4_touch", R_OK)) {
         DumpFileToFd(fd, "STM touch firmware config",
                      "/sys/class/input/ftm4_touch/version");
+        RunCommandToFd(fd, "Touch Raw",
+                       {"/vendor/bin/sh", "-c",
+                        "echo get_raw_all_data > /sys/class/input/ftm4_touch/cmd && "
+                        "cat /sys/class/input/ftm4_touch/cmd_result"});
+        RunCommandToFd(fd, "Touch Filtered",
+                       {"/vendor/bin/sh", "-c",
+                        "echo get_filtered_all_data > /sys/class/input/ftm4_touch/cmd && "
+                        "cat /sys/class/input/ftm4_touch/cmd_result"});
+        RunCommandToFd(fd, "Touch Baseline",
+                       {"/vendor/bin/sh", "-c",
+                        "echo get_baseline_all_data > /sys/class/input/ftm4_touch/cmd && "
+                        "cat /sys/class/input/ftm4_touch/cmd_result"});
+        RunCommandToFd(fd, "Touch Strength",
+                       {"/vendor/bin/sh", "-c",
+                        "echo get_strength_all_data > /sys/class/input/ftm4_touch/cmd && "
+                        "cat /sys/class/input/ftm4_touch/cmd_result"});
+        RunCommandToFd(fd, "Touch Raw Self-Capacitance",
+                       {"/vendor/bin/sh", "-c",
+                        "echo run_self_raw_read_all > /sys/class/input/ftm4_touch/cmd && "
+                        "cat /sys/class/input/ftm4_touch/cmd_result"});
+        RunCommandToFd(fd, "Touch Ix Data",
+                       {"/vendor/bin/sh", "-c",
+                        "echo run_ix_data_read_all > /sys/class/input/ftm4_touch/cmd && "
+                        "cat /sys/class/input/ftm4_touch/cmd_result"});
     }
 }
 
