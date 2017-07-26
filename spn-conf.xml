@@ -54,28 +54,28 @@
     <spnOverride numeric="40554" spn="airtel"/>
     <spnOverride numeric="40555" spn="airtel"/>
     <spnOverride numeric="40556" spn="airtel"/>
-    <spnOverride numeric="405840" spn="JIO"/>
-    <spnOverride numeric="405854" spn="JIO"/>
-    <spnOverride numeric="405855" spn="JIO"/>
-    <spnOverride numeric="405856" spn="JIO"/>
-    <spnOverride numeric="405857" spn="JIO"/>
-    <spnOverride numeric="405858" spn="JIO"/>
-    <spnOverride numeric="405859" spn="JIO"/>
-    <spnOverride numeric="405860" spn="JIO"/>
-    <spnOverride numeric="405861" spn="JIO"/>
-    <spnOverride numeric="405862" spn="JIO"/>
-    <spnOverride numeric="405863" spn="JIO"/>
-    <spnOverride numeric="405864" spn="JIO"/>
-    <spnOverride numeric="405865" spn="JIO"/>
-    <spnOverride numeric="405866" spn="JIO"/>
-    <spnOverride numeric="405867" spn="JIO"/>
-    <spnOverride numeric="405868" spn="JIO"/>
-    <spnOverride numeric="405869" spn="JIO"/>
-    <spnOverride numeric="405870" spn="JIO"/>
-    <spnOverride numeric="405871" spn="JIO"/>
-    <spnOverride numeric="405872" spn="JIO"/>
-    <spnOverride numeric="405873" spn="JIO"/>
-    <spnOverride numeric="405874" spn="JIO"/>
+    <spnOverride numeric="405840" spn="JIO 4G"/>
+    <spnOverride numeric="405854" spn="JIO 4G"/>
+    <spnOverride numeric="405855" spn="JIO 4G"/>
+    <spnOverride numeric="405856" spn="JIO 4G"/>
+    <spnOverride numeric="405857" spn="JIO 4G"/>
+    <spnOverride numeric="405858" spn="JIO 4G"/>
+    <spnOverride numeric="405859" spn="JIO 4G"/>
+    <spnOverride numeric="405860" spn="JIO 4G"/>
+    <spnOverride numeric="405861" spn="JIO 4G"/>
+    <spnOverride numeric="405862" spn="JIO 4G"/>
+    <spnOverride numeric="405863" spn="JIO 4G"/>
+    <spnOverride numeric="405864" spn="JIO 4G"/>
+    <spnOverride numeric="405865" spn="JIO 4G"/>
+    <spnOverride numeric="405866" spn="JIO 4G"/>
+    <spnOverride numeric="405867" spn="JIO 4G"/>
+    <spnOverride numeric="405868" spn="JIO 4G"/>
+    <spnOverride numeric="405869" spn="JIO 4G"/>
+    <spnOverride numeric="405870" spn="JIO 4G"/>
+    <spnOverride numeric="405871" spn="JIO 4G"/>
+    <spnOverride numeric="405872" spn="JIO 4G"/>
+    <spnOverride numeric="405873" spn="JIO 4G"/>
+    <spnOverride numeric="405874" spn="JIO 4G"/>
     <spnOverride numeric="42507" spn="HOT mobile"/>
     <spnOverride numeric="42508" spn="Golan Telecom"/>
     <spnOverride numeric="42510" spn="Orange-IL"/>
