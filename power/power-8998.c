@@ -224,8 +224,8 @@ static int process_video_encode_hint(void *data)
 
 static int process_activity_launch_hint(void *data)
 {
-    // boost will timeout in 5s
-    int duration = 5000;
+    // boost will timeout in 1.25s
+    int duration = 1250;
     ATRACE_BEGIN("launch");
     if (sustained_performance_mode || vr_mode) {
         ATRACE_END();
@@ -233,7 +233,9 @@ static int process_activity_launch_hint(void *data)
     }
 
     ALOGD("LAUNCH HINT: %s", data ? "ON" : "OFF");
-    if (data && launch_mode == 0) {
+    // restart the launch hint if the framework has not yet released
+    // this shouldn't happen, but we've seen bugs where it could
+    if (data) {
         launch_handle = process_boost(launch_handle, duration);
         if (launch_handle > 0) {
             launch_mode = 1;
@@ -246,7 +248,9 @@ static int process_activity_launch_hint(void *data)
             return HINT_NONE;
         }
     } else if (data == NULL  && launch_mode == 1) {
-        release_request(launch_handle);
+        // framework release hints aren't necessarily reliable
+        // always wait the full duration
+        // release_request(launch_handle);
         ATRACE_INT("launch_lock", 0);
         launch_mode = 0;
         ATRACE_END();
