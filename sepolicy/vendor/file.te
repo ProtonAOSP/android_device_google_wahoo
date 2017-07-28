@@ -84,3 +84,6 @@ type hexagon_halide_file, vendor_file_type, file_type;
 # input files
 type idc_file, file_type, vendor_file_type;
 type keylayout_file, file_type, vendor_file_type;
+
+# Battery Stats file
+typeattribute sysfs_batteryinfo mlstrustedobject;
