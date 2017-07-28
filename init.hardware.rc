@@ -461,7 +461,7 @@ on boot
 
     # Allow system to write to cycle_count_id to iterate and get stats
     chown system system /sys/class/power_supply/bms/cycle_count_id
-    chmod 0660 /sys/class/power_supply/bms/cycle_count_id
+    chmod 0666 /sys/class/power_supply/bms/cycle_count_id
 
     # default country code
     setprop ro.boot.wificountrycode 00
