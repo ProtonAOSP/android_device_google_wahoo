@@ -603,3 +603,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Enable CameraHAL perfd usage
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.perfd.enable=true
+
+# Preopt SystemUI
+PRODUCT_DEXPREOPT_SPEED_APPS += \
+    SystemUIGoogle
