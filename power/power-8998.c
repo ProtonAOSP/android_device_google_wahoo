@@ -204,7 +204,7 @@ static int process_video_encode_hint(void *data)
 
     if (data) {
         // TODO: remove the launch boost based on camera launch time
-        int duration = 1500; // boosts 1.5s for starting encoding
+        int duration = 2000; // boosts 2s for starting encoding
         boost_handle = process_boost(boost_handle, duration);
         ALOGD("LAUNCH ENCODER-ON: %d MS", duration);
         int *resource_values = NULL;
