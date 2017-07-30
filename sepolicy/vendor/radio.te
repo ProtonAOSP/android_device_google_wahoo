@@ -13,7 +13,6 @@ allow radio vnd_ims_radio_hwservice:hwservice_manager find;
 allow radio vnd_qcrilhook_hwservice:hwservice_manager find;
 allow radio hal_imsrtp_hwservice:hwservice_manager find;
 
-add_service(radio, radio_service)
 allow radio {
   mediaextractor_service
   mediacodec_service
