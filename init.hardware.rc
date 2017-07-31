@@ -336,8 +336,9 @@ on zygote-start
     chmod 2770 /data/system/perfd
 
     # Setup sensors-related directories and permissions
+    mkdir /persist/sensors 0775
     chown root system /persist/sensors
-    chmod 775 /persist/sensors
+    write /persist/sensors/sensors_settings 1
     chown root system /persist/sensors/sensors_settings
     chmod 664 /persist/sensors/sensors_settings
     chown root system /persist/sensors/sns.reg
