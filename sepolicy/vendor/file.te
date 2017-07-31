@@ -87,3 +87,8 @@ type keylayout_file, file_type, vendor_file_type;
 
 # Battery Stats file
 typeattribute sysfs_batteryinfo mlstrustedobject;
+
+# msm_irqbalance
+type proc_irq, fs_type;
+type sysfs_irq, fs_type;
+type irqbalance_socket, file_type;

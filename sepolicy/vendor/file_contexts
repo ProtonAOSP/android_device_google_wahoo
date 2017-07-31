@@ -49,6 +49,7 @@
 /dev/socket/ims_datad                           u:object_r:ims_socket:s0
 /dev/socket/ipacm_log_file                      u:object_r:ipacm_socket:s0
 /dev/socket/cnd                                 u:object_r:cnd_socket:s0
+/dev/socket/msm_irqbalance                      u:object_r:irqbalance_socket:s0
 /dev/socket/thermal-send-client                 u:object_r:thermal_socket:s0
 /dev/socket/thermal-recv-client                 u:object_r:thermal_socket:s0
 /dev/socket/thermal-recv-passive-client         u:object_r:thermal_socket:s0
@@ -120,6 +121,7 @@
 /vendor/bin/hw/android\.hardware\.dumpstate@1\.0-service.wahoo      u:object_r:hal_dumpstate_impl_exec:s0
 /vendor/bin/hw/android\.hardware\.vr@1\.0-service.wahoo      u:object_r:hal_vr_default_exec:s0
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service.wahoo u:object_r:hal_fingerprint_default_exec:s0
+/vendor/bin/msm_irqbalance      u:object_r:irqbalance_exec:s0
 /vendor/bin/perfd               u:object_r:perfd_exec:s0
 /vendor/bin/thermal-engine      u:object_r:thermal-engine_exec:s0
 /vendor/bin/sensors.qcom        u:object_r:sensors_exec:s0
