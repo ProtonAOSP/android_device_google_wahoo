@@ -1,1 +1,7 @@
+<<<<<<< HEAD
 sys.ramoops.decrypted         u:object_r:ramoops_prop:s0
+=======
+# TODO: delete this once it's in common sepolicy.
+persist.netd.stable_secret    u:object_r:netd_stable_secret_prop:s0
+sys.ramoops.                  u:object_r:ramoops_prop:s0
+>>>>>>> 9ed253d... ramoops: remount pstore even if decryption fails
