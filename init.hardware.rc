@@ -410,6 +410,7 @@ on early-boot
     chown system system /sys/class/leds/vibrator/device/ctrl_loop
     chown system system /sys/class/leds/vibrator/device/ol_lra_period
     chown system system /sys/class/leds/vibrator/device/autocal
+    chown system system /sys/class/leds/vibrator/device/lp_trigger_effect
 
     # Permission for LED driver
     chown system system /sys/class/leds/red/on_off_ms
