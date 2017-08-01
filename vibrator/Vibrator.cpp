@@ -63,7 +63,7 @@ using EffectStrength = ::android::hardware::vibrator::V1_0::EffectStrength;
 Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration,
         std::ofstream&& state, std::ofstream&& rtpinput,
         std::ofstream&& mode, std::ofstream&& sequencer,
-        std::ofstream&& scale, std::ofstream&& ctrlloop) :
+        std::ofstream&& scale, std::ofstream&& ctrlloop, std::ofstream&& lptrigger) :
     mActivate(std::move(activate)),
     mDuration(std::move(duration)),
     mState(std::move(state)),
@@ -71,10 +71,18 @@ Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration,
     mMode(std::move(mode)),
     mSequencer(std::move(sequencer)),
     mScale(std::move(scale)),
-    mCtrlLoop(std::move(ctrlloop)) {
+    mCtrlLoop(std::move(ctrlloop)),
+    mLpTriggerEffect(std::move(lptrigger)) {
 
     mClickDuration = property_get_int32("ro.vibrator.hal.click.duration", WAVEFORM_CLICK_EFFECT_MS);
     mTickDuration = property_get_int32("ro.vibrator.hal.tick.duration", WAVEFORM_TICK_EFFECT_MS);
+
+    // This enables effect #1 from the waveform library to be triggered by SLPI
+    // while the AP is in suspend mode
+    mLpTriggerEffect << 1 << std::endl;
+    if (!mLpTriggerEffect) {
+        ALOGW("Failed to set LP trigger mode (%d): %s", errno, strerror(errno));
+    }
 }
 
 Return<Status> Vibrator::on(uint32_t timeoutMs, bool forceOpenLoop, bool isWaveform) {
