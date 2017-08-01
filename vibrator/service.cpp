@@ -39,6 +39,7 @@ static constexpr char MODE_PATH[] = "/sys/class/leds/vibrator/device/mode";
 static constexpr char SEQUENCER_PATH[] = "/sys/class/leds/vibrator/device/set_sequencer";
 static constexpr char SCALE_PATH[] = "/sys/class/leds/vibrator/device/scale";
 static constexpr char CTRL_LOOP_PATH[] = "/sys/class/leds/vibrator/device/ctrl_loop";
+static constexpr char LP_TRIGGER_PATH[] = "/sys/class/leds/vibrator/device/lp_trigger_effect";
 
 // File path to the calibration file
 static constexpr char CALIBRATION_FILEPATH[] = "/persist/haptics/drv2624.cal";
@@ -178,13 +179,19 @@ status_t registerVibratorService() {
         ALOGW("Failed to open %s (%d): %s", CTRL_LOOP_PATH, error, strerror(error));
     }
 
+    std::ofstream lptrigger{LP_TRIGGER_PATH};
+    if (!lptrigger) {
+        int error = errno;
+        ALOGW("Failed to open %s (%d): %s", LP_TRIGGER_PATH, error, strerror(error));
+    }
+
     if (!loadCalibrationData()) {
         ALOGW("Failed load calibration data");
     }
 
     sp<IVibrator> vibrator = new Vibrator(std::move(activate), std::move(duration),
             std::move(state), std::move(rtpinput), std::move(mode),
-            std::move(sequencer), std::move(scale), std::move(ctrlloop));
+            std::move(sequencer), std::move(scale), std::move(ctrlloop), std::move(lptrigger));
 
     vibrator->registerAsService();
 
