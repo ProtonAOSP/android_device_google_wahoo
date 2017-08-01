@@ -515,13 +515,6 @@ service thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg:-/ven
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
 
-service msm_irqbalance /vendor/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.conf
-    socket msm_irqbalance seqpacket 660 root system
-    class core
-    user root
-    group root
-    writepid /dev/cpuset/system-background/tasks
-
 on property:persist.sys.ssr.restart_level=*
     start ssr_setup
 
