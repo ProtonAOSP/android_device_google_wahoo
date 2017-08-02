@@ -484,6 +484,9 @@ on boot
     # Make the ftm4 command node writeable from dumpstate
     chown system system /sys/devices/virtual/input/ftm4_touch/cmd
 
+    # ftm4 VR mode
+    chown system system /sys/devices/virtual/input/ftm4_touch/vrmode
+
 service init-elabel-sh /system/bin/init.elabel.sh
     class late_start
     user system
