@@ -1,3 +1,4 @@
+# TODO: genfs doesn't apply correctly to linked files (b/64270911)
 genfscon proc /debug/fwdump                           u:object_r:proc_wifi_dbg:s0
 genfscon proc /debugdriver/driverdump                 u:object_r:proc_wifi_dbg:s0
 genfscon proc /ath_pktlog/cld                         u:object_r:proc_wifi_dbg:s0
@@ -15,7 +16,6 @@ genfscon sysfs /devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:0 u:object_r:s
 
 genfscon sysfs /class/rfkill/rfkill0/state            u:object_r:sysfs_bluetooth_writable:s0
 
-genfscon sysfs /class/thermal                                           u:object_r:sysfs_thermal:s0
 genfscon sysfs /class/uio                                               u:object_r:sysfs_uio:s0
 genfscon sysfs /devices/soc/1da4000.ufshc/clkscale_enable               u:object_r:sysfs_clkscale:s0
 genfscon sysfs /devices/soc/soc:bt_wcn3990                              u:object_r:sysfs_bluetooth_writable:s0
