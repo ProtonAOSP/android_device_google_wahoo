@@ -233,6 +233,12 @@ on property:sys.user.0.ce_available=true
 
 on property:sys.ramoops.decrypted=true
     mount pstore pstore /sys/fs/pstore
+    chown system log /sys/fs/pstore/console-ramoops
+    chmod 0440 /sys/fs/pstore/console-ramoops
+    chown system log /sys/fs/pstore/console-ramoops-0
+    chmod 0440 /sys/fs/pstore/console-ramoops-0
+    chown system log /sys/fs/pstore/pmsg-ramoops-0
+    chmod 0440 /sys/fs/pstore/pmsg-ramoops-0
 
 on property:sys.listeners.registered=true
     # load IPA FWs
@@ -336,8 +342,9 @@ on zygote-start
     chmod 2770 /data/system/perfd
 
     # Setup sensors-related directories and permissions
+    mkdir /persist/sensors 0775
     chown root system /persist/sensors
-    chmod 775 /persist/sensors
+    write /persist/sensors/sensors_settings 1
     chown root system /persist/sensors/sensors_settings
     chmod 664 /persist/sensors/sensors_settings
     chown root system /persist/sensors/sns.reg
@@ -404,6 +411,7 @@ on early-boot
     chown system system /sys/class/leds/vibrator/device/ctrl_loop
     chown system system /sys/class/leds/vibrator/device/ol_lra_period
     chown system system /sys/class/leds/vibrator/device/autocal
+    chown system system /sys/class/leds/vibrator/device/lp_trigger_effect
 
     # Permission for LED driver
     chown system system /sys/class/leds/red/on_off_ms
@@ -475,6 +483,9 @@ on boot
 
     # Make the ftm4 command node writeable from dumpstate
     chown system system /sys/devices/virtual/input/ftm4_touch/cmd
+
+    # ftm4 VR mode
+    chown system system /sys/devices/virtual/input/ftm4_touch/vrmode
 
 service init-elabel-sh /system/bin/init.elabel.sh
     class late_start

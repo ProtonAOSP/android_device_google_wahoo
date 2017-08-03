@@ -153,6 +153,8 @@ static void DumpTouch(int fd) {
     if (!access("/sys/class/input/ftm4_touch", R_OK)) {
         DumpFileToFd(fd, "STM touch firmware config",
                      "/sys/class/input/ftm4_touch/version");
+        DumpFileToFd(fd, "STM touch VR Mode",
+                     "/sys/class/input/ftm4_touch/vrmode");
     }
 }
 

@@ -32,7 +32,7 @@ public:
     Vibrator(std::ofstream&& activate, std::ofstream&& duration,
             std::ofstream&& state, std::ofstream&& rtpinput,
             std::ofstream&& mode, std::ofstream&& sequencer,
-            std::ofstream&& scale, std::ofstream&& ctrlloop);
+            std::ofstream&& scale, std::ofstream&& ctrlloop, std::ofstream&& lptrigger);
 
     // Methods from ::android::hardware::vibrator::V1_0::IVibrator follow.
     using Status = ::android::hardware::vibrator::V1_0::Status;
@@ -56,6 +56,7 @@ private:
     std::ofstream mSequencer;
     std::ofstream mScale;
     std::ofstream mCtrlLoop;
+    std::ofstream mLpTriggerEffect;
     int32_t mClickDuration;
     int32_t mTickDuration;
 };
