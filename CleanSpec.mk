@@ -139,3 +139,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/symbols/system/lib/vndk-sp/libz.so)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/symbols/system/lib64/vndk-sp/libz.so)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib/vndk-sp/libz.so)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib64/vndk-sp/libz.so)
+
+# Remove eSIM OTA image
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app/EuiccGoogle/esim.img)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app/EuiccGoogle/esim2.img)
