@@ -48,8 +48,8 @@ Return<void> VrDevice::setVrMode(bool enabled) {
     if (!android::base::SetProperty("ctl.restart", "thermal-engine")) {
         LOG(ERROR) << "Couldn't set thermal_engine restart property";
     }
-    if (!access("/sys/class/input/ftm4_touch", R_OK)) {
-        FILE *f = fopen("/sys/class/input/ftm4_touch/vrmode", "w");
+    if (!access("/sys/devices/virtual/input/ftm4_touch/vrmode", W_OK)) {
+        FILE *f = fopen("/sys/devices/virtual/input/ftm4_touch/vrmode", "w");
         if (f) {
             fprintf(f, "%d", (enabled ? 1 : 0));
             fclose(f);
