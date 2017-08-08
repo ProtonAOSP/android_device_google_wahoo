@@ -180,10 +180,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196610
 
-# NFC/camera interaction workaround - DO NOT COPY TO NEW DEVICES
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.camera.notify_nfc=1
-
 # Enable camera EIS3.0
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.is_type=5 \
