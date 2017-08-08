@@ -597,7 +597,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Do not drop packets based upon enqueue sequence
 # to avoid freeze
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.DROPSETENABLE=0
+    persist.vendor.ims.dropset_feature=0
 
 # Enable CameraHAL perfd usage
 PRODUCT_PROPERTY_OVERRIDES += \
