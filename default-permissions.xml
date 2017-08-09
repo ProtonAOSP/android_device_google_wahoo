@@ -52,12 +52,6 @@
     </exception>
 
     <exception
-            package="com.google.android.soundpicker">
-        <!-- External storage -->
-        <permission name="android.permission.READ_EXTERNAL_STORAGE" fixed="false"/>
-    </exception>
-
-    <exception
             package="com.verizon.mips.services">
         <!-- Phone -->
         <permission name="android.permission.READ_PHONE_STATE" fixed="false"/>
