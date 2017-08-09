@@ -33,4 +33,10 @@
     <signer signature="@EASEL" >
       <seinfo value="easel" />
     </signer>
+    <signer signature="@ARCORE" >
+      <seinfo value="arcore" />
+    </signer>
+    <signer signature="@ARCORE_DEV" >
+      <seinfo value="arcore" />
+    </signer>
 </policy>

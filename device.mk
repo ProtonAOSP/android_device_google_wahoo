@@ -180,10 +180,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196610
 
-# NFC/camera interaction workaround - DO NOT COPY TO NEW DEVICES
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.camera.notify_nfc=1
-
 # Enable camera EIS3.0
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.is_type=5 \
@@ -601,7 +597,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Do not drop packets based upon enqueue sequence
 # to avoid freeze
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.DROPSETENABLE=0
+    persist.vendor.ims.dropset_feature=0
 
 # Enable CameraHAL perfd usage
 PRODUCT_PROPERTY_OVERRIDES += \

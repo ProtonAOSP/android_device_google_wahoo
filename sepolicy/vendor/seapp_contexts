@@ -11,9 +11,8 @@ user=system seinfo=platform name=com.qualcomm.telephony domain=qtelephony type=s
 user=system seinfo=platform name=.dataservices domain=dataservice_app type=system_app_data_file
 
 # The default domain for tango_core / arcore process
-user=_app seinfo=tango name=com.google.tango domain=tango_core type=app_data_file levelFrom=user
-user=_app seinfo=tango name=com.google.tango.* domain=tango_core type=app_data_file levelFrom=user
-user=_app seinfo=tango name=com.google.arcore* domain=tango_core type=app_data_file levelFrom=user
+user=_app seinfo=tango name=com.google.tango* domain=tango_core type=app_data_file levelFrom=user
+user=_app seinfo=arcore name=com.google.ar.core* domain=tango_core type=app_data_file levelFrom=user
 
 # A fallback in case tango_core is missing something critical that untrusted_app provides
 user=_app seinfo=tango name=com.google.tango:app domain=untrusted_app type=app_data_file levelFrom=user
