@@ -183,7 +183,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Enable camera EIS3.0
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.is_type=5 \
-    persist.camera.gzoom.at=0
+    persist.camera.gzoom.at=0 \
+    persist.camera.llv.fuse=2
 
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
