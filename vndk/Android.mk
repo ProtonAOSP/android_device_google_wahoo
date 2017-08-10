@@ -5,11 +5,8 @@ VNDK_SP_LIBRARIES := \
     libRS_internal\
     libRSDriver\
     libRSCpuRef\
-    libbcinfo\
-    libblas\
     libft2\
     libpng\
-    libcompiler_rt\
 
 ifndef BOARD_VNDK_VERSION
 VNDK_SP_LIBRARIES += \
@@ -29,6 +26,9 @@ VNDK_SP_LIBRARIES += \
     libhidlbase\
     libhidltransport\
     libz\
+    libbcinfo\
+    libblas\
+    libcompiler_rt\
 
 endif
 
