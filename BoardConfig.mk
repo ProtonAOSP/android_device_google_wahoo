@@ -84,6 +84,7 @@ BOARD_ROOT_EXTRA_FOLDERS := persist firmware metadata
 BOARD_SEPOLICY_DIRS += device/google/wahoo/sepolicy/vendor
 BOARD_PLAT_PUBLIC_SEPOLICY_DIR := device/google/wahoo/sepolicy/public
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR := device/google/wahoo/sepolicy/private
+BOARD_SEPOLICY_DIRS += device/google/wahoo/sepolicy/verizon
 
 TARGET_ANDROID_FILESYSTEM_CONFIG_H := device/google/wahoo/android_filesystem_config.h
 
