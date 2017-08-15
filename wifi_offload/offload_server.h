@@ -41,11 +41,9 @@ class OffloadServer {
     void clearEventCallback();
 
   private:
-    void invokeErrorCallbackAndResetIfNeeded(
-        const android::hardware::wifi::offload::V1_0::OffloadStatus& status);
+    void invokeErrorCallback(const android::hardware::wifi::offload::V1_0::OffloadStatus& status);
     void handleScanResult(const std::vector<uint8_t>& message);
     void handleScanStats(const std::vector<uint8_t>& message);
-    void resetNanoApp();
 
     ScanStats mScanStats;
     std::mutex mScanStatsLock;

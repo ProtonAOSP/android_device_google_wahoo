@@ -93,17 +93,6 @@ OffloadStatus OffloadServer::subscribeScanResults(uint32_t delayMs) {
     return createOffloadStatus(OffloadStatusCode::OK);
 }
 
-void OffloadServer::resetNanoApp() {
-    LOG(INFO) << "resetting Nano app";
-    if (!mChreInterface->isConnected()) {
-        LOG(WARNING) << "Unable to reset nano app, not connected";
-        return;
-    }
-    if (!mChreInterface->sendCommandToApp(wifi_offload::HostMessageType::HOST_CMD_RESET, {})) {
-        LOG(ERROR) << "Unable to send Reset command to Nano app";
-    }
-}
-
 bool OffloadServer::unsubscribeScanResults() {
     LOG(INFO) << "unsubscribeScanResults";
     if (!mChreInterface->isConnected()) {
@@ -136,10 +125,7 @@ void OffloadServer::clearEventCallback() {
     LOG(INFO) << "Event callback cleared";
 }
 
-void OffloadServer::invokeErrorCallbackAndResetIfNeeded(const OffloadStatus& status) {
-    if (status.code != OffloadStatusCode::OK) {
-        resetNanoApp();
-    }
+void OffloadServer::invokeErrorCallback(const OffloadStatus& status) {
     std::lock_guard<std::mutex> lock(mOffloadLock);
     if (mEventCallback != nullptr) {
         mEventCallback->onError(status);
@@ -158,13 +144,12 @@ void ChreInterfaceCallbacksImpl::handleConnectionEvents(
         case ChreInterfaceCallbacks::ConnectionEvent::DISCONNECTED:
         case ChreInterfaceCallbacks::ConnectionEvent::CONNECTION_ABORT: {
             LOG(ERROR) << "Connection to socket lost";
-            mServer->invokeErrorCallbackAndResetIfNeeded(
+            mServer->invokeErrorCallback(
                 createOffloadStatus(OffloadStatusCode::NO_CONNECTION, "Connection to socket lost"));
         } break;
         case ChreInterfaceCallbacks::ConnectionEvent::CONNECTED: {
             LOG(INFO) << "Connected to socket";
-            mServer->invokeErrorCallbackAndResetIfNeeded(
-                createOffloadStatus(OffloadStatusCode::OK));
+            mServer->invokeErrorCallback(createOffloadStatus(OffloadStatusCode::OK));
         } break;
         default:
             LOG(WARNING) << "Invalid connection event received " << (int)event;
@@ -177,13 +162,13 @@ void OffloadServer::handleScanResult(const std::vector<uint8_t>& message) {
     std::vector<ScanResult> hidlScanResults;
     std::string errorMessage;
     if (!wifi_offload::fbs::Deserialize((uint8_t*)message.data(), message.size(), &scanResults)) {
-        invokeErrorCallbackAndResetIfNeeded(
+        invokeErrorCallback(
             createOffloadStatus(OffloadStatusCode::ERROR, "Cannot deserialize scan results"));
         return;
     }
     if (!offload_utils::ToHidlScanResults(scanResults, &hidlScanResults)) {
-        invokeErrorCallbackAndResetIfNeeded(createOffloadStatus(
-            OffloadStatusCode::ERROR, "Cannot convert scan results to HIDL format"));
+        invokeErrorCallback(createOffloadStatus(OffloadStatusCode::ERROR,
+                                                "Cannot convert scan results to HIDL format"));
         return;
     }
     {
@@ -228,7 +213,7 @@ void ChreInterfaceCallbacksImpl::handleMessage(uint32_t messageType,
             {
                 std::string errorMessage;
                 if (offload_utils::ToHidlErrorMessage(message[0], &errorMessage)) {
-                    mServer->invokeErrorCallbackAndResetIfNeeded(
+                    mServer->invokeErrorCallback(
                         createOffloadStatus(OffloadStatusCode::ERROR, errorMessage));
                 }
             }
