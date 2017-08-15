@@ -532,6 +532,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.vndk.version=26.1.0 \
 
+# Once BOARD_VNDK_VERSION is defined, below packages will not be used
 PRODUCT_PACKAGES += \
     android.hardware.renderscript@1.0.vndk-sp\
     android.hardware.graphics.allocator@2.0.vndk-sp\
@@ -557,6 +558,9 @@ PRODUCT_PACKAGES += \
     libunwind.vndk-sp\
     liblzma.vndk-sp\
     libz.vndk-sp\
+
+# Include vndk/vndk-sp/ll-ndk modules
+PRODUCT_PACKAGES += vndk_package
 
 PRODUCT_ENFORCE_RRO_TARGETS := framework-res
 
