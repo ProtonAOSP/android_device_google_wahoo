@@ -1,13 +1,6 @@
 ifneq ($(filter muskie walleye taimen, $(TARGET_DEVICE)),)
 LOCAL_PATH := $(call my-dir)
 
-VNDK_SP_LIBRARIES := \
-    libRS_internal\
-    libRSDriver\
-    libRSCpuRef\
-    libft2\
-    libpng\
-
 ifndef BOARD_VNDK_VERSION
 VNDK_SP_LIBRARIES += \
     android.hardware.renderscript@1.0\
@@ -30,6 +23,11 @@ VNDK_SP_LIBRARIES += \
     libbcinfo\
     libblas\
     libcompiler_rt\
+    libRS_internal\
+    libRSDriver\
+    libRSCpuRef\
+    libft2\
+    libpng\
 
 endif
 
