@@ -52,14 +52,14 @@ constexpr unsigned int kWalleyeSkinThrottlingThreshold = 40;
 constexpr unsigned int kWalleyeSkinShutdownThreshold = 56;
 constexpr unsigned int kWalleyeVrThrottledBelowMin = 52;
 
-constexpr unsigned int kTaimenRabSkinSensorNum = 7;
-constexpr unsigned int kTaimenRabTsensOffset = 8;
+constexpr unsigned int kTaimenRabSkinSensorNum = 8;
+constexpr unsigned int kTaimenRabTsensOffset = 9;
 constexpr unsigned int kTaimenRabSkinThrottlingThreshold = 49;
 constexpr unsigned int kTaimenRabSkinShutdownThreshold = 66;
 constexpr unsigned int kTaimenRabVrThrottledBelowMin = 62;
 
-constexpr unsigned int kTaimenRcSkinSensorNum = 7;
-constexpr unsigned int kTaimenRcTsensOffset = 8;
+constexpr unsigned int kTaimenRcSkinSensorNum = 8;
+constexpr unsigned int kTaimenRcTsensOffset = 9;
 constexpr unsigned int kTaimenRcSkinThrottlingThreshold = 38;
 constexpr unsigned int kTaimenRcSkinShutdownThreshold = 54;
 constexpr unsigned int kTaimenRcVrThrottledBelowMin = 50;
