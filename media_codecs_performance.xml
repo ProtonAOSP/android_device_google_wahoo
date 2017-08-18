@@ -14,149 +14,138 @@
      limitations under the License.
 -->
 
-<!-- Generated file for wahoo using measurements between OPD1.170619.001 and OPD1.170804.003 -->
+<!-- Generated file for wahoo using measurements between OPD1.170719.001 and OPD1.170816.002 -->
 <MediaCodecs>
     <Encoders>
         <MediaCodec name="OMX.qcom.video.encoder.h263" type="video/3gpp" update="true">
-            <Limit name="measured-frame-rate-176x144" range="401-401" /> <!-- N=346 v98%=1.3 -->
-            <Limit name="measured-frame-rate-352x288" range="424-424" /> <!-- N=346 v98%=1.2 -->
+            <Limit name="measured-frame-rate-176x144" range="396-396" /> <!-- N=232 v98%=1.1 -->
+            <Limit name="measured-frame-rate-352x288" range="421-421" /> <!-- N=232 v98%=1.2 -->
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.encoder.avc" type="video/avc" update="true">
-            <Limit name="measured-frame-rate-320x240" range="431-431" /> <!-- N=346 v98%=1.2 -->
-            <Limit name="measured-frame-rate-720x480" range="169-169" /> <!-- N=344 v98%=1.2 -->
-            <Limit name="measured-frame-rate-1280x720" range="88-88" /> <!-- N=344 v98%=1.2 -->
-            <Limit name="measured-frame-rate-1920x1080" range="32-32" /> <!-- N=228 v98%=1.3 -->
+            <Limit name="measured-frame-rate-320x240" range="428-428" /> <!-- N=232 v98%=1.2 -->
+            <Limit name="measured-frame-rate-720x480" range="166-166" /> <!-- N=232 v98%=1.2 -->
+            <Limit name="measured-frame-rate-1280x720" range="88-88" /> <!-- N=232 v98%=1.1 -->
+            <Limit name="measured-frame-rate-1920x1080" range="31-31" /> <!-- N=224 v98%=1.3 -->
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.encoder.hevc" type="video/hevc" update="true">
-            <Limit name="measured-frame-rate-320x240" range="450-450" /> <!-- N=346 v98%=1.2 -->
-            <Limit name="measured-frame-rate-720x480" range="177-177" /> <!-- N=346 v98%=1.1 -->
-            <Limit name="measured-frame-rate-1280x720" range="124-124" /> <!-- N=346 v98%=1.2 -->
-            <Limit name="measured-frame-rate-1920x1080" range="53-53" /> <!-- N=232 v98%=1.2 -->
-            <Limit name="measured-frame-rate-3840x2160" range="21-21" /> <!-- N=228 v98%=1.2 -->
+            <Limit name="measured-frame-rate-320x240" range="450-450" /> <!-- N=232 v98%=1.2 -->
+            <Limit name="measured-frame-rate-720x480" range="176-176" /> <!-- N=232 v98%=1.1 -->
+            <Limit name="measured-frame-rate-1280x720" range="125-125" /> <!-- N=232 v98%=1.2 -->
+            <Limit name="measured-frame-rate-1920x1080" range="53-53" /> <!-- N=224 v98%=1.1 -->
+            <Limit name="measured-frame-rate-3840x2160" range="21-21" /> <!-- N=224 v98%=1.2 -->
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.encoder.mpeg4" type="video/mp4v-es" update="true">
-            <Limit name="measured-frame-rate-176x144" range="394-394" /> <!-- N=346 v98%=1.3 -->
-            <Limit name="measured-frame-rate-352x288" range="393-393" /> <!-- N=346 v98%=1.2 -->
-            <!-- measured 98%:78-245 med:203/206 FLAKY(mn=75.5 < 78 - 412) -->
-            <Limit name="measured-frame-rate-640x480" range="156-206" /> <!-- N=324 v98%=1.8 -->
+            <Limit name="measured-frame-rate-176x144" range="387-387" /> <!-- N=232 v98%=1.1 -->
+            <Limit name="measured-frame-rate-352x288" range="392-392" /> <!-- N=232 v98%=1.2 -->
+            <!-- measured 98%:94-244 med:189/199 FLAKY(mn=87.8 < 94 - 398) -->
+            <Limit name="measured-frame-rate-640x480" range="187-199" /> <!-- N=232 v98%=1.6 -->
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.encoder.vp8" type="video/x-vnd.on2.vp8" update="true">
-            <Limit name="measured-frame-rate-320x180" range="340-340" /> <!-- N=346 v98%=1.3 -->
-            <Limit name="measured-frame-rate-640x360" range="272-272" /> <!-- N=346 v98%=1.3 -->
-            <Limit name="measured-frame-rate-1280x720" range="85-85" /> <!-- N=346 v98%=1.1 -->
-            <Limit name="measured-frame-rate-1920x1080" range="32-32" /> <!-- N=222 v98%=1.3 -->
+            <Limit name="measured-frame-rate-320x180" range="340-340" /> <!-- N=232 v98%=1.2 -->
+            <Limit name="measured-frame-rate-640x360" range="271-271" /> <!-- N=232 v98%=1.2 -->
+            <Limit name="measured-frame-rate-1280x720" range="83-83" /> <!-- N=232 v98%=1.1 -->
+            <Limit name="measured-frame-rate-1920x1080" range="31-31" /> <!-- N=222 v98%=1.3 -->
         </MediaCodec>
         <MediaCodec name="OMX.google.h263.encoder" type="video/3gpp" update="true">
-            <!-- measured 98%:156-712 med:327/332 FLAKY(mn=90.6 < 156 - 712 < mx=764.5) variance:2.1 -->
-            <Limit name="measured-frame-rate-176x144" range="311-356" /> <!-- N=318 -->
+            <!-- measured 98%:165-554 med:321/324 FLAKY(mn=146.3 < 162 - 648 < mx=749.1) -->
+            <Limit name="measured-frame-rate-176x144" range="292-375" /> <!-- TWEAKED N=230 v98%=1.8 -->
         </MediaCodec>
         <MediaCodec name="OMX.google.h264.encoder" type="video/avc" update="true">
-            <!-- measured 98%:131-345 med:301/301 FLAKY(mn=115.1 < 131 - 602) -->
-            <Limit name="measured-frame-rate-320x240" range="261-301" /> <!-- N=226 v98%=1.6 -->
-            <Limit name="measured-frame-rate-720x480" range="110-110" /> <!-- N=226 v98%=1.4 -->
-            <!-- measured 98%:50-73 med:64/64 FLAKY(mn=20.7 < 32 - 128) -->
-            <Limit name="measured-frame-rate-1280x720" range="64-64" /> <!-- N=226 v98%=1.2 -->
-            <Limit name="measured-frame-rate-1920x1080" range="30-30" /> <!-- N=228 v98%=1.2 -->
+            <!-- measured 98%:149-354 med:303/302 FLAKY(mn=145.6 < 149 - 604) -->
+            <Limit name="measured-frame-rate-320x240" range="298-302" /> <!-- N=222 v98%=1.5 -->
+            <Limit name="measured-frame-rate-720x480" range="111-111" /> <!-- N=224 v98%=1.1 -->
+            <Limit name="measured-frame-rate-1280x720" range="65-65" /> <!-- N=222 v98%=1.2 -->
+            <Limit name="measured-frame-rate-1920x1080" range="30-30" /> <!-- N=224 v98%=1.2 -->
         </MediaCodec>
         <MediaCodec name="OMX.google.mpeg4.encoder" type="video/mp4v-es" update="true">
-            <!-- measured 97%:196-580 med:338/341 FLAKY(mn=91.9 < 171 - 682 < mx=781.3) -->
-            <Limit name="measured-frame-rate-176x144" range="341-341" /> <!-- N=334 v97%=1.7 -->
+            <!-- measured 98%:202-558 med:335/336 FLAKY(168 - 672 < mx=781.3) -->
+            <Limit name="measured-frame-rate-176x144" range="336-391" /> <!-- TWEAKED N=232 v98%=1.7 -->
         </MediaCodec>
         <MediaCodec name="OMX.google.vp8.encoder" type="video/x-vnd.on2.vp8" update="true">
-            <Limit name="measured-frame-rate-320x180" range="71-71" /> <!-- N=228 v98%=1.4 -->
-            <Limit name="measured-frame-rate-640x360" range="45-45" /> <!-- N=228 v98%=1.2 -->
-            <Limit name="measured-frame-rate-1280x720" range="37-37" /> <!-- N=228 v98%=1.0 -->
-            <Limit name="measured-frame-rate-1920x1080" range="23-23" /> <!-- N=228 v98%=1.1 -->
+            <Limit name="measured-frame-rate-320x180" range="74-74" /> <!-- N=224 v98%=1.4 -->
+            <Limit name="measured-frame-rate-640x360" range="45-45" /> <!-- N=224 v98%=1.2 -->
+            <Limit name="measured-frame-rate-1280x720" range="37-37" /> <!-- N=224 v98%=1.0 -->
+            <Limit name="measured-frame-rate-1920x1080" range="23-23" /> <!-- N=224 v98%=1.1 -->
         </MediaCodec>
-        <!-- preliminary estimates -->
         <MediaCodec name="OMX.google.vp9.encoder" type="video/x-vnd.on2.vp9" update="true">
-            <Limit name="measured-frame-rate-320x180" range="142-143" />
-            <Limit name="measured-frame-rate-640x360" range="49-50" />
-            <Limit name="measured-frame-rate-1280x720" range="13-14" />
-            <Limit name="measured-frame-rate-1920x1080" range="6-6" />
+            <!-- measured 95%:202-208 med:206/206 N=32 -->
+            <Limit name="measured-frame-rate-320x180" range="206-206" /> <!-- v95%=1.0 -->
+            <!-- measured 95%:68-70 med:69/69 N=32 -->
+            <Limit name="measured-frame-rate-640x360" range="69-69" /> <!-- v95%=1.0 -->
+            <!-- measured 95%:17-18 med:17/17 N=32 -->
+            <Limit name="measured-frame-rate-1280x720" range="17-17" /> <!-- v95%=1.0 -->
+            <!-- measured 93%:8-9 med:9/9 N=24 -->
+            <Limit name="measured-frame-rate-1920x1080" range="9-9" /> <!-- v93%=1.0 -->
         </MediaCodec>
     </Encoders>
     <Decoders>
         <MediaCodec name="OMX.qcom.video.decoder.h263" type="video/3gpp" update="true">
-            <Limit name="measured-frame-rate-176x144" range="662-662" /> <!-- N=286 v98%=1.4 -->
-            <Limit name="measured-frame-rate-352x288" range="570-570" /> <!-- N=288 v98%=1.4 -->
+            <Limit name="measured-frame-rate-176x144" range="566-566" /> <!-- N=198 v98%=1.4 -->
+            <Limit name="measured-frame-rate-352x288" range="489-489" /> <!-- N=198 v98%=1.3 -->
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.decoder.avc" type="video/avc" update="true">
-            <Limit name="measured-frame-rate-320x240" range="347-347" /> <!-- N=184 v98%=1.4 -->
-            <Limit name="measured-frame-rate-720x480" range="311-311" /> <!-- N=200 v98%=1.3 -->
-            <Limit name="measured-frame-rate-1280x720" range="253-253" /> <!-- N=182 v98%=1.2 -->
-            <Limit name="measured-frame-rate-1920x1080" range="150-150" /> <!-- N=182 v98%=1.2 -->
+            <Limit name="measured-frame-rate-320x240" range="344-344" /> <!-- N=188 v98%=1.4 -->
+            <Limit name="measured-frame-rate-720x480" range="305-305" /> <!-- N=190 v98%=1.2 -->
+            <Limit name="measured-frame-rate-1280x720" range="248-248" /> <!-- N=186 v98%=1.3 -->
+            <Limit name="measured-frame-rate-1920x1080" range="149-149" /> <!-- N=184 v98%=1.2 -->
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.decoder.hevc" type="video/hevc" update="true">
-            <Limit name="measured-frame-rate-352x288" range="347-347" /> <!-- N=182 v98%=1.4 -->
-            <Limit name="measured-frame-rate-640x360" range="330-330" /> <!-- N=194 v98%=1.3 -->
-            <Limit name="measured-frame-rate-720x480" range="317-317" /> <!-- N=206 v98%=1.3 -->
-            <Limit name="measured-frame-rate-1280x720" range="271-271" /> <!-- N=290 v98%=1.2 -->
-            <Limit name="measured-frame-rate-1920x1080" range="260-260" /> <!-- N=182 v98%=1.0 -->
-            <Limit name="measured-frame-rate-3840x2160" range="71-71" /> <!-- N=182 v98%=1.0 -->
+            <Limit name="measured-frame-rate-352x288" range="343-343" /> <!-- N=186 v98%=1.3 -->
+            <Limit name="measured-frame-rate-640x360" range="324-324" /> <!-- N=186 v98%=1.2 -->
+            <Limit name="measured-frame-rate-720x480" range="310-310" /> <!-- N=190 v98%=1.3 -->
+            <Limit name="measured-frame-rate-1280x720" range="267-267" /> <!-- N=198 v98%=1.3 -->
+            <Limit name="measured-frame-rate-1920x1080" range="259-259" /> <!-- N=186 v98%=1.0 -->
+            <Limit name="measured-frame-rate-3840x2160" range="71-71" /> <!-- N=186 v98%=1.0 -->
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.decoder.mpeg4" type="video/mp4v-es" update="true">
-            <Limit name="measured-frame-rate-176x144" range="541-541" /> <!-- N=290 v98%=1.4 -->
-            <Limit name="measured-frame-rate-480x360" range="287-320" /> <!-- N=190 v98%=1.7 -->
+            <Limit name="measured-frame-rate-176x144" range="460-460" /> <!-- N=198 v98%=1.3 -->
+            <Limit name="measured-frame-rate-480x360" range="384-421" /> <!-- N=186 v98%=1.7 -->
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.decoder.vp8" type="video/x-vnd.on2.vp8" update="true">
-            <Limit name="measured-frame-rate-320x180" range="426-426" /> <!-- N=182 v98%=1.4 -->
-            <Limit name="measured-frame-rate-640x360" range="429-429" /> <!-- N=200 v98%=1.4 -->
-            <Limit name="measured-frame-rate-1280x720" range="313-313" /> <!-- N=182 v98%=1.2 -->
-            <Limit name="measured-frame-rate-1920x1080" range="146-146" /> <!-- N=182 v98%=1.3 -->
+            <Limit name="measured-frame-rate-320x180" range="415-415" /> <!-- N=186 v98%=1.3 -->
+            <Limit name="measured-frame-rate-640x360" range="414-414" /> <!-- N=188 v98%=1.3 -->
+            <Limit name="measured-frame-rate-1280x720" range="310-310" /> <!-- N=186 v98%=1.2 -->
+            <Limit name="measured-frame-rate-1920x1080" range="145-145" /> <!-- N=186 v98%=1.2 -->
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.decoder.vp9" type="video/x-vnd.on2.vp9" update="true">
-            <Limit name="measured-frame-rate-320x180" range="368-368" /> <!-- N=186 v98%=1.4 -->
-            <Limit name="measured-frame-rate-640x360" range="359-359" /> <!-- N=184 v98%=1.3 -->
-            <Limit name="measured-frame-rate-1280x720" range="274-274" /> <!-- N=182 v98%=1.2 -->
-            <Limit name="measured-frame-rate-1920x1080" range="154-154" /> <!-- N=182 v98%=1.3 -->
-            <Limit name="measured-frame-rate-3840x2160" range="36-38" /> <!-- N=182 v98%=1.3 -->
+            <Limit name="measured-frame-rate-320x180" range="346-346" /> <!-- N=186 v98%=1.3 -->
+            <Limit name="measured-frame-rate-640x360" range="338-338" /> <!-- N=186 v98%=1.3 -->
+            <Limit name="measured-frame-rate-1280x720" range="272-272" /> <!-- N=186 v98%=1.3 -->
+            <Limit name="measured-frame-rate-1920x1080" range="153-153" /> <!-- N=186 v98%=1.3 -->
+            <Limit name="measured-frame-rate-3840x2160" range="36-36" /> <!-- N=186 v98%=1.3 -->
         </MediaCodec>
         <MediaCodec name="OMX.google.h263.decoder" type="video/3gpp" update="true">
-            <!-- measured 96%:142-281 med:155/155 FLAKY(78 - 310 < mx=1135.1) -->
-            <Limit name="measured-frame-rate-176x144" range="155-155" /> <!-- N=184 v96%=1.4 -->
+            <Limit name="measured-frame-rate-176x144" range="153-153" /> <!-- N=186 v98%=1.3 -->
         </MediaCodec>
         <MediaCodec name="OMX.google.h264.decoder" type="video/avc" update="true">
-            <Limit name="measured-frame-rate-320x240" range="163-163" /> <!-- N=182 v98%=1.5 -->
-            <!-- measured 98%:50-72 med:58/58 FLAKY(29 - 116 < mx=144.7) -->
-            <Limit name="measured-frame-rate-720x480" range="58-58" /> <!-- N=184 v98%=1.2 -->
-            <Limit name="measured-frame-rate-1280x720" range="29-29" /> <!-- N=194 v98%=1.3 -->
-            <!-- measured 98%:8-21 med:16/16 FLAKY(mn=7.4 < 8 - 32) -->
-            <Limit name="measured-frame-rate-1920x1080" range="15-16" /> <!-- N=196 v98%=1.6 -->
+            <Limit name="measured-frame-rate-320x240" range="161-161" /> <!-- N=186 v98%=1.4 -->
+            <Limit name="measured-frame-rate-720x480" range="58-58" /> <!-- N=188 v98%=1.3 -->
+            <Limit name="measured-frame-rate-1280x720" range="29-29" /> <!-- N=186 v98%=1.2 -->
+            <Limit name="measured-frame-rate-1920x1080" range="16-16" /> <!-- N=186 v98%=1.2 -->
         </MediaCodec>
         <MediaCodec name="OMX.google.hevc.decoder" type="video/hevc" update="true">
-            <!-- measured 98%:181-756 med:635/635 FLAKY(mn=128.0 < 181 - 1270) variance:2.0 -->
-            <Limit name="measured-frame-rate-352x288" range="361-635" /> <!-- N=187 -->
-            <!-- measured 98%:66-351 med:249/249 FLAKY(mn=62.2 < 66 - 498) variance:2.3 -->
-            <Limit name="measured-frame-rate-640x360" range="131-249" /> <!-- N=194 -->
-            <!-- measured 98%:57-302 med:213/214 FLAKY(mn=55.7 < 57 - 428) variance:2.3 -->
-            <Limit name="measured-frame-rate-720x480" range="113-214" /> <!-- N=195 -->
-            <!-- measured 98%:20-119 med:98/97 FLAKY(mn=20.1 < 23 - 194) variance:2.4 -->
-            <Limit name="measured-frame-rate-1280x720" range="45-97" /> <!-- N=196 -->
-            <!-- measured 98%:12-65 med:57/57 FLAKY(mn=0.0 < 13 - 114) variance:2.3 -->
-            <Limit name="measured-frame-rate-1920x1080" range="26-57" /> <!-- N=195 -->
+            <Limit name="measured-frame-rate-352x288" range="639-639" /> <!-- N=186 v98%=1.2 -->
+            <Limit name="measured-frame-rate-640x360" range="251-251" /> <!-- N=182 v98%=1.2 -->
+            <Limit name="measured-frame-rate-720x480" range="216-216" /> <!-- N=186 v98%=1.3 -->
+            <Limit name="measured-frame-rate-1280x720" range="103-103" /> <!-- N=184 v98%=1.2 -->
+            <!-- measured 97%:44-66 med:61/60 FLAKY(mn=0.0 < 30 - 120) -->
+            <Limit name="measured-frame-rate-1920x1080" range="60-60" /> <!-- N=184 v97%=1.2 -->
         </MediaCodec>
         <MediaCodec name="OMX.google.mpeg4.decoder" type="video/mp4v-es" update="true">
-            <!-- measured 98%:165-847 med:181/181 FLAKY(91 - 796 < mx=860.9) variance:2.3 -->
-            <Limit name="measured-frame-rate-176x144" range="181-398" /> <!-- N=184 -->
+            <Limit name="measured-frame-rate-176x144" range="180-180" /> <!-- N=186 v98%=1.3 -->
         </MediaCodec>
         <MediaCodec name="OMX.google.vp8.decoder" type="video/x-vnd.on2.vp8" update="true">
-            <Limit name="measured-frame-rate-320x180" range="545-675" /> <!-- N=184 v98%=1.9 -->
-            <!-- measured 98%:137-425 med:412/411 FLAKY(mn=130.7 < 137 - 822) -->
-            <Limit name="measured-frame-rate-640x360" range="274-411" /> <!-- N=182 v98%=1.8 -->
-            <!-- measured 98%:33-96 med:94/94 FLAKY(mn=31.4 < 33 - 188) -->
-            <Limit name="measured-frame-rate-1280x720" range="66-94" /> <!-- N=178 v98%=1.7 -->
-            <Limit name="measured-frame-rate-1920x1080" range="27-37" /> <!-- N=192 v98%=1.6 -->
+            <!-- measured 98%:445-1063 med:528/526 FLAKY(263 - 1064 < mx=1267.4) -->
+            <Limit name="measured-frame-rate-320x180" range="526-650" /> <!-- TWEAKED N=186 v98%=1.5 -->
+            <Limit name="measured-frame-rate-640x360" range="414-414" /> <!-- N=186 v98%=1.1 -->
+            <Limit name="measured-frame-rate-1280x720" range="94-94" /> <!-- N=192 v98%=1.1 -->
+            <Limit name="measured-frame-rate-1920x1080" range="37-37" /> <!-- N=186 v98%=1.1 -->
         </MediaCodec>
         <MediaCodec name="OMX.google.vp9.decoder" type="video/x-vnd.on2.vp9" update="true">
-            <!-- measured 98%:262-998 med:616/611 FLAKY(mn=237.6 < 262 - 1222) -->
-            <Limit name="measured-frame-rate-320x180" range="523-611" /> <!-- N=182 v98%=2.0 -->
-            <!-- measured 98%:78-409 med:392/392 FLAKY(mn=74.4 < 90 - 784) variance:2.3 -->
-            <Limit name="measured-frame-rate-640x360" range="179-392" /> <!-- N=262 -->
-            <!-- measured 98%:23-120 med:113/113 FLAKY(mn=22.3 < 26 - 226) variance:2.3 -->
-            <Limit name="measured-frame-rate-1280x720" range="52-113" /> <!-- N=196 -->
-            <!-- measured 98%:14-72 med:68/68 FLAKY(mn=13.9 < 16 - 136) variance:2.2 -->
-            <Limit name="measured-frame-rate-1920x1080" range="31-68" /> <!-- N=192 -->
+            <Limit name="measured-frame-rate-320x180" range="545-545" /> <!-- N=186 v98%=1.4 -->
+            <Limit name="measured-frame-rate-640x360" range="391-391" /> <!-- N=198 v98%=1.1 -->
+            <Limit name="measured-frame-rate-1280x720" range="114-114" /> <!-- N=186 v98%=1.1 -->
+            <Limit name="measured-frame-rate-1920x1080" range="68-68" /> <!-- N=186 v98%=1.1 -->
         </MediaCodec>
     </Decoders>
 </MediaCodecs>
