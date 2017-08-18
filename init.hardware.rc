@@ -38,6 +38,8 @@ service charger /charger
 on early-init
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
+    # Loading kernel modules in background
+    start insmod_sh
 
 on init
     # Disable UFS powersaving
@@ -46,8 +48,9 @@ on init
     write /sys/devices/soc/${ro.boot.bootdevice}/hibern8_on_idle_enable 0
     write /sys/module/lpm_levels/parameters/sleep_disabled Y
 
-    # Loading kernel modules in background
-    start insmod_sh
+    # start qseecomd early as we mount system/ vendor/ early
+    # vold needs keymaster that needs qseecomd
+    start qseecomd
 
     # Support legacy paths
     symlink /sdcard /mnt/sdcard
@@ -189,10 +192,6 @@ on fs
 
     # Start HW service manager early
     start hwservicemanager
-
-    # qseecomd needs /dev/block/bootdevice
-    # vold needs keymaster that needs qseecomd
-    start qseecomd
 
 on late-fs
     # Start devices by sysfs trigger
