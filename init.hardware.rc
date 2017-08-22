@@ -48,6 +48,10 @@ on init
     write /sys/devices/soc/${ro.boot.bootdevice}/hibern8_on_idle_enable 0
     write /sys/module/lpm_levels/parameters/sleep_disabled Y
 
+    # QSEE rpmb listener need symlink for bootdevice
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+
     # start qseecomd early as we mount system/ vendor/ early
     # vold needs keymaster that needs qseecomd
     start qseecomd
@@ -158,9 +162,6 @@ on init
     write /proc/sys/vm/page-cluster 0
 
 on fs
-    wait /dev/block/platform/soc/${ro.boot.bootdevice}
-    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
-
     mount_all /vendor/etc/fstab.${ro.hardware} --early
 
     mkdir /persist/data 0700 system system
