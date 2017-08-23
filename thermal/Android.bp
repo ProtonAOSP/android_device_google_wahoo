@@ -1,5 +1,5 @@
 cc_library_shared {
-    name: "android.hardware.thermal@1.0-wahoo",
+    name: "android.hardware.thermal@1.1-wahoo",
     defaults: ["hidl_defaults"],
     owner: "qcom",
     vendor: true,
@@ -15,5 +15,6 @@ cc_library_shared {
         "libhidltransport",
         "libutils",
         "android.hardware.thermal@1.0",
+        "android.hardware.thermal@1.1",
     ],
 }

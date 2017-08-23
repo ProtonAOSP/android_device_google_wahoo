@@ -353,7 +353,7 @@ PRODUCT_PACKAGES += \
 
 # Thermal packages
 PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.0-impl-wahoo
+    android.hardware.thermal@1.1-impl-wahoo
 
 #GNSS HAL
 PRODUCT_PACKAGES += \

@@ -30,12 +30,12 @@
 #ifndef __THERMAL_HELPER_H__
 #define __THERMAL_HELPER_H__
 
-#include <android/hardware/thermal/1.0/IThermal.h>
+#include <android/hardware/thermal/1.1/IThermal.h>
 
 namespace android {
 namespace hardware {
 namespace thermal {
-namespace V1_0 {
+namespace V1_1 {
 namespace implementation {
 
 using ::android::hardware::thermal::V1_0::CpuUsage;
@@ -92,7 +92,7 @@ ssize_t fillTemperatures(hidl_vec<Temperature> *temperatures);
 ssize_t fillCpuUsages(hidl_vec<CpuUsage> *cpuUsages);
 
 }  // namespace implementation
-}  // namespace V1_0
+}  // namespace V1_1
 }  // namespace thermal
 }  // namespace hardware
 }  // namespace android
