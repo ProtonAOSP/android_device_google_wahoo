@@ -2,7 +2,6 @@
 <spnOverrides>
     <spnOverride numeric="23430" spn="EE"/>
     <spnOverride numeric="23433" spn="EE"/>
-    <spnOverride numeric="26202" spn="Vodafone"/>
     <spnOverride numeric="310004" spn="Verizon"/>
     <spnOverride numeric="302370" spn="Fido"/>
     <spnOverride numeric="310120" spn="Sprint"/>
