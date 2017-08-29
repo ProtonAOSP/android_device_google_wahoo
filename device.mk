@@ -186,6 +186,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.gzoom.at=0 \
     persist.camera.llv.fuse=2
 
+# Enable camera ae saturation stats
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.saturationext=1
+
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
