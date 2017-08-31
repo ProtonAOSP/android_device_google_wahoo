@@ -21,9 +21,8 @@
 
 #include <private/android_filesystem_config.h>
 
-static const struct fs_path_config android_device_dirs[] = {
-    { 00771, AID_SYSTEM,      AID_SYSTEM,     0, "bt_firmware"},
-};
+#define NO_ANDROID_FILESYSTEM_CONFIG_DEVICE_DIRS
+/* static const struct fs_path_config android_device_dirs[] = { }; */
 
 /* Rules for files.
 ** These rules are applied based on "first match", so they
