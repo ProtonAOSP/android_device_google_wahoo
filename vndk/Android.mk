@@ -15,6 +15,7 @@ VNDK_SP_LIBRARIES += \
     libc++\
     libbacktrace\
     libunwind\
+    libunwindstack\
     liblzma\
     libhidlbase\
     libhidltransport\
