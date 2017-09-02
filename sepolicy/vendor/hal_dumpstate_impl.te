@@ -34,6 +34,7 @@ r_dir_file(hal_dumpstate_impl, sysfs_rmtfs)
 r_dir_file(hal_dumpstate_impl, sysfs_msm_subsys)
 r_dir_file(hal_dumpstate_impl, sysfs_soc)
 r_dir_file(hal_dumpstate_impl, sysfs_thermal)
+r_dir_file(hal_dumpstate_impl, sysfs_easel)
 
 allow hal_dumpstate_impl debugfs_ion:dir r_dir_perms;
 allow hal_dumpstate_impl debugfs_ion:file r_file_perms;
