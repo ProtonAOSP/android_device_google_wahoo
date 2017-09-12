@@ -704,10 +704,9 @@ service qmuxd /vendor/bin/qmuxd
    user root
    group radio audio bluetooth gps nfc qcom_diag
 
-#TODO evaluate group system once b/62571088 is resolved
 service cnd /vendor/bin/cnd
    class main
-   user system
+   user radio
    group inet system wifi radio wakelock
 
 service netmgrd /vendor/bin/netmgrd
