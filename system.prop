@@ -35,7 +35,6 @@ persist.mm.enable.prefetch=true
 
 # Additional buffers shared between Camera and Video
 vendor.vidc.enc.dcvs.extra-buff-count=2
-vendor.vidc.enc.disable.pq=1
 
 # system props for the data netmgrd
 persist.data.netmgrd.qos.enable=true
