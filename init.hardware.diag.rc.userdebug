@@ -384,3 +384,11 @@ service cnss_diag_txt /vendor/bin/cnss_diag -s -f -m /data/vendor/wifi/cnss_diag
 
 on property:debug.htc.ramdump.crash=true
     write /proc/sysrq-trigger "c"
+
+on property:sys.logger.bluetooth=true
+   setprop persist.service.bdroid.snooplog true
+   setprop persist.service.bdroid.fwsnoop true
+
+on property:sys.logger.bluetooth=false
+   setprop persist.service.bdroid.snooplog false
+   setprop persist.service.bdroid.fwsnoop false
