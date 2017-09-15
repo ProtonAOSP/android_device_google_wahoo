@@ -605,3 +605,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Preopt SystemUI
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUIGoogle
+
+# audio effects config
+PRODUCT_PROPERTY_OVERRIDES += \
+    fmas.hdph_sgain=0
