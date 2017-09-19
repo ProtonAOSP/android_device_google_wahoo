@@ -609,9 +609,8 @@ service vendor.ss_ramdump /vendor/bin/subsystem_ramdump
 
 on property:persist.sys.ssr.enable_ramdumps=1
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 1
-    mkdir /data/vendor/ssrdump 761 root system
+    mkdir /data/vendor/ssrdump 771 root system
     mkdir /data/vendor/ramdump 771 root system
-    mkdir /data/vendor/ramdump/bluetooth 771 root system
     start vendor.ss_ramdump
 
 on property:persist.sys.ssr.enable_ramdumps=0
