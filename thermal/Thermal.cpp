@@ -25,10 +25,28 @@
 namespace android {
 namespace hardware {
 namespace thermal {
-namespace V1_0 {
+namespace V1_1 {
 namespace implementation {
 
 Thermal::Thermal() : enabled(initThermal()) {}
+
+namespace {
+
+// Saves the IThermalCallback client object registered from the
+// framework for sending thermal events to the framework thermal event bus.
+sp<IThermalCallback> gThermalCallback;
+
+struct ThermalDeathRecipient : hidl_death_recipient {
+    virtual void serviceDied(
+        uint64_t cookie __unused, const wp<IBase>& who __unused) {
+        gThermalCallback = nullptr;
+        LOG(ERROR) << "IThermalCallback HIDL service died";
+    }
+};
+
+sp<ThermalDeathRecipient> gThermalCallbackDied = nullptr;
+
+} // anonymous namespace
 
 // Methods from ::android::hardware::thermal::V1_0::IThermal follow.
 Return<void> Thermal::getTemperatures(getTemperatures_cb _hidl_cb) {
@@ -112,8 +130,28 @@ Return<void> Thermal::getCoolingDevices(getCoolingDevices_cb _hidl_cb) {
     return Void();
 }
 
+// Methods from ::android::hardware::thermal::V1_1::IThermal follow.
+
+Return<void> Thermal::registerThermalCallback(
+    const sp<IThermalCallback>& callback) {
+    gThermalCallback = callback;
+
+    if (gThermalCallback != nullptr) {
+        if (gThermalCallbackDied == nullptr)
+            gThermalCallbackDied = new ThermalDeathRecipient();
+
+        if (gThermalCallbackDied != nullptr)
+            gThermalCallback->linkToDeath(
+                gThermalCallbackDied, 0x451F /* cookie, unused */);
+        LOG(INFO) << "ThermalCallback registered";
+    } else {
+        LOG(INFO) << "ThermalCallback unregistered";
+    }
+    return Void();
+}
+
 }  // namespace implementation
-}  // namespace V1_0
+}  // namespace V1_1
 }  // namespace thermal
 }  // namespace hardware
 }  // namespace android
