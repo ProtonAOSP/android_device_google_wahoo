@@ -47,18 +47,21 @@ constexpr const char *kCpuOnlineFileFormat = "/sys/devices/system/cpu/cpu%d/onli
 
 // thermal-engine.conf
 constexpr unsigned int kWalleyeSkinSensorNum = 9;
+constexpr auto         kWalleyeSkinSensorType = "back_therm";
 constexpr unsigned int kWalleyeTsensOffset = 11;
 constexpr unsigned int kWalleyeSkinThrottlingThreshold = 40;
 constexpr unsigned int kWalleyeSkinShutdownThreshold = 56;
 constexpr unsigned int kWalleyeVrThrottledBelowMin = 52;
 
 constexpr unsigned int kTaimenRabSkinSensorNum = 8;
+constexpr auto         kTaimenRabSkinSensorType = "bd_therm";
 constexpr unsigned int kTaimenRabTsensOffset = 9;
 constexpr unsigned int kTaimenRabSkinThrottlingThreshold = 49;
 constexpr unsigned int kTaimenRabSkinShutdownThreshold = 66;
 constexpr unsigned int kTaimenRabVrThrottledBelowMin = 62;
 
 constexpr unsigned int kTaimenRcSkinSensorNum = 8;
+constexpr auto         kTaimenRcSkinSensorType = "bd_therm2";
 constexpr unsigned int kTaimenRcTsensOffset = 9;
 constexpr unsigned int kTaimenRcSkinThrottlingThreshold = 38;
 constexpr unsigned int kTaimenRcSkinShutdownThreshold = 54;
@@ -90,6 +93,7 @@ constexpr unsigned int kBatteryShutdownThreshold = 60;
 bool initThermal();
 ssize_t fillTemperatures(hidl_vec<Temperature> *temperatures);
 ssize_t fillCpuUsages(hidl_vec<CpuUsage> *cpuUsages);
+std::string getTargetSkinSensorType();
 
 }  // namespace implementation
 }  // namespace V1_1

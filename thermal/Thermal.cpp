@@ -150,6 +150,32 @@ Return<void> Thermal::registerThermalCallback(
     return Void();
 }
 
+// Local functions used internally by thermal-engine follow.
+
+std::string Thermal::getSkinSensorType() {
+    return getTargetSkinSensorType();
+}
+
+void Thermal::notifyThrottling(
+    bool isThrottling, const Temperature& temperature) {
+    if (gThermalCallback != nullptr) {
+        Return<void> ret =
+            gThermalCallback->notifyThrottling(isThrottling, temperature);
+        if (!ret.isOk()) {
+          if (ret.isDeadObject()) {
+              gThermalCallback = nullptr;
+              LOG(WARNING) << "Dropped throttling event, ThermalCallback died";
+          } else {
+              LOG(WARNING) <<
+                  "Failed to send throttling event to ThermalCallback";
+          }
+        }
+    } else {
+        LOG(WARNING) <<
+            "Dropped throttling event, no ThermalCallback registered";
+    }
+}
+
 }  // namespace implementation
 }  // namespace V1_1
 }  // namespace thermal
