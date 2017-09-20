@@ -30,8 +30,10 @@
 namespace android {
 namespace hardware {
 namespace thermal {
-namespace V1_0 {
+namespace V1_1 {
 namespace implementation {
+
+using ::android::hardware::thermal::V1_0::TemperatureType;
 
 static unsigned int gSkinSensorNum;
 static unsigned int gTsensOffset;
@@ -287,7 +289,7 @@ ssize_t fillCpuUsages(hidl_vec<CpuUsage> *cpuUsages) {
 }
 
 }  // namespace implementation
-}  // namespace V1_0
+}  // namespace V1_1
 }  // namespace thermal
 }  // namespace hardware
 }  // namespace android
