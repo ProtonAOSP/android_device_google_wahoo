@@ -353,7 +353,7 @@ PRODUCT_PACKAGES += \
 
 # Thermal packages
 PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.0-service.wahoo
+    android.hardware.thermal@1.1-impl-wahoo
 
 #GNSS HAL
 PRODUCT_PACKAGES += \
@@ -431,10 +431,6 @@ PRODUCT_COPY_FILES += \
 # Pro audio feature
 # PRODUCT_COPY_FILES += \
 #   frameworks/native/data/etc/android.hardware.audio.pro.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.pro.xml
-
-# Thermal packages
-PRODUCT_PACKAGES += \
-    thermal.default
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \

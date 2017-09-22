@@ -30,10 +30,13 @@
 namespace android {
 namespace hardware {
 namespace thermal {
-namespace V1_0 {
+namespace V1_1 {
 namespace implementation {
 
+using ::android::hardware::thermal::V1_0::TemperatureType;
+
 static unsigned int gSkinSensorNum;
+static std::string gSkinSensorType;
 static unsigned int gTsensOffset;
 static unsigned int gSkinThrottlingThreshold;
 static unsigned int gSkinShutdownThreshold;
@@ -49,6 +52,7 @@ bool initThermal() {
     if (hardware == "walleye") {
         LOG(ERROR) << "Initialization on Walleye";
         gSkinSensorNum = kWalleyeSkinSensorNum;
+        gSkinSensorType = kWalleyeSkinSensorType;
         gTsensOffset = kWalleyeTsensOffset;
         gSkinThrottlingThreshold = kWalleyeSkinThrottlingThreshold;
         gSkinShutdownThreshold = kWalleyeSkinShutdownThreshold;
@@ -58,6 +62,7 @@ bool initThermal() {
         if (rev == "rev_a" || rev == "rev_b") {
             LOG(ERROR) << "Initialization on Taimen pre revision C";
             gSkinSensorNum = kTaimenRabSkinSensorNum;
+            gSkinSensorType = kTaimenRabSkinSensorType;
             gTsensOffset = kTaimenRabTsensOffset;
             gSkinThrottlingThreshold = kTaimenRabSkinThrottlingThreshold;
             gSkinShutdownThreshold = kTaimenRabSkinShutdownThreshold;
@@ -65,6 +70,7 @@ bool initThermal() {
         } else {
             LOG(ERROR) << "Initialization on Taimen revision C and later";
             gSkinSensorNum = kTaimenRcSkinSensorNum;
+            gSkinSensorType = kTaimenRcSkinSensorType;
             gTsensOffset = kTaimenRcTsensOffset;
             gSkinThrottlingThreshold = kTaimenRcSkinThrottlingThreshold;
             gSkinShutdownThreshold = kTaimenRcSkinShutdownThreshold;
@@ -286,8 +292,12 @@ ssize_t fillCpuUsages(hidl_vec<CpuUsage> *cpuUsages) {
     return kCpuNum;
 }
 
+std::string getTargetSkinSensorType() {
+    return gSkinSensorType;
+}
+
 }  // namespace implementation
-}  // namespace V1_0
+}  // namespace V1_1
 }  // namespace thermal
 }  // namespace hardware
 }  // namespace android
