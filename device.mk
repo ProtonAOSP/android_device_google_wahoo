@@ -280,7 +280,6 @@ PRODUCT_PACKAGES += \
 
 # Neuralnetworks HAL
 PRODUCT_PACKAGES += \
-    android.hardware.neuralnetworks@1.0-impl-hvx \
     android.hardware.neuralnetworks@1.0-service-hvx
 
 # DRM HAL
