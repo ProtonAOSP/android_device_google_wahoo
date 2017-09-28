@@ -194,3 +194,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.ke
 
 # Move libnfc-nci.conf to /vendor
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/libnfc-nci.conf)
+
+# Remove android.hardware.graphics.mapper@2.0-impl
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/android.hardware.graphics.mapper@2.0-impl.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib64/hw/android.hardware.graphics.mapper@2.0-impl.so)
