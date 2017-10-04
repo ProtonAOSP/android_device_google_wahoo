@@ -7,7 +7,11 @@
 ### ...                               ###
 #########################################
 
-cfg_file="/vendor/etc/init.insmod.cfg"
+if [[ -e "/vendor/etc/init.insmod_charger.cfg" && "$(getprop ro.boot.mode)" == "charger" ]]; then
+  cfg_file="/vendor/etc/init.insmod_charger.cfg"
+else
+  cfg_file="/vendor/etc/init.insmod.cfg"
+fi
 
 if [ -f $cfg_file ]; then
   while IFS=" " read -r action name
