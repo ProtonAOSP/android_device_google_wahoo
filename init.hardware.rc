@@ -583,6 +583,19 @@ on property:sys.boot_completed=1
     write /dev/cpuset/application/background/cpus 0-1
     write /dev/cpuset/application/cpus 0-1,4-5
 
+    # UFS health
+    chmod 755 /sys/kernel/debug/ufshcd0
+    chown 644 /sys/kernel/debug/ufshcd0/err_state
+    chmod 644 /sys/kernel/debug/ufshcd0/power_mode
+    chmod 644 /sys/kernel/debug/ufshcd0/host_regs
+    chmod 644 /sys/kernel/debug/ufshcd0/show_hba
+    chmod 644 /sys/kernel/debug/ufshcd0/dump_device_desc
+    chmod 644 /sys/kernel/debug/ufshcd0/dump_health_desc
+    chmod 755 /sys/kernel/debug/ufshcd0/stats
+    chmod 644 /sys/kernel/debug/ufshcd0/stats/req_stats
+    chmod 644 /sys/kernel/debug/ufshcd0/stats/query_stats
+    chmod 644 /sys/kernel/debug/ufshcd0/stats/err_stats
+
 on property:init.svc.vendor.per_mgr=running
     start vendor.per_proxy
 
