@@ -29,3 +29,8 @@ hwbinder_use(cnd)
 get_prop(cnd, hwservicemanager_prop)
 binder_call(cnd, dataservice_app)
 binder_call(cnd, ims)
+
+userdebug_or_eng(`
+  allow cnd diag_device:chr_file rw_file_perms;
+')
+dontaudit cnd diag_device:chr_file rw_file_perms;

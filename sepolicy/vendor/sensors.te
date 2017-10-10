@@ -29,4 +29,6 @@ r_dir_file(sensors, sysfs_msm_subsys)
 userdebug_or_eng(`
   r_dir_file(sensors, sysfs_diag)
   allow sensors sysfs_timestamp_switch:file r_file_perms;
+  allow sensors diag_device:chr_file rw_file_perms;
 ')
+dontaudit sensors diag_device:chr_file rw_file_perms;
