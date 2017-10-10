@@ -5,3 +5,8 @@ allow netutils_wrapper netmgrd:fifo_file { getattr read write append };
 dontaudit netutils_wrapper netmgrd:netlink_socket { getattr read write append };
 dontaudit netutils_wrapper kernel:system module_request;
 dontaudit netutils_wrapper self:capability sys_module;
+
+userdebug_or_eng(`
+  allow netutils_wrapper diag_device:chr_file rw_file_perms;
+')
+dontaudit netutils_wrapper diag_device:chr_file rw_file_perms;

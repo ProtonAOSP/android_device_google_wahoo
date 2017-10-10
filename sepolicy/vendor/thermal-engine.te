@@ -28,3 +28,8 @@ allowxperm thermal-engine self:socket ioctl msm_sock_ipc_ioctls;
 
 # reboot/shutdown for thermal limits exceeded
 set_prop(thermal-engine, powerctl_prop)
+
+userdebug_or_eng(`
+  allow thermal-engine diag_device:chr_file rw_file_perms;
+')
+dontaudit thermal-engine diag_device:chr_file rw_file_perms;
