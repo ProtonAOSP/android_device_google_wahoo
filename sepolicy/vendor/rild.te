@@ -21,7 +21,9 @@ allow rild time_daemon:unix_stream_socket connectto;
 
 userdebug_or_eng(`
   domain_auto_trans(rild, smlog_dump_exec, smlog_dump)
+  allow rild diag_device:chr_file rw_file_perms;
 ')
+dontaudit rild diag_device:chr_file rw_file_perms;
 
 allow rild radio_vendor_data_file:dir rw_dir_perms;
 allow rild radio_vendor_data_file:file create_file_perms;
