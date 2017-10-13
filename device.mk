@@ -118,7 +118,8 @@ AB_OTA_POSTINSTALL_CONFIG += \
 PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     bootctrl.msm8998 \
     libgptutils \
-    libz
+    libz \
+    libcutils
 
 PRODUCT_PACKAGES += \
     update_engine_sideload
@@ -214,6 +215,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.data_ltd_sys_ind=1 \
     persist.radio.is_wps_enabled=true \
     persist.radio.videopause.mode=1 \
+    persist.radio.sap_silent_pin=1 \
     persist.radio.sib16_support=1 \
     persist.radio.data_con_rprt=true \
     persist.radio.always_send_plmn=true \
