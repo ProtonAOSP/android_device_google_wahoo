@@ -53,6 +53,8 @@
 
     <exception
             package="com.verizon.mips.services">
+        <!-- Call -->
+        <permission name="android.permission.PROCESS_OUTGOING_CALLS" fixed="false"/>
         <!-- Phone -->
         <permission name="android.permission.READ_PHONE_STATE" fixed="false"/>
         <!-- SMS -->
