@@ -287,10 +287,6 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl    \
     android.hardware.bluetooth@1.0-service
 
-# Neuralnetworks HAL
-PRODUCT_PACKAGES += \
-    android.hardware.neuralnetworks@1.0-service-hvx
-
 # DRM HAL
 PRODUCT_PACKAGES += \
   android.hardware.drm@1.0-impl \
