@@ -18,3 +18,5 @@ dontaudit system_server audioserver:file write;
 dontaudit system_server untrusted_app:file write;
 dontaudit system_server hal_audio_default:file write;
 dontaudit system_server appdomain:file write;
+
+set_prop(system_server, public_vendor_system_prop)
