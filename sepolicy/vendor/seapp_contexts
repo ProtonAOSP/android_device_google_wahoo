@@ -6,10 +6,6 @@ user=_app seinfo=platform name=com.google.mds domain=mds_app type=app_data_file 
 #TODO Remove user "system" when b/63588267 is resolved
 user=system seinfo=platform name=com.qualcomm.telephony domain=qtelephony type=system_app_data_file
 
-#Add new domain for DataServices
-#TODO Remove user "system" when b/38043081 is resolved
-user=system seinfo=platform name=.dataservices domain=dataservice_app type=system_app_data_file
-
 # The default domain for tango_core / arcore process
 user=_app seinfo=tango name=com.google.tango* domain=tango_core type=app_data_file levelFrom=user
 user=_app seinfo=arcore name=com.google.ar.core* domain=tango_core type=app_data_file levelFrom=user
