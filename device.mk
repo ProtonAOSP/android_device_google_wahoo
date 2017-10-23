@@ -188,6 +188,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196610
 
+# b/68017541
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qcom.adreno.qgl.ShaderStorageImageExtendedFormats=0
+
 # Enable camera EIS3.0
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.is_type=5 \
