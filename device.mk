@@ -580,6 +580,10 @@ PRODUCT_COPY_FILES += \
     device/google/wahoo/tango_permissions.xml:system/etc/permissions/tango_permissions.xml \
     device/google/wahoo/libtango_device2.jar:system/framework/libtango_device2.jar
 
+# Privileged permissions whitelist
+PRODUCT_COPY_FILES += \
+    device/google/wahoo/permissions/privapp-permissions-aosp_wahoo.xml:system/etc/permissions/privapp-permissions-aosp_wahoo.xml
+
 PRODUCT_PACKAGES += \
     ipacm
 
