@@ -2,3 +2,4 @@ system_server vendor_framework_file dir 67860706
 zygote cgroup file 67860826
 shell ramdump_exec file 68002524
 system_server sysfs_msm_subsys dir 68003344
+surfaceflinger vendor_firmware_file dir 68213100
