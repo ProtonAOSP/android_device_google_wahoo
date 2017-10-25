@@ -502,7 +502,7 @@ PRODUCT_COPY_FILES += \
 
 # Fingerprint HIDL implementation
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service.wahoo
+    android.hardware.biometrics.fingerprint@2.1-service.fpc
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
@@ -579,6 +579,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     device/google/wahoo/tango_permissions.xml:system/etc/permissions/tango_permissions.xml \
     device/google/wahoo/libtango_device2.jar:system/framework/libtango_device2.jar
+
+# Privileged permissions whitelist
+PRODUCT_COPY_FILES += \
+    device/google/wahoo/permissions/privapp-permissions-aosp_wahoo.xml:system/etc/permissions/privapp-permissions-aosp_wahoo.xml
 
 PRODUCT_PACKAGES += \
     ipacm
