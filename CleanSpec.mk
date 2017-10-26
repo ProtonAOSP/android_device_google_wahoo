@@ -146,3 +146,6 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app/EuiccGoogle/esim2.i
 
 # Remove init.recovery.*.rc file in root directory (only needed in recovery root).
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/root/init.recovery.$(PRODUCT_HARDWARE).rc)
+
+# Remove build and default prop.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/*.prop)
