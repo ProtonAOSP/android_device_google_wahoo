@@ -561,9 +561,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.frp.pst=/dev/block/platform/soc/1da4000.ufshc/by-name/frp
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.vndk.version=27.1.0 \
-
 # Include vndk/vndk-sp/ll-ndk modules
 PRODUCT_PACKAGES += vndk_package
 
