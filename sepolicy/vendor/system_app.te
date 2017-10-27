@@ -2,9 +2,8 @@
 # userdebug and eng devices
 userdebug_or_eng(`set_prop(system_app, tel_mon_prop)')
 
-# Needed by Settings app's CameraHalHdrplusPreferenceController, available only on a subset of
-# userdebug and eng devices
-userdebug_or_eng(`set_prop(system_app, camera_prop)')
+# Needed by Settings app's CameraHalHdrplusPreferenceController
+set_prop(system_app, camera_prop)
 
 # read regulatory info
 allow system_app elabel_data_file:dir r_dir_perms;
