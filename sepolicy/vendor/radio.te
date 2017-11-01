@@ -26,4 +26,4 @@ allow radio avtimer_device:chr_file r_file_perms;
 binder_call(radio, hal_imsrtp)
 
 # read /proc/cmdline
-allow radio proc:file r_file_perms;
+allow radio proc_cmdline:file r_file_perms;
