@@ -1,5 +1,5 @@
 type ramoops, domain, coredomain;
-type ramoops_data_file, file_type, data_file_type;
+type ramoops_data_file, file_type, data_file_type, core_data_file_type;
 type ramoops_exec, exec_type, file_type;
 
 init_daemon_domain(ramoops);
