@@ -219,7 +219,6 @@ set_speaker_light_locked(struct light_device_t* dev,
         struct light_state_t const* state)
 {
     int red, green, blue;
-    int blink;
     int onMS, offMS;
     unsigned int colorRGB;
 
