@@ -2,3 +2,6 @@ zygote cgroup file 67860826
 shell ramdump_exec file 68002524
 system_server sysfs_msm_subsys dir 68003344
 surfaceflinger vendor_firmware_file dir 68213100
+surfaceflinger unlabeled dir 68864350
+hal_graphics_composer_default unlabeled dir 68864350
+bootanim unlabeled dir 68864350

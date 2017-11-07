@@ -193,9 +193,7 @@ status_t registerVibratorService() {
             std::move(state), std::move(rtpinput), std::move(mode),
             std::move(sequencer), std::move(scale), std::move(ctrlloop), std::move(lptrigger));
 
-    vibrator->registerAsService();
-
-    return OK;
+    return vibrator->registerAsService();
 }
 
 int main() {
