@@ -20,6 +20,8 @@ genfscon sysfs /devices/soc/1da4000.ufshc/clkscale_enable               u:object
 genfscon sysfs /devices/soc/soc:bt_wcn3990                              u:object_r:sysfs_bluetooth_writable:s0
 genfscon sysfs /devices/soc/a1800000.qcom,rmtfs_rtel_sharedmem          u:object_r:sysfs_rmtfs:s0
 genfscon sysfs /devices/soc/c17a000.i2c                                 u:object_r:sysfs_msm_subsys:s0
+genfscon sysfs /devices/soc/c179000.i2c                                 u:object_r:sysfs_msm_subsys:s0
+genfscon sysfs /devices/soc/c1b5000.i2c                                 u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/soc/soc:qcom,gpubw                              u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/soc/800f000.qcom,spmi                           u:object_r:sysfs_msm_subsys:s0
 genfscon sysfs /devices/soc/4080000.qcom,mss                            u:object_r:sysfs_msm_subsys:s0
