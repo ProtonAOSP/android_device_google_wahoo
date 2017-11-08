@@ -247,6 +247,7 @@
 /data/vendor/ese(/.*)?                 u:object_r:ese_vendor_data_file:s0
 /data/vendor/ipa(/.*)?                 u:object_r:ipa_vendor_data_file:s0
 /data/vendor/sensors(/.*)?             u:object_r:sensors_vendor_data_file:s0
+/data/vendor/audio(/.*)?               u:object_r:audio_vendor_data_file:s0
 
 # input files
 /vendor/usr/idc(/.*)?                  u:object_r:idc_file:s0
