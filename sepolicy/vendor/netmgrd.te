@@ -40,7 +40,9 @@ domain_auto_trans(netmgrd, netutils_wrapper_exec, netutils_wrapper)
 allow netmgrd sysfs_timestamp_switch:file { read open };
 userdebug_or_eng(`
   r_dir_file(netmgrd, sysfs_diag)
+  allow netmgrd diag_device:chr_file rw_file_perms;
 ')
+dontaudit netmgrd diag_device:chr_file rw_file_perms;
 
 #Ignore if device loading for private IOCTL failed
 dontaudit netmgrd kernel:system { module_request };

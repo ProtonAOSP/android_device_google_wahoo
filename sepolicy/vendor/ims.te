@@ -33,3 +33,8 @@ r_dir_file(ims, sysfs_diag)
 hwbinder_use(ims)
 allow ims hal_cne_hwservice:hwservice_manager find;
 binder_call(ims, cnd)
+
+userdebug_or_eng(`
+  allow ims diag_device:chr_file rw_file_perms;
+')
+dontaudit ims diag_device:chr_file rw_file_perms;
