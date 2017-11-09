@@ -30,3 +30,8 @@ r_dir_file(hal_imsrtp, sysfs_soc)
 allow hal_imsrtp ion_device:chr_file r_file_perms;
 get_prop(hal_imsrtp, ims_prop)
 binder_call(hal_imsrtp, radio)
+
+userdebug_or_eng(`
+  allow hal_imsrtp diag_device:chr_file rw_file_perms;
+')
+dontaudit hal_imsrtp diag_device:chr_file rw_file_perms;
