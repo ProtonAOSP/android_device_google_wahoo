@@ -1,1 +1,7 @@
 allow hal_drm_default vndbinder_device:chr_file rw_file_perms;
+
+# TODO(b/36601695): Remove data_between_core_and_vendor violators once
+# hal_drm_default no longer directly accesses media_data_file.
+typeattribute hal_drm_default data_between_core_and_vendor_violators;
+allow hal_drm_default media_data_file:dir create_dir_perms;
+allow hal_drm_default media_data_file:file create_file_perms;
