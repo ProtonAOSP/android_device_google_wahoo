@@ -5,11 +5,6 @@ allow hal_camera perfd_socket:sock_file w_file_perms;
 
 allow hal_camera self:capability sys_nice;
 
-# communicate with camera
-#allow hal_camera camera:unix_dgram_socket sendto;
-#allow hal_camera camera_data_file:sock_file write;
-#allow hal_camera camera_device:chr_file rw_file_perms;
-
 allow hal_camera gpu_device:chr_file rw_file_perms;
 
 # access to /dev/input/event{5,10}
