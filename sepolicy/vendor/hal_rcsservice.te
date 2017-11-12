@@ -27,3 +27,8 @@ binder_call(hal_rcsservice, dataservice_app)
 
 # imsrcsd needs read/write access to devpts
 allow hal_rcsservice devpts:chr_file rw_file_perms;
+
+userdebug_or_eng(`
+  allow hal_rcsservice diag_device:chr_file rw_file_perms;
+')
+dontaudit hal_rcsservice diag_device:chr_file rw_file_perms;
