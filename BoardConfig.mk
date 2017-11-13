@@ -72,8 +72,6 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_PREBUILT_DTBOIMAGE := device/google/wahoo-kernel/dtbo.img
 BOARD_DTBOIMG_PARTITION_SIZE := 8388608
 
-ENABLE_CPUSETS := true
-
 TARGET_COPY_OUT_VENDOR := vendor
 
 # Install odex files into the other system image
