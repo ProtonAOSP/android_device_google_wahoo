@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+# b/68710251 disable VNDK enforcement temporarily (until O-MR1 goes into public)
+PRODUCT_TREBLE_LINKER_NAMESPACES_OVERRIDE := false
+
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
 
