@@ -182,6 +182,10 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "SoC serial number", "/sys/devices/soc0/serial_number");
     DumpFileToFd(fd, "CPU present", "/sys/devices/system/cpu/present");
     DumpFileToFd(fd, "CPU online", "/sys/devices/system/cpu/online");
+    DumpFileToFd(fd, "UFS model", "/sys/block/sda/device/model");
+    DumpFileToFd(fd, "UFS rev", "/sys/block/sda/device/rev");
+    DumpFileToFd(fd, "UFS size", "/sys/block/sda/size");
+    RunCommandToFd(fd, "UFS health", {"/vendor/bin/sh", "-c", "for f in $(find /sys/kernel/debug/ufshcd0 -type f); do if [[ -r $f && -f $f ]]; then echo --- $f; cat $f; fi; done"});
     DumpFileToFd(fd, "INTERRUPTS", "/proc/interrupts");
     DumpFileToFd(fd, "RPM Stats", "/d/rpm_stats");
     DumpFileToFd(fd, "Power Management Stats", "/d/rpm_master_stats");
@@ -192,10 +196,13 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     RunCommandToFd(fd, "ION HEAPS", {"/vendor/bin/sh", "-c", "for d in $(ls -d /d/ion/*); do for f in $(ls $d); do echo --- $d/$f; cat $d/$f; done; done"});
     DumpFileToFd(fd, "dmabuf info", "/d/dma_buf/bufinfo");
     RunCommandToFd(fd, "Temperatures", {"/vendor/bin/sh", "-c", "for f in `ls /sys/class/thermal` ; do type=`cat /sys/class/thermal/$f/type` ; temp=`cat /sys/class/thermal/$f/temp` ; echo \"$type: $temp\" ; done"});
-    DumpFileToFd(fd, "cpu0-1 time-in-state", "/sys/devices/system/cpu/cpu0/cpufreq/stats/time_in_state");
-    RunCommandToFd(fd, "cpu0-1 cpuidle", {"/vendor/bin/sh", "-c", "for d in $(ls -d /sys/devices/system/cpu/cpu0/cpuidle/state*); do echo \"$d: `cat $d/name` `cat $d/desc` `cat $d/time` `cat $d/usage`\"; done"});
-    DumpFileToFd(fd, "cpu2-3 time-in-state", "/sys/devices/system/cpu/cpu2/cpufreq/stats/time_in_state");
-    RunCommandToFd(fd, "cpu2-3 cpuidle", {"/vendor/bin/sh", "-c", "for d in $(ls -d /sys/devices/system/cpu/cpu2/cpuidle/state*); do echo \"$d: `cat $d/name` `cat $d/desc` `cat $d/time` `cat $d/usage`\"; done"});
+    RunCommandToFd(fd, "Easel debug info", {"/vendor/bin/sh", "-c", "for f in `ls /sys/bus/i2c/devices/9-0008/@(*curr|temperature|vbat|total_power)`; do echo \"$f: `cat $f`\" ; done; file=/sys/devices/virtual/misc/mnh_sm/state; echo \"$file: `cat $file`\""});
+    DumpFileToFd(fd, "cpu0-3 time-in-state", "/sys/devices/system/cpu/cpu0/cpufreq/stats/time_in_state");
+    RunCommandToFd(fd, "cpu0-3 cpuidle", {"/vendor/bin/sh", "-c", "for d in $(ls -d /sys/devices/system/cpu/cpu0/cpuidle/state*); do echo \"$d: `cat $d/name` `cat $d/desc` `cat $d/time` `cat $d/usage`\"; done"});
+    DumpFileToFd(fd, "cpu4-7 time-in-state", "/sys/devices/system/cpu/cpu4/cpufreq/stats/time_in_state");
+    RunCommandToFd(fd, "cpu4-7 cpuidle", {"/vendor/bin/sh", "-c", "for d in $(ls -d /sys/devices/system/cpu/cpu4/cpuidle/state*); do echo \"$d: `cat $d/name` `cat $d/desc` `cat $d/time` `cat $d/usage`\"; done"});
+    DumpFileToFd(fd, "cpu0-3 thermal limit", "/sys/devices/virtual/thermal/cooling_device0/cur_state");
+    DumpFileToFd(fd, "cpu4-7 thermal limit", "/sys/devices/virtual/thermal/cooling_device1/cur_state");
     DumpFileToFd(fd, "MDP xlogs", "/data/vendor/display/mdp_xlog");
     DumpFileToFd(fd, "TCPM logs", "/d/tcpm/usbpd0");
     DumpFileToFd(fd, "PD Engine", "/d/pd_engine/usbpd0");

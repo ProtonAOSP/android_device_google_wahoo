@@ -34,6 +34,7 @@ r_dir_file(hal_dumpstate_impl, sysfs_rmtfs)
 r_dir_file(hal_dumpstate_impl, sysfs_msm_subsys)
 r_dir_file(hal_dumpstate_impl, sysfs_soc)
 r_dir_file(hal_dumpstate_impl, sysfs_thermal)
+r_dir_file(hal_dumpstate_impl, sysfs_easel)
 
 allow hal_dumpstate_impl debugfs_ion:dir r_dir_perms;
 allow hal_dumpstate_impl debugfs_ion:file r_file_perms;
@@ -44,6 +45,8 @@ allow hal_dumpstate_impl debugfs_icnss:dir r_dir_perms;
 allow hal_dumpstate_impl debugfs_icnss:file r_file_perms;
 allow hal_dumpstate_impl debugfs_ipc:file r_file_perms;
 allow hal_dumpstate_impl proc_stat:file r_file_perms;
+allow hal_dumpstate_impl debugfs_ufs:dir r_dir_perms;
+allow hal_dumpstate_impl debugfs_ufs:file r_file_perms;
 
 # Access to files for dumping
 allow hal_dumpstate_impl  sysfs:dir r_dir_perms;
@@ -58,3 +61,7 @@ allow hal_dumpstate_impl display_vendor_data_file:file r_file_perms;
 # Access to touch firmware info
 allow hal_dumpstate_impl sysfs_touch:dir r_dir_perms;
 allow hal_dumpstate_impl sysfs_touch:file rw_file_perms;
+
+# Access to UFS info
+allow hal_dumpstate_impl sysfs_scsi_devices_0000:dir r_dir_perms;
+allow hal_dumpstate_impl sysfs_scsi_devices_0000:file r_file_perms;

@@ -10,9 +10,12 @@ allow wcnss_filter hci_attach_dev:chr_file rw_file_perms;
 
 userdebug_or_eng(`
   allow wcnss_filter diag_device:chr_file rw_file_perms;
-  allow wcnss_filter ramdump_vendor_data_file:dir create_dir_perms;
-  allow wcnss_filter ramdump_vendor_data_file:file create_file_perms;
+  allow wcnss_filter ramdump_vendor_data_file:dir w_dir_perms;
+  allow wcnss_filter ramdump_vendor_data_file:file { create w_file_perms };
+  allow wcnss_filter sysfs_timestamp_switch:file r_file_perms;
   r_dir_file(wcnss_filter, debugfs_ipc)
+  r_dir_file(wcnss_filter, sysfs_diag)
+  set_prop(wcnss_filter, ssr_prop)
 ')
 
 #allow wakelock

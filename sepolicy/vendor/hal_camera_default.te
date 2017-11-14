@@ -7,12 +7,14 @@ allow hal_camera_default qdisplay_service:service_manager { find };
 allow hal_camera_default hal_graphics_mapper_hwservice:hwservice_manager find;
 allow hal_camera_default hal_graphics_allocator_hwservice:hwservice_manager find;
 
+hal_client_domain(hal_camera_default, hal_configstore)
 binder_call(hal_camera_default, hal_graphics_composer)
 binder_call(hal_camera_default, system_server)
 binder_call(hal_camera_default, hal_graphics_allocator)
 
-# For interfacing with PowerHAL
+# For interfacing with PowerHAL and ThermalHAL
 hal_client_domain(hal_camera_default, hal_power)
+hal_client_domain(hal_camera_default, hal_thermal)
 
 # For camera team debugging
 userdebug_or_eng(`
