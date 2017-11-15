@@ -6,8 +6,6 @@ binder_call(system_server, hal_camera_default)
 allow system_server persist_file:dir search;
 allow system_server persist_sensors_file:dir search;
 allow system_server persist_sensors_file:file r_file_perms;
-allow system_server location_data_file:dir create_dir_perms;
-allow system_server location_data_file:file create_file_perms;
 allow system_server wlan_device:chr_file rw_file_perms;
 
 # input files
