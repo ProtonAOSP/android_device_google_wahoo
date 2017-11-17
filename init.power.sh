@@ -18,7 +18,6 @@ for cpubw in /sys/class/devfreq/*qcom,cpubw*
 do
     write $cpubw/governor "bw_hwmon"
     write $cpubw/polling_interval 50
-    write $cpubw/min_freq 1525
     write $cpubw/bw_hwmon/mbps_zones "3143 5859 11863 13763"
     write $cpubw/bw_hwmon/sample_ms 4
     write $cpubw/bw_hwmon/io_percent 34
