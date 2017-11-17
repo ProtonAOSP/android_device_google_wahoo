@@ -326,7 +326,7 @@ PRODUCT_PACKAGES += \
 
 # NFC packages
 PRODUCT_PACKAGES += \
-    nfc_nci.$(TARGET_BOARD_PLATFORM) \
+    nfc_nci.msm8998 \
     NfcNci \
     Tag \
     android.hardware.nfc@1.0-impl \
