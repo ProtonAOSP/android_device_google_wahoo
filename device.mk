@@ -752,6 +752,10 @@ VENDOR_SECURITY_PATCH := "2020-09-05"
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml
 
+# MiFare Permissions file
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/com.nxp.mifare.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.nxp.mifare.xml
+
 # Shared java libs
 PRODUCT_PACKAGES += \
     com.android.nfc_extras
