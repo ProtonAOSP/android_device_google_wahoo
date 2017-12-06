@@ -1,7 +1,8 @@
 ifneq ($(filter muskie walleye taimen, $(TARGET_DEVICE)),)
 LOCAL_PATH := $(call my-dir)
 
-VNDK_SP_LIBRARIES := \
+ifndef BOARD_VNDK_VERSION
+VNDK_SP_LIBRARIES += \
     android.hardware.renderscript@1.0\
     android.hardware.graphics.allocator@2.0\
     android.hardware.graphics.mapper@2.0\
@@ -10,21 +11,25 @@ VNDK_SP_LIBRARIES := \
     libbase\
     libcutils\
     libhardware\
-    libhidlbase\
-    libhidltransport\
     libutils\
     libc++\
+    libbacktrace\
+    libunwind\
+    libunwindstack\
+    liblzma\
+    libhidlbase\
+    libhidltransport\
+    libz\
+    libbcinfo\
+    libblas\
+    libcompiler_rt\
     libRS_internal\
     libRSDriver\
     libRSCpuRef\
-    libbcinfo\
-    libblas\
     libft2\
     libpng\
-    libcompiler_rt\
-    libbacktrace\
-    libunwind\
-    liblzma\
+
+endif
 
 define add-vndk-sp-lib
 include $$(CLEAR_VARS)

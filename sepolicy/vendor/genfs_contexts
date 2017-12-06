@@ -48,6 +48,7 @@ genfscon sysfs /module/tcp_cubic/parameters                             u:object
 genfscon sysfs /module/diagchar/parameters/timestamp_switch             u:object_r:sysfs_timestamp_switch:s0
 genfscon sysfs /devices/virtual/graphics/fb0                            u:object_r:sysfs_graphics:s0
 genfscon sysfs /devices/virtual/graphics/fb1                            u:object_r:sysfs_graphics:s0
+genfscon sysfs /devices/virtual/misc/mnh_sm                             u:object_r:sysfs_easel:s0
 genfscon sysfs /devices/soc/8c0000.qcom,msm-cam                         u:object_r:sysfs_camera:s0
 genfscon sysfs /devices/soc0                                            u:object_r:sysfs_soc:s0
 genfscon sysfs /devices/soc/caa0000.qcom,jpeg                           u:object_r:sysfs_camera:s0
@@ -85,3 +86,4 @@ genfscon debugfs /msm_ipc_router                      u:object_r:debugfs_ipc:s0
 genfscon debugfs /mdp                                 u:object_r:debugfs_mdp:s0
 genfscon debugfs /rmt_storage                         u:object_r:debugfs_rmt_storage:s0
 genfscon debugfs /icnss                               u:object_r:debugfs_icnss:s0
+genfscon debugfs /ufshcd0                             u:object_r:debugfs_ufs:s0

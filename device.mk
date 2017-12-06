@@ -14,15 +14,16 @@
 # limitations under the License.
 #
 
-# b/68710251 disable VNDK enforcement temporarily (until O-MR1 goes into public)
-PRODUCT_TREBLE_LINKER_NAMESPACES_OVERRIDE := false
-
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
 
 PRODUCT_COPY_FILES += \
     device/google/wahoo/default-permissions.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default-permissions/default-permissions.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
+
+# Set the SVN for the targeted MR release
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.build.svn=4
 
 # Enforce privapp-permissions whitelist
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -70,7 +71,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.qcom.devstart.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devstart.sh \
     $(LOCAL_PATH)/init.qcom.ipastart.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.ipastart.sh \
     $(LOCAL_PATH)/init.insmod.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.insmod.sh \
-    $(LOCAL_PATH)/init.ramoops.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/init.ramoops.sh
+    $(LOCAL_PATH)/init.ramoops.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/init.ramoops.sh \
+    frameworks/native/services/vr/virtual_touchpad/idc/vr-virtual-touchpad-0.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/vr-virtual-touchpad-0.idc \
+    frameworks/native/services/vr/virtual_touchpad/idc/vr-virtual-touchpad-1.idc:$(TARGET_COPY_OUT_VENDOR)/usr/idc/vr-virtual-touchpad-1.idc
 
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
   PRODUCT_COPY_FILES += \
@@ -159,6 +162,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.hcef.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.nfc.hcef.xml \
     frameworks/native/data/etc/android.hardware.vr.headtracking-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vr.headtracking.xml \
     frameworks/native/data/etc/android.hardware.vr.high_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vr.high_performance.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.compute-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.compute.xml \
     frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level.xml \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version.xml \
     frameworks/native/data/etc/android.hardware.telephony.carrierlock.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.carrierlock.xml \
@@ -190,6 +194,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.gzoom.at=0 \
     persist.camera.llv.fuse=2
 
+# Enable camera ae saturation stats
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.saturationext=1
+
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
@@ -206,6 +214,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.data_ltd_sys_ind=1 \
     persist.radio.is_wps_enabled=true \
     persist.radio.videopause.mode=1 \
+    persist.radio.sap_silent_pin=1 \
     persist.radio.sib16_support=1 \
     persist.radio.data_con_rprt=true \
     persist.radio.always_send_plmn=true \
@@ -219,6 +228,29 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.vendor.extension_library=libqti-perfd-client.so
+
+# settings to enable Device Orientation Sensors
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qti.sensors.dev_ori=true
+
+# settings to disable unused secondary wakeup
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qti.sensors.wu=false
+
+# settings to disable unused algorithms
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qti.sdk.sensors.gestures=false \
+    ro.qti.sensors.amd=false \
+    ro.qti.sensors.cmc=false \
+    ro.qti.sensors.facing=false \
+    ro.qti.sensors.pedometer=false \
+    ro.qti.sensors.rmd=false \
+    ro.qti.sensors.scrn_ortn=false
+
+# use SMGR supplied version of step detector and counter
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qti.sensors.step_counter=false \
+    ro.qti.sensors.step_detector=false
 
 # camera gyro and laser sensor
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -347,7 +379,7 @@ PRODUCT_PACKAGES += \
 
 # Thermal packages
 PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.0-service.wahoo
+    android.hardware.thermal@1.1-impl-wahoo
 
 #GNSS HAL
 PRODUCT_PACKAGES += \
@@ -426,10 +458,6 @@ PRODUCT_COPY_FILES += \
 # PRODUCT_COPY_FILES += \
 #   frameworks/native/data/etc/android.hardware.audio.pro.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.pro.xml
 
-# Thermal packages
-PRODUCT_PACKAGES += \
-    thermal.default
-
 ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
     tinyplay \
@@ -502,10 +530,6 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 PRODUCT_COPY_FILES += \
     device/google/wahoo/fstab.hardware:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.$(PRODUCT_HARDWARE)
 
-# For SPN display
-PRODUCT_COPY_FILES += \
-    device/google/wahoo/spn-conf.xml:system/etc/spn-conf.xml
-
 # Provide meaningful APN configuration
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/apns-full-conf.xml:system/etc/apns-conf.xml
@@ -533,33 +557,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.frp.pst=/dev/block/platform/soc/1da4000.ufshc/by-name/frp
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.vndk.version=26.1.0 \
+    ro.vendor.vndk.version=27.1.0 \
 
-PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0.vndk-sp\
-    android.hardware.graphics.allocator@2.0.vndk-sp\
-    android.hardware.graphics.mapper@2.0.vndk-sp\
-    android.hardware.graphics.common@1.0.vndk-sp\
-    libhwbinder.vndk-sp\
-    libbase.vndk-sp\
-    libcutils.vndk-sp\
-    libhardware.vndk-sp\
-    libhidlbase.vndk-sp\
-    libhidltransport.vndk-sp\
-    libutils.vndk-sp\
-    libc++.vndk-sp\
-    libRS_internal.vndk-sp\
-    libRSDriver.vndk-sp\
-    libRSCpuRef.vndk-sp\
-    libbcinfo.vndk-sp\
-    libblas.vndk-sp\
-    libft2.vndk-sp\
-    libpng.vndk-sp\
-    libcompiler_rt.vndk-sp\
-    libbacktrace.vndk-sp\
-    libunwind.vndk-sp\
-    liblzma.vndk-sp\
-    libz.vndk-sp\
+# Include vndk/vndk-sp/ll-ndk modules
+PRODUCT_PACKAGES += vndk_package
 
 PRODUCT_ENFORCE_RRO_TARGETS := framework-res
 
@@ -585,13 +586,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.sf.color_saturation=1.1
 
-# Add minidebug info to the system server to support diagnosing native crashes.
-ifneq (,$(filter user userdebug, $(TARGET_BUILD_VARIANT)))
-    # System server and some of its services.
-    # Note: we cannot use PRODUCT_SYSTEM_SERVER_JARS, as it has not been expanded at this point.
-    $(call add-product-dex-preopt-module-config,services,--generate-mini-debug-info)
-    $(call add-product-dex-preopt-module-config,wifi-service,--generate-mini-debug-info)
-endif
+# Easel device feature
+PRODUCT_COPY_FILES += \
+    device/google/wahoo/permissions/com.google.hardware.camera.easel.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.google.hardware.camera.easel.xml
 
 # QC time-daemon to use persist
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -606,6 +603,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.perfd.enable=true
 
+# Enable Gcam FD Ensemble
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.gcam.fd.ensemble=1
+
 # Preopt SystemUI
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUIGoogle
+
+# audio effects config
+PRODUCT_PROPERTY_OVERRIDES += \
+    fmas.hdph_sgain=0

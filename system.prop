@@ -35,7 +35,6 @@ persist.mm.enable.prefetch=true
 
 # Additional buffers shared between Camera and Video
 vendor.vidc.enc.dcvs.extra-buff-count=2
-vendor.vidc.enc.disable.pq=1
 
 # system props for the data netmgrd
 persist.data.netmgrd.qos.enable=true
@@ -50,23 +49,8 @@ telephony.lteOnCdmaDevice=1
 # Simulate sdcard on /data/media
 persist.fuse_sdcard=true
 
-# settings to enable Device Orientation Sensors
-ro.qti.sensors.dev_ori=true
-
-# settings to disable sensors not needed
-# all secondary wakeup
-ro.qti.sensors.wu=false
-# unused algorithms
-ro.qti.sdk.sensors.gestures=false
-ro.qti.sensors.amd=false
-ro.qti.sensors.cmc=false
-ro.qti.sensors.facing=false
-ro.qti.sensors.pedometer=false
-ro.qti.sensors.rmd=false
-ro.qti.sensors.scrn_ortn=false
-# use SMGR supplied verison
-ro.qti.sensors.step_counter=false
-ro.qti.sensors.step_detector=false
+# sensor properties are moved to device.mk
+#
 
 #system prop for RmNet Data
 persist.rmnet.data.enable=true
