@@ -508,7 +508,7 @@ service vendor.perfd /vendor/bin/perfd
    disabled
 
 service vendor.thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg:-/vendor/etc/thermal-engine.conf}
-   class main
+   class hal
    user root
    group root system
    socket thermal-send-client stream 0666 system system

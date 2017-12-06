@@ -170,7 +170,7 @@ PRODUCT_COPY_FILES += \
 
 # power HAL
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.1-service.wahoo
+    android.hardware.power@1.2-service.wahoo
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
@@ -616,7 +616,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Enable CameraHAL perfd usage
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.camera.perfd.enable=true
+    persist.camera.perfd.enable=false
 
 # Enable Gcam FD Ensemble
 PRODUCT_PROPERTY_OVERRIDES += \
