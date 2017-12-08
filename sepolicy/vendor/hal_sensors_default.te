@@ -15,3 +15,7 @@ userdebug_or_eng(`
   allow hal_sensors_default diag_device:chr_file rw_file_perms;
 ')
 dontaudit hal_sensors_default diag_device:chr_file rw_file_perms;
+
+# Allow communication with CHRE daemon via socket
+allow hal_sensors_default chre:unix_stream_socket connectto;
+allow hal_sensors_default chre_socket:sock_file write;
