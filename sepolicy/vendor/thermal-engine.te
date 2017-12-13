@@ -24,6 +24,9 @@ hal_server_domain(thermal-engine, hal_thermal)
 
 allow thermal-engine thermal_device:chr_file rw_file_perms;
 
+r_dir_file(thermal-engine, sysfs_batteryinfo)
+allow thermal-engine sysfs_batteryinfo:file w_file_perms;
+
 r_dir_file(thermal-engine, sysfs_leds)
 r_dir_file(thermal-engine, sysfs_msm_subsys)
 r_dir_file(thermal-engine, sysfs_uio)
