@@ -373,6 +373,7 @@ service vendor.cnss_diag /vendor/bin/cnss_diag -q -u -w
     class late_start
     user system
     group system
+    disabled
     oneshot
 
 service vendor.cnss_diag_txt /vendor/bin/cnss_diag -s -f -m /data/vendor/wifi/cnss_diag/cnss_diag.conf
