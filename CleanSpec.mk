@@ -149,3 +149,6 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/root/init.recovery.$(PRODUCT_HARDWA
 
 # Remove build and default prop.
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/*.prop)
+
+# android.hardware.thermal@1.0-wahoo.so can be a static lib
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/android.hardware.thermal@1.0-wahoo.so)
