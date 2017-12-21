@@ -15,5 +15,6 @@ allow tango_core persist_sensors_file:dir search;
 allow tango_core persist_sensors_file:file { getattr open read };
 
 # Allow access to necessary vendor libraries to execute Hexagon code
+typeattribute tango_core system_executes_vendor_violators;
 allow tango_core hexagon_halide_file:file { execute read open getattr };
 allow tango_core qdsp_device:chr_file { ioctl open read };

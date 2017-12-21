@@ -36,4 +36,5 @@ allow google_camera_app system_app_data_file:file { read write getattr };
 
 # Allow GoogleCamera access to necessary vendor libraries to execute
 # Halide code
+typeattribute google_camera_app system_executes_vendor_violators;
 allow google_camera_app hexagon_halide_file:file { execute read open getattr };
