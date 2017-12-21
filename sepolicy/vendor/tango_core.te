@@ -1,4 +1,5 @@
 type tango_core, domain, coredomain;
+typeattribute tango_core system_executes_vendor_violators;
 
 app_domain(tango_core)
 #from system/sepolicy/private/untrusted_app.te
