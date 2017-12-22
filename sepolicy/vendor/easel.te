@@ -12,3 +12,8 @@ vndbinder_use(easel)
 allow easel easel_device:chr_file rw_file_perms;
 allow easel sysfs_easel:file rw_file_perms;
 allow easel sysfs_easel:dir r_dir_perms;
+
+# access easel thermal sysfs
+allow easel sysfs_thermal:dir r_dir_perms;
+allow easel sysfs_thermal:file r_file_perms;
+allow easel sysfs_thermal:lnk_file r_file_perms;
