@@ -24,3 +24,6 @@ allow hardware_info_app sysfs_scsi_devices_0000:file { getattr open read };
 allow hardware_info_app sysfs_soc:dir search;
 allow hardware_info_app sysfs_soc:file { getattr open read };
 
+# DebugFS
+allow hardware_info_app debugfs_ufs:dir search;
+allow hardware_info_app debugfs_ufs:file r_file_perms;
