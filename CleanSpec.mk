@@ -152,3 +152,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/*.prop)
 
 # android.hardware.thermal@1.0-wahoo.so can be a static lib
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/android.hardware.thermal@1.0-wahoo.so)
+
+# Remove android.hardware.keymaster@4.0-service
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.keymaster@4.0-service)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.keymaster@4.0-service.rc)
