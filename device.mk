@@ -238,6 +238,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.snapshot_enabled=0 \
     persist.radio.snapshot_timer=0
 
+# By default, enable zram; experiment can toggle the flag,
+# which takes effect on boot
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.zram_enabled=1
+
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.vendor.extension_library=libqti-perfd-client.so
 
