@@ -176,7 +176,7 @@ PRODUCT_COPY_FILES += \
 
 # health HAL
 PRODUCT_PACKAGES += \
-    android.hardware.health@2.0-service
+    android.hardware.health@2.0-service.wahoo
 
 # Keymaster 4 (software only)
 PRODUCT_PACKAGES += \
