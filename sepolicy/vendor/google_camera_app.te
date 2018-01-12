@@ -1,4 +1,5 @@
 type google_camera_app, domain, coredomain;
+typeattribute google_camera_app system_executes_vendor_violators;
 
 app_domain(google_camera_app)
 net_domain(google_camera_app)
