@@ -334,6 +334,10 @@ PRODUCT_PACKAGES += \
   android.hardware.drm@1.0-service \
   android.hardware.drm@1.0-service.widevine
 
+# NeuralNetworks HAL
+PRODUCT_PACKAGES += \
+    android.hardware.neuralnetworks@1.0-service-hvx
+
 # NFC packages
 PRODUCT_PACKAGES += \
     nfc_nci.msm8998 \
