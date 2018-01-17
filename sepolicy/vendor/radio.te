@@ -27,3 +27,5 @@ binder_call(radio, hal_imsrtp)
 
 # read /proc/cmdline
 allow radio proc_cmdline:file r_file_perms;
+
+get_prop(radio, vendor_radio_prop)
