@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+PRODUCT_COMPATIBLE_PROPERTY := true
+
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
 
@@ -332,6 +334,10 @@ PRODUCT_PACKAGES += \
   android.hardware.drm@1.0-service \
   android.hardware.drm@1.0-service.widevine
 
+# NeuralNetworks HAL
+PRODUCT_PACKAGES += \
+    android.hardware.neuralnetworks@1.0-service-hvx
+
 # NFC packages
 PRODUCT_PACKAGES += \
     nfc_nci.msm8998 \
@@ -584,10 +590,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     qcom.bluetooth.soc=cherokee
-
-PRODUCT_COPY_FILES += \
-    device/google/wahoo/tango_permissions.xml:system/etc/permissions/tango_permissions.xml \
-    device/google/wahoo/libtango_device2.jar:system/framework/libtango_device2.jar
 
 # Privileged permissions whitelist
 PRODUCT_COPY_FILES += \
