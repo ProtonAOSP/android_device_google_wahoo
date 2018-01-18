@@ -14,7 +14,8 @@
 # limitations under the License.
 #
 
-PRODUCT_COMPATIBLE_PROPERTY := true
+PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
+PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE := true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
