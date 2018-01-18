@@ -2,3 +2,4 @@ shell ramdump_exec file 68002524
 system_server sysfs_msm_subsys dir 68003344
 surfaceflinger vendor_firmware_file dir 68213100
 priv_app system_data_file dir 70308329
+cnss_diag system_data_file dir 72133934
