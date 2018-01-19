@@ -18,6 +18,7 @@
 
 #include <healthd/healthd.h>
 #include <health2/Health.h>
+#include <health2/service.h>
 #include <hidl/HidlTransportSupport.h>
 
 #include <android-base/file.h>
@@ -130,3 +131,6 @@ void get_disk_stats(std::vector<DiskStats>& vec_stats) {
     return;
 }
 
+int main(void) {
+    return health_service_main();
+}
