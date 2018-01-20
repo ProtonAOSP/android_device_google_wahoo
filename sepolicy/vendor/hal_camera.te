@@ -47,5 +47,6 @@ allow hal_camera sysfs_easel:file rw_file_perms;
 allow hal_camera qdsp_device:chr_file r_file_perms;
 
 # lens calibration file
+allow hal_camera persist_file:dir search;
 allow hal_camera persist_sensors_file:dir search;
 allow hal_camera persist_sensors_file:file { getattr open read };
