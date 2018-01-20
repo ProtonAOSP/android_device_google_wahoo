@@ -39,13 +39,8 @@ class SocketCallbacks
     void onConnected() override;
     void onConnectionAborted() override;
     void onDisconnected() override;
-    void handleNanoappMessage(uint64_t appId, uint32_t messageType, uint16_t hostEndpoint,
-                              const void* messageData, size_t messageDataLen) override;
-    void handleHubInfoResponse(const char* name, const char* vendor, const char* toolchain,
-                               uint32_t legacyPlatformVersion, uint32_t legacyToolchainVersion,
-                               float peakMips, float stoppedPower, float sleepPower,
-                               float peakPower, uint32_t maxMessageLen, uint64_t platformId,
-                               uint32_t version) override;
+    void handleNanoappMessage(const ::chre::fbs::NanoappMessageT& message) override;
+    void handleHubInfoResponse(const ::chre::fbs::HubInfoResponseT& response) override;
     void handleNanoappListResponse(const ::chre::fbs::NanoappListResponseT& response) override;
     void handleLoadNanoappResponse(const ::chre::fbs::LoadNanoappResponseT& response) override;
     void handleUnloadNanoappResponse(const ::chre::fbs::UnloadNanoappResponseT& response) override;

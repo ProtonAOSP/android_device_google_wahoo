@@ -21,6 +21,7 @@
 
 #include "chre_host/host_protocol_host.h"
 
+using android::chre::getStringFromByteVector;
 using android::chre::HostProtocolHost;
 using flatbuffers::FlatBufferBuilder;
 
@@ -60,36 +61,29 @@ void SocketCallbacks::onDisconnected() {
     mParent->reportConnectionEvent(ChreInterfaceCallbacks::DISCONNECTED);
 }
 
-void SocketCallbacks::handleNanoappMessage(uint64_t appId, uint32_t messageType,
-                                           uint16_t hostEndpoint, const void* messageData,
-                                           size_t messageDataLen) {
-    LOG(VERBOSE) << "handleNanoappMessage from appId: " << appId;
-    LOG(VERBOSE) << "HostEndPoint: " << hostEndpoint;
-    if (appId == chre_constants::kWifiOffloadNanoAppId) {
-        mParent->handleMessage(messageType, messageData, messageDataLen);
+void SocketCallbacks::handleNanoappMessage(const fbs::NanoappMessageT& message) {
+    LOG(VERBOSE) << "handleNanoappMessage from appId: " << message.app_id;
+    LOG(VERBOSE) << "HostEndPoint: " << message.host_endpoint;
+    if (message.app_id == chre_constants::kWifiOffloadNanoAppId) {
+        mParent->handleMessage(message.message_type, message.message.data(), message.message.size());
     }
 }
 
-void SocketCallbacks::handleHubInfoResponse(const char* name, const char* vendor,
-                                            const char* toolchain, uint32_t legacyPlatformVersion,
-                                            uint32_t legacyToolchainVersion, float peakMips,
-                                            float stoppedPower, float sleepPower, float peakPower,
-                                            uint32_t maxMessageLen, uint64_t platformId,
-                                            uint32_t version) {
+void SocketCallbacks::handleHubInfoResponse(const fbs::HubInfoResponseT& response) {
     LOG(VERBOSE) << "Hub Info response";
-    LOG(VERBOSE) << "Hub Info name: " << name;
-    LOG(VERBOSE) << "Version : " << version;
-    LOG(VERBOSE) << "Legacy Platform Version: " << legacyPlatformVersion;
-    LOG(VERBOSE) << "Legacy Toolchain Version: " << legacyToolchainVersion;
-    LOG(VERBOSE) << "Peak Mips: " << peakMips;
-    LOG(VERBOSE) << "Stopped Power: " << stoppedPower;
-    LOG(VERBOSE) << "Sleep Power: " << sleepPower;
-    LOG(VERBOSE) << "Peak Power: " << peakPower;
-    LOG(VERBOSE) << "Platform ID: " << platformId;
-    LOG(VERBOSE) << "Vendor : " << vendor;
-    LOG(VERBOSE) << "Toolchain : " << toolchain;
-    LOG(VERBOSE) << "maxMessageLen : " << maxMessageLen;
-    if (maxMessageLen < chre_constants::kMaxMessageLen) {
+    LOG(VERBOSE) << "Hub Info name: " << getStringFromByteVector(response.name);
+    LOG(VERBOSE) << "Version : " << response.chre_platform_version;
+    LOG(VERBOSE) << "Legacy Platform Version: " << response.platform_version;
+    LOG(VERBOSE) << "Legacy Toolchain Version: " << response.toolchain_version;
+    LOG(VERBOSE) << "Peak Mips: " << response.peak_mips;
+    LOG(VERBOSE) << "Stopped Power: " << response.stopped_power;
+    LOG(VERBOSE) << "Sleep Power: " << response.sleep_power;
+    LOG(VERBOSE) << "Peak Power: " << response.peak_power;
+    LOG(VERBOSE) << "Platform ID: " << response.platform_id;
+    LOG(VERBOSE) << "Vendor : " << getStringFromByteVector(response.vendor);
+    LOG(VERBOSE) << "Toolchain : " << getStringFromByteVector(response.toolchain);
+    LOG(VERBOSE) << "maxMessageLen : " << response.max_msg_len;
+    if (response.max_msg_len < chre_constants::kMaxMessageLen) {
         LOG(WARNING) << "Incorrect max message length";
     }
 }
