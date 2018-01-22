@@ -216,6 +216,8 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
       RunCommandToFd(fd, "FP LOGS", {"qsee_logger", "-d"});
     }
 
+    DumpFileToFd(fd, "Battery type", "/sys/class/power_supply/bms/battery_type");
+
     RunCommandToFd(fd, "Battery cycle count", {"/vendor/bin/sh", "-c", "for f in 1 2 3 4 5 6 7 8 ; do echo $f > /sys/class/power_supply/bms/cycle_count_id; count=`cat /sys/class/power_supply/bms/cycle_count`; echo \"$f: $count\"; done"});
     return Void();
 };

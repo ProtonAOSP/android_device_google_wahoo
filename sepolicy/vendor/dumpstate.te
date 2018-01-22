@@ -11,3 +11,6 @@ userdebug_or_eng(`
 
   binder_call(dumpstate, per_mgr)
 ')
+
+allow hal_dumpstate sysfs_batteryinfo:dir search;
+allow hal_dumpstate sysfs_batteryinfo:file rw_file_perms;
