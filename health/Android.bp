@@ -19,12 +19,10 @@ cc_binary {
     proprietary: true,
     relative_install_path: "hw",
     srcs: [
-        "HealthServiceCommon.cpp",
         "HealthService.cpp",
     ],
 
     cflags: [
-        "-DHEALTH_INSTANCE_NAME=\"default\"",
         "-Wall",
         "-Werror",
     ],
@@ -32,6 +30,7 @@ cc_binary {
     static_libs: [
         "android.hardware.health@2.0-impl",
         "android.hardware.health@1.0-convert",
+        "libhealthservice",
         "libbatterymonitor",
     ],
 
