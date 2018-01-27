@@ -170,7 +170,7 @@
 /vendor/bin/hw/android\.hardware\.oemlock@1\.0-service               u:object_r:hal_oemlock_default_exec:s0
 /vendor/bin/oemlock_provision   u:object_r:hal_bootctl_default_exec:s0
 /vendor/bin/oemlock-bridge      u:object_r:hal_bootctl_default_exec:s0
-/vendor/bin/hw/android\.hardware\.usb@1\.1-service.wahoo             u:object_r:hal_usb_default_exec:s0
+/vendor/bin/hw/android\.hardware\.usb@1\.1-service.wahoo             u:object_r:hal_usb_impl_exec:s0
 /vendor/bin/hw/android\.hardware\.power@1\.2-service.wahoo           u:object_r:hal_power_default_exec:s0
 /vendor/bin/hw/android\.hardware\.power@1\.2-service.wahoo-libperfmgr u:object_r:hal_power_default_exec:s0
 /vendor/bin/hw/android\.hardware\.thermal@1\.0-service.wahoo         u:object_r:hal_thermal_default_exec:s0
