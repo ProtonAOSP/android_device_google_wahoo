@@ -27,7 +27,7 @@ on post-fs-data
     mkdir /data/vendor/wifi 0777 system system
     mkdir /data/vendor/wifi/cnss_diag 0777 system system
 
-service diag_mdlog_start /vendor/bin/diag_mdlog
+service vendor.diag_mdlog_start /vendor/bin/diag_mdlog
     class late_start
     user shell
     group system diag media_rw
