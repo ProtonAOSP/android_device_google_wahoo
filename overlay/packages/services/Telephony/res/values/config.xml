@@ -19,4 +19,6 @@
 <resources>
     <!-- Allow handover from telephony calls to another ConnectionService. -->
     <bool name="config_support_handover_from">true</bool>
+    <!-- Show enabled lte option for lte device -->
+    <bool name="config_enabled_lte" translatable="false">true</bool>
 </resources>
