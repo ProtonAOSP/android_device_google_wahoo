@@ -8,6 +8,9 @@ allow system_server persist_sensors_file:dir search;
 allow system_server persist_sensors_file:file r_file_perms;
 allow system_server wlan_device:chr_file rw_file_perms;
 
+# BatterySaver access to cpufreq.
+allow system_server sysfs_devices_system_cpu:file w_file_perms;
+
 # input files
 r_dir_file(system_server, idc_file)
 r_dir_file(system_server, keylayout_file)
