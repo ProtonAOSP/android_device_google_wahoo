@@ -21,4 +21,9 @@
     <bool name="config_support_handover_from">true</bool>
     <!-- Show enabled lte option for lte device -->
     <bool name="config_enabled_lte" translatable="false">true</bool>
+    <!-- This device supports the AudioManager Telephony audio device and output onto this
+         device using {@link AudioDeviceInfo#TYPE_TELEPHONY}.
+         This is used to support carriers which generate a recording tone to the remote party
+         when a call recording app is in use. -->
+    <bool name="config_support_telephony_audio_device">true</bool>
 </resources>
