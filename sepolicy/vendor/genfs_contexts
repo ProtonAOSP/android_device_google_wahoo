@@ -12,6 +12,11 @@ genfscon sysfs /devices/soc/soc:qcom,memlat-cpu4      u:object_r:sysfs_msm_subsy
 genfscon sysfs /android_touch                         u:object_r:sysfs_touch:s0
 
 genfscon sysfs /devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:0 u:object_r:sysfs_scsi_devices_0000:s0
+genfscon sysfs /devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:1 u:object_r:sysfs_scsi_devices_other:s0
+genfscon sysfs /devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:2 u:object_r:sysfs_scsi_devices_other:s0
+genfscon sysfs /devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:3 u:object_r:sysfs_scsi_devices_other:s0
+genfscon sysfs /devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:4 u:object_r:sysfs_scsi_devices_other:s0
+genfscon sysfs /devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:5 u:object_r:sysfs_scsi_devices_other:s0
 
 genfscon sysfs /class/rfkill/rfkill0/state            u:object_r:sysfs_bluetooth_writable:s0
 
@@ -90,3 +95,5 @@ genfscon debugfs /mdp                                 u:object_r:debugfs_mdp:s0
 genfscon debugfs /rmt_storage                         u:object_r:debugfs_rmt_storage:s0
 genfscon debugfs /icnss                               u:object_r:debugfs_icnss:s0
 genfscon debugfs /ufshcd0                             u:object_r:debugfs_ufs:s0
+
+genfscon debugfs /dma_buf/bufinfo                     u:object_r:debugfs_dma_bufinfo:s0
