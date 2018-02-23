@@ -504,6 +504,13 @@ service vendor.folio_daemon /system/bin/folio_daemon
     class late_start
     user system
     group system
+    disabled
+
+on property:init.svc.zygote=running
+    start vendor.folio_daemon
+
+on property:init.svc.zygote=stopped
+    stop vendor.folio_daemon
 
 service vendor.perfd /vendor/bin/perfd
    class main
