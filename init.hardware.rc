@@ -783,10 +783,10 @@ on property:persist.radio.atfwd.start=false
     stop vendor.atfwd
 
 # b/68982314
-on property:proc.uidcpupower=*
+on property:sys.uidcpupower=*
    write /proc/uid_cpupower/enable 1
 
-on property:proc.uidcpupower=0
+on property:sys.uidcpupower=0
    write /proc/uid_cpupower/enable 0
 
 # bugreport is triggered by holding down volume down, volume up and power
