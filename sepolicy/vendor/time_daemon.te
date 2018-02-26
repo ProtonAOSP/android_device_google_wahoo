@@ -28,3 +28,6 @@ userdebug_or_eng(`
   allow time_daemon diag_device:chr_file rw_file_perms;
 ')
 dontaudit time_daemon diag_device:chr_file rw_file_perms;
+
+# b/68864350
+dontaudit time_daemon unlabeled:dir search;
