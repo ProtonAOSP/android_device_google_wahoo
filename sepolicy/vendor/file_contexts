@@ -120,7 +120,6 @@
 /system/bin/move_widevine_data\.sh              u:object_r:move-widevine-data-sh_exec:s0
 
 # files in /vendor
-/vendor/firmware(/.*)?          u:object_r:vendor_firmware_file:s0
 /vendor/bin/hw/android\.hardware\.dumpstate@1\.0-service.wahoo      u:object_r:hal_dumpstate_impl_exec:s0
 /vendor/bin/hw/android\.hardware\.vr@1\.0-service.wahoo      u:object_r:hal_vr_default_exec:s0
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service.wahoo u:object_r:hal_fingerprint_default_exec:s0
