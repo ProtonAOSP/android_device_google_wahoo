@@ -168,3 +168,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.powe
 # Remove Vibrator HAL 1.1
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.vibrator@1.1-service.wahoo.rc)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.vibrator@1.1-service.wahoo)
+
+# Remove all HALs (actual bitness now being specified)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/*)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib64/hw/*)
