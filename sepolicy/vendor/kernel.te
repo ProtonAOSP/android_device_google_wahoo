@@ -3,10 +3,11 @@ userdebug_or_eng(`
   allow kernel self:socket create;
 ')
 
-dontaudit kernel kernel:system module_request;
+allow kernel vendor_firmware_file:dir search;
+allow kernel vendor_firmware_file:file r_file_perms;
+allow kernel vendor_firmware_file:lnk_file read;
 
-# Read FDs from /vendor/firmware
-allow kernel vendor_file:file r_file_perms;
+dontaudit kernel kernel:system module_request;
 
 allow kernel debugfs_ipc:dir search;
 allow kernel persist_file:dir search;
