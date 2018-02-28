@@ -328,8 +328,9 @@ PRODUCT_PACKAGES += \
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
     libbt-vendor \
-    android.hardware.bluetooth@1.0-impl    \
-    android.hardware.bluetooth@1.0-service
+    android.hardware.bluetooth@1.0-impl \
+    android.hardware.bluetooth@1.0-service \
+    wcnss_filter
 
 # DRM HAL
 PRODUCT_PACKAGES += \
