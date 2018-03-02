@@ -24,4 +24,7 @@ userdebug_or_eng(`
   allow smlog_dump dumpstate:fd use;
   allow smlog_dump hal_dumpstate_impl:fd use;
   allow smlog_dump uio_device:chr_file rw_file_perms;
+
+  # For collecting bugreports.
+  allow smlog_dump shell_data_file:file write;
 ')
