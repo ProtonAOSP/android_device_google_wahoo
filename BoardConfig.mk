@@ -89,6 +89,7 @@ TARGET_ANDROID_FILESYSTEM_CONFIG_H := device/google/wahoo/android_filesystem_con
 
 QCOM_BOARD_PLATFORMS += msm8998
 BOARD_HAVE_BLUETOOTH_QCOM := true
+BOARD_USES_SDM845_BLUETOOTH_HAL := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/google/wahoo/bluetooth
 
 # Camera
