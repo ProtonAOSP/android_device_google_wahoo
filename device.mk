@@ -297,10 +297,10 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     hwcomposer.msm8998 \
-    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.composer@2.1-impl:64 \
     android.hardware.graphics.composer@2.1-service \
     gralloc.msm8998 \
-    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.allocator@2.0-impl:64 \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.mapper@2.0-impl \
     libbt-vendor
@@ -312,7 +312,7 @@ PRODUCT_PACKAGES += \
 # Light HAL
 PRODUCT_PACKAGES += \
     lights.$(PRODUCT_HARDWARE) \
-    android.hardware.light@2.0-impl \
+    android.hardware.light@2.0-impl:64 \
     android.hardware.light@2.0-service
 
 # eSE applet HALs
@@ -328,13 +328,13 @@ PRODUCT_PACKAGES += \
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
     libbt-vendor \
-    android.hardware.bluetooth@1.0-impl \
+    android.hardware.bluetooth@1.0-impl:64 \
     android.hardware.bluetooth@1.0-service \
     wcnss_filter
 
 # DRM HAL
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.0-impl \
+    android.hardware.drm@1.0-impl:32 \
     android.hardware.drm@1.0-service \
     android.hardware.drm@1.0-service.widevine \
     android.hardware.drm@1.1-service.clearkey \
@@ -349,7 +349,7 @@ PRODUCT_PACKAGES += \
     nfc_nci.msm8998 \
     NfcNci \
     Tag \
-    android.hardware.nfc@1.0-impl \
+    android.hardware.nfc@1.0-impl:64 \
     android.hardware.nfc@1.0-service
 
 PRODUCT_COPY_FILES += \
@@ -368,7 +368,7 @@ PRODUCT_PACKAGES += \
     libc2dcolorconvert
 
 PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.4-impl \
+    android.hardware.camera.provider@2.4-impl:32 \
     android.hardware.camera.provider@2.4-service \
     camera.device@3.2-impl \
     camera.msm8998 \
@@ -378,7 +378,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     sensors.$(PRODUCT_HARDWARE) \
-    android.hardware.sensors@1.0-impl \
+    android.hardware.sensors@1.0-impl:64 \
     android.hardware.sensors@1.0-service
 
 PRODUCT_COPY_FILES += \
@@ -394,12 +394,12 @@ PRODUCT_PACKAGES += \
 
 # Context hub HAL
 PRODUCT_PACKAGES += \
-    android.hardware.contexthub@1.0-impl.generic \
+    android.hardware.contexthub@1.0-impl.generic:64 \
     android.hardware.contexthub@1.0-service
 
 # Boot control HAL
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.0-impl \
+    android.hardware.boot@1.0-impl:64 \
     android.hardware.boot@1.0-service \
 
 # Vibrator HAL
@@ -463,9 +463,9 @@ PRODUCT_PACKAGES += \
     libaudio-resampler
 
 PRODUCT_PACKAGES += \
-    android.hardware.audio@2.0-impl \
-    android.hardware.audio.effect@2.0-impl \
-    android.hardware.soundtrigger@2.1-impl \
+    android.hardware.audio@2.0-impl:32 \
+    android.hardware.audio.effect@2.0-impl:32 \
+    android.hardware.soundtrigger@2.1-impl:32 \
     android.hardware.audio@2.0-service
 
 # stereo speakers: orientation changes swap L/R channels
