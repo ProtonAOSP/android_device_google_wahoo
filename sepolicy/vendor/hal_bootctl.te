@@ -29,3 +29,6 @@ allow hal_bootctl xbl_block_device:blk_file rw_file_perms;
 
 # Expose a socket for brokered boot message access for hal_oemlock.
 allow hal_bootctl hal_bootctl_socket:sock_file create_file_perms;
+
+allow hal_bootctl sysfs_scsi_devices_other:dir r_dir_perms;
+allow hal_bootctl sysfs_scsi_devices_other:file r_file_perms;
