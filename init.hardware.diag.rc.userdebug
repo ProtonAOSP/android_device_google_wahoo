@@ -92,3 +92,9 @@ on property:persist.bluetooth.btsnoopenable=true
 
 on property:persist.bluetooth.btsnoopenable=false
    setprop persist.service.bdroid.soclog false
+
+on property:vendor.usb.config=*
+   start usbd
+
+on property:persist.vendor.usb.usbradio.config=*
+   start usbd
