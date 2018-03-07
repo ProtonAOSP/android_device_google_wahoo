@@ -236,7 +236,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.data_con_rprt=true \
     persist.radio.always_send_plmn=true \
     persist.rcs.supported=1 \
-    rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
+    vendor.rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
 
 # Disable snapshot timer
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -463,8 +463,8 @@ PRODUCT_PACKAGES += \
     libaudio-resampler
 
 PRODUCT_PACKAGES += \
-    android.hardware.audio@2.0-impl:32 \
-    android.hardware.audio.effect@2.0-impl:32 \
+    android.hardware.audio@4.0-impl:32 \
+    android.hardware.audio.effect@4.0-impl:32 \
     android.hardware.soundtrigger@2.1-impl:32 \
     android.hardware.audio@2.0-service
 
@@ -636,3 +636,8 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
 # audio effects config
 PRODUCT_PROPERTY_OVERRIDES += \
     fmas.hdph_sgain=0
+
+# NFC/camera interaction workaround - DO NOT COPY TO NEW DEVICES
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.camera.notify_nfc=1
+

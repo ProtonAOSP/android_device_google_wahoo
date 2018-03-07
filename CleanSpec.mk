@@ -172,3 +172,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.vibr
 # Remove all HALs (actual bitness now being specified)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/*)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib64/hw/*)
+
+# Remove android.hardware.audio*@2.0 implementation
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/android.hardware.audio*@2.0-impl.so)
+
