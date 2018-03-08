@@ -77,7 +77,6 @@ genfscon sysfs /devices/soc/a800000.ssusb/a800000.dwc3/xhci-hcd.0.auto/usb2 u:ob
 genfscon sysfs /devices/soc/800f000.qcom,spmi/spmi-0/spmi0-02/800f000.qcom,spmi:qcom,pmi8998@2:qcom,usb-pdphy@1700/usbpd0/typec     u:object_r:sysfs_usb_c:s0
 genfscon sysfs /module/diagchar                                         u:object_r:sysfs_diag:s0
 genfscon sysfs /kernel/irq_helper/irq_blacklist_on                      u:object_r:sysfs_irq:s0
-genfscon sysfs /devices/virtual/block                                   u:object_r:sysfs_devices_block:s0
 
 genfscon debugfs /kgsl/proc                           u:object_r:debugfs_kgsl:s0
 genfscon debugfs /clk/debug_suspend                   u:object_r:debugfs_clk:s0
