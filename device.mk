@@ -234,7 +234,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.sap_silent_pin=1 \
     persist.radio.sib16_support=1 \
     persist.radio.data_con_rprt=true \
-    persist.radio.always_send_plmn=true \
+    persist.radio.always_send_plmn=false\
     persist.rcs.supported=1 \
     vendor.rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
 
