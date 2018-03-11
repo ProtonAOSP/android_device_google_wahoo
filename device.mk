@@ -234,7 +234,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.sap_silent_pin=1 \
     persist.radio.sib16_support=1 \
     persist.radio.data_con_rprt=true \
-    persist.radio.always_send_plmn=true \
+    persist.radio.always_send_plmn=false\
     persist.rcs.supported=1 \
     vendor.rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
 
@@ -327,10 +327,9 @@ PRODUCT_PACKAGES += \
 
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
-    libbt-vendor \
-    android.hardware.bluetooth@1.0-impl:64 \
-    android.hardware.bluetooth@1.0-service \
-    wcnss_filter
+    android.hardware.bluetooth@1.0-impl-qti:64 \
+    android.hardware.bluetooth@1.0-service-qti \
+    android.hardware.bluetooth@1.0-service-qti.rc
 
 # DRM HAL
 PRODUCT_PACKAGES += \
@@ -353,7 +352,7 @@ PRODUCT_PACKAGES += \
     android.hardware.nfc@1.0-service
 
 PRODUCT_COPY_FILES += \
-    device/google/wahoo/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-nci.conf \
+    device/google/wahoo/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/libnfc-nci.conf \
 
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.1-service.wahoo
