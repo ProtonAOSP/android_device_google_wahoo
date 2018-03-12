@@ -12,3 +12,9 @@ userdebug_or_eng(`
 
 allow hal_dumpstate sysfs_batteryinfo:dir search;
 allow hal_dumpstate sysfs_batteryinfo:file rw_file_perms;
+
+# For collecting bugreports.
+allow dumpstate sysfs_scsi_devices_0000:file r_file_perms;
+allow dumpstate sysfs_scsi_devices_other:file r_file_perms;
+allow dumpstate sysfs_devices_block:file r_file_perms;
+dontaudit dumpstate kernel:system module_request;
