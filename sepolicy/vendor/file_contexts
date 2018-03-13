@@ -285,3 +285,5 @@
 
 /metadata                 u:object_r:rootfs:s0
 /metadata/.*              u:object_r:vold_data_file:s0
+
+/sys/devices/virtual/block/.*/stat u:object_r:sysfs_devices_block_stat:s0
