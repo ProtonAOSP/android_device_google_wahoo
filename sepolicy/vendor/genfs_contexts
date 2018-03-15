@@ -98,3 +98,4 @@ genfscon debugfs /icnss                               u:object_r:debugfs_icnss:s
 genfscon debugfs /ufshcd0                             u:object_r:debugfs_ufs:s0
 
 genfscon debugfs /dma_buf/bufinfo                     u:object_r:debugfs_dma_bufinfo:s0
+genfscon debugfs /tzdbg	                              u:object_r:debugfs_tzdbg:s0
