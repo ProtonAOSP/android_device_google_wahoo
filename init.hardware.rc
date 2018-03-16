@@ -466,10 +466,6 @@ on boot
     # Wifi firmware reload path
     chown wifi wifi /sys/module/wlan/parameters/fwpath
 
-    # Allow system to write to cycle_count_id to iterate and get stats
-    chown system system /sys/class/power_supply/bms/cycle_count_id
-    chmod 0666 /sys/class/power_supply/bms/cycle_count_id
-
     # default country code
     setprop ro.boot.wificountrycode 00
 
@@ -590,7 +586,7 @@ on property:sys.boot_completed=1
 
     # UFS health
     chmod 755 /sys/kernel/debug/ufshcd0
-    chown 644 /sys/kernel/debug/ufshcd0/err_state
+    chmod 644 /sys/kernel/debug/ufshcd0/err_state
     chmod 644 /sys/kernel/debug/ufshcd0/power_mode
     chmod 644 /sys/kernel/debug/ufshcd0/host_regs
     chmod 644 /sys/kernel/debug/ufshcd0/show_hba
@@ -600,6 +596,14 @@ on property:sys.boot_completed=1
     chmod 644 /sys/kernel/debug/ufshcd0/stats/req_stats
     chmod 644 /sys/kernel/debug/ufshcd0/stats/query_stats
     chmod 644 /sys/kernel/debug/ufshcd0/stats/err_stats
+
+    # QCOM FG SRAM dump for dumpstate
+    chown system system /d/fg/sram/data
+    chown system system /d/fg/sram/count
+    chown system system /d/fg/sram/address
+
+    # com.google.android.hardwareinfo needs to be able to read cycle counts
+    chmod 0666 /sys/class/power_supply/bms/cycle_count_id
 
     trigger sys-boot-completed-set
 
