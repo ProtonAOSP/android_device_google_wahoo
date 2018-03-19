@@ -200,6 +200,18 @@ ssize_t fillTemperatures(hidl_vec<Temperature> *temperatures) {
         }
         current_index++;
     }
+
+    // USB-C temperature.
+    if (current_index < temperatures->size()) {
+        // temperature in Celsius.
+        result = readTemperature(
+            kUsbcSensorNum, TemperatureType::UNKNOWN, kUsbcLabel, 0.1, NAN, NAN,
+            NAN, &(*temperatures)[current_index]);
+        if (result < 0) {
+            return result;
+        }
+        current_index++;
+    }
     return kTemperatureNum;
 }
 
