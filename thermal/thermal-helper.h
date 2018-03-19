@@ -69,17 +69,19 @@ constexpr unsigned int kTaimenRcVrThrottledBelowMin = 50;
 
 
 constexpr unsigned int kBatterySensorNum = 0;
+constexpr unsigned int kUsbcSensorNum = 5;
 constexpr unsigned int kGpuTsensOffset = 11;
 constexpr unsigned int kCpuNum = 8;
 
 constexpr const char *kGpuLabel = "GPU";
 constexpr const char *kBatteryLabel = "battery";
 constexpr const char *kSkinLabel = "skin";
+constexpr const char *kUsbcLabel = "usbc";
 constexpr const char *kCpuLabel[kCpuNum] = {"CPU0", "CPU1", "CPU2", "CPU3", "CPU4", "CPU5", "CPU6", "CPU7"};
 constexpr int kCpuTsensOffset[kCpuNum] = {1, 2, 4, 3, 5, 6, 7, 8};
 
-// Sum of kCpuNum + 3 for GPU, BATTERY, and SKIN.
-constexpr unsigned int kTemperatureNum = 3 + kCpuNum;
+// Sum of kCpuNum + 4 for GPU, BATTERY, SKIN, and USB-C.
+constexpr unsigned int kTemperatureNum = 4 + kCpuNum;
 
 // qcom, therm-reset-temp
 constexpr unsigned int kCpuShutdownThreshold = 115;
