@@ -331,6 +331,10 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-service-qti \
     android.hardware.bluetooth@1.0-service-qti.rc
 
+# Property for loading BDA from bdaddress module in kernel
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.bt.bdaddr_path=/sys/module/bdaddress/parameters/bdaddress
+
 # DRM HAL
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl:32 \
