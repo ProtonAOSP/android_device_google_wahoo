@@ -46,30 +46,29 @@ constexpr const char *kTemperatureFileFormat = "/sys/class/thermal/thermal_zone%
 constexpr const char *kCpuOnlineFileFormat = "/sys/devices/system/cpu/cpu%d/online";
 
 // thermal-engine.conf
-constexpr unsigned int kWalleyeSkinSensorNum = 9;
+constexpr unsigned int kWalleyeSkinSensorNum = 13;
 constexpr auto         kWalleyeSkinSensorType = "back_therm";
-constexpr unsigned int kWalleyeTsensOffset = 11;
+constexpr unsigned int kWalleyeTsensOffset = 15;
 constexpr unsigned int kWalleyeSkinThrottlingThreshold = 40;
 constexpr unsigned int kWalleyeSkinShutdownThreshold = 56;
 constexpr unsigned int kWalleyeVrThrottledBelowMin = 52;
 
-constexpr unsigned int kTaimenRabSkinSensorNum = 8;
+constexpr unsigned int kTaimenRabSkinSensorNum = 12;
 constexpr auto         kTaimenRabSkinSensorType = "bd_therm";
-constexpr unsigned int kTaimenRabTsensOffset = 9;
+constexpr unsigned int kTaimenRabTsensOffset = 13;
 constexpr unsigned int kTaimenRabSkinThrottlingThreshold = 49;
 constexpr unsigned int kTaimenRabSkinShutdownThreshold = 66;
 constexpr unsigned int kTaimenRabVrThrottledBelowMin = 62;
 
-constexpr unsigned int kTaimenRcSkinSensorNum = 8;
+constexpr unsigned int kTaimenRcSkinSensorNum = 12;
 constexpr auto         kTaimenRcSkinSensorType = "bd_therm2";
-constexpr unsigned int kTaimenRcTsensOffset = 9;
+constexpr unsigned int kTaimenRcTsensOffset = 13;
 constexpr unsigned int kTaimenRcSkinThrottlingThreshold = 38;
 constexpr unsigned int kTaimenRcSkinShutdownThreshold = 54;
 constexpr unsigned int kTaimenRcVrThrottledBelowMin = 50;
 
-
-constexpr unsigned int kBatterySensorNum = 0;
 constexpr unsigned int kUsbcSensorNum = 5;
+constexpr unsigned int kBatterySensorNum = 4;
 constexpr unsigned int kGpuTsensOffset = 11;
 constexpr unsigned int kCpuNum = 8;
 
