@@ -184,7 +184,7 @@
 /vendor/bin/init\.radio\.sh     u:object_r:init_radio_exec:s0
 
 /vendor/bin/hw/android\.hardware\.bluetooth@1\.0-service-qti          u:object_r:hal_bluetooth_default_exec:s0
-/vendor/bin/hw/android\.hardware\.drm@1\.0-service\.widevine          u:object_r:hal_drm_widevine_exec:s0
+/vendor/bin/hw/android\.hardware\.drm@1\.1-service\.widevine          u:object_r:hal_drm_widevine_exec:s0
 /vendor/bin/hw/android\.hardware\.drm@1\.1-service\.clearkey          u:object_r:hal_drm_clearkey_exec:s0
 /vendor/bin/hw/android\.hardware\.vibrator@1\.2-service\.wahoo        u:object_r:hal_vibrator_default_exec:s0
 /vendor/bin/hw/android\.hardware\.health@2\.0-service\.wahoo          u:object_r:hal_health_default_exec:s0
