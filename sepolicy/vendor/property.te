@@ -20,3 +20,4 @@ type bluetooth_log_prop, property_type;
 type power_prop, property_type;
 type vendor_net_radio_prop, property_type;
 type vendor_radio_prop, property_type;
+type vendor_wifi_version, property_type;
