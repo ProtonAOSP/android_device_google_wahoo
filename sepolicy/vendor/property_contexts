@@ -28,6 +28,8 @@ persist.radio.atfwd.start  u:object_r:atfwd_start_prop:s0
 sys.logger.bluetooth       u:object_r:bluetooth_log_prop:s0
 vendor.powerhal.state      u:object_r:power_prop:s0
 vendor.powerhal.audio      u:object_r:power_prop:s0
+sys.wlan.driver.version    u:object_r:vendor_wifi_version:s0
+sys.wlan.firmware.version  u:object_r:vendor_wifi_version:s0
 
 # public_vendor_default_prop
 # They are public_vendor_default_props for vendor-specific extension.
