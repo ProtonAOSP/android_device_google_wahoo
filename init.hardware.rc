@@ -826,6 +826,13 @@ service vendor.devstart_sh /vendor/bin/init.qcom.devstart.sh
     disabled
     oneshot
 
+service vendor.wlan_sh /vendor/bin/init.qcom.wlan.sh
+    class main
+    user root
+    group root
+    disabled
+    oneshot
+
 service vendor.ipastart_sh /vendor/bin/init.qcom.ipastart.sh
     class main
     user system
@@ -861,3 +868,7 @@ on property:sys.vdso=64
 
 on property:sys.vdso=32
    write /sys/module/vdso/parameters/enable_64 0
+
+on property:wlan.driver.status=ok
+   # Get the wlan driver/fw version
+   start vendor.wlan_sh
