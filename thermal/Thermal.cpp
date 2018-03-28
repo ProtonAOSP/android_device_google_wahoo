@@ -55,6 +55,8 @@ Return<void> Thermal::getTemperatures(getTemperatures_cb _hidl_cb) {
     hidl_vec<Temperature> temperatures;
     temperatures.resize(kTemperatureNum);
 
+    LOG(INFO) << "ThermalHAL enabled: " << enabled;
+
     if (!enabled) {
         status.code = ThermalStatusCode::FAILURE;
         status.debugMessage = "Unsupported hardware";
@@ -62,10 +64,9 @@ Return<void> Thermal::getTemperatures(getTemperatures_cb _hidl_cb) {
         return Void();
     }
 
-    ssize_t ret = fillTemperatures(&temperatures);
-    if (ret < 0) {
+    if (fillTemperatures(&temperatures) != kTemperatureNum) {
         status.code = ThermalStatusCode::FAILURE;
-        status.debugMessage = strerror(-ret);
+        status.debugMessage = "Error reading thermal sensors.";
     }
     _hidl_cb(status, temperatures);
 
