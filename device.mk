@@ -206,6 +206,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qcom.adreno.qgl.ShaderStorageImageExtendedFormats=0
 
+# b/73640835
+PRODUCT_PROPERTY_OVERRIDES += \
+    sdm.debug.rotator_downscale=1
+
 # Enable camera EIS3.0
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.is_type=5 \
