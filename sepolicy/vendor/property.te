@@ -21,3 +21,4 @@ type power_prop, property_type;
 type vendor_net_radio_prop, property_type;
 type vendor_radio_prop, property_type;
 type vendor_wifi_version, property_type;
+type vendor_usb_config_prop, property_type;
