@@ -26,7 +26,7 @@ PRODUCT_COPY_FILES += \
 
 # Set the SVN for the targeted MR release
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.build.svn=9
+    ro.vendor.build.svn=10
 
 # Enforce privapp-permissions whitelist
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -205,6 +205,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # b/68017541
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qcom.adreno.qgl.ShaderStorageImageExtendedFormats=0
+
+# b/73640835
+PRODUCT_PROPERTY_OVERRIDES += \
+    sdm.debug.rotator_downscale=1
 
 # Enable camera EIS3.0
 PRODUCT_PROPERTY_OVERRIDES += \
