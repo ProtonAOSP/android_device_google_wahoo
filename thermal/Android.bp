@@ -5,6 +5,7 @@ cc_library {
     vendor: true,
     relative_install_path: "hw",
     srcs: [
+	"sensors.cpp",
         "Thermal.cpp",
         "thermal-helper.cpp",
     ],
