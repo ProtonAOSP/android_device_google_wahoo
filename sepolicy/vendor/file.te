@@ -37,7 +37,7 @@ type debugfs_dma_bufinfo, debugfs_type, fs_type;
 type debugfs_tzdbg, debugfs_type, fs_type;
 
 # /proc
-type proc_wifi_dbg, fs_type;
+type proc_wifi_dbg, fs_type, proc_type;
 
 type qmuxd_socket, file_type;
 type netmgrd_socket, file_type;
@@ -95,6 +95,6 @@ type keylayout_file, file_type, vendor_file_type;
 typeattribute sysfs_batteryinfo mlstrustedobject;
 
 # msm_irqbalance
-type proc_irq, fs_type;
-type sysfs_irq, fs_type;
+type proc_irq, fs_type, proc_type;
+type sysfs_irq, sysfs_type, fs_type;
 type irqbalance_socket, file_type;
