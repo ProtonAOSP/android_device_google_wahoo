@@ -187,6 +187,10 @@ on fs
     chmod 0770 /persist/rfs/apq
     chmod 0770 /persist/rfs/apq/gnss
     chmod 0770 /persist/hlos_rfs
+
+    # for android.hardware.health@2.0-service.marlin cycle count backup
+    mkdir /persist/battery 0700 system system
+
     restorecon_recursive /persist
 
     # Start HW service manager early
@@ -424,6 +428,11 @@ on early-boot
     chown system system /sys/class/leds/green/rgb_start
     chown system system /sys/class/leds/blue/rgb_start
     chown system system /sys/class/graphics/fb0/msm_fb_persist_mode
+
+    # dumpstate needs to read, vendor.health-hal needs to be able to RW
+    chown system system /sys/devices/soc/800f000.qcom,spmi/spmi-0/spmi0-02/800f000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
+    # HardwareInfo needs to be able to read CC bins
+    chmod 644 /sys/devices/soc/800f000.qcom,spmi/spmi-0/spmi0-02/800f000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
 
 on boot
     mkdir /dev/socket/qmux_radio 0770 radio radio
