@@ -260,7 +260,7 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     // Timeout after 3s
     RunCommandToFd(fd, "QSEE logs", {"/vendor/bin/sh", "-c", "/vendor/bin/timeout 3 cat /d/tzdbg/qsee_log"});
     RunCommandToFd(fd, "Power supply properties", {"/vendor/bin/sh", "-c", "for f in /sys/class/power_supply/*/uevent ; do echo \"\n------ $f\" ; cat $f ; done"});
-    RunCommandToFd(fd, "Battery cycle count", {"/vendor/bin/sh", "-c", "for f in 1 2 3 4 5 6 7 8 ; do echo $f > /sys/class/power_supply/bms/cycle_count_id; count=`cat /sys/class/power_supply/bms/cycle_count`; echo \"$f: $count\"; done"});
+    DumpFileToFd(fd, "Battery cycle count", "/sys/class/power_supply/bms/device/cycle_counts_bins");
     RunCommandToFd(fd, "QCOM FG SRAM", {"/vendor/bin/sh", "-c", "echo 0 > /d/fg/sram/address ; echo 500 > /d/fg/sram/count ; cat /d/fg/sram/data"});
 
     DumpFileToFd(fd, "WLAN FW Log Symbol Table", "/vendor/firmware/Data.msc");
