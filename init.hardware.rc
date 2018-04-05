@@ -160,6 +160,8 @@ on init
     write /proc/sys/vm/page-cluster 0
 
 on fs
+    # Start HW service manager early
+    start hwservicemanager
     mount_all /vendor/etc/fstab.${ro.hardware} --early
 
     mkdir /persist/data 0700 system system
@@ -193,9 +195,6 @@ on fs
 
     restorecon_recursive /persist
 
-    # Start HW service manager early
-    start hwservicemanager
-
 on late-fs
     # Start devices by sysfs trigger
     start vendor.devstart_sh
@@ -206,6 +205,10 @@ on late-fs
     start vendor.configstore-hal-1-0
     start vendor.gralloc-2-0
 
+    # Wait for hwservicemanager ready since fsck might be triggered in mount_all --late
+    # In such case, init won't responce the property_set from hwservicemanager and then
+    # cause services for bootanim not running.
+    wait_for_prop hwservicemanager.ready true
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.${ro.hardware} --late
 
