@@ -27,14 +27,50 @@
 #include <vector>
 #include <string>
 
+#include "CycleCountBackupRestore.h"
+
 using android::hardware::health::V2_0::StorageInfo;
 using android::hardware::health::V2_0::DiskStats;
+using ::device::google::wahoo::health::CycleCountBackupRestore;
 
-void healthd_board_init(struct healthd_config*) {
+static constexpr int kBackupTrigger = 20;
+static CycleCountBackupRestore ccBackupRestore;
+
+int cycle_count_backup(int battery_level)
+{
+    static int saved_soc = 0;
+    static int soc_inc = 0;
+    static bool is_first = true;
+
+    if (is_first) {
+        is_first = false;
+        saved_soc = battery_level;
+        return 0;
+    }
+
+    if (battery_level > saved_soc) {
+        soc_inc += battery_level - saved_soc;
+    }
+
+    saved_soc = battery_level;
+
+    if (soc_inc >= kBackupTrigger) {
+        ccBackupRestore.Backup();
+        soc_inc = 0;
+    }
+    return 0;
 }
 
-int healthd_board_battery_update(struct android::BatteryProperties*) {
-    return 0;
+// See : hardware/interfaces/health/2.0/README
+
+void healthd_board_init(struct healthd_config*)
+{
+    ccBackupRestore.Restore();
+}
+
+int healthd_board_battery_update(struct android::BatteryProperties *props)
+{
+    return cycle_count_backup(props->batteryLevel);
 }
 
 const char kUFSHealthFile[] = "/sys/kernel/debug/ufshcd0/dump_health_desc";

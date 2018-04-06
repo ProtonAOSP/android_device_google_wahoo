@@ -160,6 +160,8 @@ on init
     write /proc/sys/vm/page-cluster 0
 
 on fs
+    # Start HW service manager early
+    start hwservicemanager
     mount_all /vendor/etc/fstab.${ro.hardware} --early
 
     mkdir /persist/data 0700 system system
@@ -187,10 +189,11 @@ on fs
     chmod 0770 /persist/rfs/apq
     chmod 0770 /persist/rfs/apq/gnss
     chmod 0770 /persist/hlos_rfs
-    restorecon_recursive /persist
 
-    # Start HW service manager early
-    start hwservicemanager
+    # for android.hardware.health@2.0-service.marlin cycle count backup
+    mkdir /persist/battery 0700 system system
+
+    restorecon_recursive /persist
 
 on late-fs
     # Start devices by sysfs trigger
@@ -202,6 +205,10 @@ on late-fs
     start vendor.configstore-hal-1-0
     start vendor.gralloc-2-0
 
+    # Wait for hwservicemanager ready since fsck might be triggered in mount_all --late
+    # In such case, init won't responce the property_set from hwservicemanager and then
+    # cause services for bootanim not running.
+    wait_for_prop hwservicemanager.ready true
     # Mount RW partitions which need run fsck
     mount_all /vendor/etc/fstab.${ro.hardware} --late
 
@@ -424,6 +431,11 @@ on early-boot
     chown system system /sys/class/leds/green/rgb_start
     chown system system /sys/class/leds/blue/rgb_start
     chown system system /sys/class/graphics/fb0/msm_fb_persist_mode
+
+    # dumpstate needs to read, vendor.health-hal needs to be able to RW
+    chown system system /sys/devices/soc/800f000.qcom,spmi/spmi-0/spmi0-02/800f000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
+    # HardwareInfo needs to be able to read CC bins
+    chmod 644 /sys/devices/soc/800f000.qcom,spmi/spmi-0/spmi0-02/800f000.qcom,spmi:qcom,pmi8998@2:qpnp,fg/cycle_counts_bins
 
 on boot
     mkdir /dev/socket/qmux_radio 0770 radio radio
@@ -872,3 +884,14 @@ on property:sys.vdso=32
 on property:wlan.driver.status=ok
    # Get the wlan driver/fw version
    start vendor.wlan_sh
+
+# charger driver exposes now finer grain control, map demo mode to those properties
+# demo mode can only be exit wipping data which will also reset the persist properties
+on property:sys.retaildemo.enabled=1
+    setprop persist.vendor.charge.stop.level 35
+    setprop persist.vendor.charge.start.level 30
+
+# system will not set the sys.retaildemo.enabled to 0 but this is used to set back to default charging
+on property:sys.retaildemo.enabled=0
+    setprop persist.vendor.charge.stop.level 100
+    setprop persist.vendor.charge.start.level 0
