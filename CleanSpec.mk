@@ -183,3 +183,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.drm@
 # Remove Widevine HAL 1.0
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.drm@1.0-service.widevine.rc)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.drm@1.0-service.widevine)
+
+# Remove healthd
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/healthd)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/init/healthd.rc)
