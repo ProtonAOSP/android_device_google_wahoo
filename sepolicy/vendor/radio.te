@@ -25,6 +25,11 @@ allow radio avtimer_device:chr_file r_file_perms;
 
 binder_call(radio, hal_imsrtp)
 
+userdebug_or_eng(`
+  allow radio diag_device:chr_file rw_file_perms;
+')
+dontaudit radio diag_device:chr_file rw_file_perms;
+
 # read /proc/cmdline
 allow radio proc_cmdline:file r_file_perms;
 
