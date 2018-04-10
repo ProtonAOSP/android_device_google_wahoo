@@ -32,8 +32,10 @@ allow hal_gnss_qti self:netlink_route_socket { bind create nlmsg_read read write
 
 userdebug_or_eng(`
   allow hal_gnss_qti diag_device:chr_file rw_file_perms;
+  r_dir_file(hal_gnss_qti, sysfs_diag)
 ')
 dontaudit hal_gnss_qti diag_device:chr_file rw_file_perms;
+dontaudit hal_gnss_qti sysfs_diag:dir search;
 
 # Most HALs are not allowed to use network sockets. Qcom library
 # libqdi is used across multiple processes which are clients of
