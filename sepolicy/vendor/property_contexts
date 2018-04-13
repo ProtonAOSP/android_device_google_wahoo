@@ -85,7 +85,6 @@ mm.enable.qcom_parser      u:object_r:vendor_default_prop:s0
 mm.enable.smoothstreaming  u:object_r:vendor_default_prop:s0
 perflocks.predefined_clust_map  u:object_r:vendor_default_prop:s0
 perflocks.predefined_freq_map  u:object_r:vendor_default_prop:s0
-perist.vendor.             u:object_r:vendor_default_prop:s0
 persist.audio.calfile0     u:object_r:vendor_default_prop:s0
 persist.audio.dualmic.config  u:object_r:vendor_default_prop:s0
 persist.audio.fluence.     u:object_r:vendor_default_prop:s0
