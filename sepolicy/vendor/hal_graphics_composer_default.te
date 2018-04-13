@@ -34,3 +34,5 @@ userdebug_or_eng(`
         allow hal_graphics_composer_default diag_device:chr_file rw_file_perms;
 ')
 dontaudit hal_graphics_composer_default diag_device:chr_file rw_file_perms;
+
+dontaudit hal_graphics_composer_default kernel:system module_request;
