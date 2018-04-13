@@ -1,0 +1,1 @@
+dontaudit dnsmasq kernel:system module_request;
