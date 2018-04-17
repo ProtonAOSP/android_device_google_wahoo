@@ -62,6 +62,7 @@ private:
     std::ofstream mLpTriggerEffect;
     int32_t mClickDuration;
     int32_t mTickDuration;
+    int32_t mHeavyClickDuration;
 };
 }  // namespace implementation
 }  // namespace V1_2
