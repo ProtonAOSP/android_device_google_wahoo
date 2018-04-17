@@ -164,6 +164,7 @@ ro.vendor.build.svn        u:object_r:vendor_default_prop:s0
 ro.vendor.extension_library  u:object_r:vendor_default_prop:s0
 ro.vibrator.hal.click.duration  u:object_r:vendor_default_prop:s0
 ro.vibrator.hal.tick.duration  u:object_r:vendor_default_prop:s0
+ro.vibrator.hal.heavyclick.duration  u:object_r:vendor_default_prop:s0
 sdm.                       u:object_r:vendor_default_prop:s0
 sys.disable_ext_animation  u:object_r:vendor_default_prop:s0
 sys.display.low_persistence_mode_brightness  u:object_r:vendor_default_prop:s0

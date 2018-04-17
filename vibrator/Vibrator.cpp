@@ -42,17 +42,21 @@ static constexpr int8_t MIN_RTP_INPUT = 0;
 static constexpr char RTP_MODE[] = "rtp";
 static constexpr char WAVEFORM_MODE[] = "waveform";
 
-// Use effect #1 in the waveform library
+// Use effect #1 in the waveform library for CLICK effect
 static constexpr char WAVEFORM_CLICK_EFFECT_SEQ[] = "1 0";
 static constexpr int32_t WAVEFORM_CLICK_EFFECT_MS = 6;
 
-// Use effect #2 in the waveform library
+// Use effect #2 in the waveform library for TICK effect
 static constexpr char WAVEFORM_TICK_EFFECT_SEQ[] = "2 0";
 static constexpr int32_t WAVEFORM_TICK_EFFECT_MS = 2;
 
-// Use effect #3 in the waveform library
+// Use effect #3 in the waveform library for DOUBLE_CLICK effect
 static constexpr char WAVEFORM_DOUBLE_CLICK_EFFECT_SEQ[] = "3 0";
 static constexpr uint32_t WAVEFORM_DOUBLE_CLICK_EFFECT_MS = 135;
+
+// Use effect #4 in the waveform library for HEAVY_CLICK effect
+static constexpr char WAVEFORM_HEAVY_CLICK_EFFECT_SEQ[] = "4 0";
+static constexpr uint32_t WAVEFORM_HEAVY_CLICK_EFFECT_MS = 8;
 
 // Timeout threshold for selecting open or closed loop mode
 static constexpr int8_t LOOP_MODE_THRESHOLD_MS = 20;
@@ -76,6 +80,8 @@ Vibrator::Vibrator(std::ofstream&& activate, std::ofstream&& duration,
 
     mClickDuration = property_get_int32("ro.vibrator.hal.click.duration", WAVEFORM_CLICK_EFFECT_MS);
     mTickDuration = property_get_int32("ro.vibrator.hal.tick.duration", WAVEFORM_TICK_EFFECT_MS);
+    mHeavyClickDuration = property_get_int32(
+        "ro.vibrator.hal.heavyclick.duration", WAVEFORM_HEAVY_CLICK_EFFECT_MS);
 
     // This enables effect #1 from the waveform library to be triggered by SLPI
     // while the AP is in suspend mode
@@ -198,6 +204,10 @@ Return<void> Vibrator::performEffect(Effect effect, EffectStrength strength, per
     case Effect::TICK:
         mSequencer << WAVEFORM_TICK_EFFECT_SEQ << std::endl;
         timeMS = mTickDuration;
+        break;
+    case Effect::HEAVY_CLICK:
+        mSequencer << WAVEFORM_HEAVY_CLICK_EFFECT_SEQ << std::endl;
+        timeMS = mHeavyClickDuration;
         break;
     default:
         _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
