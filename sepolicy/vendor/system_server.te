@@ -22,3 +22,5 @@ dontaudit system_server audioserver:file write;
 dontaudit system_server untrusted_app:file write;
 dontaudit system_server hal_audio_default:file write;
 dontaudit system_server appdomain:file write;
+
+dontaudit system_server self:capability sys_module;
