@@ -143,9 +143,6 @@ ro.alarm_boot              u:object_r:vendor_default_prop:s0
 ro.boot.factoryota         u:object_r:vendor_default_prop:s0
 ro.boot.mid                u:object_r:vendor_default_prop:s0
 ro.boot.temp_protect_ignore  u:object_r:vendor_default_prop:s0
-ro.bluetooth.a4wp          u:object_r:vendor_default_prop:s0
-ro.bluetooth.emb_wp_mode   u:object_r:vendor_default_prop:s0
-ro.bluetooth.wipower       u:object_r:vendor_default_prop:s0
 ro.camera.wrapper.hal3TrebleMinorVersion  u:object_r:vendor_default_prop:s0
 ro.fota.oem                u:object_r:vendor_default_prop:s0
 ro.lean                    u:object_r:vendor_default_prop:s0
@@ -191,3 +188,14 @@ persist.radio.snapshot_timer  u:object_r:vendor_radio_prop:s0
 persist.radio.videopause.mode  u:object_r:vendor_radio_prop:s0
 persist.radio.VT_ENABLE    u:object_r:vendor_radio_prop:s0
 persist.radio.VT_HYBRID_ENABLE  u:object_r:vendor_radio_prop:s0
+
+# vendor_bluetooth_prop
+persist.bluetooth.a4wp     u:object_r:vendor_bluetooth_prop:s0
+persist.bluetooth.csoc.cnt  u:object_r:vendor_bluetooth_prop:s0
+persist.service.bdroid.fwsnoop  u:object_r:vendor_bluetooth_prop:s0
+persist.service.bdroid.sibs  u:object_r:vendor_bluetooth_prop:s0
+persist.service.bdroid.soclog  u:object_r:vendor_bluetooth_prop:s0
+persist.service.bdroid.ssrlvl  u:object_r:vendor_bluetooth_prop:s0
+ro.bluetooth.a4wp          u:object_r:vendor_bluetooth_prop:s0
+ro.bluetooth.emb_wp_mode   u:object_r:vendor_bluetooth_prop:s0
+ro.bluetooth.wipower       u:object_r:vendor_bluetooth_prop:s0
