@@ -586,6 +586,7 @@ on property:sys.boot_completed=1
     write /dev/cpuset/foreground/cpus 0-3,6-7
     write /dev/cpuset/background/cpus 0-1
     write /dev/cpuset/system-background/cpus 0-3
+    write /dev/cpuset/restricted/cpus 0-3
 
     # Update DVR cpusets to runtime values.
     write /dev/cpuset/kernel/cpus 2,3
