@@ -27,5 +27,7 @@ binder_call(radio, hal_imsrtp)
 
 userdebug_or_eng(`
   allow radio diag_device:chr_file rw_file_perms;
+  r_dir_file(radio, sysfs_diag)
 ')
 dontaudit radio diag_device:chr_file rw_file_perms;
+dontaudit radio sysfs_diag:dir search;
