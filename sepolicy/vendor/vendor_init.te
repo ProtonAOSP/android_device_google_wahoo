@@ -15,3 +15,6 @@ allow vendor_init proc_uid_cpupower:file write;
 dontaudit vendor_init kernel:system module_request;
 
 get_prop(vendor_init, modem_diag_prop)
+
+dontaudit vendor_init unlabeled:dir getattr;
+dontaudit vendor_init unlabeled:file getattr;
