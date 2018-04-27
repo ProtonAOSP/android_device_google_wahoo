@@ -18,6 +18,7 @@ r_dir_file(qti, sysfs_msm_subsys)
 userdebug_or_eng(`
   allow qti diag_device:chr_file rw_file_perms;
   r_dir_file(qti, sysfs_diag)
+  allow qti sysfs_timestamp_switch:file r_file_perms;
 ')
 dontaudit qti diag_device:chr_file rw_file_perms;
 dontaudit qti sysfs_diag:dir search;
