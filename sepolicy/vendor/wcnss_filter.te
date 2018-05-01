@@ -15,7 +15,7 @@ userdebug_or_eng(`
   allow wcnss_filter sysfs_timestamp_switch:file r_file_perms;
   r_dir_file(wcnss_filter, debugfs_ipc)
   r_dir_file(wcnss_filter, sysfs_diag)
-  set_prop(wcnss_filter, ssr_prop)
+  set_prop(wcnss_filter, vendor_ssr_prop)
 ')
 
 #allow wakelock
