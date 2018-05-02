@@ -61,6 +61,7 @@ audio_hal.period_multiplier  u:object_r:vendor_default_prop:s0
 audio_hal.period_size      u:object_r:vendor_default_prop:s0
 audio.adm.                 u:object_r:vendor_default_prop:s0
 audio.snd_card.open.retries  u:object_r:vendor_default_prop:s0
+audio.usb.enable.debug     u:object_r:vendor_default_prop:s0
 audio.volume.headset.gain.depcal  u:object_r:vendor_default_prop:s0
 audio.volume.listener.dump  u:object_r:vendor_default_prop:s0
 boost_override             u:object_r:vendor_default_prop:s0
