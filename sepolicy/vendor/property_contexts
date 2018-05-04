@@ -12,7 +12,7 @@ radio.                     u:object_r:vendor_radio_prop:s0
 rcs.publish.status         u:object_r:vendor_radio_prop:s0
 vendor.debug.ramdump.      u:object_r:vendor_ramdump_prop:s0
 persist.vendor.sys.crash_rcu  u:object_r:vendor_ramdump_prop:s0
-debug.ssrdump              u:object_r:ssr_prop:s0
+vendor.debug.ssrdump       u:object_r:vendor_ssr_prop:s0
 persist.sys.cnss.          u:object_r:cnss_diag_prop:s0
 sys.listeners.registered   u:object_r:tee_listener_prop:s0
 wc_transport.              u:object_r:wc_prop:s0
@@ -61,6 +61,7 @@ audio_hal.period_multiplier  u:object_r:vendor_default_prop:s0
 audio_hal.period_size      u:object_r:vendor_default_prop:s0
 audio.adm.                 u:object_r:vendor_default_prop:s0
 audio.snd_card.open.retries  u:object_r:vendor_default_prop:s0
+audio.usb.enable.debug     u:object_r:vendor_default_prop:s0
 audio.volume.headset.gain.depcal  u:object_r:vendor_default_prop:s0
 audio.volume.listener.dump  u:object_r:vendor_default_prop:s0
 boost_override             u:object_r:vendor_default_prop:s0
