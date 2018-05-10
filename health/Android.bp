@@ -21,6 +21,7 @@ cc_binary {
     srcs: [
         "HealthService.cpp",
         "CycleCountBackupRestore.cpp",
+        "LearnedCapacityBackupRestore.cpp",
     ],
 
     cflags: [
