@@ -349,10 +349,6 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.1-service.clearkey \
     move_widevine_data.sh
 
-# NeuralNetworks HAL
-PRODUCT_PACKAGES += \
-    android.hardware.neuralnetworks@1.0-service-hvx
-
 # NFC packages
 PRODUCT_PACKAGES += \
     NfcNci \
