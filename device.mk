@@ -20,6 +20,9 @@ PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE := true
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true
 
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.adb.secure=1
+
 PRODUCT_COPY_FILES += \
     device/google/wahoo/default-permissions.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default-permissions/default-permissions.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml \
@@ -348,10 +351,6 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.1-service.widevine \
     android.hardware.drm@1.1-service.clearkey \
     move_widevine_data.sh
-
-# NeuralNetworks HAL
-PRODUCT_PACKAGES += \
-    android.hardware.neuralnetworks@1.0-service-hvx
 
 # NFC packages
 PRODUCT_PACKAGES += \
