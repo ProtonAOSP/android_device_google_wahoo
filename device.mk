@@ -174,7 +174,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vr.high_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vr.high_performance.xml \
     frameworks/native/data/etc/android.hardware.vulkan.compute-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.compute.xml \
     frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level.xml \
-    frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.version-1_1.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version.xml \
     frameworks/native/data/etc/android.hardware.telephony.carrierlock.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.telephony.carrierlock.xml \
 
 # power HAL
@@ -187,10 +187,6 @@ PRODUCT_COPY_FILES += \
 # health HAL
 PRODUCT_PACKAGES += \
     android.hardware.health@2.0-service.wahoo
-
-# Keymaster 4 (software only)
-PRODUCT_PACKAGES += \
-    android.hardware.keymaster@4.0-service
 
 # Audio fluence, ns, aec property, voice and media volume steps
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -205,10 +201,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # graphics
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=196610
-
-# b/68017541
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qcom.adreno.qgl.ShaderStorageImageExtendedFormats=0
 
 # b/73640835
 PRODUCT_PROPERTY_OVERRIDES += \
