@@ -18,6 +18,7 @@ netutils_wrapper sysfs_timestamp_switch file 77871509
 netutils_wrapper tmpfs dir 77871509
 netutils_wrapper vendor_app_file dir 77871509
 netutils_wrapper vendor_framework_file dir 77871509
+nfc vendor_default_prop file 79617173
 per_proxy exported3_system_prop file 79541095
 priv_app vendor_default_prop file 79617173
 platform_app vendor_default_prop file 79617173
