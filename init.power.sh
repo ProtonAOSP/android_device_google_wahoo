@@ -41,9 +41,6 @@ write /sys/class/devfreq/soc:qcom,mincpubw/governor "cpufreq"
 #    write $memlat/mem_latency/ratio_ceil 400
 #done
 
-# Signal perfd that boot has completed
-setprop sys.post_boot.parsed 1
-
 # On debuggable builds, enable console_suspend if uart is enabled to save power
 # Otherwise, disable console_suspend to get better logging for kernel crashes
 if [[ $(getprop ro.debuggable) == "1" && ! -e /sys/class/tty/ttyMSM0 ]]
