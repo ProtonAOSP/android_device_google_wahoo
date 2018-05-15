@@ -523,13 +523,6 @@ on property:init.svc.zygote=running
 on property:init.svc.zygote=stopped
     stop vendor.folio_daemon
 
-service vendor.perfd /vendor/bin/perfd
-   class main
-   user root
-   group root readproc system
-   socket perfd seqpacket 0666 root system
-   disabled
-
 service vendor.thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg:-/vendor/etc/thermal-engine.conf}
    class hal
    user root
