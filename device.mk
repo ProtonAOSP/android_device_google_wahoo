@@ -14,7 +14,13 @@
 # limitations under the License.
 #
 
+ifneq (,$(filter 27, $(PRODUCT_EXTRA_VNDK_VERSIONS)))
+    _vndk_test := true
+endif
+
+ifeq (,$(_vndk_test))
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
+endif
 PRODUCT_ACTIONABLE_COMPATIBLE_PROPERTY_DISABLE := true
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -236,8 +242,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.sib16_support=1 \
     persist.radio.data_con_rprt=true \
     persist.radio.always_send_plmn=false\
-    persist.rcs.supported=1 \
+    persist.rcs.supported=1
+
+ifeq (,$(_vndk_test))
+PRODUCT_PROPERTY_OVERRIDES += \
     vendor.rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
+else
+PRODUCT_PROPERTY_OVERRIDES += \
+    rild.libpath=/vendor/lib64/libril-qc-qmi-1.so
+endif
 
 # Disable snapshot timer
 PRODUCT_PROPERTY_OVERRIDES += \
