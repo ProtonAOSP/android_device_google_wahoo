@@ -200,3 +200,6 @@ persist.service.bdroid.ssrlvl  u:object_r:vendor_bluetooth_prop:s0
 ro.bluetooth.a4wp          u:object_r:vendor_bluetooth_prop:s0
 ro.bluetooth.emb_wp_mode   u:object_r:vendor_bluetooth_prop:s0
 ro.bluetooth.wipower       u:object_r:vendor_bluetooth_prop:s0
+
+# persist_nfc_prop
+persist.nfc. u:object_r:persist_nfc_prop:s0
