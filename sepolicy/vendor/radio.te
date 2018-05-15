@@ -1,4 +1,5 @@
 get_prop(radio, ims_prop)
+typeattribute radio system_writes_vendor_properties_violators;
 userdebug_or_eng(`set_prop(radio, tel_mon_prop)')
 
 allow radio qmuxd_socket:dir search;
