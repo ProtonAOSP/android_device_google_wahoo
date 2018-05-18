@@ -5,6 +5,7 @@ drmserver sdcardfs dir 77869200
 dumpstate sysfs file 77919159
 hal_audio_default default_prop file 77926553
 hal_audio_default priv_app fd 77926553
+hal_bluetooth_default bluetooth_data_file dir 79920182
 hal_camera_default camera_vendor_data_file dir 77865891
 hal_camera_default debugfs dir 77865891
 hal_camera_default radio_prop file 77865891
