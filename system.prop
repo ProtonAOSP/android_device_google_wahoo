@@ -69,13 +69,3 @@ persist.data.df.dev_name=rmnet_usb0
 #ro.use_data_netmgrd=true
 persist.data.netmgrd.qos.enable=true
 persist.data.mode=concurrent
-
-#system prop for A4WP profile support
-ro.bluetooth.a4wp=false
-
-#system prop for wipower support
-ro.bluetooth.emb_wp_mode=false
-ro.bluetooth.wipower=false
-
-# Property for loading BDA from bdaddress module in kernel
-ro.bt.bdaddr_path=/sys/module/bdaddress/parameters/bdaddress

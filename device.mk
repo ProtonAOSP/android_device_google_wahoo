@@ -345,9 +345,18 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-service-qti \
     android.hardware.bluetooth@1.0-service-qti.rc
 
+# Bluetooth SoC
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.qcom.bluetooth.soc=cherokee
+
 # Property for loading BDA from bdaddress module in kernel
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.bt.bdaddr_path=/sys/module/bdaddress/parameters/bdaddress
+    ro.vendor.bt.bdaddr_path=/sys/module/bdaddress/parameters/bdaddress
+
+# Bluetooth WiPower
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.bluetooth.emb_wp_mode=false \
+    ro.vendor.bluetooth.wipower=false
 
 # DRM HAL
 PRODUCT_PACKAGES += \
@@ -608,9 +617,6 @@ PRODUCT_ENFORCE_RRO_TARGETS := framework-res
 # Override heap growth limit due to high display density on device
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapgrowthlimit=256m
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    qcom.bluetooth.soc=cherokee
 
 # Privileged permissions whitelist
 PRODUCT_COPY_FILES += \
