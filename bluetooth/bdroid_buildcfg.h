@@ -22,10 +22,6 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-// Wide-band speech support
-#define BTM_WBS_INCLUDED TRUE
-#define BTIF_HF_WBS_PREFERRED TRUE
-
 // Google VSC spec support
 #define BLE_VND_INCLUDED TRUE
 
