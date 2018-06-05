@@ -46,8 +46,10 @@ ro.boot.ddrsize            u:object_r:public_vendor_default_prop:s0
 ro.boot.hardware.ddr       u:object_r:public_vendor_default_prop:s0
 ro.boot.hardware.ufs       u:object_r:public_vendor_default_prop:s0
 ro.qcom.adreno.            u:object_r:public_vendor_default_prop:s0
+ro.vendor.graphics.memory  u:object_r:public_vendor_default_prop:s0
 vendor.debug.egl.changepixelformat  u:object_r:public_vendor_default_prop:s0
 vendor.debug.prerotation.disable  u:object_r:public_vendor_default_prop:s0
+vendor.debug.rs.           u:object_r:public_vendor_default_prop:s0
 
 # public_vendor_system_prop
 # They are public_vendor_system_props for vendor-specific extension.
