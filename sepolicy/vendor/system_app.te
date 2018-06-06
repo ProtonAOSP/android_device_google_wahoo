@@ -4,6 +4,7 @@ userdebug_or_eng(`set_prop(system_app, tel_mon_prop)')
 
 # Needed by Settings app's CameraHalHdrplusPreferenceController, available only on a subset of
 # userdebug and eng devices
+typeattribute system_app system_writes_vendor_properties_violators;
 userdebug_or_eng(`set_prop(system_app, camera_prop)')
 
 # read regulatory info
