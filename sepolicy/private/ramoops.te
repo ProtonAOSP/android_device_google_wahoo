@@ -11,6 +11,7 @@ allow ramoops shell_exec:file rx_file_perms;
 allow ramoops toolbox_exec:file rx_file_perms;
 
 # Set the sys.ramoops.decrypted property
+typeattribute ramoops system_writes_vendor_properties_violators;
 set_prop(ramoops, ramoops_prop);
 
 allow ramoops sysfs_pstore:file rw_file_perms;
