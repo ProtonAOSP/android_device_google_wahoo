@@ -1,0 +1,2 @@
+typeattribute charger system_writes_vendor_properties_violators;
+set_prop(charger, public_vendor_system_prop)

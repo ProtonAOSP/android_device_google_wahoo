@@ -1,12 +1,10 @@
-# Needed by Settings app's TelephonyMonitorPreferenceController, available only on a subset of
-# userdebug and eng devices
-userdebug_or_eng(`set_prop(system_app, tel_mon_prop)')
-
-# Needed by Settings app's CameraHalHdrplusPreferenceController, available only on a subset of
-# userdebug and eng devices
+# Needed by Settings app's CameraHalHdrplusPreferenceController
 typeattribute system_app system_writes_vendor_properties_violators;
-userdebug_or_eng(`set_prop(system_app, camera_prop)')
+set_prop(system_app, camera_prop)
 
 # read regulatory info
 allow system_app elabel_data_file:dir r_dir_perms;
 allow system_app elabel_data_file:file r_file_perms;
+
+set_prop(system_app, vendor_bluetooth_prop)
+set_prop(system_app, public_vendor_system_prop)

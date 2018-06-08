@@ -1,0 +1,6 @@
+#Add new domain for DataServices
+#TODO Remove user "system" when b/38043081 is resolved
+user=system seinfo=platform name=.dataservices domain=dataservice_app type=system_app_data_file
+
+# Domain for WfcActivation app
+user=_app seinfo=wfcactivation name=com.google.android.wfcactivation domain=wfc_activation_app levelFrom=all

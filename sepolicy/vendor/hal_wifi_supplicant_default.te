@@ -4,7 +4,3 @@ typeattribute hal_wifi_supplicant_default data_between_core_and_vendor_violators
 
 allow hal_wifi_supplicant_default wifi_data_file:dir create_dir_perms;
 allow hal_wifi_supplicant_default wifi_data_file:file create_file_perms;
-
-# Create a socket for receiving info from wpa
-allow hal_wifi_supplicant_default wpa_socket:dir create_dir_perms;
-allow hal_wifi_supplicant_default wpa_socket:sock_file create_file_perms;

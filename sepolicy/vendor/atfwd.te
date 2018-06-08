@@ -13,4 +13,4 @@ allowxperm atfwd self:socket ioctl msm_sock_ipc_ioctls;
 
 r_dir_file(atfwd, sysfs_type)
 
-set_prop(atfwd, radio_prop)
+set_prop(atfwd, vendor_radio_prop)

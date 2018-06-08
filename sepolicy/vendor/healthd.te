@@ -1,0 +1,2 @@
+typeattribute healthd system_writes_vendor_properties_violators;
+set_prop(healthd, public_vendor_system_prop)

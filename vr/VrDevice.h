@@ -32,6 +32,11 @@ struct VrDevice : public IVr {
 
     Return<void> init()  override;
     Return<void> setVrMode(bool enabled)  override;
+    Return<void> debug(const hidl_handle& handle, const hidl_vec<hidl_string>&)  override;
+  private:
+    // Taimen display touch sensitivity for VR Mode (b/37515573)
+    bool mFtm4Touch;
+    bool mVRmode;
 };
 
 }  // namespace implementation

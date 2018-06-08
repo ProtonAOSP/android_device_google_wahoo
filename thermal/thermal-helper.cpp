@@ -20,11 +20,17 @@
 #include <cmath>
 #include <cstdlib>
 #include <cstring>
+#include <tuple>
+#include <unordered_map>
+#include <vector>
 
+#include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/properties.h>
+#include <android-base/strings.h>
 #include <android-base/stringprintf.h>
 
+#include "sensors.h"
 #include "thermal-helper.h"
 
 namespace android {
@@ -33,14 +39,102 @@ namespace thermal {
 namespace V1_1 {
 namespace implementation {
 
+constexpr const char kThermalSensorsRoot[] = "/sys/class/thermal";
+constexpr char kThermalZoneDirSuffix[] = "thermal_zone";
+constexpr char kSensorTypeFileSuffix[] = "type";
+constexpr char kTemperatureFileSuffix[] = "temp";
+// This is a golden set of thermal sensor names, their types, and their
+// multiplier. Used when we read in sensor values. The tuple value stored is
+// formatted as such:
+// <temperature type, multiplier value for reading temp>
+const std::unordered_map<std::string, std::tuple<TemperatureType, float>>
+kValidThermalSensorsMap = {
+    {"tsens_tz_sensor1", {TemperatureType::CPU, 0.1}},   // CPU0
+    {"tsens_tz_sensor2", {TemperatureType::CPU, 0.1}},   // CPU1
+    {"tsens_tz_sensor4", {TemperatureType::CPU, 0.1}},   // CPU2
+    {"tsens_tz_sensor3", {TemperatureType::CPU, 0.1}},   // CPU3
+    {"tsens_tz_sensor7", {TemperatureType::CPU, 0.1}},   // CPU4
+    {"tsens_tz_sensor8", {TemperatureType::CPU, 0.1}},   // CPU5
+    {"tsens_tz_sensor9", {TemperatureType::CPU, 0.1}},   // CPU6
+    {"tsens_tz_sensor10", {TemperatureType::CPU, 0.1}},  // CPU7
+    // GPU thermal sensor.
+    {"tsens_tz_sensor13", {TemperatureType::GPU, 0.1}},
+    // Battery thermal sensor.
+    {"battery", {TemperatureType::BATTERY, 0.001}},
+    // Skin thermal sensors. We use back_therm for walleye. For taimen we use
+    // bd_therm and bd_therm2.
+    {"back_therm", {TemperatureType::SKIN, 1.}},
+    {"bd_therm", {TemperatureType::SKIN, 1.}},
+    {"bd_therm2", {TemperatureType::SKIN, 1.}},
+    // USBC thermal sensor.
+    {"usb_port_temp", {TemperatureType::UNKNOWN, 0.1}},
+};
+
+namespace {
+
 using ::android::hardware::thermal::V1_0::TemperatureType;
 
-static unsigned int gSkinSensorNum;
 static std::string gSkinSensorType;
-static unsigned int gTsensOffset;
 static unsigned int gSkinThrottlingThreshold;
 static unsigned int gSkinShutdownThreshold;
 static unsigned int gVrThrottledBelowMin;
+Sensors gSensors;
+
+// A map containing hardcoded thresholds per sensor type.  Its not const
+// because initThermal() will modify the skin sensor thresholds depending on the
+// hardware type. The tuple is formatted as follows:
+// <throttling threshold, shutdown threshold, vr threshold>
+std::unordered_map<TemperatureType, std::tuple<float, float, float>>
+gSensorTypeToThresholdsMap = {
+    {TemperatureType::CPU, {kCpuThrottlingThreshold, kCpuShutdownThreshold,
+                             kCpuThrottlingThreshold}},
+    {TemperatureType::GPU, {NAN, NAN, NAN}},
+    {TemperatureType::BATTERY, {NAN, kBatteryShutdownThreshold, NAN}},
+    {TemperatureType::SKIN, {NAN, NAN, NAN}},
+    {TemperatureType::UNKNOWN, {NAN, NAN, NAN}}
+};
+
+bool initializeSensors() {
+    auto thermal_zone_dir = std::unique_ptr<DIR, int (*)(DIR*)>(
+        opendir(kThermalSensorsRoot), closedir);
+    struct dirent* dp;
+    size_t num_thermal_zones = 0;
+    while ((dp = readdir(thermal_zone_dir.get())) != nullptr) {
+        std::string dir_name(dp->d_name);
+        if (dir_name.find(kThermalZoneDirSuffix) != std::string::npos) {
+            ++num_thermal_zones;
+        }
+    }
+
+    for (size_t sensor_zone_num = 0; sensor_zone_num < num_thermal_zones;
+            ++sensor_zone_num) {
+        std::string path = android::base::StringPrintf("%s/%s%zu",
+                                                       kThermalSensorsRoot,
+                                                       kThermalZoneDirSuffix,
+                                                       sensor_zone_num);
+        std::string sensor_name;
+        if (android::base::ReadFileToString(
+                path + "/" + kSensorTypeFileSuffix, &sensor_name)) {
+            sensor_name = android::base::Trim(sensor_name);
+            if (kValidThermalSensorsMap.find(sensor_name) !=
+                kValidThermalSensorsMap.end()) {
+                  TemperatureType type = std::get<0>(
+                      kValidThermalSensorsMap.at(sensor_name));
+                  auto thresholds = gSensorTypeToThresholdsMap.at(type);
+                  if (!gSensors.addSensor(
+                          sensor_name, path + "/" + kTemperatureFileSuffix,
+                          std::get<0>(thresholds), std::get<1>(thresholds),
+                          std::get<2>(thresholds), type)) {
+                        LOG(ERROR) << "Could not add " << sensor_name
+                                   << "to sensors map";
+                  }
+            }
+        }
+    }
+    return (gSensors.getNumSensors() == kTemperatureNum);
+}
+
+}  // namespace
 
 /**
  * Initialization constants based on platform
@@ -51,9 +145,6 @@ bool initThermal() {
     std::string hardware = android::base::GetProperty("ro.hardware", "");
     if (hardware == "walleye") {
         LOG(ERROR) << "Initialization on Walleye";
-        gSkinSensorNum = kWalleyeSkinSensorNum;
-        gSkinSensorType = kWalleyeSkinSensorType;
-        gTsensOffset = kWalleyeTsensOffset;
         gSkinThrottlingThreshold = kWalleyeSkinThrottlingThreshold;
         gSkinShutdownThreshold = kWalleyeSkinShutdownThreshold;
         gVrThrottledBelowMin = kWalleyeVrThrottledBelowMin;
@@ -61,17 +152,11 @@ bool initThermal() {
         std::string rev = android::base::GetProperty("ro.revision", "");
         if (rev == "rev_a" || rev == "rev_b") {
             LOG(ERROR) << "Initialization on Taimen pre revision C";
-            gSkinSensorNum = kTaimenRabSkinSensorNum;
-            gSkinSensorType = kTaimenRabSkinSensorType;
-            gTsensOffset = kTaimenRabTsensOffset;
             gSkinThrottlingThreshold = kTaimenRabSkinThrottlingThreshold;
             gSkinShutdownThreshold = kTaimenRabSkinShutdownThreshold;
             gVrThrottledBelowMin = kTaimenRabVrThrottledBelowMin;
         } else {
             LOG(ERROR) << "Initialization on Taimen revision C and later";
-            gSkinSensorNum = kTaimenRcSkinSensorNum;
-            gSkinSensorType = kTaimenRcSkinSensorType;
-            gTsensOffset = kTaimenRcTsensOffset;
             gSkinThrottlingThreshold = kTaimenRcSkinThrottlingThreshold;
             gSkinShutdownThreshold = kTaimenRcSkinShutdownThreshold;
             gVrThrottledBelowMin = kTaimenRcVrThrottledBelowMin;
@@ -80,127 +165,25 @@ bool initThermal() {
         LOG(ERROR) << "Unsupported hardware: " << hardware;
         return false;
     }
-    return true;
+    gSensorTypeToThresholdsMap[TemperatureType::SKIN] =
+        std::make_tuple(gSkinThrottlingThreshold, gSkinShutdownThreshold,
+                        gVrThrottledBelowMin);
+    return initializeSensors();
 }
 
-/**
- * Reads device temperature.
- *
- * @param sensor_num Number of sensor file with temperature.
- * @param type Device temperature type.
- * @param name Device temperature name.
- * @param mult Multiplier used to translate temperature to Celsius.
- * @param throttling_threshold Throttling threshold for the temperature.
- * @param shutdown_threshold Shutdown threshold for the temperature.
- * @param out Pointer to temperature_t structure that will be filled with current
- *     values.
- *
- * @return 0 on success or negative value -errno on error.
- */
-static ssize_t readTemperature(int sensor_num, TemperatureType type, const char *name, float mult,
-                                float throttling_threshold, float shutdown_threshold,
-                                float vr_throttling_threshold, Temperature *out) {
-    FILE *file;
-    char file_name[PATH_MAX];
-    float temp;
-
-    sprintf(file_name, kTemperatureFileFormat, sensor_num);
-    file = fopen(file_name, "r");
-    if (file == NULL) {
-        PLOG(ERROR) << "readTemperature: failed to open file (" << file_name << ")";
-        return -errno;
-    }
-    if (1 != fscanf(file, "%f", &temp)) {
-        fclose(file);
-        PLOG(ERROR) << "readTemperature: failed to read a float";
-        return errno ? -errno : -EIO;
-    }
-
-    fclose(file);
-
-    (*out).type = type;
-    (*out).name = name;
-    (*out).currentValue = temp * mult;
-    (*out).throttlingThreshold = throttling_threshold;
-    (*out).shutdownThreshold = shutdown_threshold;
-    (*out).vrThrottlingThreshold = vr_throttling_threshold;
-
-    LOG(DEBUG) << android::base::StringPrintf(
-        "readTemperature: %d, %d, %s, %g, %g, %g, %g",
-        sensor_num, type, name, temp * mult, throttling_threshold,
-        shutdown_threshold, vr_throttling_threshold);
-
-    return 0;
-}
-
-static ssize_t getCpuTemperatures(hidl_vec<Temperature> *temperatures) {
-    size_t cpu;
-
-    for (cpu = 0; cpu < kCpuNum; cpu++) {
-        if (cpu >= temperatures->size()) {
-            break;
-        }
-        // temperature in decidegrees Celsius.
-        ssize_t result = readTemperature(kCpuTsensOffset[cpu] + gTsensOffset, TemperatureType::CPU, kCpuLabel[cpu],
-                                          0.1, kCpuThrottlingThreshold, kCpuShutdownThreshold, kCpuThrottlingThreshold,
-                                          &(*temperatures)[cpu]);
-        if (result != 0) {
-            return result;
+ssize_t fillTemperatures(hidl_vec<Temperature>* temperatures) {
+    temperatures->resize(gSensors.getNumSensors());
+    ssize_t current_index = 0;
+    for (const auto& name_type_mult_pair : kValidThermalSensorsMap) {
+        Temperature temp;
+        if (gSensors.readTemperature(name_type_mult_pair.first,
+                                     std::get<1>(name_type_mult_pair.second),
+                                     &temp)) {
+            (*temperatures)[current_index] = temp;
+            ++current_index;
         }
     }
-    return cpu;
-}
-
-ssize_t fillTemperatures(hidl_vec<Temperature> *temperatures) {
-    ssize_t result = 0;
-    size_t current_index = 0;
-
-    if (temperatures == NULL || temperatures->size() < kTemperatureNum) {
-        LOG(ERROR) << "fillTemperatures: incorrect buffer";
-        return -EINVAL;
-    }
-
-    result = getCpuTemperatures(temperatures);
-    if (result < 0) {
-        return result;
-    }
-    current_index += result;
-
-    // GPU temperature.
-    if (current_index < temperatures->size()) {
-        // temperature in decidegrees Celsius.
-        result = readTemperature(gTsensOffset + kGpuTsensOffset, TemperatureType::GPU, kGpuLabel, 0.1,
-                                  NAN, NAN, NAN, &(*temperatures)[current_index]);
-        if (result < 0) {
-            return result;
-        }
-        current_index++;
-    }
-
-    // Battery temperature.
-    if (current_index < temperatures->size()) {
-        // battery: temperature in millidegrees Celsius.
-        result = readTemperature(kBatterySensorNum, TemperatureType::BATTERY, kBatteryLabel,
-                                  0.001, NAN, kBatteryShutdownThreshold, NAN,
-                                  &(*temperatures)[current_index]);
-        if (result < 0) {
-            return result;
-        }
-        current_index++;
-    }
-
-    // Skin temperature.
-    if (current_index < temperatures->size()) {
-        // temperature in Celsius.
-        result = readTemperature(gSkinSensorNum, TemperatureType::SKIN, kSkinLabel, 1.,
-                                  gSkinThrottlingThreshold, gSkinShutdownThreshold, gVrThrottledBelowMin,
-                                  &(*temperatures)[current_index]);
-        if (result < 0) {
-            return result;
-        }
-        current_index++;
-    }
-    return kTemperatureNum;
+    return current_index;
 }
 
 ssize_t fillCpuUsages(hidl_vec<CpuUsage> *cpuUsages) {

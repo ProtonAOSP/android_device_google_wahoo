@@ -16,8 +16,11 @@
 
 #define LOG_TAG "VrDevice"
 
+#include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/properties.h>
+#include <android-base/stringprintf.h>
+
 #include "VrDevice.h"
 
 namespace android {
@@ -26,7 +29,16 @@ namespace vr {
 namespace V1_0 {
 namespace implementation {
 
-VrDevice::VrDevice() {}
+constexpr char kTouchVRModeSysfs[] = "/sys/devices/virtual/input/ftm4_touch/vrmode";
+
+VrDevice::VrDevice() : mVRmode(false) {
+    std::string hardware = android::base::GetProperty("ro.hardware", "");
+    if (hardware == "taimen") {
+        mFtm4Touch = true;
+    } else {
+        mFtm4Touch = false;
+    }
+}
 
 Return<void> VrDevice::init() {
     // NOOP
@@ -34,29 +46,41 @@ Return<void> VrDevice::init() {
 }
 
 Return<void> VrDevice::setVrMode(bool enabled) {
+    mVRmode = enabled;
     if (enabled) {
-        if (!android::base::SetProperty("sys.qcom.thermalcfg", "/vendor/etc/thermal-engine-vr.conf")) {
+        if (!android::base::SetProperty("sys.qcom.thermalcfg",
+                                        "/vendor/etc/thermal-engine-vr.conf")) {
             LOG(ERROR) << "Couldn't set thermal_engine enable property";
             return Void();
         }
     } else {
-        if (!android::base::SetProperty("sys.qcom.thermalcfg", "/vendor/etc/thermal-engine.conf")) {
+        if (!android::base::SetProperty("sys.qcom.thermalcfg",
+                                        "/vendor/etc/thermal-engine.conf")) {
             LOG(ERROR) << "Couldn't set thermal_engine disable property";
             return Void();
         }
     }
-    if (!android::base::SetProperty("ctl.restart", "thermal-engine")) {
+    if (!android::base::SetProperty("ctl.restart", "vendor.thermal-engine")) {
         LOG(ERROR) << "Couldn't set thermal_engine restart property";
     }
-    if (!access("/sys/devices/virtual/input/ftm4_touch/vrmode", W_OK)) {
-        FILE *f = fopen("/sys/devices/virtual/input/ftm4_touch/vrmode", "w");
-        if (f) {
-            fprintf(f, "%d", (enabled ? 1 : 0));
-            fclose(f);
+
+    if (mFtm4Touch &&
+        !android::base::WriteStringToFile((enabled ? "1" : "0"), kTouchVRModeSysfs)) {
+        PLOG(ERROR) <<  "Failed to write to vrmode sysfs node with :" << enabled;
+    }
+
+    return Void();
+}
+
+Return<void> VrDevice::debug(const hidl_handle& handle, const hidl_vec<hidl_string>&) {
+    if (handle != nullptr && handle->numFds >= 1) {
+        int fd = handle->data[0];
+        std::string buf(android::base::StringPrintf("VRMode: %s\n",
+                                                    (mVRmode ? "true" : "false")));
+        if (!android::base::WriteStringToFd(buf, fd)) {
+            PLOG(ERROR) << "Failed to dump state to fd";
         }
-        else {
-            LOG(ERROR) << "Couldn't open vrmode sysfs node";
-        }
+        fsync(fd);
     }
     return Void();
 }

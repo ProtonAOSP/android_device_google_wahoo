@@ -144,5 +144,51 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/lib64/vndk-sp/libz.so)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app/EuiccGoogle/esim.img)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/priv-app/EuiccGoogle/esim2.img)
 
+# Remove init.recovery.*.rc file in root directory (only needed in recovery root).
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/root/init.recovery.$(PRODUCT_HARDWARE).rc)
+
+# Remove build and default prop.
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/*.prop)
+
 # android.hardware.thermal@1.0-wahoo.so can be a static lib
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/android.hardware.thermal@1.0-wahoo.so)
+
+# Remove android.hardware.keymaster@4.0-service
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.keymaster@4.0-service)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.keymaster@4.0-service.rc)
+
+# Health HAL 2.0
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.health@2.0-service)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.health@2.0-service.rc)
+
+# Remove PowerHAL
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.power*)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.power*)
+
+# Remove Vibrator HAL 1.1
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.vibrator@1.1-service.wahoo.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.vibrator@1.1-service.wahoo)
+
+# Remove all HALs (actual bitness now being specified)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/*)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib64/hw/*)
+
+# Remove android.hardware.audio*@2.0 implementation
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/android.hardware.audio*@2.0-impl.so)
+
+# Remove Clearkey HAL 1.0
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.drm@1.0-service.clearkey.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.drm@1.0-service.clearkey)
+
+# Remove Widevine HAL 1.0
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.drm@1.0-service.widevine.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.drm@1.0-service.widevine)
+
+# Remove healthd
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/healthd)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/init/healthd.rc)
+
+# Remove android.hardware.keymaster@4.0-service
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.keymaster@4.0-service)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.keymaster@4.0-service.rc)
+

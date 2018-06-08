@@ -1,4 +1,8 @@
 LOCAL_PATH := $(call my-dir)
+
+# Disabling when building with PDK (b/68767391)
+ifneq ($(TARGET_BUILD_PDK),true)
+
 include $(CLEAR_VARS)
 
 LOCAL_SHARED_LIBRARIES := \
@@ -20,3 +24,5 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_OWNER := google
 
 include $(BUILD_EXECUTABLE)
+
+endif
