@@ -705,11 +705,6 @@ on property:vendor.ims.DATA_DAEMON_STATUS=1
    start ims_rtp_daemon
    start imsrcsservice
 
-service qmuxd /vendor/bin/qmuxd
-   class main
-   user root
-   group radio audio bluetooth gps nfc qcom_diag
-
 #TODO evaluate group system once b/62571088 is resolved
 service cnd /vendor/bin/cnd
    class main
