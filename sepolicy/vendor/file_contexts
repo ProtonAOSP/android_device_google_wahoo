@@ -155,7 +155,6 @@
 /vendor/bin/ims_rtp_daemon      u:object_r:hal_imsrtp_exec:s0
 /vendor/bin/ipacm               u:object_r:hal_tetheroffload_default_exec:s0
 /vendor/bin/ipacm-diag          u:object_r:hal_tetheroffload_default_exec:s0
-/vendor/bin/qmuxd               u:object_r:qmuxd_exec:s0
 /vendor/bin/cnd                 u:object_r:cnd_exec:s0
 /vendor/bin/ATFWD-daemon        u:object_r:atfwd_exec:s0
 /vendor/bin/easelmanagerd       u:object_r:easel_exec:s0
