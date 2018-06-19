@@ -741,11 +741,6 @@ on property:vendor.ims.DATA_DAEMON_STATUS=1
    start vendor.ims_rtp_daemon
    start vendor.imsrcsservice
 
-service vendor.qmuxd /vendor/bin/qmuxd
-   class main
-   user root
-   group radio audio bluetooth gps nfc qcom_diag
-
 service vendor.cnd /vendor/bin/cnd
    class main
    user radio
