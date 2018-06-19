@@ -745,6 +745,9 @@ PRODUCT_PACKAGES += \
     libsensorndkbridge:32 \
     libtinyxml
 
+# Setting vendor SPL
+VENDOR_SECURITY_PATCH := "2020-09-05"
+
 # EUICC feature
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml
