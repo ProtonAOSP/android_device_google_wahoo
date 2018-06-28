@@ -18,8 +18,6 @@ genfscon sysfs /devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:3 u:object_r:s
 genfscon sysfs /devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:4 u:object_r:sysfs_scsi_devices_other:s0
 genfscon sysfs /devices/soc/1da4000.ufshc/host0/target0:0:0/0:0:0:5 u:object_r:sysfs_scsi_devices_other:s0
 
-genfscon sysfs /class/rfkill/rfkill0/state            u:object_r:sysfs_bluetooth_writable:s0
-
 genfscon sysfs /class/uio                                               u:object_r:sysfs_uio:s0
 genfscon sysfs /devices/soc/1da4000.ufshc/clkscale_enable               u:object_r:sysfs_clkscale:s0
 genfscon sysfs /devices/soc/soc:bt_wcn3990                              u:object_r:sysfs_bluetooth_writable:s0
