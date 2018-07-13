@@ -190,6 +190,9 @@ on fs
     chmod 0770 /persist/rfs/apq/gnss
     chmod 0770 /persist/hlos_rfs
 
+    # b/78019660 Remove unlabeled persist_rfs_file
+    rm /persist/rfs/msm/mpss/server_check.txt
+
     # for android.hardware.health@2.0-service.marlin cycle count backup
     mkdir /persist/battery 0700 system system
 
