@@ -499,6 +499,9 @@ on boot
     # ftm4 VR mode
     chown system system /sys/devices/virtual/input/ftm4_touch/vrmode
 
+    # WLAN debug access
+    chown system system /d/icnss/stats
+
 service vendor.init-elabel-sh /system/bin/init.elabel.sh
     class late_start
     user system
