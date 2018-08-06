@@ -1,4 +1,10 @@
-service vr-wahoo-1-0 /vendor/bin/hw/android.hardware.vr@1.0-service.wahoo
+service vendor.vr-wahoo-1-0 /vendor/bin/hw/android.hardware.vr@1.0-service.wahoo
     class hal
     user system
     group system
+
+# reset touch and thermal-engine when framework died and thermal-engine is in VR mode
+on property:init.svc.zygote=restarting && property:sys.qcom.thermalcfg=/vendor/etc/thermal-engine-vr.conf
+   write /sys/devices/virtual/input/ftm4_touch/vrmode 0
+   setprop sys.qcom.thermalcfg "/vendor/etc/thermal-engine.conf"
+   restart vendor.thermal-engine

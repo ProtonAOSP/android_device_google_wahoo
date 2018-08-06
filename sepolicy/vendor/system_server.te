@@ -23,4 +23,7 @@ dontaudit system_server untrusted_app:file write;
 dontaudit system_server hal_audio_default:file write;
 dontaudit system_server appdomain:file write;
 
+typeattribute system_server system_writes_vendor_properties_violators;
+set_prop(system_server, public_vendor_system_prop)
+
 dontaudit system_server self:capability sys_module;

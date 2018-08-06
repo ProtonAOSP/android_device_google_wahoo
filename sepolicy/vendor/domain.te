@@ -5,3 +5,7 @@
 allow domain debugfs_kgsl:dir search;
 
 allow domain debugfs_ion:dir search;
+
+get_prop(domain, public_vendor_default_prop)
+get_prop(domain, public_vendor_system_prop)
+get_prop(domain, vendor_radio_prop)

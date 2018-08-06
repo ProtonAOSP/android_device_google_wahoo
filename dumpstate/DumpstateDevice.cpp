@@ -21,10 +21,11 @@
 #include <android-base/properties.h>
 #include <android-base/unique_fd.h>
 #include <cutils/properties.h>
-#include <libgen.h>
 #include <log/log.h>
-#include <stdlib.h>
-#include <string>
+#include <string.h>
+
+#define _SVID_SOURCE
+#include <dirent.h>
 
 #include "DumpstateUtil.h"
 
@@ -34,6 +35,8 @@
 
 #define DIAG_MDLOG_PROPERTY "sys.modem.diag.mdlog"
 #define DIAG_MDLOG_STATUS_PROPERTY "sys.modem.diag.mdlog_on"
+
+#define DIAG_MDLOG_NUMBER_BUGREPORT "persist.sys.modem.diag.mdlog_br_num"
 
 using android::os::dumpstate::CommandOptions;
 using android::os::dumpstate::DumpFileToFd;
@@ -45,6 +48,54 @@ namespace hardware {
 namespace dumpstate {
 namespace V1_0 {
 namespace implementation {
+
+#define DIAG_LOG_PREFIX "diag_log_"
+
+void DumpstateDevice::dumpDiagLogs(int fd, std::string srcDir, std::string destDir) {
+    struct dirent **dirent_list = NULL;
+    int num_entries = scandir(srcDir.c_str(),
+                              &dirent_list,
+                              0,
+                              (int (*)(const struct dirent **, const struct dirent **)) alphasort);
+    if (!dirent_list) {
+        return;
+    } else if (num_entries <= 0) {
+        return;
+    }
+
+    int maxFileNum = android::base::GetIntProperty(DIAG_MDLOG_NUMBER_BUGREPORT, 100);
+    int copiedFiles = 0;
+
+    for (int i = num_entries - 1; i >= 0; i--) {
+        ALOGD("Found %s\n", dirent_list[i]->d_name);
+
+        if (0 != strncmp(dirent_list[i]->d_name, DIAG_LOG_PREFIX, strlen(DIAG_LOG_PREFIX))) {
+            continue;
+        }
+
+        if ((copiedFiles >= maxFileNum) && (maxFileNum != -1)) {
+            ALOGD("Skipped %s\n", dirent_list[i]->d_name);
+            continue;
+        }
+
+        copiedFiles++;
+
+        CommandOptions options = CommandOptions::WithTimeout(120).Build();
+        std::string srcLogFile = srcDir + "/" + dirent_list[i]->d_name;
+        std::string destLogFile = destDir + "/" + dirent_list[i]->d_name;
+
+        std::string copyCmd= "/vendor/bin/cp " + srcLogFile + " " + destLogFile;
+
+        ALOGD("Copying %s to %s\n", srcLogFile.c_str(), destLogFile.c_str());
+        RunCommandToFd(fd, "CP DIAG LOGS", { "/vendor/bin/sh", "-c", copyCmd.c_str() }, options);
+    }
+
+    while (num_entries--) {
+        free(dirent_list[num_entries]);
+    }
+
+    free(dirent_list);
+}
 
 void DumpstateDevice::dumpModem(int fd, int fdModem)
 {
@@ -68,7 +119,8 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
               "/data/vendor/radio/ril_log",
               "/data/vendor/radio/ril_log_old",
               "/data/vendor/netmgr/netmgr_log",
-              "/data/vendor/netmgr/netmgr_log_old"
+              "/data/vendor/netmgr/netmgr_log_old",
+              "/data/vendor/radio/power_anomaly_data.txt"
             };
 
         std::string modemLogMkDirCmd= "/vendor/bin/mkdir -p " + modemLogAllDir;
@@ -77,8 +129,6 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
         if (smlogEnabled) {
             RunCommandToFd(fd, "SMLOG DUMP", { "smlog_dump", "-d", "-o", modemLogAllDir.c_str() }, options);
         } else if (diagLogEnabled) {
-            std::string copyCmd= "/vendor/bin/cp -rf " + diagLogDir + " " + modemLogAllDir;
-
             android::base::SetProperty(DIAG_MDLOG_PROPERTY, "false");
 
             ALOGD("Waiting for diag log to exit\n");
@@ -92,7 +142,7 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
                 sleep(1);
             }
 
-            RunCommandToFd(fd, "CP DIAG LOGS", { "/vendor/bin/sh", "-c", copyCmd.c_str()}, options);
+            dumpDiagLogs(fd, diagLogDir, modemLogAllDir);
 
             android::base::SetProperty(DIAG_MDLOG_PROPERTY, "true");
         }
@@ -178,7 +228,7 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
         int fdModem = handle->data[1];
         dumpModem(fd, fdModem);
     }
-
+    RunCommandToFd(fd, "VENDOR PROPERTIES", {"/vendor/bin/getprop"});
     DumpFileToFd(fd, "SoC serial number", "/sys/devices/soc0/serial_number");
     DumpFileToFd(fd, "CPU present", "/sys/devices/system/cpu/present");
     DumpFileToFd(fd, "CPU online", "/sys/devices/system/cpu/online");
@@ -195,14 +245,11 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "SMD Log", "/d/ipc_logging/smd/log");
     RunCommandToFd(fd, "ION HEAPS", {"/vendor/bin/sh", "-c", "for d in $(ls -d /d/ion/*); do for f in $(ls $d); do echo --- $d/$f; cat $d/$f; done; done"});
     DumpFileToFd(fd, "dmabuf info", "/d/dma_buf/bufinfo");
-    RunCommandToFd(fd, "Temperatures", {"/vendor/bin/sh", "-c", "for f in `ls /sys/class/thermal` ; do type=`cat /sys/class/thermal/$f/type` ; temp=`cat /sys/class/thermal/$f/temp` ; echo \"$type: $temp\" ; done"});
     RunCommandToFd(fd, "Easel debug info", {"/vendor/bin/sh", "-c", "for f in `ls /sys/bus/i2c/devices/9-0008/@(*curr|temperature|vbat|total_power)`; do echo \"$f: `cat $f`\" ; done; file=/sys/devices/virtual/misc/mnh_sm/state; echo \"$file: `cat $file`\""});
-    DumpFileToFd(fd, "cpu0-3 time-in-state", "/sys/devices/system/cpu/cpu0/cpufreq/stats/time_in_state");
-    RunCommandToFd(fd, "cpu0-3 cpuidle", {"/vendor/bin/sh", "-c", "for d in $(ls -d /sys/devices/system/cpu/cpu0/cpuidle/state*); do echo \"$d: `cat $d/name` `cat $d/desc` `cat $d/time` `cat $d/usage`\"; done"});
-    DumpFileToFd(fd, "cpu4-7 time-in-state", "/sys/devices/system/cpu/cpu4/cpufreq/stats/time_in_state");
-    RunCommandToFd(fd, "cpu4-7 cpuidle", {"/vendor/bin/sh", "-c", "for d in $(ls -d /sys/devices/system/cpu/cpu4/cpuidle/state*); do echo \"$d: `cat $d/name` `cat $d/desc` `cat $d/time` `cat $d/usage`\"; done"});
-    DumpFileToFd(fd, "cpu0-3 thermal limit", "/sys/devices/virtual/thermal/cooling_device0/cur_state");
-    DumpFileToFd(fd, "cpu4-7 thermal limit", "/sys/devices/virtual/thermal/cooling_device1/cur_state");
+    RunCommandToFd(fd, "Temperatures", {"/vendor/bin/sh", "-c", "for f in /sys/class/thermal/thermal* ; do type=`cat $f/type` ; temp=`cat $f/temp` ; echo \"$type: $temp\" ; done"});
+    RunCommandToFd(fd, "Cooling Device Current State", {"/vendor/bin/sh", "-c", "for f in /sys/class/thermal/cooling* ; do type=`cat $f/type` ; temp=`cat $f/cur_state` ; echo \"$type: $temp\" ; done"});
+    RunCommandToFd(fd, "CPU time-in-state", {"/vendor/bin/sh", "-c", "for cpu in /sys/devices/system/cpu/cpu*; do f=$cpu/cpufreq/stats/time_in_state; if [ ! -f $f ]; then continue; fi; echo $f:; cat $f; done"});
+    RunCommandToFd(fd, "CPU cpuidle", {"/vendor/bin/sh", "-c", "for cpu in /sys/devices/system/cpu/cpu*; do for d in $cpu/cpuidle/state*; do if [ ! -d $d ]; then continue; fi; echo \"$d: `cat $d/name` `cat $d/desc` `cat $d/time` `cat $d/usage`\"; done; done"});
     DumpFileToFd(fd, "MDP xlogs", "/data/vendor/display/mdp_xlog");
     DumpFileToFd(fd, "TCPM logs", "/d/tcpm/usbpd0");
     DumpFileToFd(fd, "PD Engine", "/d/pd_engine/usbpd0");
@@ -210,15 +257,14 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "ipc-local-ports", "/d/msm_ipc_router/dump_local_ports");
     DumpTouch(fd);
     RunCommandToFd(fd, "USB Device Descriptors", {"/vendor/bin/sh", "-c", "cd /sys/bus/usb/devices/1-1 && cat product && cat bcdDevice; cat descriptors | od -t x1 -w16 -N96"});
+    // Timeout after 3s
+    RunCommandToFd(fd, "QSEE logs", {"/vendor/bin/sh", "-c", "/vendor/bin/timeout 3 cat /d/tzdbg/qsee_log"});
+    RunCommandToFd(fd, "Power supply properties", {"/vendor/bin/sh", "-c", "for f in /sys/class/power_supply/*/uevent ; do echo \"\n------ $f\" ; cat $f ; done"});
+    DumpFileToFd(fd, "Battery cycle count", "/sys/class/power_supply/bms/device/cycle_counts_bins");
+    RunCommandToFd(fd, "QCOM FG SRAM", {"/vendor/bin/sh", "-c", "echo 0 > /d/fg/sram/address ; echo 500 > /d/fg/sram/count ; cat /d/fg/sram/data"});
 
-    /* Check if qsee_logger tool exists */
-    if (!access("/vendor/bin/qsee_logger", X_OK)) {
-      RunCommandToFd(fd, "FP LOGS", {"qsee_logger", "-d"});
-    }
+    DumpFileToFd(fd, "WLAN FW Log Symbol Table", "/vendor/firmware/Data.msc");
 
-    DumpFileToFd(fd, "Battery type", "/sys/class/power_supply/bms/battery_type");
-
-    RunCommandToFd(fd, "Battery cycle count", {"/vendor/bin/sh", "-c", "for f in 1 2 3 4 5 6 7 8 ; do echo $f > /sys/class/power_supply/bms/cycle_count_id; count=`cat /sys/class/power_supply/bms/cycle_count`; echo \"$f: $count\"; done"});
     return Void();
 };
 

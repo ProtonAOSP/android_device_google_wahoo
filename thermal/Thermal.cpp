@@ -17,6 +17,7 @@
 #include <cerrno>
 #include <vector>
 
+#include <android-base/file.h>
 #include <android-base/logging.h>
 
 #include "Thermal.h"
@@ -59,13 +60,13 @@ Return<void> Thermal::getTemperatures(getTemperatures_cb _hidl_cb) {
         status.code = ThermalStatusCode::FAILURE;
         status.debugMessage = "Unsupported hardware";
         _hidl_cb(status, temperatures);
+        LOG(ERROR) << "ThermalHAL not initialized properly.";
         return Void();
     }
 
-    ssize_t ret = fillTemperatures(&temperatures);
-    if (ret < 0) {
+    if (fillTemperatures(&temperatures) != kTemperatureNum) {
         status.code = ThermalStatusCode::FAILURE;
-        status.debugMessage = strerror(-ret);
+        status.debugMessage = "Error reading thermal sensors.";
     }
     _hidl_cb(status, temperatures);
 
@@ -92,6 +93,7 @@ Return<void> Thermal::getCpuUsages(getCpuUsages_cb _hidl_cb) {
         status.code = ThermalStatusCode::FAILURE;
         status.debugMessage = "Unsupported hardware";
         _hidl_cb(status, cpuUsages);
+        LOG(ERROR) << "ThermalHAL not initialized properly.";
         return Void();
     }
 
@@ -122,6 +124,7 @@ Return<void> Thermal::getCoolingDevices(getCoolingDevices_cb _hidl_cb) {
         status.code = ThermalStatusCode::FAILURE;
         status.debugMessage = "Unsupported hardware";
         _hidl_cb(status, coolingDevices);
+        LOG(ERROR) << "ThermalHAL not initialized properly.";
         return Void();
     }
 
@@ -174,6 +177,58 @@ void Thermal::notifyThrottling(
         LOG(WARNING) <<
             "Dropped throttling event, no ThermalCallback registered";
     }
+}
+
+Return<void> Thermal::debug(const hidl_handle& handle, const hidl_vec<hidl_string>&) {
+    if (handle != nullptr && handle->numFds >= 1) {
+        int fd = handle->data[0];
+        std::ostringstream dump_buf;
+
+        if (!enabled) {
+            dump_buf << "ThermalHAL not initialized properly." << std::endl;
+        } else {
+            hidl_vec<Temperature> temperatures;
+            hidl_vec<CpuUsage> cpu_usages;
+            cpu_usages.resize(kCpuNum);
+            temperatures.resize(kTemperatureNum);
+
+            dump_buf << "getTemperatures:" << std::endl;
+            if (fillTemperatures(&temperatures) != kTemperatureNum) {
+                dump_buf << "Failed to read thermal sensors." << std::endl;
+            } else {
+                for (const auto& t : temperatures) {
+                    dump_buf << "Name: " << t.name
+                             << " Type: " << android::hardware::thermal::V1_0::toString(t.type)
+                             << " CurrentValue: " << t.currentValue
+                             << " ThrottlingThreshold: " << t.throttlingThreshold
+                             << " ShutdownThreshold: " << t.shutdownThreshold
+                             << " VrThrottlingThreshold: " << t.vrThrottlingThreshold
+                             << std::endl;
+                }
+            }
+
+            dump_buf << "getCpuUsages:" << std::endl;
+            ssize_t ret = fillCpuUsages(&cpu_usages);
+            if (ret < 0) {
+                dump_buf << "Failed to get CPU usages." << std::endl;
+            } else {
+                for (const auto& usage : cpu_usages) {
+                    dump_buf << "Name: " << usage.name
+                             << " Active: " << usage.active
+                             << " Total: " << usage.total
+                             << " IsOnline: " << usage.isOnline
+                             << std::endl;
+                }
+            }
+
+        }
+        std::string buf = dump_buf.str();
+        if (!android::base::WriteStringToFd(buf, fd)) {
+            PLOG(ERROR) << "Failed to dump state to fd";
+        }
+        fsync(fd);
+    }
+    return Void();
 }
 
 }  // namespace implementation

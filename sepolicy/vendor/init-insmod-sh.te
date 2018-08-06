@@ -7,7 +7,7 @@ allow init-insmod-sh vendor_shell_exec:file rx_file_perms;
 allow init-insmod-sh vendor_toolbox_exec:file rx_file_perms;
 
 # Set the sys.touch.modules.ready property
-set_prop(init-insmod-sh, system_prop)
+set_prop(init-insmod-sh, public_vendor_system_prop)
 
 # Allow insmod
 allow init-insmod-sh self:capability sys_module;

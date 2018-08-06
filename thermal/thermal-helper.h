@@ -40,46 +40,32 @@ namespace implementation {
 
 using ::android::hardware::thermal::V1_0::CpuUsage;
 using ::android::hardware::thermal::V1_0::Temperature;
+using ::android::hardware::thermal::V1_0::TemperatureType;
 
 constexpr const char *kCpuUsageFile = "/proc/stat";
 constexpr const char *kTemperatureFileFormat = "/sys/class/thermal/thermal_zone%d/temp";
 constexpr const char *kCpuOnlineFileFormat = "/sys/devices/system/cpu/cpu%d/online";
 
 // thermal-engine.conf
-constexpr unsigned int kWalleyeSkinSensorNum = 9;
-constexpr auto         kWalleyeSkinSensorType = "back_therm";
-constexpr unsigned int kWalleyeTsensOffset = 11;
 constexpr unsigned int kWalleyeSkinThrottlingThreshold = 40;
 constexpr unsigned int kWalleyeSkinShutdownThreshold = 56;
 constexpr unsigned int kWalleyeVrThrottledBelowMin = 52;
 
-constexpr unsigned int kTaimenRabSkinSensorNum = 8;
-constexpr auto         kTaimenRabSkinSensorType = "bd_therm";
-constexpr unsigned int kTaimenRabTsensOffset = 9;
 constexpr unsigned int kTaimenRabSkinThrottlingThreshold = 49;
 constexpr unsigned int kTaimenRabSkinShutdownThreshold = 66;
 constexpr unsigned int kTaimenRabVrThrottledBelowMin = 62;
 
-constexpr unsigned int kTaimenRcSkinSensorNum = 8;
-constexpr auto         kTaimenRcSkinSensorType = "bd_therm2";
-constexpr unsigned int kTaimenRcTsensOffset = 9;
 constexpr unsigned int kTaimenRcSkinThrottlingThreshold = 38;
 constexpr unsigned int kTaimenRcSkinShutdownThreshold = 54;
 constexpr unsigned int kTaimenRcVrThrottledBelowMin = 50;
 
-
-constexpr unsigned int kBatterySensorNum = 0;
-constexpr unsigned int kGpuTsensOffset = 11;
 constexpr unsigned int kCpuNum = 8;
 
-constexpr const char *kGpuLabel = "GPU";
-constexpr const char *kBatteryLabel = "battery";
-constexpr const char *kSkinLabel = "skin";
-constexpr const char *kCpuLabel[kCpuNum] = {"CPU0", "CPU1", "CPU2", "CPU3", "CPU4", "CPU5", "CPU6", "CPU7"};
-constexpr int kCpuTsensOffset[kCpuNum] = {1, 2, 4, 3, 5, 6, 7, 8};
+constexpr const char *kCpuLabel[kCpuNum] = {
+  "CPU0", "CPU1", "CPU2", "CPU3", "CPU4", "CPU5", "CPU6", "CPU7"};
 
-// Sum of kCpuNum + 3 for GPU, BATTERY, and SKIN.
-constexpr unsigned int kTemperatureNum = 3 + kCpuNum;
+// Sum of kCpuNum + 4 for GPU, BATTERY, SKIN, and USB-C.
+constexpr unsigned int kTemperatureNum = 4 + kCpuNum;
 
 // qcom, therm-reset-temp
 constexpr unsigned int kCpuShutdownThreshold = 115;

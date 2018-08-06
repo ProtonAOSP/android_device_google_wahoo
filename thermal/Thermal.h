@@ -54,7 +54,8 @@ struct Thermal : public IThermal {
     // Methods from ::android::hardware::thermal::V1_1::IThermal follow.
     Return<void> registerThermalCallback(
         const sp<IThermalCallback>& callback) override;
-
+    // Methods from ::android::hidl::base::V1_0::IBase follow.
+    Return<void> debug(const hidl_handle& fd, const hidl_vec<hidl_string>& args) override;
   private:
     bool enabled;
 };

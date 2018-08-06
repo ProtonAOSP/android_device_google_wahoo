@@ -3,3 +3,5 @@ dontaudit surfaceflinger vendor_file:file read;
 dontaudit surfaceflinger kernel:system module_request;
 allow surfaceflinger debugfs_ion:dir search;
 
+typeattribute surfaceflinger system_writes_vendor_properties_violators;
+set_prop(surfaceflinger, public_vendor_system_prop)
