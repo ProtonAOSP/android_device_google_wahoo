@@ -340,7 +340,7 @@ on zygote-start
     mkdir /data/misc/dash 0770 media audio
 
     # Create directory for radio
-    mkdir /data/vendor/radio 0771 system radio
+    mkdir /data/vendor/radio 0773 system radio
 
     # Create directory used by display clients
     mkdir /data/misc/display 0770 system graphics
