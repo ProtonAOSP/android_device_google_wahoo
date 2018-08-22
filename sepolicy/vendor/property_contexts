@@ -194,6 +194,7 @@ persist.radio.snapshot_timer  u:object_r:vendor_radio_prop:s0
 persist.radio.videopause.mode  u:object_r:vendor_radio_prop:s0
 persist.radio.VT_ENABLE    u:object_r:vendor_radio_prop:s0
 persist.radio.VT_HYBRID_ENABLE  u:object_r:vendor_radio_prop:s0
+vendor.radio.pwr.curb_backoff  u:object_r:vendor_radio_prop:s0
 
 # vendor_bluetooth_prop
 persist.vendor.bluetooth.a4wp           u:object_r:vendor_bluetooth_prop:s0
