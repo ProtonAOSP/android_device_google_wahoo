@@ -28,7 +28,7 @@ dontaudit rild diag_device:chr_file rw_file_perms;
 allow rild radio_vendor_data_file:dir rw_dir_perms;
 allow rild radio_vendor_data_file:file create_file_perms;
 
-get_prop(rild, vendor_radio_prop)
+set_prop(rild, vendor_radio_prop)
 
 # Allow vendor native process to read the proc file of xt_qtaguid
 allow rild proc_qtaguid_stat:file r_file_perms;
