@@ -677,3 +677,7 @@ ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
   PRODUCT_PROPERTY_OVERRIDES += \
       persist.vendor.usb.usbradio.config=diag
 endif
+
+# default atrace HAL
+PRODUCT_PACKAGES += \
+    android.hardware.atrace@1.0-service
