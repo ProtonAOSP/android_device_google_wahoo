@@ -36,6 +36,8 @@
 /dev/mnh_sm                                     u:object_r:easel_device:s0
 /dev/easelcomm-client                           u:object_r:easel_device:s0
 /dev/pn81a                                      u:object_r:pn81a_device:s0
+/dev/access-metadata                            u:object_r:ramoops_device:s0
+/dev/access-ramoops                             u:object_r:ramoops_device:s0
 
 # dev socket nodes
 /dev/socket/chre                                u:object_r:chre_socket:s0
@@ -182,6 +184,8 @@
 /vendor/etc/init\.insmod\.cfg                                        u:object_r:init-insmod-sh_exec:s0
 /vendor/bin/init\.power\.sh     u:object_r:init_power_exec:s0
 /vendor/bin/init\.radio\.sh     u:object_r:init_radio_exec:s0
+/vendor/bin/ramoops             u:object_r:ramoops_exec:s0
+/vendor/bin/init\.ramoops\.sh   u:object_r:ramoops_exec:s0
 
 /vendor/bin/hw/android\.hardware\.bluetooth@1\.0-service-qti          u:object_r:hal_bluetooth_default_exec:s0
 /vendor/bin/hw/android\.hardware\.drm@1\.1-service\.widevine          u:object_r:hal_drm_widevine_exec:s0
@@ -259,6 +263,7 @@
 /data/vendor/sensors(/.*)?             u:object_r:sensors_vendor_data_file:s0
 /data/vendor/audio(/.*)?               u:object_r:audio_vendor_data_file:s0
 /data/vendor/mediadrm(/.*)?            u:object_r:mediadrm_vendor_data_file:s0
+/data/vendor_ce/[0-9]+/ramoops(/.*)?   u:object_r:ramoops_vendor_data_file:s0
 
 # input files
 /vendor/usr/idc(/.*)?                  u:object_r:idc_file:s0

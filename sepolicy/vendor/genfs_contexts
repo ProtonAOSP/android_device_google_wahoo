@@ -98,3 +98,8 @@ genfscon debugfs /ufshcd0                             u:object_r:debugfs_ufs:s0
 genfscon debugfs /fg/sram                             u:object_r:debugfs_fg_sram:s0
 genfscon debugfs /dma_buf/bufinfo                     u:object_r:debugfs_dma_bufinfo:s0
 genfscon debugfs /tzdbg	                              u:object_r:debugfs_tzdbg:s0
+
+genfscon sysfs /devices/virtual/ramoops/pstore/aes_key                  u:object_r:sysfs_pstore:s0
+genfscon sysfs /devices/virtual/ramoops/pstore/aes_key_iv               u:object_r:sysfs_pstore:s0
+genfscon sysfs /devices/virtual/ramoops/pstore/aes_key_tag              u:object_r:sysfs_pstore:s0
+genfscon sysfs /devices/virtual/ramoops/pstore/use_alt                  u:object_r:sysfs_pstore:s0
