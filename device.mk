@@ -749,6 +749,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml
 
+# Shared java libs
+PRODUCT_PACKAGES += \
+    com.android.nfc_extras
+
 # Early phase offset configuration for SurfaceFlinger
 #PRODUCT_PROPERTY_OVERRIDES += \
 #    debug.sf.early_phase_offset_ns=1500000
