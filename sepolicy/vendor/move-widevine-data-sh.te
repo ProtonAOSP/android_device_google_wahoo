@@ -1,5 +1,5 @@
 type move-widevine-data-sh, domain, coredomain;
-type move-widevine-data-sh_exec, exec_type, file_type;
+type move-widevine-data-sh_exec, system_file_type, exec_type, file_type;
 init_daemon_domain(move-widevine-data-sh);
 
 typeattribute move-widevine-data-sh data_between_core_and_vendor_violators;
