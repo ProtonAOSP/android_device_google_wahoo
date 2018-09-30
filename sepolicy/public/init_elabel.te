@@ -4,4 +4,4 @@
 # settings app
 #
 type init_elabel, domain, coredomain;
-type init_elabel_exec, exec_type, file_type;
+type init_elabel_exec, system_file_type, exec_type, file_type;
