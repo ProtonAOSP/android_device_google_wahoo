@@ -22,7 +22,6 @@ allow hal_imsrtp self:capability net_bind_service;
 
 allow hal_imsrtp sysfs_timestamp_switch:file r_file_perms;
 allow hal_imsrtp ion_device:chr_file r_file_perms;
-allow hal_imsrtp sysfs_data:file r_file_perms;
 r_dir_file(hal_imsrtp, sysfs_msm_subsys)
 r_dir_file(hal_imsrtp, sysfs_diag)
 r_dir_file(hal_imsrtp, sysfs_soc)
