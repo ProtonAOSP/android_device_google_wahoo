@@ -1,8 +1,3 @@
-# communicate with perfd
-dontaudit hal_camera perfd:unix_stream_socket connectto;
-dontaudit hal_camera perfd_socket:sock_file write;
-dontaudit hal_camera perfd_socket:sock_file w_file_perms;
-
 allow hal_camera self:capability sys_nice;
 
 allow hal_camera gpu_device:chr_file rw_file_perms;

@@ -342,10 +342,6 @@ on zygote-start
     # Create directory used by display clients
     mkdir /data/misc/display 0770 system graphics
 
-    # Create perfd related dirs
-    mkdir /data/system/perfd 0770 root system
-    chmod 2770 /data/system/perfd
-
     # Setup sensors-related directories and permissions
     mkdir /persist/sensors 0775
     chown root system /persist/sensors
