@@ -758,12 +758,6 @@ on property:wc_transport.start_hci=true
 on property:wc_transport.start_hci=false
     stop vendor.hci_filter
 
-service vendor.hci_filter /vendor/bin/wcnss_filter
-    class late_start
-    user bluetooth
-    group bluetooth diag system wakelock
-    disabled
-
 service vendor.loc_launcher /vendor/bin/loc_launcher
     class late_start
     group gps inet diag wifi
