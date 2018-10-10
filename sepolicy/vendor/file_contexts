@@ -55,7 +55,6 @@
 /dev/socket/thermal-send-client                 u:object_r:thermal_socket:s0
 /dev/socket/thermal-recv-client                 u:object_r:thermal_socket:s0
 /dev/socket/thermal-recv-passive-client         u:object_r:thermal_socket:s0
-/dev/socket/perfd                               u:object_r:perfd_socket:s0
 /dev/socket/netmgr(/.*)?                        u:object_r:netmgrd_socket:s0
 /dev/nq-nci                                     u:object_r:nfc_device:s0
 /dev/ttyHS0                                     u:object_r:hci_attach_dev:s0
@@ -126,7 +125,6 @@
 /vendor/bin/hw/android\.hardware\.vr@1\.0-service\.wahoo      u:object_r:hal_vr_default_exec:s0
 /vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service\.fpc u:object_r:hal_fingerprint_default_exec:s0
 /vendor/bin/msm_irqbalance      u:object_r:irqbalance_exec:s0
-/vendor/bin/perfd               u:object_r:perfd_exec:s0
 /vendor/bin/thermal-engine      u:object_r:thermal-engine_exec:s0
 /vendor/bin/sensors\.qcom        u:object_r:sensors_exec:s0
 /vendor/bin/ssr_setup           u:object_r:ssr_setup_exec:s0
@@ -170,9 +168,7 @@
 /vendor/bin/oemlock_provision   u:object_r:hal_bootctl_default_exec:s0
 /vendor/bin/oemlock-bridge      u:object_r:hal_bootctl_default_exec:s0
 /vendor/bin/hw/android\.hardware\.usb@1\.1-service\.wahoo             u:object_r:hal_usb_impl_exec:s0
-/vendor/bin/hw/android\.hardware\.power@1\.2-service\.wahoo           u:object_r:hal_power_default_exec:s0
 /vendor/bin/hw/android\.hardware\.power@1\.2-service\.wahoo-libperfmgr u:object_r:hal_power_default_exec:s0
-/vendor/bin/hw/android\.hardware\.thermal@1\.0-service\.wahoo         u:object_r:hal_thermal_default_exec:s0
 /vendor/bin/chre                u:object_r:chre_exec:s0
 /vendor/bin/time_daemon         u:object_r:time_daemon_exec:s0
 /vendor/bin/imsrcsd             u:object_r:hal_rcsservice_exec:s0
@@ -194,7 +190,6 @@
 /vendor/bin/hw/android\.hardware\.keymaster@3\.0-service-qti         u:object_r:hal_keymaster_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service-qti        u:object_r:hal_gatekeeper_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.gnss@1\.0-service-qti              u:object_r:hal_gnss_qti_exec:s0
-/vendor/bin/hw/android\.hardware\.neuralnetworks@1\.0-service-hvx    u:object_r:hal_neuralnetworks_hvx_exec:s0
 
 ###############################################
 # same-process HAL files and their dependencies
