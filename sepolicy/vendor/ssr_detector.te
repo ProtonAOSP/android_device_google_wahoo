@@ -19,3 +19,5 @@ allow ssr_detector_app system_app_data_file:{ file lnk_file } create_file_perms;
 allow ssr_detector_app sysfs:lnk_file r_file_perms;
 
 r_dir_file(ssr_detector_app, sysfs_msm_subsys)
+
+allow ssr_detector_app cgroup:file w_file_perms;
