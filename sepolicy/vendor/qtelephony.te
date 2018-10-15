@@ -13,3 +13,5 @@ allow qtelephony system_app_data_file:dir create_dir_perms;
 allow qtelephony system_app_data_file:{ file lnk_file } create_file_perms;
 
 set_prop(qtelephony, atfwd_start_prop)
+
+allow qtelephony cgroup:file w_file_perms;
