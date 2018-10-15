@@ -259,10 +259,6 @@
 /data/vendor/mediadrm(/.*)?            u:object_r:mediadrm_vendor_data_file:s0
 /data/vendor_ce/[0-9]+/ramoops(/.*)?   u:object_r:ramoops_vendor_data_file:s0
 
-# input files
-/vendor/usr/idc(/.*)?                  u:object_r:idc_file:s0
-/vendor/usr/keylayout(/.*)?            u:object_r:keylayout_file:s0
-
 # /
 /tombstones             u:object_r:rootfs:s0
 /dsp                    u:object_r:rootfs:s0
