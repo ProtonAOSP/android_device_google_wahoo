@@ -6,3 +6,5 @@ binder_call(dataservice_app, cnd)
 
 # imsrcsd to bind with UceShimService.apk
 binder_call(dataservice_app, hal_rcsservice)
+
+allow dataservice_app cgroup:file w_file_perms;
