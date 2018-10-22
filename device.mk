@@ -380,7 +380,7 @@ PRODUCT_PACKAGES += \
     SecureElement
 
 PRODUCT_COPY_FILES += \
-    device/google/wahoo/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_SYSTEM)/etc/libnfc-nci.conf \
+    device/google/wahoo/nfc/libnfc-nci.conf:$(TARGET_COPY_OUT_PRODUCT)/etc/libnfc-nci.conf \
 
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.1-service.wahoo
