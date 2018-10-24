@@ -26,4 +26,5 @@ rfs_access unlabeled file 78019660
 rild system_prop file 77960261
 surfaceflinger vendor_default_prop file 79617173
 system_app vendor_default_prop file 79617173
+system_server vendor_default_prop file 79617173
 untrusted_app vendor_default_prop file 79617173
