@@ -212,3 +212,7 @@ persist.nfc. u:object_r:persist_nfc_prop:s0
 
 # ramoops
 vendor.ramoops.                    u:object_r:vendor_ramoops_prop:s0
+
+# fingerprint
+vendor.fps.init.succeed               u:object_r:vendor_fingerprint_prop:s0
+vendor.fps.init_retry.count           u:object_r:vendor_fingerprint_prop:s0
