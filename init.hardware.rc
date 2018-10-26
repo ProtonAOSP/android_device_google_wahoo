@@ -160,8 +160,6 @@ on init
     write /proc/sys/vm/page-cluster 0
 
 on fs
-    # Start HW service manager early
-    start hwservicemanager
     mount_all /vendor/etc/fstab.${ro.hardware} --early
 
     mkdir /persist/data 0700 system system
