@@ -160,8 +160,6 @@ on init
     write /proc/sys/vm/page-cluster 0
 
 on fs
-    # Start HW service manager early
-    start hwservicemanager
     mount_all /vendor/etc/fstab.${ro.hardware} --early
 
     mkdir /persist/data 0700 system system
@@ -245,6 +243,10 @@ on post-fs-data
 
     # b/38496103 Setup debug folders for display
     mkdir /data/vendor/display 0770 system graphics
+
+    # b/65834073 Create rfs folder for tftp_server
+    mkdir /data/vendor/tombstones 0770 system system
+    mkdir /data/vendor/tombstones/rfs 0770 root system
 
     # keep that at the end of on post-fs-data
     # Set indication (checked by vold) that we have finished this action
