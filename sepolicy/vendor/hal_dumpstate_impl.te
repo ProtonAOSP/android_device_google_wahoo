@@ -8,6 +8,10 @@ init_daemon_domain(hal_dumpstate_impl)
 allow hal_dumpstate_impl vendor_shell_exec:file rx_file_perms;
 allow hal_dumpstate_impl vendor_toolbox_exec:file rx_file_perms;
 
+# Allow to read pixel-trace trace file
+allow hal_dumpstate_impl debugfs_tracing_instances:dir search;
+allow hal_dumpstate_impl debugfs_tracing_instances:file r_file_perms;
+
 userdebug_or_eng(`
   # smlog_dump
   domain_auto_trans(hal_dumpstate_impl, smlog_dump_exec, smlog_dump)
