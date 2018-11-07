@@ -154,7 +154,6 @@
 /vendor/bin/ipacm-diag          u:object_r:hal_tetheroffload_default_exec:s0
 /vendor/bin/cnd                 u:object_r:cnd_exec:s0
 /vendor/bin/ATFWD-daemon        u:object_r:atfwd_exec:s0
-/vendor/bin/easelmanagerd       u:object_r:easel_exec:s0
 # Remove after b/38447389
 /vendor/bin/esed                u:object_r:esed_exec:s0
 # Rename to android.hardware.[XXX] after b/38447431
