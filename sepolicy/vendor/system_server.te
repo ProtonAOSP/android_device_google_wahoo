@@ -27,3 +27,5 @@ typeattribute system_server system_writes_vendor_properties_violators;
 set_prop(system_server, public_vendor_system_prop)
 
 dontaudit system_server self:capability sys_module;
+
+allow system_server thermal_service:service_manager find;
