@@ -481,8 +481,7 @@ PRODUCT_PACKAGES += \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     libqcomvoiceprocessingdescriptors \
-    libqcompostprocbundle \
-    libmalistener
+    libqcompostprocbundle
 
 PRODUCT_PACKAGES += \
     audio.primary.msm8998 \
