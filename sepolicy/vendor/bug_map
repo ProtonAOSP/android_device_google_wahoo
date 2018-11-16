@@ -10,7 +10,7 @@ hal_camera_default camera_vendor_data_file dir 77865891
 hal_camera_default debugfs dir 77865891
 hal_camera_default radio_prop file 77865891
 hal_imsrtp default_prop file 77725358
-hal_power_default cgroup file 77919134
+hal_nfc_default default_prop file 119670542
 init_power init_power capability 77915310
 installd media_rw_data_file file 77926261
 netutils_wrapper oemfs dir 77871509
@@ -28,5 +28,4 @@ rild system_prop file 77960261
 surfaceflinger vendor_default_prop file 79617173
 system_app vendor_default_prop file 79617173
 system_server vendor_default_prop file 79617173
-thermal-engine thermal-engine capability 78019417
 untrusted_app vendor_default_prop file 79617173
