@@ -20,3 +20,6 @@ allow hal_power_default cgroup:file rw_file_perms;
 
 # To get/set powerhal state property
 set_prop(hal_power_default, power_prop)
+
+# interact with thermal_config
+set_prop(hal_power_default, thermal_prop)
