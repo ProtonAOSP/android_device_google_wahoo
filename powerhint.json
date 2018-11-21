@@ -134,14 +134,56 @@
         "100"
       ],
       "HoldFd": true
+    },
+    {
+      "Name": "PowerHALMainState",
+      "Path": "vendor.powerhal.state",
+      "Values": [
+        "VIDEO_ENCODE",
+        "VR_SUSTAINED_PERFORMANCE",
+        "SUSTAINED_PERFORMANCE",
+        "VR_MODE",
+        ""
+      ],
+      "Type": "Property"
+    },
+    {
+      "Name": "PowerHALAudioState",
+      "Path": "vendor.powerhal.audio",
+      "Values": [
+        "AUDIO_LOW_LATENCY",
+        ""
+      ],
+      "Type": "Property"
+    },
+    {
+      "Name": "ThermalConfig",
+      "Path": "vendor.qcom.thermalcfg",
+      "Values": [
+        "/vendor/etc/thermal-engine-vr.conf",
+        "/vendor/etc/thermal-engine.conf"
+      ],
+      "Type": "Property"
     }
   ],
   "Actions": [
     {
       "PowerHint": "VIDEO_ENCODE",
+      "Node": "PowerHALMainState",
+      "Duration": 0,
+      "Value": "VIDEO_ENCODE"
+    },
+    {
+      "PowerHint": "VIDEO_ENCODE",
       "Node": "CPUBigClusterMaxFreq",
       "Duration": 0,
       "Value": "1958400"
+    },
+    {
+      "PowerHint": "SUSTAINED_PERFORMANCE",
+      "Node": "PowerHALMainState",
+      "Duration": 0,
+      "Value": "SUSTAINED_PERFORMANCE"
     },
     {
       "PowerHint": "SUSTAINED_PERFORMANCE",
@@ -160,6 +202,18 @@
       "Node": "GPUMaxFreq",
       "Duration": 0,
       "Value": "342000000"
+    },
+    {
+      "PowerHint": "VR_MODE",
+      "Node": "PowerHALMainState",
+      "Duration": 0,
+      "Value": "VR_MODE"
+    },
+    {
+      "PowerHint": "VR_MODE",
+      "Node": "ThermalConfig",
+      "Duration": 0,
+      "Value": "/vendor/etc/thermal-engine-vr.conf"
     },
     {
       "PowerHint": "VR_MODE",
@@ -202,6 +256,18 @@
       "Node": "GPUBusMinFreq",
       "Duration": 0,
       "Value": "11863"
+    },
+    {
+      "PowerHint": "VR_SUSTAINED_PERFORMANCE",
+      "Node": "PowerHALMainState",
+      "Duration": 0,
+      "Value": "VR_MODE"
+    },
+    {
+      "PowerHint": "VR_SUSTAINED_PERFORMANCE",
+      "Node": "ThermalConfig",
+      "Duration": 0,
+      "Value": "/vendor/etc/thermal-engine-vr.conf"
     },
     {
       "PowerHint": "VR_SUSTAINED_PERFORMANCE",
@@ -442,6 +508,12 @@
       "Node": "PMQoSCpuDmaLatency",
       "Duration": 2000,
       "Value": "44"
+    },
+    {
+      "PowerHint": "AUDIO_LOW_LATENCY",
+      "Node": "PowerHALAudioState",
+      "Duration": 0,
+      "Value": "AUDIO_LOW_LATENCY"
     },
     {
       "PowerHint": "AUDIO_LOW_LATENCY",

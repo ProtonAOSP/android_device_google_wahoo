@@ -506,7 +506,7 @@ on property:init.svc.zygote=running
 on property:init.svc.zygote=stopped
     stop vendor.folio_daemon
 
-service vendor.thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg:-/vendor/etc/thermal-engine.conf}
+service vendor.thermal-engine /vendor/bin/thermal-engine -c ${vendor.qcom.thermalcfg:-/vendor/etc/thermal-engine.conf}
    class hal
    user root
    group root system diag
