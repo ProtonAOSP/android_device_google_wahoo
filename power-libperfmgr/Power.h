@@ -45,6 +45,7 @@ using ::android::perfmgr::HintManager;
 constexpr char kPowerHalStateProp[] = "vendor.powerhal.state";
 constexpr char kPowerHalAudioProp[] = "vendor.powerhal.audio";
 constexpr char kPowerHalInitProp[] = "vendor.powerhal.init";
+constexpr char kPowerHalConfigPath[] = "/vendor/etc/powerhint.json";
 
 struct Power : public IPower {
     // Methods from ::android::hardware::power::V1_0::IPower follow.
