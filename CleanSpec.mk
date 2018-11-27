@@ -176,13 +176,13 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib64/hw/*)
 # Remove android.hardware.audio*@2.0 implementation
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/android.hardware.audio*@2.0-impl.so)
 
-# Remove Clearkey HAL 1.0
-$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.drm@1.0-service.clearkey.rc)
-$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.drm@1.0-service.clearkey)
+# Remove Clearkey HAL 1.1
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.drm@1.1-service.clearkey.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.drm@1.1-service.clearkey)
 
-# Remove Widevine HAL 1.0
-$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.drm@1.0-service.widevine.rc)
-$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.drm@1.0-service.widevine)
+# Remove Widevine HAL 1.1
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.drm@1.1-service.widevine.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.drm@1.1-service.widevine)
 
 # Remove healthd
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/healthd)
