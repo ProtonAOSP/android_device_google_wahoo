@@ -497,7 +497,7 @@ service vendor.init-radio-sh /vendor/bin/init.radio.sh
 service vendor.folio_daemon /system/bin/folio_daemon
     class late_start
     user system
-    group system
+    group system uhid
     disabled
 
 on property:init.svc.zygote=running
