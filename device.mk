@@ -29,6 +29,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.adb.secure=1
 
+PRODUCT_SOONG_NAMESPACES += \
+    device/google/wahoo \
+    hardware/google/pixel/thermalhal
+
 # Telephony IWLAN operation mode
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.telephony.iwlan_operation_mode=0
@@ -439,9 +443,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.2-service.wahoo
 
-# Thermal packages
+# Thermal HAL
 PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.1-impl-wahoo
+    android.hardware.thermal@2.0-service.pixel
 
 #GNSS HAL
 PRODUCT_PACKAGES += \
