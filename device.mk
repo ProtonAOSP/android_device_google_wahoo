@@ -59,7 +59,7 @@ SRC_MEDIA_HAL_DIR := hardware/qcom/media/msm8998
 SRC_DISPLAY_HAL_DIR := hardware/qcom/display/msm8998
 SRC_CAMERA_HAL_DIR := hardware/qcom/camera/msm8998
 
-TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
+TARGET_SYSTEM_PROP := $(TARGET_SYSTEM_PROP) $(LOCAL_PATH)/system.prop
 
 # Get kernel-headers
 $(call inherit-product, hardware/qcom/msm8998/msm8998.mk)
