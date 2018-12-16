@@ -148,6 +148,10 @@ TARGET_HAS_HDR_DISPLAY := false
 TARGET_USE_COLOR_MANAGEMENT := true
 TARGET_USES_COLOR_METADATA := true
 
+# Must align with HAL types Dataspace
+# The data space of wide color gamut composition preference is Dataspace::DISPLAY_P3
+SF_WCG_COMPOSITION_DATA_SPACE := 143261696
+
 # Charger Mode
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
