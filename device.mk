@@ -501,7 +501,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.audio@5.0-impl:32 \
     android.hardware.audio.effect@5.0-impl:32 \
-    android.hardware.soundtrigger@2.1-impl:32 \
+    android.hardware.soundtrigger@2.2-impl:32 \
     android.hardware.audio@2.0-service
 
 # stereo speakers: orientation changes swap L/R channels
