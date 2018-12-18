@@ -31,7 +31,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 PRODUCT_SOONG_NAMESPACES += \
     device/google/wahoo \
-    hardware/google/pixel/thermalhal
+    hardware/google/pixel
 
 # Telephony IWLAN operation mode
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
