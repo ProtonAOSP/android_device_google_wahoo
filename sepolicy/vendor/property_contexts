@@ -25,8 +25,8 @@ persist.radio.atfwd.start  u:object_r:atfwd_start_prop:s0
 sys.logger.bluetooth       u:object_r:bluetooth_log_prop:s0
 vendor.powerhal.state      u:object_r:power_prop:s0
 vendor.powerhal.audio      u:object_r:power_prop:s0
-sys.wlan.driver.version    u:object_r:vendor_wifi_version:s0
-sys.wlan.firmware.version  u:object_r:vendor_wifi_version:s0
+vendor.wlan.driver.version    u:object_r:vendor_wifi_version:s0
+vendor.wlan.firmware.version  u:object_r:vendor_wifi_version:s0
 persist.vendor.usb.config  u:object_r:vendor_usb_config_prop:s0
 vendor.usb.config          u:object_r:vendor_usb_config_prop:s0
 persist.vendor.charge.     u:object_r:vendor_charge_prop:s0
