@@ -16,3 +16,7 @@ allow rfs_access persist_rfs_file:dir create_dir_perms;
 allow rfs_access persist_rfs_file:file create_file_perms;
 
 allow rfs_access self:socket create_socket_perms_no_ioctl;
+
+# For ramdump entries in /data/vendor/tombstones
+allow rfs_access tombstone_vendor_data_file:dir create_dir_perms;
+allow rfs_access tombstone_vendor_data_file:file create_file_perms;
