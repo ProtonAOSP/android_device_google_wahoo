@@ -207,3 +207,6 @@ ro.vendor.bluetooth.wipower             u:object_r:vendor_bluetooth_prop:s0
 
 # persist_nfc_prop
 persist.nfc. u:object_r:persist_nfc_prop:s0
+
+# ramoops
+vendor.ramoops.                    u:object_r:vendor_ramoops_prop:s0
