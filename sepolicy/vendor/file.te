@@ -91,3 +91,6 @@ typeattribute sysfs_batteryinfo mlstrustedobject;
 type proc_irq, fs_type, proc_type;
 type sysfs_irq, sysfs_type, fs_type;
 type irqbalance_socket, file_type;
+
+type sysfs_pstore, sysfs_type, fs_type;
+type ramoops_vendor_data_file, file_type, data_file_type;

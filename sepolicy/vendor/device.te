@@ -26,3 +26,4 @@ type ssr_device, dev_type;
 type thermal_device, dev_type;
 type wlan_device, dev_type;
 type xbl_block_device, dev_type;
+type ramoops_device, dev_type;

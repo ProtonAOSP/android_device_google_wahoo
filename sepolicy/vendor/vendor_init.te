@@ -4,7 +4,6 @@ allow vendor_init {
   dhcp_data_file
   elabel_data_file
   media_rw_data_file
-  ramoops_data_file
   system_data_file
   tombstone_data_file
   wifi_data_file
