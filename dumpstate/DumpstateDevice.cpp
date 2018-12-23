@@ -279,6 +279,11 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "PD Engine", "/d/pd_engine/usbpd0");
     DumpFileToFd(fd, "smblib-usb logs", "/d/ipc_logging/smblib/log");
     DumpFileToFd(fd, "ipc-local-ports", "/d/msm_ipc_router/dump_local_ports");
+    DumpFileToFd(fd, "ipc-servers", "/d/msm_ipc_router/dump_servers");
+    RunCommandToFd(fd, "ipc-logs",
+                   {"/vendor/bin/sh", "-c",
+                    "for f in `ls /d/ipc_logging/*_IPCRTR/log` ; do echo \"------ $f\\n`cat "
+                    "$f`\\n\" ; done"});
     DumpTouch(fd);
     RunCommandToFd(fd, "USB Device Descriptors", {"/vendor/bin/sh", "-c", "cd /sys/bus/usb/devices/1-1 && cat product && cat bcdDevice; cat descriptors | od -t x1 -w16 -N96"});
     DumpFileToFd(fd, "Pixel trace", "/d/tracing/instances/pixel-trace/trace");
