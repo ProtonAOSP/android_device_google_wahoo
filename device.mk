@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2016 The Android Open-Source Project
+# Copyright (C) 2018 The Android Open-Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -196,6 +196,10 @@ PRODUCT_COPY_FILES += \
 # power HAL
 PRODUCT_PACKAGES += \
     android.hardware.power@1.2-service.wahoo-libperfmgr
+
+# power.stats HAL
+PRODUCT_PACKAGES += \
+    android.hardware.power.stats@1.0-service.pixel
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
