@@ -338,9 +338,6 @@
     <!-- True if Unprocessed audio source supports the required frequency range and level -->
     <bool name="config_supportAudioSourceUnprocessed">true</bool>
 
-    <!-- Colon separated list of package names that should be granted DND access -->
-    <string name="config_defaultDndAccessPackages" translatable="false">com.google.android.gms:com.google.android.GoogleCamera:com.google.intelligence.sense:com.google.android.settings.intelligence</string>
-
     <!-- Specify model in case of attestation failure due to misprovisioned device. -->
     <string name="config_misprovisionedDeviceModel" translatable="false">Pixel 2</string>
 
