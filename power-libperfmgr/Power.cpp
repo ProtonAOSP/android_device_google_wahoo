@@ -29,10 +29,6 @@
 #include <utils/Trace.h>
 
 #include "Power.h"
-#include "power-helper.h"
-
-/* RPM runs at 19.2Mhz. Divide by 19200 for msec */
-#define RPM_CLK 19200
 
 extern struct stat_pair rpm_stat_map[];
 
@@ -43,10 +39,7 @@ namespace V1_2 {
 namespace implementation {
 
 using ::android::hardware::power::V1_0::Feature;
-using ::android::hardware::power::V1_0::PowerStatePlatformSleepState;
 using ::android::hardware::power::V1_0::Status;
-using ::android::hardware::power::V1_1::PowerStateSubsystem;
-using ::android::hardware::power::V1_1::PowerStateSubsystemSleepState;
 using ::android::hardware::hidl_vec;
 using ::android::hardware::Return;
 using ::android::hardware::Void;
@@ -215,166 +208,15 @@ Return<void> Power::setFeature(Feature /*feature*/, bool /*activate*/)  {
 }
 
 Return<void> Power::getPlatformLowPowerStats(getPlatformLowPowerStats_cb _hidl_cb) {
-
-    hidl_vec<PowerStatePlatformSleepState> states;
-    uint64_t stats[MAX_PLATFORM_STATS * MAX_RPM_PARAMS] = {0};
-    uint64_t *values;
-    struct PowerStatePlatformSleepState *state;
-    int ret;
-
-    states.resize(PLATFORM_SLEEP_MODES_COUNT);
-
-    ret = extract_platform_stats(stats);
-    if (ret != 0) {
-        states.resize(0);
-        goto done;
-    }
-
-    /* Update statistics for XO_shutdown */
-    state = &states[RPM_MODE_XO];
-    state->name = "XO_shutdown";
-    values = stats + (RPM_MODE_XO * MAX_RPM_PARAMS);
-
-    state->residencyInMsecSinceBoot = values[1];
-    state->totalTransitions = values[0];
-    state->supportedOnlyInSuspend = false;
-    state->voters.resize(XO_VOTERS);
-    for(size_t i = 0; i < XO_VOTERS; i++) {
-        int voter = static_cast<int>(i + XO_VOTERS_START);
-        state->voters[i].name = rpm_stat_map[voter].label;
-        values = stats + (voter * MAX_RPM_PARAMS);
-        state->voters[i].totalTimeInMsecVotedForSinceBoot = values[0] / RPM_CLK;
-        state->voters[i].totalNumberOfTimesVotedSinceBoot = values[1];
-    }
-
-    /* Update statistics for VMIN state */
-    state = &states[RPM_MODE_VMIN];
-    state->name = "VMIN";
-    values = stats + (RPM_MODE_VMIN * MAX_RPM_PARAMS);
-
-    state->residencyInMsecSinceBoot = values[1];
-    state->totalTransitions = values[0];
-    state->supportedOnlyInSuspend = false;
-    state->voters.resize(VMIN_VOTERS);
-    //Note: No filling of state voters since VMIN_VOTERS = 0
-
-done:
-    _hidl_cb(states, Status::SUCCESS);
+    LOG(ERROR) << "getPlatformLowPowerStats not supported. Use IPowerStats HAL.";
+    _hidl_cb({}, Status::SUCCESS);
     return Void();
-}
-
-static int get_wlan_low_power_stats(struct PowerStateSubsystem *subsystem) {
-    uint64_t stats[WLAN_POWER_PARAMS_COUNT] = {0};
-    struct PowerStateSubsystemSleepState *state;
-
-    subsystem->name = "wlan";
-
-    if (extract_wlan_stats(stats) != 0) {
-        subsystem->states.resize(0);
-        return -1;
-    }
-
-    subsystem->states.resize(WLAN_STATES_COUNT);
-
-    /* Update statistics for Active State */
-    state = &subsystem->states[WLAN_STATE_ACTIVE];
-    state->name = "Active";
-    state->residencyInMsecSinceBoot = stats[CUMULATIVE_TOTAL_ON_TIME_MS];
-    state->totalTransitions = stats[DEEP_SLEEP_ENTER_COUNTER];
-    state->lastEntryTimestampMs = 0; //FIXME need a new value from Qcom
-    state->supportedOnlyInSuspend = false;
-
-    /* Update statistics for Deep-Sleep state */
-    state = &subsystem->states[WLAN_STATE_DEEP_SLEEP];
-    state->name = "Deep-Sleep";
-    state->residencyInMsecSinceBoot = stats[CUMULATIVE_SLEEP_TIME_MS];
-    state->totalTransitions = stats[DEEP_SLEEP_ENTER_COUNTER];
-    state->lastEntryTimestampMs = stats[LAST_DEEP_SLEEP_ENTER_TSTAMP_MS];
-    state->supportedOnlyInSuspend = false;
-
-    return 0;
-}
-
-enum easel_state {
-    EASEL_OFF = 0,
-    EASEL_ON,
-    EASEL_SUSPENDED,
-    NUM_EASEL_STATES
-};
-
-// Get low power stats for easel subsystem
-static int get_easel_low_power_stats(struct PowerStateSubsystem *subsystem) {
-    // This implementation is a workaround to provide minimal visibility into
-    // Easel state behavior until canonical low power stats are supported.
-    // It takes an "external observer" snapshot of the current Easel state every
-    // time it is called, and synthesizes an artificial sleep state that will
-    // behave similarly to real stats if Easel gets "wedged" in the "on" state.
-    static std::mutex statsLock;
-    static uint64_t totalOnSnapshotCount = 0;
-    static uint64_t totalNotOnSnapshotCount = 0;
-    unsigned long currentState;
-    struct PowerStateSubsystemSleepState *state;
-
-    subsystem->name = "Easel";
-
-    if (get_easel_state(&currentState) != 0) {
-        subsystem->states.resize(0);
-        return -1;
-    }
-
-    if (currentState >= NUM_EASEL_STATES) {
-        ALOGE("%s: unrecognized Easel state(%lu)", __func__, currentState);
-        return -1;
-    }
-
-    subsystem->states.resize(1);
-
-    // Since we are storing stats locally but can have multiple parallel
-    // callers, locking is required to ensure stats are not corrupted.
-    std::lock_guard<std::mutex> lk(statsLock);
-
-    // Update statistics for synthetic sleep state.  We combine OFF and
-    // SUSPENDED to act as a composite "not on" state so the numbers will behave
-    // like a real sleep state.
-    if ((currentState == EASEL_OFF) || (currentState == EASEL_SUSPENDED)) {
-        totalNotOnSnapshotCount++;
-    } else {
-        totalOnSnapshotCount++;
-    }
-
-    // Update statistics for synthetic sleep state, where
-    // totalTransitions = cumulative count of Easel state0 (as seen by PowerHAL)
-    // residencyInMsecsSinceBoot = cumulative count of Easel state1 (as seen by
-    //   PowerHAL)
-    // lastEntryTimestampMs = cumulative count of Easel state2 (as seen by
-    //   PowerHAL)
-    state = &subsystem->states[0];
-    state->name = "SyntheticSleep";
-    state->totalTransitions = totalOnSnapshotCount;
-    state->residencyInMsecSinceBoot = totalNotOnSnapshotCount;
-    state->lastEntryTimestampMs = 0;  // No added value for the workaround
-    state->supportedOnlyInSuspend = false;
-
-    return 0;
 }
 
 // Methods from ::android::hardware::power::V1_1::IPower follow.
 Return<void> Power::getSubsystemLowPowerStats(getSubsystemLowPowerStats_cb _hidl_cb) {
-    hidl_vec<PowerStateSubsystem> subsystems;
-
-    subsystems.resize(SUBSYSTEM_COUNT);
-
-    // Get WLAN subsystem low power stats.
-    if (get_wlan_low_power_stats(&subsystems[SUBSYSTEM_WLAN]) != 0) {
-        ALOGE("%s: failed to process wlan stats", __func__);
-    }
-
-    // Get Easel subsystem low power stats.
-    if (get_easel_low_power_stats(&subsystems[SUBSYSTEM_EASEL]) != 0) {
-        ALOGE("%s: failed to process Easel stats", __func__);
-    }
-
-    _hidl_cb(subsystems, Status::SUCCESS);
+    LOG(ERROR) << "getSubsystemLowPowerStats not supported. Use IPowerStats HAL.";
+    _hidl_cb({}, Status::SUCCESS);
     return Void();
 }
 
