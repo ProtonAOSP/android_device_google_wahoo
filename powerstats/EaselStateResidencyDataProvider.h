@@ -32,7 +32,8 @@ class EaselStateResidencyDataProvider : public IStateResidencyDataProvider {
   public:
     EaselStateResidencyDataProvider(uint32_t id);
     ~EaselStateResidencyDataProvider() = default;
-    bool getResults(std::map<uint32_t, PowerEntityStateResidencyResult> &results) override;
+    bool getResults(std::unordered_map<uint32_t, PowerEntityStateResidencyResult>
+            &results) override;
     std::vector<PowerEntityStateSpace> getStateSpaces() override;
 
   private:
