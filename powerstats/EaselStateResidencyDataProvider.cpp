@@ -32,7 +32,7 @@ EaselStateResidencyDataProvider::EaselStateResidencyDataProvider(uint32_t id) :
     mPowerEntityId(id), mTotalOnSnapshotCount(0), mTotalNotOnSnapshotCount(0) {}
 
 bool EaselStateResidencyDataProvider::getResults(
-    std::map<uint32_t, PowerEntityStateResidencyResult> &results) {
+    std::unordered_map<uint32_t, PowerEntityStateResidencyResult> &results) {
     const std::string path = "/sys/devices/virtual/misc/mnh_sm/state";
 
     enum easel_state {
