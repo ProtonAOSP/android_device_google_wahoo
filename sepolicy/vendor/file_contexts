@@ -199,6 +199,7 @@
 /vendor/lib(64)?/hw/android\.hardware\.graphics\.mapper@2\.0-impl-2\.1\.so u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/hw/gralloc\.msm8998\.so   u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libqdMetaData\.so         u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/lib_aion_buffer\.so       u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libqservice\.so           u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libqdutils\.so            u:object_r:same_process_hal_file:s0
 /vendor/lib(64)?/libadreno_utils\.so       u:object_r:same_process_hal_file:s0
