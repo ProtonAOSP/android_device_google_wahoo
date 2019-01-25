@@ -1,4 +1,5 @@
 type easelservice_app, domain;
+type easelservice_app_tmpfs, file_type;
 
 app_domain(easelservice_app)
 

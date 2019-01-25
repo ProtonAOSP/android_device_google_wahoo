@@ -1,5 +1,6 @@
 # ConnectivityMonitor app
 type con_monitor_app, domain;
+type con_monitor_app_tmpfs, file_type;
 
 app_domain(con_monitor_app)
 
