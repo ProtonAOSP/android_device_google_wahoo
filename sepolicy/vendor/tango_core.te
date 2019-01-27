@@ -1,4 +1,5 @@
 type tango_core, domain, coredomain;
+type tango_core_tmpfs, file_type;
 
 app_domain(tango_core)
 #from system/sepolicy/private/untrusted_app.te
