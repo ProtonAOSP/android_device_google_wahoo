@@ -1,5 +1,6 @@
 # Qualcomm telephony apps, such as AtFwd and FastDormancy
 type qtelephony, domain;
+type qtelephony_tmpfs, file_type;
 
 app_domain(qtelephony)
 
