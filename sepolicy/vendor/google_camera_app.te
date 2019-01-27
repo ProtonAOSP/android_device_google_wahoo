@@ -1,4 +1,5 @@
 type google_camera_app, domain, coredomain;
+type google_camera_app_tmpfs, file_type;
 
 app_domain(google_camera_app)
 net_domain(google_camera_app)

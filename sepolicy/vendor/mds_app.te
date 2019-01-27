@@ -1,4 +1,5 @@
 type mds_app, domain;
+type mds_app_tmpfs, file_type;
 
 app_domain(mds_app)
 

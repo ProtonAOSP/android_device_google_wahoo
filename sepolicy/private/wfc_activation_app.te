@@ -1,4 +1,5 @@
 type wfc_activation_app, domain, coredomain;
+type wfc_activation_app_tmpfs, file_type;
 
 app_domain(wfc_activation_app)
 net_domain(wfc_activation_app)

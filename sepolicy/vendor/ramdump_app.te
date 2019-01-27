@@ -1,4 +1,5 @@
 type ramdump_app, domain;
+type ramdump_app_tmpfs, file_type;
 
 userdebug_or_eng(`
   app_domain(ramdump_app)
