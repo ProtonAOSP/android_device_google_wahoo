@@ -1,2 +1,1 @@
 type dataservice_app, domain;
-type dataservice_app_tmpfs, file_type;
