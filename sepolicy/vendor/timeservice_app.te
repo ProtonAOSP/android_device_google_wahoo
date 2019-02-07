@@ -1,5 +1,4 @@
 type timeservice_app, domain;
-type timeservice_app_tmpfs, file_type;
 app_domain(timeservice_app);
 
 allow timeservice_app app_api_service:service_manager find;
