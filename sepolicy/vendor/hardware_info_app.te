@@ -1,5 +1,4 @@
 type hardware_info_app, domain;
-type hardware_info_app_tmpfs, file_type;
 
 app_domain(hardware_info_app)
 
