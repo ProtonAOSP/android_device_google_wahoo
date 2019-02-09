@@ -36,7 +36,7 @@ PRODUCT_COPY_FILES += \
 
 # Set the SVN for the targeted MR release
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.build.svn=22
+    ro.vendor.build.svn=23
 
 # Enforce privapp-permissions whitelist
 PRODUCT_PROPERTY_OVERRIDES += \
