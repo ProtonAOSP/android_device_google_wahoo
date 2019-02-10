@@ -1,5 +1,4 @@
 type logger_app, domain;
-type logger_app_tmpfs, file_type;
 
 userdebug_or_eng(`
   app_domain(logger_app)
