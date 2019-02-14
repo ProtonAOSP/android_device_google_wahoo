@@ -50,6 +50,7 @@ ro.vendor.graphics.memory  u:object_r:public_vendor_default_prop:s0
 vendor.debug.egl.changepixelformat  u:object_r:public_vendor_default_prop:s0
 vendor.debug.prerotation.disable  u:object_r:public_vendor_default_prop:s0
 vendor.debug.rs.           u:object_r:public_vendor_default_prop:s0
+vendor.debug.egl.swapinterval      u:object_r:public_vendor_default_prop:s0
 
 # public_vendor_system_prop
 # They are public_vendor_system_props for vendor-specific extension.
@@ -193,6 +194,7 @@ persist.radio.snapshot_timer  u:object_r:vendor_radio_prop:s0
 persist.radio.videopause.mode  u:object_r:vendor_radio_prop:s0
 persist.radio.VT_ENABLE    u:object_r:vendor_radio_prop:s0
 persist.radio.VT_HYBRID_ENABLE  u:object_r:vendor_radio_prop:s0
+vendor.radio.pwr.curb_backoff  u:object_r:vendor_radio_prop:s0
 
 # vendor_bluetooth_prop
 persist.vendor.bluetooth.a4wp           u:object_r:vendor_bluetooth_prop:s0
