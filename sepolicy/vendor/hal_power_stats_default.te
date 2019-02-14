@@ -4,3 +4,8 @@ r_dir_file(hal_power_stats_default, debugfs_wlan)
 
 # power.stats HAL needs access to the easel sysfs node
 r_dir_file(hal_power_stats_default, sysfs_easel)
+
+# Allow power.stats HAL to add the power_stats_service
+vndbinder_use(hal_power_stats)
+add_service(hal_power_stats_server, power_stats_service)
+

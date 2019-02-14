@@ -1,2 +1,4 @@
 type qdisplay_service,             vndservice_manager_type;
 type per_mgr_service,              vndservice_manager_type;
+type power_stats_service,          vndservice_manager_type;
+
