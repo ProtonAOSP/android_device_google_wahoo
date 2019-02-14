@@ -42,3 +42,5 @@ allow google_camera_app system_app_data_file:file { read write getattr };
 # Halide code
 typeattribute google_camera_app system_executes_vendor_violators;
 allow google_camera_app hexagon_halide_file:file { execute read open getattr };
+
+dontaudit google_camera_app easel_device:chr_file r_file_perms;
