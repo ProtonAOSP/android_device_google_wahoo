@@ -31,6 +31,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 
 PRODUCT_SOONG_NAMESPACES += \
     device/google/wahoo \
+    vendor/google/camera \
     hardware/google/pixel
 
 # Telephony IWLAN operation mode
@@ -413,6 +414,8 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-service \
     camera.device@3.2-impl \
     camera.msm8998 \
+    libgooglecamerahal \
+    libgoogle_camera_hal_tests \
     libqomx_core \
     libmmjpeg_interface \
     libmmcamera_interface
