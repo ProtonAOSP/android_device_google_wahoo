@@ -17,8 +17,12 @@
 #define LOG_TAG "android.hardware.power.stats@1.0-service.pixel"
 
 #include <android/log.h>
+#include <binder/IPCThreadState.h>
+#include <binder/IServiceManager.h>
+#include <binder/ProcessState.h>
 #include <hidl/HidlTransportSupport.h>
 
+#include <pixelpowerstats/AidlStateResidencyDataProvider.h>
 #include <pixelpowerstats/GenericStateResidencyDataProvider.h>
 #include <pixelpowerstats/PowerStats.h>
 #include <pixelpowerstats/WlanStateResidencyDataProvider.h>
@@ -40,6 +44,7 @@ using android::hardware::power::stats::V1_0::PowerEntityType;
 using android::hardware::power::stats::V1_0::implementation::PowerStats;
 
 // Pixel specific
+using android::hardware::google::pixel::powerstats::AidlStateResidencyDataProvider;
 using android::hardware::google::pixel::powerstats::GenericStateResidencyDataProvider;
 using android::hardware::google::pixel::powerstats::PowerEntityConfig;
 using android::hardware::google::pixel::powerstats::StateResidencyConfig;
@@ -65,8 +70,8 @@ int main(int /* argc */, char ** /* argv */) {
          .totalTimeTransform = rpmConvertToMs,
          .lastEntrySupported = false}};
 
-    auto rpmSdp =
-        std::make_shared<GenericStateResidencyDataProvider>("/d/system_stats");
+    sp<GenericStateResidencyDataProvider> rpmSdp =
+            new GenericStateResidencyDataProvider("/d/system_stats");
 
     uint32_t apssId = service->addPowerEntity("APSS", PowerEntityType::SUBSYSTEM);
     rpmSdp->addEntity(apssId, PowerEntityConfig("APSS", rpmStateResidencyConfigs));
@@ -80,7 +85,7 @@ int main(int /* argc */, char ** /* argv */) {
     uint32_t slpiId = service->addPowerEntity("SLPI", PowerEntityType::SUBSYSTEM);
     rpmSdp->addEntity(slpiId, PowerEntityConfig("SLPI", rpmStateResidencyConfigs));
 
-    service->addStateResidencyDataProvider(std::move(rpmSdp));
+    service->addStateResidencyDataProvider(rpmSdp);
 
     // Add SoC power entity
     std::vector<StateResidencyConfig> socStateResidencyConfigs = {
@@ -99,24 +104,43 @@ int main(int /* argc */, char ** /* argv */) {
          .totalTimePrefix = "actual last sleep(msec):",
          .lastEntrySupported = false}};
 
-    auto socSdp =
-        std::make_shared<GenericStateResidencyDataProvider>("/d/system_stats");
+     sp<GenericStateResidencyDataProvider> socSdp =
+            new GenericStateResidencyDataProvider("/d/system_stats");
 
     uint32_t socId = service->addPowerEntity("SoC", PowerEntityType::POWER_DOMAIN);
     socSdp->addEntity(socId, PowerEntityConfig(socStateResidencyConfigs));
 
-    service->addStateResidencyDataProvider(std::move(socSdp));
+    service->addStateResidencyDataProvider(socSdp);
 
     // Add WLAN power entity
     uint32_t wlanId = service->addPowerEntity("WLAN", PowerEntityType::SUBSYSTEM);
-    auto wlanSdp =
-        std::make_shared<WlanStateResidencyDataProvider>(wlanId, "/d/wlan0/power_stats");
-    service->addStateResidencyDataProvider(std::move(wlanSdp));
+    sp<WlanStateResidencyDataProvider> wlanSdp =
+            new WlanStateResidencyDataProvider(wlanId, "/d/wlan0/power_stats");
+    service->addStateResidencyDataProvider(wlanSdp);
 
     // Add Easel power entity
     uint32_t easelId = service->addPowerEntity("Easel", PowerEntityType::SUBSYSTEM);
-    auto easelSdp = std::make_shared<EaselStateResidencyDataProvider>(easelId);
-    service->addStateResidencyDataProvider(std::move(easelSdp));
+    sp<EaselStateResidencyDataProvider> easelSdp = new EaselStateResidencyDataProvider(easelId);
+    service->addStateResidencyDataProvider(easelSdp);
+
+    // Add Power Entities that require the Aidl data provider
+    sp<AidlStateResidencyDataProvider> aidlSdp = new AidlStateResidencyDataProvider();
+    // TODO(117585786): Add real power entities here
+    // uint32_t mock1Id = service->addPowerEntity("Mock1", PowerEntityType::SUBSYSTEM);
+    // aidlSdp->addEntity(mock1Id, "Mock1", {"state_a", "state_b"});
+    // uint32_t mock2Id = service->addPowerEntity("Mock2", PowerEntityType::SUBSYSTEM);
+    // aidlSdp->addEntity(mock2Id, "Mock2", {"state_c", "state_d"});
+
+    auto serviceStatus = android::defaultServiceManager()->addService(
+            android::String16("power.stats-vendor"), aidlSdp);
+    if (serviceStatus != android::OK) {
+        ALOGE("Unable to register power.stats-vendor service %d", serviceStatus);
+        return 1;
+    }
+    sp<android::ProcessState> ps{android::ProcessState::self()};  // Create non-HW binder threadpool
+    ps->startThreadPool();
+
+    service->addStateResidencyDataProvider(aidlSdp);
 
     // Configure the threadpool
     configureRpcThreadpool(1, true /*callerWillJoin*/);
