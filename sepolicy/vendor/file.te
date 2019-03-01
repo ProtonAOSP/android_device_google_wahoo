@@ -13,7 +13,6 @@ type sysfs_rmtfs, sysfs_type, fs_type;
 type sysfs_soc, sysfs_type, fs_type;
 type sysfs_scsi_devices_0000, sysfs_type, fs_type;
 type sysfs_scsi_devices_other, sysfs_type, fs_type;
-type sysfs_devices_block, sysfs_type, fs_type;
 type sysfs_timestamp_switch, sysfs_type, fs_type;
 type sysfs_touch, sysfs_type, fs_type;
 type sysfs_usb_c, sysfs_type, fs_type;
