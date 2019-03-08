@@ -21,6 +21,8 @@ platform_app vendor_default_prop file 79617173
 radio vendor_default_prop file 77915129
 surfaceflinger vendor_default_prop file 79617173
 system_app vendor_default_prop file 79617173
+system_server metadata_file dir 127946548
+system_server metadata_file file 127946548
 system_server sysfs dir 124364409
 system_server vendor_default_prop file 79617173
 untrusted_app vendor_default_prop file 79617173
