@@ -704,3 +704,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.use_color_management=tr
 # Must align with HAL types Dataspace
 # The data space of wide color gamut composition preference is Dataspace::DISPLAY_P3
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.wcg_composition_dataspace=143261696
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.apex.updatable=true
