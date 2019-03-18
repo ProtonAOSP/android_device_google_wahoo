@@ -70,6 +70,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hard
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hardware.location.gps.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hardware.telephony.gsm.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hardware.telephony.cdma.xml)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hardware.telephony.ims.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hardware.wifi.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hardware.wifi.direct.xml)
