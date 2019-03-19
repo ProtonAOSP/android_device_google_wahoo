@@ -211,8 +211,8 @@ persist.vendor.service.bdroid.ssrlvl    u:object_r:vendor_bluetooth_prop:s0
 ro.vendor.bluetooth.emb_wp_mode         u:object_r:vendor_bluetooth_prop:s0
 ro.vendor.bluetooth.wipower             u:object_r:vendor_bluetooth_prop:s0
 
-# persist_nfc_prop
-persist.nfc. u:object_r:persist_nfc_prop:s0
+# vendor_nfc_prop
+persist.vendor.nfc.                     u:object_r:vendor_nfc_prop:s0
 
 # ramoops
 vendor.ramoops.                    u:object_r:vendor_ramoops_prop:s0
