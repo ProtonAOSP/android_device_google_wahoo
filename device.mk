@@ -150,6 +150,7 @@ PRODUCT_PACKAGES += \
 
 # The following modules are included in debuggable builds only.
 PRODUCT_PACKAGES_DEBUG += \
+    a_sns_test \
     bootctl \
     update_engine_client
 
