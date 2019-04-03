@@ -736,3 +736,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.apex.updatable=true
+
+# Use /product/etc/fstab.postinstall to mount system_other.
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.postinstall.fstab.prefix=/product
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/fstab.postinstall:$(TARGET_COPY_OUT_PRODUCT)/etc/fstab.postinstall
