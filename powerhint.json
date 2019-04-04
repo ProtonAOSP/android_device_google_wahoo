@@ -139,7 +139,7 @@
       "Name": "PowerHALMainState",
       "Path": "vendor.powerhal.state",
       "Values": [
-        "VIDEO_ENCODE",
+        "CAMERA_STREAMING",
         "VR_SUSTAINED_PERFORMANCE",
         "SUSTAINED_PERFORMANCE",
         "VR_MODE",
@@ -164,21 +164,18 @@
         "/vendor/etc/thermal-engine.conf"
       ],
       "Type": "Property"
+    },
+    {
+      "Name": "PowerHALRenderingState",
+      "Path": "vendor.powerhal.rendering",
+      "Values": [
+        "EXPENSIVE_RENDERING",
+        ""
+      ],
+      "Type": "Property"
     }
   ],
   "Actions": [
-    {
-      "PowerHint": "VIDEO_ENCODE",
-      "Node": "PowerHALMainState",
-      "Duration": 0,
-      "Value": "VIDEO_ENCODE"
-    },
-    {
-      "PowerHint": "VIDEO_ENCODE",
-      "Node": "CPUBigClusterMaxFreq",
-      "Duration": 0,
-      "Value": "1958400"
-    },
     {
       "PowerHint": "SUSTAINED_PERFORMANCE",
       "Node": "PowerHALMainState",
@@ -427,27 +424,15 @@
     },
     {
       "PowerHint": "CAMERA_STREAMING",
+      "Node": "PowerHALMainState",
+      "Duration": 0,
+      "Value": "CAMERA_STREAMING"
+    },
+    {
+      "PowerHint": "CAMERA_STREAMING",
       "Node": "CPUBigClusterMaxFreq",
-      "Duration": 1000,
-      "Value": "2457600"
-    },
-    {
-      "PowerHint": "CAMERA_STREAMING",
-      "Node": "CPUBigClusterMinFreq",
-      "Duration": 1000,
-      "Value": "2457600"
-    },
-    {
-      "PowerHint": "CAMERA_STREAMING",
-      "Node": "CPULittleClusterMinFreq",
-      "Duration": 1000,
-      "Value": "1900800"
-    },
-    {
-      "PowerHint": "CAMERA_STREAMING",
-      "Node": "PMQoSCpuDmaLatency",
-      "Duration": 1000,
-      "Value": "44"
+      "Duration": 0,
+      "Value": "1958400"
     },
     {
       "PowerHint": "CAMERA_SHOT",
@@ -520,6 +505,12 @@
       "Node": "PMQoSCpuDmaLatency",
       "Duration": 0,
       "Value": "44"
+    },
+    {
+      "PowerHint": "EXPENSIVE_RENDERING",
+      "Node": "PowerHALRenderingState",
+      "Duration": 0,
+      "Value": "EXPENSIVE_RENDERING"
     }
   ]
 }

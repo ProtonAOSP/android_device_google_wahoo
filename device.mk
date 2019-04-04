@@ -150,6 +150,7 @@ PRODUCT_PACKAGES += \
 
 # The following modules are included in debuggable builds only.
 PRODUCT_PACKAGES_DEBUG += \
+    a_sns_test \
     bootctl \
     update_engine_client
 
@@ -197,7 +198,7 @@ PRODUCT_COPY_FILES += \
 
 # power HAL
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.2-service.wahoo-libperfmgr
+    android.hardware.power@1.3-service.pixel-libperfmgr
 
 # power.stats HAL
 PRODUCT_PACKAGES += \
@@ -732,3 +733,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.early_gl_phase_offset_ns=3000000
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.early_gl_app_phase_offset_ns=15000000
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.apex.updatable=true
+
+# Use /product/etc/fstab.postinstall to mount system_other.
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.postinstall.fstab.prefix=/product
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/fstab.postinstall:$(TARGET_COPY_OUT_PRODUCT)/etc/fstab.postinstall
