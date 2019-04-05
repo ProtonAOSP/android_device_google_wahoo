@@ -508,9 +508,9 @@
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",
-      "Node": "PowerHALRenderingState",
+      "Node": "CPULittleClusterMinFreq",
       "Duration": 0,
-      "Value": "EXPENSIVE_RENDERING"
+      "Value": "0"
     }
   ]
 }
