@@ -34,10 +34,6 @@ PRODUCT_SOONG_NAMESPACES += \
     vendor/google/camera \
     hardware/google/pixel
 
-# Telephony IWLAN operation mode
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.telephony.iwlan_operation_mode=0
-
 PRODUCT_COPY_FILES += \
     device/google/wahoo/default-permissions.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default-permissions/default-permissions.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml \
