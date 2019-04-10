@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+# Installs gsi keys into ramdisk, to boot a GSI with verified boot.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
+
 ifneq (,$(filter 27, $(PRODUCT_EXTRA_VNDK_VERSIONS)))
     _vndk_test := true
 endif
@@ -33,10 +36,6 @@ PRODUCT_SOONG_NAMESPACES += \
     device/google/wahoo \
     vendor/google/camera \
     hardware/google/pixel
-
-# Telephony IWLAN operation mode
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.telephony.iwlan_operation_mode=0
 
 PRODUCT_COPY_FILES += \
     device/google/wahoo/default-permissions.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default-permissions/default-permissions.xml \
