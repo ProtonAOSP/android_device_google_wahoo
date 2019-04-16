@@ -1,3 +1,7 @@
+get_prop(hal_fingerprint_default, hwservicemanager_prop)
+allow hal_fingerprint_default fwk_stats_hwservice:hwservice_manager find;
+binder_call(hal_fingerprint_default, statsd)
+
 allow hal_fingerprint_default sysfs_fingerprint:dir r_dir_perms;
 allow hal_fingerprint_default sysfs_fingerprint:file rw_file_perms;
 allow hal_fingerprint_default sysfs_msm_subsys:dir search;
