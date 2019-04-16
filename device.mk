@@ -17,6 +17,9 @@
 # Installs gsi keys into ramdisk, to boot a GSI with verified boot.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
+# Enable updating of APEXes
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
 ifneq (,$(filter 27, $(PRODUCT_EXTRA_VNDK_VERSIONS)))
     _vndk_test := true
 endif
@@ -732,9 +735,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.early_gl_phase_offset_ns=3000000
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.early_gl_app_phase_offset_ns=15000000
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.apex.updatable=true
 
 # Use /product/etc/fstab.postinstall to mount system_other.
 PRODUCT_PRODUCT_PROPERTIES += \
