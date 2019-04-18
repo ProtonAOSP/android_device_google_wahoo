@@ -17,6 +17,10 @@
 import /vendor/etc/init/hw/init.${ro.hardware}.usb.rc
 
 on charger
+    # Set runtime stune value
+    write /dev/stune/schedtune.prefer_idle 0
+    write /dev/stune/schedtune.boost 0
+    # Offline CPUs
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
     write /sys/devices/system/cpu/cpu4/online 0
@@ -79,6 +83,10 @@ on init
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor "schedutil"
     write /sys/devices/system/cpu/cpufreq/policy4/schedutil/up_rate_limit_us 500
     write /sys/devices/system/cpu/cpufreq/policy4/schedutil/down_rate_limit_us 20000
+
+    # Set boottime stune value
+    write /dev/stune/schedtune.prefer_idle 1
+    write /dev/stune/schedtune.boost 100
 
     # set default schedTune value for foreground/top-app
     write /dev/stune/foreground/schedtune.prefer_idle 1
@@ -546,6 +554,10 @@ on property:sys.post_boot.parsed=1
     setprop vendor.powerhal.init 1
 
 on property:sys.boot_completed=1
+    # Set runtime stune value
+    write /dev/stune/schedtune.prefer_idle 0
+    write /dev/stune/schedtune.boost 0
+
     # Enable power setting and set sys.post_boot.parsed to 1
     start vendor.power_sh
 
