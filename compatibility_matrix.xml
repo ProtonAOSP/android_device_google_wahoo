@@ -68,4 +68,12 @@
         -->
         <version>1.0</version>
     </hal>
+    <hal format="hidl" optional="true">
+        <name>vendor.qti.atcmdfwd</name>
+        <version>1.0</version>
+        <interface>
+            <name>IAtCmdFwd</name>
+            <instance>AtCmdFwdService</instance>
+        </interface>
+    </hal>
 </compatibility-matrix>
