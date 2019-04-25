@@ -1,4 +1,5 @@
 type camera_prop, property_type;
+type vendor_ro_camera_prop, property_type;
 type cnd_prop, property_type;
 type ims_prop, property_type;
 type keymaster_prop, property_type;

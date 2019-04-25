@@ -7,6 +7,7 @@ allow hal_camera input_device:dir r_dir_perms;
 allow hal_camera input_device:chr_file r_file_perms;
 
 set_prop(hal_camera, camera_prop)
+get_prop(hal_camera, vendor_ro_camera_prop)
 
 #allow hal_camera sysfs_enable_ps_sensor:file w_file_perms;
 r_dir_file(hal_camera, sysfs_type)
