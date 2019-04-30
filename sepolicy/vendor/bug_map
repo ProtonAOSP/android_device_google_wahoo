@@ -29,3 +29,4 @@ system_server sysfs dir 124364409
 system_server vendor_default_prop file 79617173
 untrusted_app vendor_default_prop file 79617173
 vold_prepare_subdirs unlabeled file 131096543
+webview_zygote app_data_file dir 131636647
