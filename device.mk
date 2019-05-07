@@ -216,6 +216,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.power.stats@1.0-service.pixel
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
+
 # health HAL
 PRODUCT_PACKAGES += \
     android.hardware.health@2.0-service.wahoo

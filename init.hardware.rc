@@ -441,9 +441,6 @@ on property:init.svc.zygote=running
 on property:init.svc.zygote=stopped
     stop vendor.folio_daemon
 
-on property:vendor.qcom.thermalcfg=*
-    restart vendor.thermal-engine
-
 service vendor.thermal-engine /vendor/bin/thermal-engine -c ${vendor.qcom.thermalcfg:-/vendor/etc/thermal-engine.conf}
    class hal
    user root
