@@ -174,7 +174,6 @@
 /vendor/bin/imsrcsd             u:object_r:hal_rcsservice_exec:s0
 /vendor/bin/init\.qcom\.devstart\.sh                                 u:object_r:init-qcom-devstart-sh_exec:s0
 /vendor/bin/init\.qcom\.ipastart\.sh                                 u:object_r:init-qcom-ipastart-sh_exec:s0
-/vendor/bin/init\.qcom\.wlan\.sh                                     u:object_r:init-qcom-wlan-sh_exec:s0
 /vendor/bin/init\.insmod\.sh                                         u:object_r:init-insmod-sh_exec:s0
 /vendor/etc/init\.insmod\.cfg                                        u:object_r:init-insmod-sh_exec:s0
 /vendor/bin/init\.power\.sh     u:object_r:init_power_exec:s0
