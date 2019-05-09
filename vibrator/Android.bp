@@ -16,7 +16,11 @@ cc_binary {
     name: "android.hardware.vibrator@1.2-service.wahoo",
     relative_install_path: "hw",
     init_rc: ["android.hardware.vibrator@1.2-service.wahoo.rc"],
-    srcs: ["service.cpp", "Vibrator.cpp"],
+    srcs: [
+        "service.cpp",
+        "Vibrator.cpp",
+        "Hardware.cpp",
+    ],
     cflags: [
         "-Wall",
         "-Werror",

@@ -28,11 +28,77 @@ namespace V1_2 {
 namespace implementation {
 
 class Vibrator : public IVibrator {
+  public:
+    // APIs for interfacing with the kernel driver.
+    class HwApi {
+      public:
+        virtual ~HwApi() = default;
+        // Stores the COMP, BEMF, and GAIN calibration values to use.
+        //   <COMP> <BEMF> <GAIN>
+        virtual bool setAutocal(std::string value) = 0;
+        // Stores the open-loop LRA frequency to be used.
+        virtual bool setOlLraPeriod(uint32_t value) = 0;
+        // Activates/deactivates the vibrator for durations specified by
+        // setDuration().
+        virtual bool setActivate(bool value) = 0;
+        // Specifies the vibration duration in milliseconds.
+        virtual bool setDuration(uint32_t value) = 0;
+        // Specifies the active state of the vibrator
+        // (true = enabled, false = disabled).
+        virtual bool setState(bool value) = 0;
+        // Reports whether setRtpInput() is supported.
+        virtual bool hasRtpInput() = 0;
+        // Specifies the playback amplitude of the haptic waveforms in RTP mode.
+        // Negative numbers indicates braking.
+        virtual bool setRtpInput(int8_t value) = 0;
+        // Specifies the mode of operation.
+        //   rtp        - RTP Mode
+        //   waveform   - Waveform Sequencer Mode
+        //   diag       - Diagnostics Routine
+        //   autocal    - Automatic Level Calibration Routine
+        virtual bool setMode(std::string value) = 0;
+        // Specifies a waveform sequence in index-count pairs.
+        //   <index-1> <count-1> [<index-2> <cound-2> ...]
+        virtual bool setSequencer(std::string value) = 0;
+        // Specifies the scaling of effects in Waveform mode.
+        //   0 - 100%
+        //   1 - 75%
+        //   2 - 50%
+        //   3 - 25%
+        virtual bool setScale(uint8_t value) = 0;
+        // Selects either closed loop or open loop mode.
+        // (true = open, false = closed).
+        virtual bool setCtrlLoop(bool value) = 0;
+        // Specifies waveform index to be played in low-power trigger mode.
+        // 0    - Disabled
+        // 1+   - Waveform Index
+        virtual bool setLpTriggerEffect(uint32_t value) = 0;
+        // Emit diagnostic information to the given file.
+        virtual void debug(int fd) = 0;
+    };
+
+    // APIs for obtaining calibration/configuration data from persistent memory.
+    class HwCal {
+      public:
+        virtual ~HwCal() = default;
+        // Obtains the COMP, BEMF, and GAIN calibration values to use.
+        virtual bool getAutocal(std::string *value) = 0;
+        // Obtains the open-loop LRA frequency to be used.
+        virtual bool getLraPeriod(uint32_t *value) = 0;
+        // Obtains the duration for the click effect
+        virtual bool getClickDuration(uint32_t *value) = 0;
+        // Obtains the duration for the tick effect
+        virtual bool getTickDuration(uint32_t *value) = 0;
+        // Obtains the duration for the double-click effect
+        virtual bool getDoubleClickDuration(uint32_t *value) = 0;
+        // Obtains the duration for the heavy-click effect
+        virtual bool getHeavyClickDuration(uint32_t *value) = 0;
+        // Emit diagnostic information to the given file.
+        virtual void debug(int fd) = 0;
+    };
+
 public:
-    Vibrator(std::ofstream&& activate, std::ofstream&& duration,
-            std::ofstream&& state, std::ofstream&& rtpinput,
-            std::ofstream&& mode, std::ofstream&& sequencer,
-            std::ofstream&& scale, std::ofstream&& ctrlloop, std::ofstream&& lptrigger);
+    Vibrator(std::unique_ptr<HwApi> hwapi, std::unique_ptr<HwCal> hwcal);
 
     // Methods from ::android::hardware::vibrator::V1_0::IVibrator follow.
     using Status = ::android::hardware::vibrator::V1_0::Status;
@@ -51,18 +117,12 @@ public:
 private:
     Return<Status> on(uint32_t timeoutMs, bool forceOpenLoop, bool isWaveform);
     Return<void> performEffect(Effect effect, EffectStrength strength, perform_cb _hidl_cb);
-    std::ofstream mActivate;
-    std::ofstream mDuration;
-    std::ofstream mState;
-    std::ofstream mRtpInput;
-    std::ofstream mMode;
-    std::ofstream mSequencer;
-    std::ofstream mScale;
-    std::ofstream mCtrlLoop;
-    std::ofstream mLpTriggerEffect;
-    int32_t mClickDuration;
-    int32_t mTickDuration;
-    int32_t mHeavyClickDuration;
+    std::unique_ptr<HwApi> mHwApi;
+    std::unique_ptr<HwCal> mHwCal;
+    uint32_t mClickDuration;
+    uint32_t mTickDuration;
+    uint32_t mDoubleClickDuration;
+    uint32_t mHeavyClickDuration;
 };
 }  // namespace implementation
 }  // namespace V1_2

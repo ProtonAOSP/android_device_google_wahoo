@@ -2,3 +2,18 @@ service vendor.vibrator-1-2 /vendor/bin/hw/android.hardware.vibrator@1.2-service
     class hal
     user system
     group system
+
+    setenv PROPERTY_PREFIX ro.vibrator.hal.
+    setenv CALIBRATION_FILEPATH /persist/haptics/drv2624.cal
+
+    setenv AUTOCAL_FILEPATH /sys/class/leds/vibrator/device/autocal
+    setenv OL_LRA_PERIOD_FILEPATH /sys/class/leds/vibrator/device/ol_lra_period
+    setenv ACTIVATE_PATH /sys/class/leds/vibrator/activate
+    setenv DURATION_PATH /sys/class/leds/vibrator/duration
+    setenv STATE_PATH /sys/class/leds/vibrator/state
+    setenv RTP_INPUT_PATH /sys/class/leds/vibrator/device/rtp_input
+    setenv MODE_PATH /sys/class/leds/vibrator/device/mode
+    setenv SEQUENCER_PATH /sys/class/leds/vibrator/device/set_sequencer
+    setenv SCALE_PATH /sys/class/leds/vibrator/device/scale
+    setenv CTRL_LOOP_PATH /sys/class/leds/vibrator/device/ctrl_loop
+    setenv LP_TRIGGER_PATH /sys/class/leds/vibrator/device/lp_trigger_effect
