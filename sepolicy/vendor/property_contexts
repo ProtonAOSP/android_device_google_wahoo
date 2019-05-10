@@ -1,4 +1,5 @@
 persist.camera.            u:object_r:camera_prop:s0
+ro.camera.                 u:object_r:camera_prop:s0
 htc.camera.                u:object_r:camera_prop:s0
 persist.vendor.sys.cnd     u:object_r:cnd_prop:s0
 persist.sys.cnd            u:object_r:cnd_prop:s0
