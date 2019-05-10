@@ -203,6 +203,28 @@ void HwCal::debug(int fd) {
     std::ifstream stream;
     std::string path;
     std::string line;
+    struct context {
+        HwCal *obj;
+        int fd;
+    } context{this, fd};
+
+    dprintf(fd, "Properties:\n");
+
+    property_list(
+        [](const char *key, const char *value, void *cookie) {
+            struct context *context = static_cast<struct context *>(cookie);
+            HwCal *obj = context->obj;
+            int fd = context->fd;
+            const std::string expect{obj->mPropertyPrefix};
+            const std::string actual{key, std::min(strlen(key), expect.size())};
+            if (actual == expect) {
+                dprintf(fd, "  %s:\n", key);
+                dprintf(fd, "    %s\n", value);
+            }
+        },
+        &context);
+
+    dprintf(fd, "\n");
 
     dprintf(fd, "Persist:\n");
 

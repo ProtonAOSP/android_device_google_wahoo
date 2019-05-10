@@ -17,3 +17,10 @@ service vendor.vibrator-1-2 /vendor/bin/hw/android.hardware.vibrator@1.2-service
     setenv SCALE_PATH /sys/class/leds/vibrator/device/scale
     setenv CTRL_LOOP_PATH /sys/class/leds/vibrator/device/ctrl_loop
     setenv LP_TRIGGER_PATH /sys/class/leds/vibrator/device/lp_trigger_effect
+
+    setenv HWAPI_DEBUG_PATHS "
+        /sys/class/leds/vibrator/device/autocal
+        /sys/class/leds/vibrator/device/lp_trigger_effect
+        /sys/class/leds/vibrator/device/ol_lra_period
+        /sys/class/leds/vibrator/state
+        "

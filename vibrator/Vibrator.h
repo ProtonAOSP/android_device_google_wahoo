@@ -114,6 +114,9 @@ public:
             override;
     Return<void> perform_1_2(Effect effect, EffectStrength strength, perform_cb _hidl_cb) override;
 
+    // Methods from ::android.hidl.base::V1_0::IBase follow.
+    Return<void> debug(const hidl_handle &handle, const hidl_vec<hidl_string> &options) override;
+
 private:
     Return<Status> on(uint32_t timeoutMs, bool forceOpenLoop, bool isWaveform);
     Return<void> performEffect(Effect effect, EffectStrength strength, perform_cb _hidl_cb);

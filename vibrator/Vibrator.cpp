@@ -152,6 +152,36 @@ Return<Status> Vibrator::setAmplitude(uint8_t amplitude) {
     return Status::OK;
 }
 
+// Methods from ::android.hidl.base::V1_0::IBase follow.
+
+Return<void> Vibrator::debug(const hidl_handle &handle,
+                             const hidl_vec<hidl_string> & /* options */) {
+    if (handle == nullptr || handle->numFds < 1 || handle->data[0] < 0) {
+        ALOGE("Called debug() with invalid fd.");
+        return Void();
+    }
+
+    int fd = handle->data[0];
+
+    dprintf(fd, "HIDL:\n");
+
+    dprintf(fd, "  Click Duration: %" PRIu32 "\n", mClickDuration);
+    dprintf(fd, "  Tick Duration: %" PRIu32 "\n", mTickDuration);
+    dprintf(fd, "  Double Click Duration: %" PRIu32 "\n", mDoubleClickDuration);
+    dprintf(fd, "  Heavy Click Duration: %" PRIu32 "\n", mHeavyClickDuration);
+
+    dprintf(fd, "\n");
+
+    mHwApi->debug(fd);
+
+    dprintf(fd, "\n");
+
+    mHwCal->debug(fd);
+
+    fsync(fd);
+    return Void();
+}
+
 static uint8_t convertEffectStrength(EffectStrength strength) {
     uint8_t scale;
 
