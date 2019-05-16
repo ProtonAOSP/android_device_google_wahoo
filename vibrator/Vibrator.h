@@ -119,6 +119,8 @@ public:
 
 private:
     Return<Status> on(uint32_t timeoutMs, bool forceOpenLoop, bool isWaveform);
+    template <typename T>
+    Return<void> performWrapper(T effect, EffectStrength strength, perform_cb _hidl_cb);
     Return<void> performEffect(Effect effect, EffectStrength strength, perform_cb _hidl_cb);
     std::unique_ptr<HwApi> mHwApi;
     std::unique_ptr<HwCal> mHwCal;
