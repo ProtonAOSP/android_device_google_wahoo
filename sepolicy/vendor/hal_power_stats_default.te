@@ -1,6 +1,7 @@
 # power.stats HAL needs access to rpm, and wlan sysfs nodes in /d/
 r_dir_file(hal_power_stats_default, debugfs_rpm)
 r_dir_file(hal_power_stats_default, debugfs_wlan)
+get_prop(hal_power_stats_default, exported_wifi_prop) # Needed to detect wifi on/off
 
 # power.stats HAL needs access to the easel sysfs node
 r_dir_file(hal_power_stats_default, sysfs_easel)
