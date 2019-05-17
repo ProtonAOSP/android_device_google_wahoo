@@ -33,6 +33,7 @@
         <param max_ape_sessions="8" />
         <param enable_failure_detection="false" />
         <param support_device_switch="false" />
+        <param concurrent_capture="true" />
     </common_config>
     <acdb_ids>
         <param DEVICE_HANDSET_MIC_APE="100" />
