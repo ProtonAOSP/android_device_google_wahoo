@@ -1,0 +1,6 @@
+soong_namespace {
+    imports: [
+        "hardware/qcom/bootctrl",
+        "hardware/qcom/msm8998",
+    ],
+}
