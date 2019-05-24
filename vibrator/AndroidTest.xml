@@ -14,15 +14,15 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<configuration description="Runs PtsVibratorHalWahooTestSuite.">
+<configuration description="Runs PtsVibratorHalDrv2624TestSuite.">
     <option name="test-suite-tag" value="pts" />
     <target_preparer class="com.android.compatibility.common.tradefed.targetprep.FilePusher">
         <option name="append-bitness" value="true" />
         <option name="cleanup" value="true" />
-        <option name="push" value="PtsVibratorHalWahooTestSuite->/data/local/tmp/PtsVibratorHalWahooTestSuite" />
+        <option name="push" value="PtsVibratorHalDrv2624TestSuite->/data/local/tmp/PtsVibratorHalDrv2624TestSuite" />
     </target_preparer>
     <test class="com.android.tradefed.testtype.GTest" >
-        <option name="module-name" value="PtsVibratorHalWahooTestSuite" />
+        <option name="module-name" value="PtsVibratorHalDrv2624TestSuite" />
         <option name="native-test-device-path" value="/data/local/tmp" />
     </test>
 </configuration>

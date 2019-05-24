@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#define LOG_TAG "android.hardware.vibrator@1.2-service.wahoo"
+#define LOG_TAG "android.hardware.vibrator@1.2-service.drv2624"
 
 #include <android/hardware/vibrator/1.2/IVibrator.h>
 #include <hidl/HidlSupport.h>

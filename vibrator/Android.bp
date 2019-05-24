@@ -14,7 +14,7 @@
 // limitations under the License.
 
 cc_defaults {
-    name: "android.hardware.vibrator@1.2-defaults.wahoo",
+    name: "android.hardware.vibrator@1.2-defaults.drv2624",
     defaults: ["hidl_defaults"],
     relative_install_path: "hw",
     shared_libs: [
@@ -33,8 +33,8 @@ cc_defaults {
 }
 
 cc_library {
-    name: "android.hardware.vibrator@1.2-impl.wahoo",
-    defaults: ["android.hardware.vibrator@1.2-defaults.wahoo"],
+    name: "android.hardware.vibrator@1.2-impl.drv2624",
+    defaults: ["android.hardware.vibrator@1.2-defaults.drv2624"],
     srcs: [
         "Hardware.cpp",
         "Vibrator.cpp",
@@ -42,23 +42,23 @@ cc_library {
 }
 
 cc_binary {
-    name: "android.hardware.vibrator@1.2-service.wahoo",
-    defaults: ["android.hardware.vibrator@1.2-defaults.wahoo"],
-    init_rc: ["android.hardware.vibrator@1.2-service.wahoo.rc"],
+    name: "android.hardware.vibrator@1.2-service.drv2624",
+    defaults: ["android.hardware.vibrator@1.2-defaults.drv2624"],
+    init_rc: ["android.hardware.vibrator@1.2-service.drv2624.rc"],
     srcs: ["service.cpp"],
-    static_libs: ["android.hardware.vibrator@1.2-impl.wahoo"],
+    static_libs: ["android.hardware.vibrator@1.2-impl.drv2624"],
 }
 
 cc_test {
-    name: "PtsVibratorHalWahooTestSuite",
-    defaults: ["android.hardware.vibrator@1.2-defaults.wahoo"],
+    name: "PtsVibratorHalDrv2624TestSuite",
+    defaults: ["android.hardware.vibrator@1.2-defaults.drv2624"],
     srcs: [
         "tests/test-hwapi.cpp",
         "tests/test-hwcal.cpp",
         "tests/test-vibrator.cpp",
     ],
     static_libs: [
-        "android.hardware.vibrator@1.2-impl.wahoo",
+        "android.hardware.vibrator@1.2-impl.drv2624",
         "libgmock",
     ],
     shared_libs: [

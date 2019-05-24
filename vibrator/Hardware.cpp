@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.vibrator@1.2-service.wahoo"
+#define LOG_TAG "android.hardware.vibrator@1.2-service.drv2624"
 
 #include "Hardware.h"
 
