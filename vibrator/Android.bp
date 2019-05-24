@@ -45,6 +45,7 @@ cc_binary {
     name: "android.hardware.vibrator@1.2-service.drv2624",
     defaults: ["android.hardware.vibrator@1.2-defaults.drv2624"],
     init_rc: ["android.hardware.vibrator@1.2-service.drv2624.rc"],
+    vintf_fragments: ["android.hardware.vibrator@1.2-service.drv2624.xml"],
     srcs: ["service.cpp"],
     static_libs: ["android.hardware.vibrator@1.2-impl.drv2624"],
 }
