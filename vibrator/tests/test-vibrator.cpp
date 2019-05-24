@@ -24,8 +24,6 @@
 #include "types.h"
 #include "utils.h"
 
-using namespace ::testing;
-
 namespace android {
 namespace hardware {
 namespace vibrator {
@@ -35,21 +33,39 @@ namespace implementation {
 using ::android::hardware::vibrator::V1_0::EffectStrength;
 using ::android::hardware::vibrator::V1_0::Status;
 
+using ::testing::_;
+using ::testing::AnyNumber;
+using ::testing::AnyOf;
+using ::testing::Assign;
+using ::testing::Combine;
+using ::testing::DoAll;
+using ::testing::DoDefault;
+using ::testing::Exactly;
+using ::testing::Mock;
+using ::testing::Return;
+using ::testing::Sequence;
+using ::testing::SetArgPointee;
+using ::testing::SetArgReferee;
+using ::testing::Test;
+using ::testing::TestParamInfo;
+using ::testing::ValuesIn;
+using ::testing::WithParamInterface;
+
 // Constants With Prescribed Values
 
 static const std::map<EffectTuple, EffectSequence> EFFECT_SEQUENCES{
-    {{Effect::CLICK, EffectStrength::LIGHT}, {"1 0", 2}},
-    {{Effect::CLICK, EffectStrength::MEDIUM}, {"1 0", 0}},
-    {{Effect::CLICK, EffectStrength::STRONG}, {"1 0", 0}},
-    {{Effect::TICK, EffectStrength::LIGHT}, {"2 0", 2}},
-    {{Effect::TICK, EffectStrength::MEDIUM}, {"2 0", 0}},
-    {{Effect::TICK, EffectStrength::STRONG}, {"2 0", 0}},
-    {{Effect::DOUBLE_CLICK, EffectStrength::LIGHT}, {"3 0", 2}},
-    {{Effect::DOUBLE_CLICK, EffectStrength::MEDIUM}, {"3 0", 0}},
-    {{Effect::DOUBLE_CLICK, EffectStrength::STRONG}, {"3 0", 0}},
-    {{Effect::HEAVY_CLICK, EffectStrength::LIGHT}, {"4 0", 2}},
-    {{Effect::HEAVY_CLICK, EffectStrength::MEDIUM}, {"4 0", 0}},
-    {{Effect::HEAVY_CLICK, EffectStrength::STRONG}, {"4 0", 0}},
+        {{Effect::CLICK, EffectStrength::LIGHT}, {"1 0", 2}},
+        {{Effect::CLICK, EffectStrength::MEDIUM}, {"1 0", 0}},
+        {{Effect::CLICK, EffectStrength::STRONG}, {"1 0", 0}},
+        {{Effect::TICK, EffectStrength::LIGHT}, {"2 0", 2}},
+        {{Effect::TICK, EffectStrength::MEDIUM}, {"2 0", 0}},
+        {{Effect::TICK, EffectStrength::STRONG}, {"2 0", 0}},
+        {{Effect::DOUBLE_CLICK, EffectStrength::LIGHT}, {"3 0", 2}},
+        {{Effect::DOUBLE_CLICK, EffectStrength::MEDIUM}, {"3 0", 0}},
+        {{Effect::DOUBLE_CLICK, EffectStrength::STRONG}, {"3 0", 0}},
+        {{Effect::HEAVY_CLICK, EffectStrength::LIGHT}, {"4 0", 2}},
+        {{Effect::HEAVY_CLICK, EffectStrength::MEDIUM}, {"4 0", 0}},
+        {{Effect::HEAVY_CLICK, EffectStrength::STRONG}, {"4 0", 0}},
 };
 
 class VibratorTest : public Test, public WithParamInterface<EffectTuple> {
@@ -81,17 +97,17 @@ class VibratorTest : public Test, public WithParamInterface<EffectTuple> {
 
         ON_CALL(*mMockCal, destructor()).WillByDefault(Assign(&mMockCal, nullptr));
         ON_CALL(*mMockCal, getClickDuration(_))
-            .WillByDefault(
-                DoAll(SetArgPointee<0>(mEffectDurations[Effect::CLICK]), ::testing::Return(true)));
+                .WillByDefault(DoAll(SetArgPointee<0>(mEffectDurations[Effect::CLICK]),
+                                     ::testing::Return(true)));
         ON_CALL(*mMockCal, getTickDuration(_))
-            .WillByDefault(
-                DoAll(SetArgPointee<0>(mEffectDurations[Effect::TICK]), ::testing::Return(true)));
+                .WillByDefault(DoAll(SetArgPointee<0>(mEffectDurations[Effect::TICK]),
+                                     ::testing::Return(true)));
         ON_CALL(*mMockCal, getDoubleClickDuration(_))
-            .WillByDefault(DoAll(SetArgPointee<0>(mEffectDurations[Effect::DOUBLE_CLICK]),
-                                 ::testing::Return(true)));
+                .WillByDefault(DoAll(SetArgPointee<0>(mEffectDurations[Effect::DOUBLE_CLICK]),
+                                     ::testing::Return(true)));
         ON_CALL(*mMockCal, getHeavyClickDuration(_))
-            .WillByDefault(DoAll(SetArgPointee<0>(mEffectDurations[Effect::HEAVY_CLICK]),
-                                 ::testing::Return(true)));
+                .WillByDefault(DoAll(SetArgPointee<0>(mEffectDurations[Effect::HEAVY_CLICK]),
+                                     ::testing::Return(true)));
 
         relaxMock(false);
     }
@@ -157,8 +173,8 @@ class VibratorTest : public Test, public WithParamInterface<EffectTuple> {
 TEST_F(VibratorTest, Constructor) {
     std::unique_ptr<MockApi> mockapi;
     std::unique_ptr<MockCal> mockcal;
-    std::string autocalVal = std::to_string(std::rand()) + " " + std::to_string(std::rand()) +
-                             " " + std::to_string(std::rand());
+    std::string autocalVal = std::to_string(std::rand()) + " " + std::to_string(std::rand()) + " " +
+                             std::to_string(std::rand());
     uint32_t lraPeriodVal = std::rand();
     Sequence autocalSeq, lraPeriodSeq;
 
@@ -172,18 +188,18 @@ TEST_F(VibratorTest, Constructor) {
     EXPECT_CALL(*mMockApi, setState(true)).WillOnce(::testing::Return(true));
 
     EXPECT_CALL(*mMockCal, getAutocal(_))
-        .InSequence(autocalSeq)
-        .WillOnce(DoAll(SetArgReferee<0>(autocalVal), ::testing::Return(true)));
+            .InSequence(autocalSeq)
+            .WillOnce(DoAll(SetArgReferee<0>(autocalVal), ::testing::Return(true)));
     EXPECT_CALL(*mMockApi, setAutocal(autocalVal))
-        .InSequence(autocalSeq)
-        .WillOnce(::testing::Return(true));
+            .InSequence(autocalSeq)
+            .WillOnce(::testing::Return(true));
 
     EXPECT_CALL(*mMockCal, getLraPeriod(_))
-        .InSequence(lraPeriodSeq)
-        .WillOnce(DoAll(SetArgPointee<0>(lraPeriodVal), ::testing::Return(true)));
+            .InSequence(lraPeriodSeq)
+            .WillOnce(DoAll(SetArgPointee<0>(lraPeriodVal), ::testing::Return(true)));
     EXPECT_CALL(*mMockApi, setOlLraPeriod(lraPeriodVal))
-        .InSequence(lraPeriodSeq)
-        .WillOnce(::testing::Return(true));
+            .InSequence(lraPeriodSeq)
+            .WillOnce(::testing::Return(true));
 
     EXPECT_CALL(*mMockCal, getClickDuration(_)).WillOnce(DoDefault());
     EXPECT_CALL(*mMockCal, getTickDuration(_)).WillOnce(DoDefault());
@@ -199,12 +215,14 @@ TEST_F(VibratorTest, on) {
     EffectDuration duration = std::rand();
     Sequence s1, s2, s3;
 
-    EXPECT_CALL(*mMockApi, setCtrlLoop(AnyOf(0, 1))).InSequence(s1).WillOnce(::testing::Return(true));
+    EXPECT_CALL(*mMockApi, setCtrlLoop(AnyOf(0, 1)))
+            .InSequence(s1)
+            .WillOnce(::testing::Return(true));
     EXPECT_CALL(*mMockApi, setMode("rtp")).InSequence(s2).WillOnce(::testing::Return(true));
     EXPECT_CALL(*mMockApi, setDuration(duration)).InSequence(s3).WillOnce(::testing::Return(true));
     EXPECT_CALL(*mMockApi, setActivate(true))
-        .InSequence(s1, s2, s3)
-        .WillOnce(::testing::Return(true));
+            .InSequence(s1, s2, s3)
+            .WillOnce(::testing::Return(true));
 
     EXPECT_EQ(Status::OK, mVibrator->on(duration));
 }
@@ -231,7 +249,7 @@ TEST_F(VibratorTest, setAmplitude) {
     EffectAmplitude amplitude = std::rand();
 
     EXPECT_CALL(*mMockApi, setRtpInput(amplitudeToRtpInput(amplitude)))
-        .WillOnce(::testing::Return(true));
+            .WillOnce(::testing::Return(true));
 
     EXPECT_EQ(Status::OK, mVibrator->setAmplitude(amplitude));
 }
@@ -252,18 +270,20 @@ TEST_P(VibratorTest, perform) {
         duration = durIter->second;
 
         EXPECT_CALL(*mMockApi, setSequencer(sequence))
-            .InSequence(s1)
-            .WillOnce(::testing::Return(true));
+                .InSequence(s1)
+                .WillOnce(::testing::Return(true));
         EXPECT_CALL(*mMockApi, setScale(scale)).InSequence(s2).WillOnce(::testing::Return(true));
         EXPECT_CALL(*mMockApi, setCtrlLoop(1)).InSequence(s3).WillOnce(::testing::Return(true));
-        EXPECT_CALL(*mMockApi, setMode("waveform")).InSequence(s4).WillOnce(::testing::Return(true));
+        EXPECT_CALL(*mMockApi, setMode("waveform"))
+                .InSequence(s4)
+                .WillOnce(::testing::Return(true));
         EXPECT_CALL(*mMockApi, setDuration(duration))
-            .InSequence(s5)
-            .WillOnce(::testing::Return(true));
+                .InSequence(s5)
+                .WillOnce(::testing::Return(true));
 
         EXPECT_CALL(*mMockApi, setActivate(true))
-            .InSequence(s1, s2, s3, s4, s5)
-            .WillOnce(::testing::Return(true));
+                .InSequence(s1, s2, s3, s4, s5)
+                .WillOnce(::testing::Return(true));
     } else {
         duration = 0;
     }

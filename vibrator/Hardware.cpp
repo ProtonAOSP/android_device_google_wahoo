@@ -116,30 +116,30 @@ std::unique_ptr<HwApi> HwApi::Create() {
 }
 
 template <typename T>
-bool HwApi::has(T &stream) {
+bool HwApi::has(const T &stream) {
     return !!stream;
 }
 
 template <typename T, typename U>
-bool HwApi::get(T *value, U &stream) {
+bool HwApi::get(T *value, U *stream) {
     bool ret;
-    stream.seekg(0);
-    stream >> *value;
-    if (!(ret = !!stream)) {
-        ALOGE("Failed to read %s (%d): %s", mNames[&stream].c_str(), errno, strerror(errno));
+    stream->seekg(0);
+    *stream >> *value;
+    if (!(ret = !!*stream)) {
+        ALOGE("Failed to read %s (%d): %s", mNames[stream].c_str(), errno, strerror(errno));
     }
-    stream.clear();
+    stream->clear();
     return ret;
 }
 
 template <typename T, typename U>
-bool HwApi::set(const T &value, U &stream) {
+bool HwApi::set(const T &value, U *stream) {
     using utils::operator<<;
     bool ret;
-    stream << value << std::endl;
-    if (!(ret = !!stream)) {
-        ALOGE("Failed to write %s (%d): %s", mNames[&stream].c_str(), errno, strerror(errno));
-        stream.clear();
+    *stream << value << std::endl;
+    if (!(ret = !!*stream)) {
+        ALOGE("Failed to write %s (%d): %s", mNames[stream].c_str(), errno, strerror(errno));
+        stream->clear();
     }
     return ret;
 }
@@ -211,18 +211,18 @@ void HwCal::debug(int fd) {
     dprintf(fd, "Properties:\n");
 
     property_list(
-        [](const char *key, const char *value, void *cookie) {
-            struct context *context = static_cast<struct context *>(cookie);
-            HwCal *obj = context->obj;
-            int fd = context->fd;
-            const std::string expect{obj->mPropertyPrefix};
-            const std::string actual{key, std::min(strlen(key), expect.size())};
-            if (actual == expect) {
-                dprintf(fd, "  %s:\n", key);
-                dprintf(fd, "    %s\n", value);
-            }
-        },
-        &context);
+            [](const char *key, const char *value, void *cookie) {
+                struct context *context = static_cast<struct context *>(cookie);
+                HwCal *obj = context->obj;
+                int fd = context->fd;
+                const std::string expect{obj->mPropertyPrefix};
+                const std::string actual{key, std::min(strlen(key), expect.size())};
+                if (actual == expect) {
+                    dprintf(fd, "  %s:\n", key);
+                    dprintf(fd, "    %s\n", value);
+                }
+            },
+            &context);
 
     dprintf(fd, "\n");
 

@@ -24,12 +24,15 @@
 #include "Hardware.h"
 #include "Vibrator.h"
 
+using android::OK;
+using android::sp;
+using android::status_t;
+using android::UNKNOWN_ERROR;
 using android::hardware::configureRpcThreadpool;
 using android::hardware::joinRpcThreadpool;
 using android::hardware::vibrator::V1_2::implementation::HwApi;
 using android::hardware::vibrator::V1_2::implementation::HwCal;
 using android::hardware::vibrator::V1_2::implementation::Vibrator;
-using namespace android;
 
 status_t registerVibratorService() {
     auto hwapi = HwApi::Create();

@@ -41,7 +41,7 @@ class MockApi : public ::android::hardware::vibrator::V1_2::implementation::Vibr
 class MockCal : public ::android::hardware::vibrator::V1_2::implementation::Vibrator::HwCal {
   public:
     MOCK_METHOD0(destructor, void());
-    MOCK_METHOD1(getAutocal, bool(std::string &value));
+    MOCK_METHOD1(getAutocal, bool(std::string &value));  // NOLINT
     MOCK_METHOD1(getLraPeriod, bool(uint32_t *value));
     MOCK_METHOD1(getClickDuration, bool(uint32_t *value));
     MOCK_METHOD1(getTickDuration, bool(uint32_t *value));

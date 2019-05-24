@@ -97,27 +97,27 @@ class Vibrator : public IVibrator {
         virtual void debug(int fd) = 0;
     };
 
-public:
+  public:
     Vibrator(std::unique_ptr<HwApi> hwapi, std::unique_ptr<HwCal> hwcal);
 
     // Methods from ::android::hardware::vibrator::V1_0::IVibrator follow.
     using Status = ::android::hardware::vibrator::V1_0::Status;
-    Return<Status> on(uint32_t timeoutMs)  override;
-    Return<Status> off()  override;
+    Return<Status> on(uint32_t timeoutMs) override;
+    Return<Status> off() override;
     Return<bool> supportsAmplitudeControl() override;
     Return<Status> setAmplitude(uint8_t amplitude) override;
 
     using EffectStrength = ::android::hardware::vibrator::V1_0::EffectStrength;
-    Return<void> perform(V1_0::Effect effect, EffectStrength strength, perform_cb _hidl_cb)
-            override;
-    Return<void> perform_1_1(V1_1::Effect_1_1 effect, EffectStrength strength, perform_cb _hidl_cb)
-            override;
+    Return<void> perform(V1_0::Effect effect, EffectStrength strength,
+                         perform_cb _hidl_cb) override;
+    Return<void> perform_1_1(V1_1::Effect_1_1 effect, EffectStrength strength,
+                             perform_cb _hidl_cb) override;
     Return<void> perform_1_2(Effect effect, EffectStrength strength, perform_cb _hidl_cb) override;
 
     // Methods from ::android.hidl.base::V1_0::IBase follow.
     Return<void> debug(const hidl_handle &handle, const hidl_vec<hidl_string> &options) override;
 
-private:
+  private:
     Return<Status> on(uint32_t timeoutMs, bool forceOpenLoop, bool isWaveform);
     template <typename T>
     Return<void> performWrapper(T effect, EffectStrength strength, perform_cb _hidl_cb);

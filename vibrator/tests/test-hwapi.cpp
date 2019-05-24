@@ -23,26 +23,29 @@
 
 #include "Hardware.h"
 
-using namespace ::testing;
-
 namespace android {
 namespace hardware {
 namespace vibrator {
 namespace V1_2 {
 namespace implementation {
 
+using ::testing::Test;
+using ::testing::TestParamInfo;
+using ::testing::ValuesIn;
+using ::testing::WithParamInterface;
+
 class HwApiTest : public Test {
   protected:
     static constexpr const char *FILE_NAMES[]{
-        "AUTOCAL_FILEPATH", "OL_LRA_PERIOD_FILEPATH", "ACTIVATE_PATH",   "DURATION_PATH",
-        "STATE_PATH",       "RTP_INPUT_PATH",         "MODE_PATH",       "SEQUENCER_PATH",
-        "SCALE_PATH",       "CTRL_LOOP_PATH",         "LP_TRIGGER_PATH",
+            "AUTOCAL_FILEPATH", "OL_LRA_PERIOD_FILEPATH", "ACTIVATE_PATH",   "DURATION_PATH",
+            "STATE_PATH",       "RTP_INPUT_PATH",         "MODE_PATH",       "SEQUENCER_PATH",
+            "SCALE_PATH",       "CTRL_LOOP_PATH",         "LP_TRIGGER_PATH",
     };
 
     static constexpr const char *REQUIRED[]{
-        "ACTIVATE_PATH",
-        "DURATION_PATH",
-        "STATE_PATH",
+            "ACTIVATE_PATH",
+            "DURATION_PATH",
+            "STATE_PATH",
     };
 
   public:
@@ -101,7 +104,7 @@ class HwApiTest : public Test {
         }
     }
 
-    // TODO: Determine how to induce errors in required files
+    // TODO(eliptus): Determine how to induce errors in required files
     static bool isRequired(const std::string &name) {
         for (auto n : REQUIRED) {
             if (std::string(n) == name) {
@@ -212,7 +215,7 @@ TEST_P(HasTest, success_returnsFalse) {
 
 INSTANTIATE_TEST_CASE_P(HwApiTests, HasTest,
                         ValuesIn({
-                            HasTest::MakeParam("RTP_INPUT_PATH", &Vibrator::HwApi::hasRtpInput),
+                                HasTest::MakeParam("RTP_INPUT_PATH", &Vibrator::HwApi::hasRtpInput),
                         }),
                         HasTest::PrintParam);
 
@@ -251,13 +254,14 @@ TEST_P(SetBoolTest, failure) {
     EXPECT_FALSE(func(*mNoApi, false));
 }
 
-INSTANTIATE_TEST_CASE_P(HwApiTests, SetBoolTest,
-                        ValuesIn({
-                            SetBoolTest::MakeParam("ACTIVATE_PATH", &Vibrator::HwApi::setActivate),
-                            SetBoolTest::MakeParam("STATE_PATH", &Vibrator::HwApi::setState),
-                            SetBoolTest::MakeParam("CTRL_LOOP_PATH", &Vibrator::HwApi::setCtrlLoop),
-                        }),
-                        SetBoolTest::PrintParam);
+INSTANTIATE_TEST_CASE_P(
+        HwApiTests, SetBoolTest,
+        ValuesIn({
+                SetBoolTest::MakeParam("ACTIVATE_PATH", &Vibrator::HwApi::setActivate),
+                SetBoolTest::MakeParam("STATE_PATH", &Vibrator::HwApi::setState),
+                SetBoolTest::MakeParam("CTRL_LOOP_PATH", &Vibrator::HwApi::setCtrlLoop),
+        }),
+        SetBoolTest::PrintParam);
 
 using SetInt8Test = HwApiTypedTest<bool(Vibrator::HwApi &, int8_t)>;
 
@@ -287,7 +291,8 @@ TEST_P(SetInt8Test, failure) {
 
 INSTANTIATE_TEST_CASE_P(HwApiTests, SetInt8Test,
                         ValuesIn({
-                            SetInt8Test::MakeParam("RTP_INPUT_PATH", &Vibrator::HwApi::setRtpInput),
+                                SetInt8Test::MakeParam("RTP_INPUT_PATH",
+                                                       &Vibrator::HwApi::setRtpInput),
                         }),
                         SetInt8Test::PrintParam);
 
@@ -319,7 +324,7 @@ TEST_P(SetUint8Test, failure) {
 
 INSTANTIATE_TEST_CASE_P(HwApiTests, SetUint8Test,
                         ValuesIn({
-                            SetUint8Test::MakeParam("SCALE_PATH", &Vibrator::HwApi::setScale),
+                                SetUint8Test::MakeParam("SCALE_PATH", &Vibrator::HwApi::setScale),
                         }),
                         SetUint8Test::PrintParam);
 
@@ -350,13 +355,14 @@ TEST_P(SetUint32Test, failure) {
 }
 
 INSTANTIATE_TEST_CASE_P(
-    HwApiTests, SetUint32Test,
-    ValuesIn({
-        SetUint32Test::MakeParam("OL_LRA_PERIOD_FILEPATH", &Vibrator::HwApi::setOlLraPeriod),
-        SetUint32Test::MakeParam("DURATION_PATH", &Vibrator::HwApi::setDuration),
-        SetUint32Test::MakeParam("LP_TRIGGER_PATH", &Vibrator::HwApi::setLpTriggerEffect),
-    }),
-    SetUint32Test::PrintParam);
+        HwApiTests, SetUint32Test,
+        ValuesIn({
+                SetUint32Test::MakeParam("OL_LRA_PERIOD_FILEPATH",
+                                         &Vibrator::HwApi::setOlLraPeriod),
+                SetUint32Test::MakeParam("DURATION_PATH", &Vibrator::HwApi::setDuration),
+                SetUint32Test::MakeParam("LP_TRIGGER_PATH", &Vibrator::HwApi::setLpTriggerEffect),
+        }),
+        SetUint32Test::PrintParam);
 
 using SetStringTest = HwApiTypedTest<bool(Vibrator::HwApi &, std::string)>;
 
@@ -385,13 +391,13 @@ TEST_P(SetStringTest, failure) {
 }
 
 INSTANTIATE_TEST_CASE_P(
-    HwApiTests, SetStringTest,
-    ValuesIn({
-        SetStringTest::MakeParam("AUTOCAL_FILEPATH", &Vibrator::HwApi::setAutocal),
-        SetStringTest::MakeParam("MODE_PATH", &Vibrator::HwApi::setMode),
-        SetStringTest::MakeParam("SEQUENCER_PATH", &Vibrator::HwApi::setSequencer),
-    }),
-    SetStringTest::PrintParam);
+        HwApiTests, SetStringTest,
+        ValuesIn({
+                SetStringTest::MakeParam("AUTOCAL_FILEPATH", &Vibrator::HwApi::setAutocal),
+                SetStringTest::MakeParam("MODE_PATH", &Vibrator::HwApi::setMode),
+                SetStringTest::MakeParam("SEQUENCER_PATH", &Vibrator::HwApi::setSequencer),
+        }),
+        SetStringTest::PrintParam);
 
 }  // namespace implementation
 }  // namespace V1_2

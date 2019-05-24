@@ -23,8 +23,6 @@
 
 #include "Hardware.h"
 
-using namespace ::testing;
-
 namespace android {
 namespace hardware {
 namespace vibrator {
@@ -33,6 +31,8 @@ namespace implementation {
 
 using ::android::base::SetProperty;
 using ::android::base::WaitForProperty;
+
+using ::testing::Test;
 
 class HwCalTest : public Test {
   protected:

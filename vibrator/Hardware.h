@@ -29,28 +29,28 @@ namespace implementation {
 class HwApi : public Vibrator::HwApi {
   public:
     static std::unique_ptr<HwApi> Create();
-    bool setAutocal(std::string value) override { return set(value, mAutocal); }
-    bool setOlLraPeriod(uint32_t value) override { return set(value, mOlLraPeriod); }
-    bool setActivate(bool value) override { return set(value, mActivate); }
-    bool setDuration(uint32_t value) override { return set(value, mDuration); }
-    bool setState(bool value) override { return set(value, mState); }
+    bool setAutocal(std::string value) override { return set(value, &mAutocal); }
+    bool setOlLraPeriod(uint32_t value) override { return set(value, &mOlLraPeriod); }
+    bool setActivate(bool value) override { return set(value, &mActivate); }
+    bool setDuration(uint32_t value) override { return set(value, &mDuration); }
+    bool setState(bool value) override { return set(value, &mState); }
     bool hasRtpInput() override { return has(mRtpInput); }
-    bool setRtpInput(int8_t value) override { return set(value, mRtpInput); }
-    bool setMode(std::string value) override { return set(value, mMode); }
-    bool setSequencer(std::string value) override { return set(value, mSequencer); }
-    bool setScale(uint8_t value) override { return set(value, mScale); }
-    bool setCtrlLoop(bool value) override { return set(value, mCtrlLoop); }
-    bool setLpTriggerEffect(uint32_t value) override { return set(value, mLpTrigger); }
+    bool setRtpInput(int8_t value) override { return set(value, &mRtpInput); }
+    bool setMode(std::string value) override { return set(value, &mMode); }
+    bool setSequencer(std::string value) override { return set(value, &mSequencer); }
+    bool setScale(uint8_t value) override { return set(value, &mScale); }
+    bool setCtrlLoop(bool value) override { return set(value, &mCtrlLoop); }
+    bool setLpTriggerEffect(uint32_t value) override { return set(value, &mLpTrigger); }
     void debug(int fd) override;
 
   private:
     HwApi();
     template <typename T>
-    bool has(T &stream);
+    bool has(const T &stream);
     template <typename T, typename U>
-    bool get(T *value, U &stream);
+    bool get(T *value, U *stream);
     template <typename T, typename U>
-    bool set(const T &value, U &stream);
+    bool set(const T &value, U *stream);
 
   private:
     std::map<void *, std::string> mNames;

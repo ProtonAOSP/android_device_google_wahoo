@@ -16,19 +16,17 @@
 
 #define LOG_TAG "VibratorService"
 
-#include <log/log.h>
+#include "Vibrator.h"
 
+#include <cutils/properties.h>
 #include <hardware/hardware.h>
 #include <hardware/vibrator.h>
-#include <cutils/properties.h>
-
-#include "Vibrator.h"
+#include <log/log.h>
 
 #include <cinttypes>
 #include <cmath>
-#include <iostream>
 #include <fstream>
-
+#include <iostream>
 
 namespace android {
 namespace hardware {
@@ -114,7 +112,7 @@ Return<Status> Vibrator::on(uint32_t timeoutMs, bool forceOpenLoop, bool isWavef
         return Status::UNKNOWN_ERROR;
     }
 
-   return Status::OK;
+    return Status::OK;
 }
 
 // Methods from ::android::hardware::vibrator::V1_2::IVibrator follow.
@@ -122,7 +120,7 @@ Return<Status> Vibrator::on(uint32_t timeoutMs) {
     return on(timeoutMs, false /* forceOpenLoop */, false /* isWaveform */);
 }
 
-Return<Status> Vibrator::off()  {
+Return<Status> Vibrator::off() {
     if (!mHwApi->setActivate(0)) {
         ALOGE("Failed to turn vibrator off (%d): %s", errno, strerror(errno));
         return Status::UNKNOWN_ERROR;
@@ -130,19 +128,17 @@ Return<Status> Vibrator::off()  {
     return Status::OK;
 }
 
-Return<bool> Vibrator::supportsAmplitudeControl()  {
+Return<bool> Vibrator::supportsAmplitudeControl() {
     return (mHwApi->hasRtpInput() ? true : false);
 }
 
 Return<Status> Vibrator::setAmplitude(uint8_t amplitude) {
-
     if (amplitude == 0) {
         return Status::BAD_VALUE;
     }
 
     int32_t rtp_input =
-            std::round((amplitude - 1) / 254.0 * (MAX_RTP_INPUT - MIN_RTP_INPUT) +
-            MIN_RTP_INPUT);
+            std::round((amplitude - 1) / 254.0 * (MAX_RTP_INPUT - MIN_RTP_INPUT) + MIN_RTP_INPUT);
 
     if (!mHwApi->setRtpInput(rtp_input)) {
         ALOGE("Failed to set amplitude (%d): %s", errno, strerror(errno));
@@ -186,13 +182,13 @@ static uint8_t convertEffectStrength(EffectStrength strength) {
     uint8_t scale;
 
     switch (strength) {
-    case EffectStrength::LIGHT:
-        scale = 2; // 50%
-        break;
-    case EffectStrength::MEDIUM:
-    case EffectStrength::STRONG:
-        scale = 0; // 100%
-        break;
+        case EffectStrength::LIGHT:
+            scale = 2;  // 50%
+            break;
+        case EffectStrength::MEDIUM:
+        case EffectStrength::STRONG:
+            scale = 0;  // 100%
+            break;
     }
 
     return scale;
@@ -203,7 +199,7 @@ Return<void> Vibrator::perform(V1_0::Effect effect, EffectStrength strength, per
 }
 
 Return<void> Vibrator::perform_1_1(V1_1::Effect_1_1 effect, EffectStrength strength,
-        perform_cb _hidl_cb) {
+                                   perform_cb _hidl_cb) {
     return performWrapper(effect, strength, _hidl_cb);
 }
 
@@ -231,25 +227,25 @@ Return<void> Vibrator::performEffect(Effect effect, EffectStrength strength, per
     uint32_t timeMS;
 
     switch (effect) {
-    case Effect::CLICK:
-        mHwApi->setSequencer(WAVEFORM_CLICK_EFFECT_SEQ);
-        timeMS = mClickDuration;
-        break;
-    case Effect::DOUBLE_CLICK:
-        mHwApi->setSequencer(WAVEFORM_DOUBLE_CLICK_EFFECT_SEQ);
-        timeMS = mDoubleClickDuration;
-        break;
-    case Effect::TICK:
-        mHwApi->setSequencer(WAVEFORM_TICK_EFFECT_SEQ);
-        timeMS = mTickDuration;
-        break;
-    case Effect::HEAVY_CLICK:
-        mHwApi->setSequencer(WAVEFORM_HEAVY_CLICK_EFFECT_SEQ);
-        timeMS = mHeavyClickDuration;
-        break;
-    default:
-        _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
-        return Void();
+        case Effect::CLICK:
+            mHwApi->setSequencer(WAVEFORM_CLICK_EFFECT_SEQ);
+            timeMS = mClickDuration;
+            break;
+        case Effect::DOUBLE_CLICK:
+            mHwApi->setSequencer(WAVEFORM_DOUBLE_CLICK_EFFECT_SEQ);
+            timeMS = mDoubleClickDuration;
+            break;
+        case Effect::TICK:
+            mHwApi->setSequencer(WAVEFORM_TICK_EFFECT_SEQ);
+            timeMS = mTickDuration;
+            break;
+        case Effect::HEAVY_CLICK:
+            mHwApi->setSequencer(WAVEFORM_HEAVY_CLICK_EFFECT_SEQ);
+            timeMS = mHeavyClickDuration;
+            break;
+        default:
+            _hidl_cb(Status::UNSUPPORTED_OPERATION, 0);
+            return Void();
     }
     mHwApi->setScale(convertEffectStrength(strength));
     on(timeMS, true /* forceOpenLoop */, true /* isWaveform */);
@@ -257,8 +253,7 @@ Return<void> Vibrator::performEffect(Effect effect, EffectStrength strength, per
     return Void();
 }
 
-
-} // namespace implementation
+}  // namespace implementation
 }  // namespace V1_2
 }  // namespace vibrator
 }  // namespace hardware
