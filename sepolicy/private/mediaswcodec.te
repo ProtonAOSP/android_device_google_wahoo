@@ -1,0 +1,2 @@
+allow mediaswcodec gpu_device:chr_file { ioctl open read write };
+
