@@ -7,9 +7,6 @@ init_daemon_domain(netmgrd)
 set_prop(netmgrd, vendor_net_radio_prop)
 set_prop(netmgrd, net_rmnet_prop)
 
-# communicate with netd
-unix_socket_connect(netmgrd, netd, netd)
-
 allow netmgrd netmgrd_socket:dir w_dir_perms;
 allow netmgrd netmgrd_socket:sock_file create_file_perms;
 allow netmgrd self:netlink_xfrm_socket { create_socket_perms_no_ioctl nlmsg_write };
