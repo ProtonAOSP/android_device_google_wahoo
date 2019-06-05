@@ -58,6 +58,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     messaging
 
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+PRODUCT_PACKAGES += chre_test_client
+endif
+
 LOCAL_PATH := device/google/wahoo
 
 SRC_MEDIA_HAL_DIR := hardware/qcom/media/msm8998
