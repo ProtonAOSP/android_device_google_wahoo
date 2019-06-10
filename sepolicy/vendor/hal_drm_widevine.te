@@ -9,7 +9,6 @@ hal_server_domain(hal_drm_widevine, hal_drm)
 vndbinder_use(hal_drm_widevine);
 
 allow hal_drm_widevine mediacodec:fd use;
-allow hal_drm_widevine { appdomain -isolated_app }:fd use;
 
 # The Qualcomm DRM-HAL implementation uses a vendor-binder service provided
 # by the HWC HAL.
