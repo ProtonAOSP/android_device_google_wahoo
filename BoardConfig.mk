@@ -88,10 +88,10 @@ BOARD_USES_SYSTEM_OTHER_ODEX := true
 
 BOARD_ROOT_EXTRA_FOLDERS := persist firmware metadata
 
-BOARD_SEPOLICY_DIRS += device/google/wahoo/sepolicy/vendor
+BOARD_VENDOR_SEPOLICY_DIRS += device/google/wahoo/sepolicy/vendor
 BOARD_PLAT_PUBLIC_SEPOLICY_DIR := device/google/wahoo/sepolicy/public
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR := device/google/wahoo/sepolicy/private
-BOARD_SEPOLICY_DIRS += device/google/wahoo/sepolicy/verizon
+BOARD_VENDOR_SEPOLICY_DIRS += device/google/wahoo/sepolicy/verizon
 
 TARGET_FS_CONFIG_GEN := device/google/wahoo/config.fs
 
