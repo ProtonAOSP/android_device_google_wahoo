@@ -7,5 +7,3 @@ init_daemon_domain(hal_drm_clearkey)
 hal_server_domain(hal_drm_clearkey, hal_drm)
 
 vndbinder_use(hal_drm_clearkey);
-
-allow hal_drm_clearkey { appdomain -isolated_app }:fd use;
