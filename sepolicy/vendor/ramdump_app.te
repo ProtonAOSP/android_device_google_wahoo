@@ -11,4 +11,5 @@ userdebug_or_eng(`
 
   set_prop(ramdump_app, vendor_ramdump_prop);
   get_prop(system_app, vendor_ssr_prop)
+  get_prop(ramdump_app, system_boot_reason_prop)
 ')
