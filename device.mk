@@ -707,6 +707,10 @@ ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
       persist.vendor.usb.usbradio.config=diag
 endif
 
+# Vibrator HAL
+PRODUCT_PROPERTY_OVERRIDES += \
+  ro.vibrator.hal.closeloop.threshold=20
+
 # default atrace HAL
 PRODUCT_PACKAGES += \
     android.hardware.atrace@1.0-service
