@@ -1,3 +1,7 @@
+dump_hal(hal_thermal)
+dump_hal(hal_power)
+dump_hal(hal_power_stats)
+
 userdebug_or_eng(`
   allow dumpstate proc_modules:file r_file_perms;
   allow dumpstate proc_stat:file r_file_perms;
