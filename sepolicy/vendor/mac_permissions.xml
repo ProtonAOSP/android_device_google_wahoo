@@ -42,4 +42,7 @@
     <signer signature="@ARCORE_DEV" >
       <seinfo value="arcore" />
     </signer>
+    <signer signature="@MDS" >
+        <seinfo value="mds" />
+    </signer>
 </policy>
