@@ -358,6 +358,8 @@ on early-boot
     chown system system /sys/class/leds/vibrator/device/ol_lra_period
     chown system system /sys/class/leds/vibrator/device/autocal
     chown system system /sys/class/leds/vibrator/device/lp_trigger_effect
+    chown system system /sys/class/leds/vibrator/device/lra_wave_shape
+    chown system system /sys/class/leds/vibrator/device/od_clamp
 
     # Permission for LED driver
     chown system system /sys/class/leds/red/on_off_ms
