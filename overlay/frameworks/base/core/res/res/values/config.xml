@@ -73,6 +73,11 @@
         <item>2</item> <!-- COLOR_MODE_SATURATED -->
     </integer-array>
 
+    <!-- Color mode to use when accessibility transforms are enabled. This color mode must be
+     supported by the device, but not necessarily appear in config_availableColorModes. The
+     regularly selected color mode will be used if this value is negative. -->
+    <integer name="config_accessibilityColorMode">2</integer>
+
     <!-- Boolean indicating whether the HWC setColorTransform function can be performed efficiently
          in hardware. -->
     <bool name="config_setColorTransformAccelerated">true</bool>
@@ -217,6 +222,11 @@
         <item>8</item>
     </integer-array>
 
+    <!-- Enables or disables haptic effect when the text insertion/selection handle is moved
+          manually by the user. Off by default, since the expected haptic feedback may not be
+          available on some devices. -->
+     <bool name="config_enableHapticTextHandle">true</bool>
+
     <!-- Make things go fast -->
     <bool name="config_ui_enableFadingMarquee">false</bool>
 
@@ -232,7 +242,7 @@
 
    <!-- Enable doze mode
          ComponentName of a dream to show whenever the system would otherwise have gone to sleep. -->
-    <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
+    <string translatable="false" name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
 
     <!-- If true, the doze component is not started until after the screen has been turned off
          and the screen off animation has been performed. -->
@@ -255,7 +265,7 @@
     <bool name="config_displayBrightnessBucketsInDoze">true</bool>
 
     <!-- ImsService package name to bind to by default, if config_dynamic_bind_ims is true -->
-    <string name="config_ims_package">org.codeaurora.ims</string>
+    <string name="config_ims_package" translatable="false">org.codeaurora.ims</string>
 
     <!-- Flag specifying whether or not IMS will use the ImsResolver dynamically -->
     <bool name="config_dynamic_bind_ims">true</bool>
@@ -350,12 +360,15 @@
     <!-- True if Unprocessed audio source supports the required frequency range and level -->
     <bool name="config_supportAudioSourceUnprocessed">true</bool>
 
-    <!-- Colon separated list of package names that should be granted DND access -->
-    <string name="config_defaultDndAccessPackages" translatable="false">com.google.android.gms:com.google.android.GoogleCamera:com.google.intelligence.sense:com.google.android.settings.intelligence</string>
-
     <!-- Specify model in case of attestation failure due to misprovisioned device. -->
     <string name="config_misprovisionedDeviceModel" translatable="false">Pixel 2</string>
 
     <!-- Brand value for attestation of misprovisioned device. -->
     <string name="config_misprovisionedBrandValue" translatable="false">htc</string>
+
+    <!-- True if the firmware supports connected MAC randomization -->
+    <bool name="config_wifi_connected_mac_randomization_supported">true</bool>
+
+    <!-- True if the firmware supports Wi-Fi link probing -->
+    <bool name="config_wifi_link_probing_supported">true</bool>
 </resources>

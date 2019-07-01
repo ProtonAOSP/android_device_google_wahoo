@@ -1,0 +1,1 @@
+allow init vold_data_file:dir { relabelfrom };

@@ -22,5 +22,7 @@ userdebug_or_eng(`
   # read from /fstab.taimen
   allow ramdump rootfs:file r_file_perms;
 
+  dontaudit ramdump metadata_file:dir search;
+
   r_dir_file(ramdump, sysfs_type)
 ')

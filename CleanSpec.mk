@@ -177,13 +177,13 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib64/hw/*)
 # Remove android.hardware.audio*@2.0 implementation
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/android.hardware.audio*@2.0-impl.so)
 
-# Remove Clearkey HAL 1.0
-$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.drm@1.0-service.clearkey.rc)
-$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.drm@1.0-service.clearkey)
+# Remove Clearkey HAL 1.1
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.drm@1.1-service.clearkey.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.drm@1.1-service.clearkey)
 
-# Remove Widevine HAL 1.0
-$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.drm@1.0-service.widevine.rc)
-$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.drm@1.0-service.widevine)
+# Remove Widevine HAL 1.1
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.drm@1.1-service.widevine.rc)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/bin/hw/android.hardware.drm@1.1-service.widevine)
 
 # Remove healthd
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/bin/healthd)
@@ -195,6 +195,12 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.ke
 
 # Move libnfc-nci.conf to /vendor
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/libnfc-nci.conf)
+
+# Remove android.hardware.graphics.mapper@2.0-impl
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib/hw/android.hardware.graphics.mapper@2.0-impl.so)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/lib64/hw/android.hardware.graphics.mapper@2.0-impl.so)
+# Rename power HAL
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/vendor/etc/init/android.hardware.power@1.2-service.wahoo-libperfmgr.rc)
 
 # Remove obsolete android.hardware.boot@1.0-impl-wrapper.recovery.so
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/recovery/root/system/lib64/hw/android.hardware.boot@1.0-impl-wrapper.recovery.so)

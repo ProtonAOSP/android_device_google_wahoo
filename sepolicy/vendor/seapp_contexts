@@ -1,7 +1,7 @@
 user=system seinfo=platform name=com.google.SSRestartDetector domain=ssr_detector_app type=system_app_data_file
 user=_app seinfo=platform name=com.android.pixellogger domain=logger_app type=app_data_file levelFrom=all
 user=_app seinfo=platform name=com.android.ramdump domain=ramdump_app type=app_data_file levelFrom=all
-user=_app seinfo=platform name=com.google.mds domain=mds_app type=app_data_file levelFrom=all
+user=_app seinfo=google name=com.google.mds domain=mds_app type=app_data_file levelFrom=all
 
 #TODO Remove user "system" when b/63588267 is resolved
 user=system seinfo=platform name=com.qualcomm.telephony domain=qtelephony type=system_app_data_file
@@ -29,4 +29,4 @@ user=_app seinfo=platform name=com.qualcomm.timeservice domain=timeservice_app t
 user=_app seinfo=easel name=com.google.android.imaging.easel.service domain=easelservice_app type=app_data_file levelFrom=user
 
 #Domain for connectivity monitor
-user=radio seinfo=platform name=com.google.android.connectivitymonitor domain=con_monitor_app type=app_data_file levelFrom=all
+user=_app isPrivApp=true seinfo=platform name=com.google.android.connectivitymonitor domain=con_monitor_app type=app_data_file levelFrom=all

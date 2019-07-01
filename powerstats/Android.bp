@@ -13,25 +13,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 cc_binary {
-    name: "android.hardware.power@1.2-service.wahoo-libperfmgr",
+    name: "android.hardware.power.stats@1.0-service.pixel",
     relative_install_path: "hw",
-    init_rc: ["android.hardware.power@1.2-service.wahoo-libperfmgr.rc"],
-    srcs: ["service.cpp", "Power.cpp", "InteractionHandler.cpp", "power-helper.c"],
+    init_rc: ["android.hardware.power.stats@1.0-service.pixel.rc"],
+    srcs: ["service.cpp", "EaselStateResidencyDataProvider.cpp"],
     cflags: [
         "-Wall",
         "-Werror",
     ],
+    static_libs: [
+        "libpixelpowerstats",
+    ],
     shared_libs: [
         "libbase",
+        "libcutils",
         "libhidlbase",
         "libhidltransport",
+        "libfmq",
         "liblog",
         "libutils",
-        "libcutils",
-        "android.hardware.power@1.0",
-        "android.hardware.power@1.1",
-        "android.hardware.power@1.2",
-        "libperfmgr",
+        "android.hardware.power.stats@1.0",
+        "pixelpowerstats_provider_aidl_interface-cpp",
+        "libbinder",
     ],
-    proprietary: true,
+    vendor: true,
 }
