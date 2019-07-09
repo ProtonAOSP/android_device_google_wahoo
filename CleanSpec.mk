@@ -82,6 +82,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hard
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hardware.nfc.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hardware.nfc.hce.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hardware.nfc.hcef.xml)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/com.nxp.mifare.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hardware.vr.headtracking.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hardware.vr.high_performance.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hardware.vulkan.level.xml)
