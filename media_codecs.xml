@@ -161,6 +161,7 @@ Only the three quirks included above are recognized at this point:
             <Limit name="frame-rate" range="1-240" />
             <Limit name="concurrent-instances" max="16" />
             <Limit name="performance-point-864x480" value="30" />
+            <Limit name="performance-point-720x576" value="25" />
             <Limit name="performance-point-720x480" value="30" />
             <Feature name="bitrate-modes" value="VBR,CBR" />
         </MediaCodec>
@@ -260,6 +261,7 @@ Only the three quirks included above are recognized at this point:
             <Feature name="adaptive-playback" />
             <Limit name="concurrent-instances" max="16" />
             <Limit name="performance-point-864x480" value="30" />
+            <Limit name="performance-point-720x576" value="25" />
             <Limit name="performance-point-720x480" value="30" />
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.decoder.vp8" type="video/x-vnd.on2.vp8" >
