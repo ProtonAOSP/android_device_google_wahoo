@@ -739,3 +739,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/fstab.postinstall:$(TARGET_COPY_OUT_PRODUCT)/etc/fstab.postinstall
+
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.charger.enable_suspend=true
