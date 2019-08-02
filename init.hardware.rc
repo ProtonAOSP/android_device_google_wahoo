@@ -714,8 +714,7 @@ on property:sys.uidcpupower=0
    write /proc/uid_cpupower/enable 0
 
 # bugreport is triggered by holding down volume down, volume up and power
-service bugreport /system/bin/dumpstate -d -p -B -z \
-        -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
+service bugreport /system/bin/dumpstate -d -p -z
     class main
     disabled
     oneshot
