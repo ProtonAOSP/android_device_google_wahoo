@@ -8,7 +8,6 @@ allow google_camera_app app_api_service:service_manager find;
 allow google_camera_app audioserver_service:service_manager find;
 allow google_camera_app cameraserver_service:service_manager find;
 allow google_camera_app drmserver_service:service_manager find;
-allow google_camera_app mediacodec_service:service_manager find;
 allow google_camera_app mediaextractor_service:service_manager find;
 allow google_camera_app mediaserver_service:service_manager find;
 allow google_camera_app mediametrics_service:service_manager find;
