@@ -44,6 +44,7 @@ on early-init
     # Loading kernel modules in background
     start vendor.insmod_sh
 
+    write /sys/module/dm_verity/parameters/prefetch_cluster 0
 on init
     # Disable UFS powersaving
     write /sys/devices/soc/${ro.boot.bootdevice}/clkscale_enable 0
