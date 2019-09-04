@@ -25,3 +25,6 @@ type vendor_usb_config_prop, property_type;
 type vendor_charge_prop, property_type;
 type vendor_nfc_prop, property_type;
 type vendor_ramoops_prop, property_type;
+
+# fingerprint
+type vendor_fingerprint_prop, property_type;

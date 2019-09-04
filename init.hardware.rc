@@ -17,6 +17,10 @@
 import /vendor/etc/init/hw/init.${ro.hardware}.usb.rc
 
 on charger
+    # Set runtime stune value
+    write /dev/stune/schedtune.prefer_idle 0
+    write /dev/stune/schedtune.boost 0
+    # Offline CPUs
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
     write /sys/devices/system/cpu/cpu4/online 0
@@ -79,6 +83,10 @@ on init
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor "schedutil"
     write /sys/devices/system/cpu/cpufreq/policy4/schedutil/up_rate_limit_us 500
     write /sys/devices/system/cpu/cpufreq/policy4/schedutil/down_rate_limit_us 20000
+
+    # Set boottime stune value
+    write /dev/stune/schedtune.prefer_idle 1
+    write /dev/stune/schedtune.boost 100
 
     # set default schedTune value for foreground/top-app
     write /dev/stune/foreground/schedtune.prefer_idle 1
@@ -159,6 +167,9 @@ on init
     write /sys/block/zram0/comp_algorithm lz4
     write /proc/sys/vm/page-cluster 0
 
+on init
+    setprop vendor.thermal.config thermal_info_config.json
+
 on fs
     mount_all /vendor/etc/fstab.${ro.hardware} --early
 
@@ -187,6 +198,9 @@ on fs
     chmod 0770 /persist/rfs/apq
     chmod 0770 /persist/rfs/apq/gnss
     chmod 0770 /persist/hlos_rfs
+
+    # b/78019660 Remove unlabeled persist_rfs_file
+    rm /persist/rfs/msm/mpss/server_check.txt
 
     # for android.hardware.health@2.0-service.marlin cycle count backup
     mkdir /persist/battery 0700 system system
@@ -227,20 +241,6 @@ on post-fs
     # Wait qseecomd started
     wait_for_prop sys.listeners.registered true
 
-on property:sys.user.0.ce_available=true
-    mkdir /data/misc_ce/0/ramoops
-    start vendor.ramoops_sh
-
-on property:sys.ramoops.decrypted=true
-    mount pstore pstore /sys/fs/pstore
-    chown system log /sys/fs/pstore
-    chown system log /sys/fs/pstore/console-ramoops
-    chmod 0440 /sys/fs/pstore/console-ramoops
-    chown system log /sys/fs/pstore/console-ramoops-0
-    chmod 0440 /sys/fs/pstore/console-ramoops-0
-    chown system log /sys/fs/pstore/pmsg-ramoops-0
-    chmod 0440 /sys/fs/pstore/pmsg-ramoops-0
-
 on property:sys.listeners.registered=true
     # load IPA FWs
     start vendor.ipastart_sh
@@ -254,6 +254,9 @@ on post-fs-data
 
     # b/38496103 Setup debug folders for display
     mkdir /data/vendor/display 0770 system graphics
+
+    # b/65834073 Create rfs folder for tftp_server
+    mkdir /data/vendor/tombstones/rfs 0770 root system
 
     # keep that at the end of on post-fs-data
     # Set indication (checked by vold) that we have finished this action
@@ -335,7 +338,7 @@ on zygote-start
     mkdir /data/misc/dash 0770 media audio
 
     # Create directory for radio
-    mkdir /data/vendor/radio 0771 system radio
+    mkdir /data/vendor/radio 0773 system radio
 
     # Create directory used by display clients
     mkdir /data/misc/display 0770 system graphics
@@ -385,14 +388,6 @@ on zygote-start
 
     # b/62837579 elabel directory
     mkdir /data/misc/elabel 0700 system system
-
-    # Setup permission for powerHAL
-    chown system system /dev/stune/top-app/schedtune.boost
-    chown system system /dev/cpu_dma_latency
-    chown system system /sys/class/kgsl/kgsl-3d0/devfreq/min_freq
-    chown system system /sys/class/kgsl/kgsl-3d0/devfreq/max_freq
-    chown system system /sys/class/devfreq/soc:qcom,gpubw/min_freq
-    chown system system /sys/devices/soc/soc:qcom,cpubw/devfreq/soc:qcom,cpubw/min_freq
 
 on early-boot
     # wait for devices
@@ -480,18 +475,14 @@ on boot
     # default country code
     setprop ro.boot.wificountrycode 00
 
-    # Encrypted ramoops
-    umount /sys/fs/pstore
-    chmod 770 /dev/access-ramoops
-    chown system system /dev/access-ramoops
-    chmod 770 /dev/access-metadata
-    chown system system /dev/access-metadata
-
     # Make the ftm4 command node writeable from dumpstate
     chown system system /sys/devices/virtual/input/ftm4_touch/cmd
 
     # ftm4 VR mode
     chown system system /sys/devices/virtual/input/ftm4_touch/vrmode
+
+    # WLAN debug access
+    chown system system /d/icnss/stats
 
 service vendor.init-elabel-sh /system/bin/init.elabel.sh
     class late_start
@@ -508,7 +499,7 @@ service vendor.init-radio-sh /vendor/bin/init.radio.sh
 service vendor.folio_daemon /system/bin/folio_daemon
     class late_start
     user system
-    group system
+    group system uhid
     disabled
 
 on property:init.svc.zygote=running
@@ -517,7 +508,10 @@ on property:init.svc.zygote=running
 on property:init.svc.zygote=stopped
     stop vendor.folio_daemon
 
-service vendor.thermal-engine /vendor/bin/thermal-engine -c ${sys.qcom.thermalcfg:-/vendor/etc/thermal-engine.conf}
+on property:vendor.qcom.thermalcfg=*
+    restart vendor.thermal-engine
+
+service vendor.thermal-engine /vendor/bin/thermal-engine -c ${vendor.qcom.thermalcfg:-/vendor/etc/thermal-engine.conf}
    class hal
    user root
    group root system diag
@@ -559,12 +553,14 @@ service vendor.per_proxy /vendor/bin/pm-proxy
     disabled
 
 on property:sys.post_boot.parsed=1
-    # Setup permission for powerHAL
-    chown system system /sys/devices/soc/soc:qcom,cpubw/devfreq/soc:qcom,cpubw/bw_hwmon/hyst_trigger_count
-    chown system system /sys/devices/soc/soc:qcom,cpubw/devfreq/soc:qcom,cpubw/bw_hwmon/hist_memory
-    chown system system /sys/devices/soc/soc:qcom,cpubw/devfreq/soc:qcom,cpubw/bw_hwmon/hyst_length
+    # Enable PowerHAL hint processing
+    setprop vendor.powerhal.init 1
 
 on property:sys.boot_completed=1
+    # Set runtime stune value
+    write /dev/stune/schedtune.prefer_idle 0
+    write /dev/stune/schedtune.boost 0
+
     # Enable power setting and set sys.post_boot.parsed to 1
     start vendor.power_sh
 
@@ -618,6 +614,7 @@ on property:sys.boot_completed=1
 # we don't want to run swapon_all at that time.
 on sys-boot-completed-set && property:persist.sys.zram_enabled=1
     swapon_all /vendor/etc/fstab.${ro.hardware}
+    write /proc/sys/vm/swappiness 100
 
 on property:init.svc.vendor.per_mgr=running
     start vendor.per_proxy
@@ -691,6 +688,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     #   group wifi inet keystore
     interface android.hardware.wifi.supplicant@1.0::ISupplicant default
     interface android.hardware.wifi.supplicant@1.1::ISupplicant default
+    interface android.hardware.wifi.supplicant@1.2::ISupplicant default
     class main
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
@@ -820,13 +818,6 @@ service vendor.devstart_sh /vendor/bin/init.qcom.devstart.sh
     disabled
     oneshot
 
-service vendor.wlan_sh /vendor/bin/init.qcom.wlan.sh
-    class main
-    user root
-    group root
-    disabled
-    oneshot
-
 service vendor.ipastart_sh /vendor/bin/init.qcom.ipastart.sh
     class main
     user system
@@ -835,13 +826,6 @@ service vendor.ipastart_sh /vendor/bin/init.qcom.ipastart.sh
     oneshot
 
 service vendor.insmod_sh /vendor/bin/init.insmod.sh
-    class main
-    user root
-    group root system
-    disabled
-    oneshot
-
-service vendor.ramoops_sh /system/bin/init.ramoops.sh
     class main
     user root
     group root system
@@ -863,13 +847,51 @@ on property:sys.vdso=64
 on property:sys.vdso=32
    write /sys/module/vdso/parameters/enable_64 0
 
-on property:wlan.driver.status=ok
-   # Get the wlan driver/fw version
-   start vendor.wlan_sh
-
 # charger driver exposes now finer grain control, map demo mode to those properties
 # demo mode can only be exit wipping data which will also reset the persist properties
 on property:sys.retaildemo.enabled=1
     setprop persist.vendor.charge.stop.level 35
     setprop persist.vendor.charge.start.level 30
 
+on property:sys.boot_completed=1
+    # Create pixel-trace.
+    # At this moment, only mm_event is available. If others want to put more,
+    # it should get hard review from pixel-perf-team.
+
+    mkdir /sys/kernel/debug/tracing/instances/pixel-trace 755 system system
+    chown system system /sys/kernel/debug/tracing/instances/pixel-trace/trace
+    chmod 0660 /sys/kernel/debug/tracing/instances/pixel-trace/trace
+    chown system system /sys/kernel/debug/tracing/instances/pixel-trace/tracing_on
+    chmod 0660 /sys/kernel/debug/tracing/instances/pixel-trace/tracing_on
+    write /sys/kernel/debug/tracing/instances/pixel-trace/buffer_size_kb 64
+    write /sys/kernel/debug/tracing/instances/pixel-trace/events/mm_event/enable 1
+
+# turns off tracing right before bugreporting to keep more traces
+on property:init.svc.dumpstatez=running
+    write /d/tracing/instances/pixel-trace/tracing_on 0
+
+on property:init.svc.dumpstatez=stopped
+    write /d/tracing/instances/pixel-trace/tracing_on 1
+
+on property:init.svc.bugreport=running
+    write /d/tracing/instances/pixel-trace/tracing_on 0
+
+on property:init.svc.bugreport=stopped
+    write /d/tracing/instances/pixel-trace/tracing_on 1
+
+# init-fingerprint-sh is for stopping fps_hal after init retry fail serval times
+# It keeps running until max init retry or fps_hal running successfully
+# vendor.fps_hal restarts until max init retry times
+#
+# /vendor/bin/init.fingerprint.sh [max_init_retry_times]
+service init-fingerprint-sh /vendor/bin/init.fingerprint.sh 10
+    group root
+    user root
+    disabled
+    oneshot
+
+on property:sys.boot_completed=1
+    start init-fingerprint-sh
+
+on property:vendor.fps.init.succeed=true && property:init.svc.vendor.fps_hal=stopped
+    start init-fingerprint-sh

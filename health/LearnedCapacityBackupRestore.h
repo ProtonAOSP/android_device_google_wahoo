@@ -41,7 +41,6 @@ class LearnedCapacityBackupRestore {
     void SaveToStorage();
     void ReadFromSRAM();
     void SaveToSRAM();
-    void UpdateAndSave();
 };
 
 }  // namespace health

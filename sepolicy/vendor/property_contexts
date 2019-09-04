@@ -17,15 +17,18 @@ vendor.debug.ssrdump       u:object_r:vendor_ssr_prop:s0
 persist.sys.cnss.          u:object_r:cnss_diag_prop:s0
 sys.listeners.registered   u:object_r:tee_listener_prop:s0
 wc_transport.              u:object_r:wc_prop:s0
-sys.qcom.thermalcfg        u:object_r:thermal_prop:s0
-ctl.vendor.thermal-engine  u:object_r:thermal_prop:s0
+vendor.qcom.thermalcfg     u:object_r:thermal_prop:s0
+vendor.thermal.config      u:object_r:thermal_prop:s0
 persist.sys.modem.diag.    u:object_r:modem_diag_prop:s0
 sys.modem.diag.            u:object_r:modem_diag_prop:s0
 sys.time.set               u:object_r:sys_time_prop:s0
 persist.radio.atfwd.start  u:object_r:atfwd_start_prop:s0
 sys.logger.bluetooth       u:object_r:bluetooth_log_prop:s0
-vendor.powerhal.state      u:object_r:power_prop:s0
-vendor.powerhal.audio      u:object_r:power_prop:s0
+vendor.powerhal.state                           u:object_r:power_prop:s0
+vendor.powerhal.audio                           u:object_r:power_prop:s0
+vendor.powerhal.lpm                             u:object_r:power_prop:s0
+vendor.powerhal.init                            u:object_r:power_prop:s0
+vendor.powerhal.rendering                       u:object_r:power_prop:s0
 vendor.wlan.driver.version    u:object_r:vendor_wifi_version:s0
 vendor.wlan.firmware.version  u:object_r:vendor_wifi_version:s0
 persist.vendor.usb.config  u:object_r:vendor_usb_config_prop:s0
@@ -53,6 +56,9 @@ vendor.debug.egl.changepixelformat  u:object_r:public_vendor_default_prop:s0
 vendor.debug.prerotation.disable  u:object_r:public_vendor_default_prop:s0
 vendor.debug.rs.           u:object_r:public_vendor_default_prop:s0
 vendor.debug.egl.swapinterval      u:object_r:public_vendor_default_prop:s0
+vendor.gralloc.disable_ubwc u:object_r:public_vendor_default_prop:s0
+vendor.debug.egl.profiler   u:object_r:public_vendor_default_prop:s0
+vendor.gralloc.enable_ahardware_buffer  u:object_r:public_vendor_default_prop:s0
 
 # public_vendor_system_prop
 # They are public_vendor_system_props for vendor-specific extension.
@@ -214,3 +220,7 @@ persist.vendor.nfc.                     u:object_r:vendor_nfc_prop:s0
 
 # ramoops
 vendor.ramoops.                    u:object_r:vendor_ramoops_prop:s0
+
+# fingerprint
+vendor.fps.init.succeed               u:object_r:vendor_fingerprint_prop:s0
+vendor.fps.init_retry.count           u:object_r:vendor_fingerprint_prop:s0

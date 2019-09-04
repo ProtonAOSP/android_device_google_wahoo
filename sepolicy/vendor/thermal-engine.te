@@ -19,8 +19,6 @@ allow thermal-engine sysfs_rmtfs:dir search;
 allow thermal-engine sysfs_rmtfs:file r_file_perms;
 # to read /proc/stat
 allow thermal-engine proc_stat:file { getattr open read };
-# IThermal Thermal HAL
-hal_server_domain(thermal-engine, hal_thermal)
 
 allow thermal-engine thermal_device:chr_file rw_file_perms;
 

@@ -56,6 +56,7 @@ TARGET_NO_KERNEL := false
 TARGET_NO_RECOVERY := true
 BOARD_USES_RECOVERY_AS_BOOT := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
+BOARD_USES_METADATA_PARTITION := true
 
 # Partitions (listed in the file) to be wiped under recovery.
 TARGET_RECOVERY_WIPE := device/google/wahoo/recovery.wipe
@@ -85,7 +86,7 @@ TARGET_COPY_OUT_VENDOR := vendor
 # Install odex files into the other system image
 BOARD_USES_SYSTEM_OTHER_ODEX := true
 
-BOARD_ROOT_EXTRA_FOLDERS := persist firmware
+BOARD_ROOT_EXTRA_FOLDERS := persist firmware metadata
 
 BOARD_VENDOR_SEPOLICY_DIRS += device/google/wahoo/sepolicy/vendor
 BOARD_PLAT_PUBLIC_SEPOLICY_DIR := device/google/wahoo/sepolicy/public
@@ -147,7 +148,7 @@ VSYNC_EVENT_PHASE_OFFSET_NS := 2000000
 SF_VSYNC_EVENT_PHASE_OFFSET_NS := 6000000
 
 # Display
-TARGET_HAS_WIDE_COLOR_DISPLAY := true
+TARGET_HAS_WIDE_COLOR_DISPLAY := false
 TARGET_HAS_HDR_DISPLAY := false
 TARGET_USES_COLOR_METADATA := true
 

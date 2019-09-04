@@ -1,4 +1,4 @@
-# policy for /vendor/bin/hw/android.hardware.drm@1.1-service.clearkey
+# policy for /vendor/bin/hw/android.hardware.drm clearkey service
 type hal_drm_clearkey, domain;
 type hal_drm_clearkey_exec, exec_type, vendor_file_type, file_type;
 

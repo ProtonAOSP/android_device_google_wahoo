@@ -25,17 +25,28 @@ static constexpr char kChgFullFile[] = "sys/class/power_supply/bms/charge_full";
 static constexpr char kSysCFPersistFile[] = "/persist/battery/qcom_charge_full";
 static constexpr int kBuffSize = 256;
 
-LearnedCapacityBackupRestore::LearnedCapacityBackupRestore() {}
+LearnedCapacityBackupRestore::LearnedCapacityBackupRestore() : sw_cap_(0), hw_cap_(0) {}
 
 void LearnedCapacityBackupRestore::Restore() {
     ReadFromStorage();
     ReadFromSRAM();
-    UpdateAndSave();
+    if (sw_cap_ == 0) {
+        // First backup
+        sw_cap_ = hw_cap_;
+        SaveToStorage();
+    } else {
+        // Always restore backup value
+        SaveToSRAM();
+    }
 }
 
 void LearnedCapacityBackupRestore::Backup() {
     ReadFromSRAM();
-    UpdateAndSave();
+    if (sw_cap_ != hw_cap_) {
+        // Always backup the new FG computed learned capacity
+        sw_cap_ = hw_cap_;
+        SaveToStorage();
+    }
 }
 
 void LearnedCapacityBackupRestore::ReadFromStorage() {
@@ -88,24 +99,6 @@ void LearnedCapacityBackupRestore::SaveToSRAM() {
 
     if (!android::base::WriteStringToFile(strData, std::string(kChgFullFile)))
         LOG(ERROR) << "Write data error: " << strerror(errno);
-}
-
-void LearnedCapacityBackupRestore::UpdateAndSave() {
-    bool backup = false;
-    bool restore = false;
-    if (hw_cap_) {
-        if ((hw_cap_ < sw_cap_) || (sw_cap_ == 0)) {
-            sw_cap_ = hw_cap_;
-            backup = true;
-        } else if (hw_cap_ > sw_cap_) {
-            hw_cap_ = sw_cap_;
-            restore = true;
-        }
-    }
-    if (restore)
-        SaveToSRAM();
-    if (backup)
-        SaveToStorage();
 }
 
 }  // namespace health

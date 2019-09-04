@@ -33,6 +33,7 @@
         <param max_ape_sessions="8" />
         <param enable_failure_detection="false" />
         <param support_device_switch="false" />
+        <param concurrent_capture="true" />
     </common_config>
     <acdb_ids>
         <param DEVICE_HANDSET_MIC_APE="100" />
@@ -52,6 +53,7 @@
             <param uid="0x1" />
             <param load_sound_model_ids="0x18000001, 0x1, 0x18000100" />
             <param start_engine_ids="0x18000001, 0x1, 0x18000101" />
+            <param request_detection_ids="0x18000001, 0x4, 0x18000106" />
             <param detection_event_ids="0x18000001, 0x1, 0x00012C29" />
             <param read_cmd_ids="0x00020013, 0x1, 0x00020015" />
             <param read_rsp_ids="0x00020013, 0x1, 0x00020016" />
@@ -71,6 +73,7 @@
             <param uid="0x2" />
             <param load_sound_model_ids="0x18000001, 0x1, 0x18000102" />
             <param start_engine_ids="0x18000001, 0x1, 0x18000103" />
+            <param request_detection_ids="0x18000001, 0x4, 0x18000107" />
             <param custom_config_ids="0x18000001, 0x1, 0x18000106" />
             <param detection_event_ids="0x18000001, 0x1, 0x00012C29" />
             <param read_cmd_ids="0x00020013, 0x2, 0x00020015" />
