@@ -30,3 +30,6 @@ user=_app seinfo=easel name=com.google.android.imaging.easel.service domain=ease
 
 #Domain for connectivity monitor
 user=_app isPrivApp=true seinfo=platform name=com.google.android.connectivitymonitor domain=con_monitor_app type=app_data_file levelFrom=all
+
+#Domain for omadm
+user=_app isPrivApp=true seinfo=platform name=com.android.omadm.service domain=omadm_app type=app_data_file levelFrom=all
