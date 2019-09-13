@@ -248,9 +248,6 @@ on zygote-start
     chmod 0771 /persist
     chown system system /persist/WCNSS_qcom_wlan_nv.bin
 
-    # Create directory for hostapd
-    mkdir /data/hostapd 0770 system wifi
-
     # Trigger WLAN driver load
     write /sys/kernel/boot_wlan/boot_wlan 1
 
