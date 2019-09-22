@@ -32,4 +32,7 @@
 
     <!-- String indicating the package name of the device ImsService implementation for RCS. -->
     <string name="config_ims_rcs_package" translatable="false">com.android.service.ims</string>
+
+    <!-- The package name for the platform carrier config app, bundled with system image. -->
+    <string name="platform_carrier_config_package" translatable="false">com.google.android.carrier</string>
 </resources>
