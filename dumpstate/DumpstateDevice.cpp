@@ -123,6 +123,7 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
               "/data/vendor/radio/ril_log_old",
               "/data/vendor/netmgr/netmgr_log",
               "/data/vendor/netmgr/netmgr_log_old",
+              "/data/vendor/radio/omadm_logs.txt",
               "/data/vendor/radio/power_anomaly_data.txt",
               "/data/vendor/radio/diag_logs/diag_trace.txt",
               "/data/vendor/radio/diag_logs/diag_trace_old.txt",
