@@ -229,3 +229,8 @@ vendor.fps.init_retry.count           u:object_r:vendor_fingerprint_prop:s0
 
 # vendor-init-settable
 ro.boot.vr                      u:object_r:exported2_system_prop:s0 exact bool
+
+# wifi_sniffer
+persist.vendor.wifi.sniffer.freq              u:object_r:vendor_wifi_sniffer_prop:s0
+persist.vendor.wifi.sniffer.bandwidth         u:object_r:vendor_wifi_sniffer_prop:s0
+vendor.wifi.sniffer.start                     u:object_r:vendor_wifi_sniffer_prop:s0
