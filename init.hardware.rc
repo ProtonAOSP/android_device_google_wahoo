@@ -34,7 +34,7 @@ on charger
     write /sys/class/typec/port0/port_type sink
     write /sys/module/lpm_levels/parameters/sleep_disabled N
 
-service vendor.charger /charger
+service vendor.charger /system/bin/charger
     class charger
     seclabel u:r:charger:s0
 
