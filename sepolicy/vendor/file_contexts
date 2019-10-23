@@ -181,6 +181,7 @@
 /vendor/bin/ramoops             u:object_r:ramoops_exec:s0
 /vendor/bin/init\.ramoops\.sh   u:object_r:ramoops_exec:s0
 /vendor/bin/init\.fingerprint\.sh                                    u:object_r:init-fingerprint_exec:s0
+/vendor/bin/wifi_sniffer                                             u:object_r:wifi_sniffer_exec:s0
 
 /vendor/bin/hw/android\.hardware\.bluetooth@1\.0-service-qti          u:object_r:hal_bluetooth_default_exec:s0
 /vendor/bin/hw/android\.hardware\.drm@1\.2-service\.clearkey          u:object_r:hal_drm_clearkey_exec:s0

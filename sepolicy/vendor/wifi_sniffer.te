@@ -1,0 +1,20 @@
+type wifi_sniffer, domain;
+type wifi_sniffer_exec, exec_type, vendor_file_type, file_type;
+
+userdebug_or_eng(`
+  # make transition from init to its domain
+  init_daemon_domain(wifi_sniffer)
+  net_domain(wifi_sniffer)
+
+# configurate con mode
+  allow wifi_sniffer self:capability { net_admin net_raw };
+  allow wifi_sniffer sysfs_wifi_conmode:file rw_file_perms;
+
+# interface up
+  allowxperm wifi_sniffer self:udp_socket ioctl SIOCSIFFLAGS;
+  allow wifi_sniffer self:netlink_generic_socket create_socket_perms_no_ioctl;
+
+  get_prop(wifi_sniffer, vendor_wifi_sniffer_prop)
+
+  dontaudit wifi_sniffer debugfs_wlan:dir search;
+')
