@@ -213,6 +213,15 @@ void DumpstateDevice::dumpModem(int fd, int fdModem)
     }
 }
 
+static void DumpPower(int fd) {
+    RunCommandToFd(fd, "Power Stats Times", {"/vendor/bin/sh", "-c",
+                   "echo -n \"Boot: \" && /vendor/bin/uptime -s &&"
+                   "echo -n \"Now: \" && date"});
+    DumpFileToFd(fd, "RPM Stats", "/d/rpm_stats");
+    DumpFileToFd(fd, "Power Management Stats", "/d/rpm_master_stats");
+    DumpFileToFd(fd, "WLAN Power Stats", "/d/wlan0/power_stats");
+}
+
 static void DumpTouch(int fd) {
     if (!access("/sys/android_touch", R_OK)) {
         DumpFileToFd(fd, "Synaptics touch firmware version",
@@ -262,9 +271,9 @@ Return<void> DumpstateDevice::dumpstateBoard(const hidl_handle& handle) {
     DumpFileToFd(fd, "UFS size", "/sys/block/sda/size");
     RunCommandToFd(fd, "UFS health", {"/vendor/bin/sh", "-c", "for f in $(find /sys/kernel/debug/ufshcd0 -type f); do if [[ -r $f && -f $f ]]; then echo --- $f; cat $f; fi; done"});
     DumpFileToFd(fd, "INTERRUPTS", "/proc/interrupts");
-    DumpFileToFd(fd, "RPM Stats", "/d/rpm_stats");
-    DumpFileToFd(fd, "Power Management Stats", "/d/rpm_master_stats");
-    DumpFileToFd(fd, "WLAN Power Stats", "/d/wlan0/power_stats");
+
+    DumpPower(fd);
+
     DumpFileToFd(fd, "LL-Stats", "/d/wlan0/ll_stats");
     DumpFileToFd(fd, "ICNSS Stats", "/d/icnss/stats");
     DumpFileToFd(fd, "SMD Log", "/d/ipc_logging/smd/log");
