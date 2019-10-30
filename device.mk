@@ -35,6 +35,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
 PRODUCT_SOONG_NAMESPACES += \
     device/google/wahoo \
     vendor/google/camera \
+    hardware/google/camera \
     hardware/google/pixel \
     hardware/qcom/msm8998
 
@@ -418,17 +419,14 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-service \
     camera.device@3.2-impl \
     camera.msm8998 \
-    libgooglecamerahal \
     libqomx_core \
     libmmjpeg_interface \
     libmmcamera_interface
 
 # Google Camera HAL test libraries in debug builds
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES_DEBUG += \
     libgoogle_camera_hal_proprietary_tests \
-    libgoogle_camera_hal_tests
-endif
+    libgoogle_camera_hal_tests.vendor
 
 PRODUCT_PACKAGES += \
     sensors.$(PRODUCT_HARDWARE) \
