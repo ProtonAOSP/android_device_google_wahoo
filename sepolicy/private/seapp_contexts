@@ -4,3 +4,7 @@ user=system seinfo=platform name=.dataservices domain=dataservice_app type=syste
 
 # Domain for WfcActivation app
 user=_app seinfo=wfcactivation name=com.google.android.wfcactivation domain=wfc_activation_app levelFrom=all
+
+# Domain for Sprint Hidden Menu
+user=_app isPrivApp=true seinfo=platform name=com.google.android.hiddenmenu domain=sprint_hidden_menu type=app_data_file levelFrom=all
+

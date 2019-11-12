@@ -1,0 +1,9 @@
+type sprint_hidden_menu, domain, coredomain;
+
+app_domain(sprint_hidden_menu)
+net_domain(sprint_hidden_menu)
+
+# Services
+allow sprint_hidden_menu app_api_service:service_manager find;
+allow sprint_hidden_menu qchook_service:service_manager find;
+allow sprint_hidden_menu radio_service:service_manager find;
