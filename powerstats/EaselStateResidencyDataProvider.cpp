@@ -75,8 +75,8 @@ bool EaselStateResidencyDataProvider::getResults(
     PowerEntityStateResidencyResult result = {
         .powerEntityId = mPowerEntityId,
         .stateResidencyData = {{.powerEntityStateId = EASEL_SYNTHETIC_SLEEP_ID,
-                                .totalStateEntryCount = mTotalOnSnapshotCount,
                                 .totalTimeInStateMs = mTotalNotOnSnapshotCount,
+                                .totalStateEntryCount = mTotalOnSnapshotCount,
                                 .lastEntryTimestampMs = 0}}
     };
 
