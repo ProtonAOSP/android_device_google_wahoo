@@ -178,6 +178,7 @@
 /vendor/etc/init\.insmod\.cfg                                        u:object_r:init-insmod-sh_exec:s0
 /vendor/bin/init\.power\.sh     u:object_r:init_power_exec:s0
 /vendor/bin/init\.radio\.sh     u:object_r:init_radio_exec:s0
+/vendor/bin/thermal_logd        u:object_r:init-thermal-logging-sh_exec:s0
 /vendor/bin/ramoops             u:object_r:ramoops_exec:s0
 /vendor/bin/init\.ramoops\.sh   u:object_r:ramoops_exec:s0
 /vendor/bin/init\.fingerprint\.sh                                    u:object_r:init-fingerprint_exec:s0
