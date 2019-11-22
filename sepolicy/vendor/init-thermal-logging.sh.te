@@ -1,0 +1,10 @@
+type init-thermal-logging-sh, domain;
+type init-thermal-logging-sh_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(init-thermal-logging-sh)
+
+userdebug_or_eng(`
+  allow init-thermal-logging-sh vendor_toolbox_exec:file rx_file_perms;
+  allow init-thermal-logging-sh sysfs_thermal:dir r_dir_perms;
+  allow init-thermal-logging-sh sysfs_thermal:file r_file_perms;
+')
