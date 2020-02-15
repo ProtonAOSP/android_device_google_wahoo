@@ -172,9 +172,6 @@ TARGET_USES_MKE2FS := true
 
 BOARD_VNDK_VERSION := current
 
-# Generate an APEX image for experiment b/119800099.
-DEXPREOPT_GENERATE_APEX_IMAGE := true
-
 # Board uses A/B OTA.
 AB_OTA_UPDATER := true
 

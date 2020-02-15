@@ -87,6 +87,7 @@ $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hard
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hardware.vr.high_performance.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hardware.vulkan.level.xml)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.hardware.vulkan.version.xml)
+$(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/permissions/android.software.vulkan.deqp.level.xml)
 
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/wifi/wpa_supplicant_overlay.conf)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/system/etc/wifi/p2p_supplicant_overlay.conf)
