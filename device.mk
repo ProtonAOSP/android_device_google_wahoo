@@ -463,10 +463,6 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl.recovery:64 \
     android.hardware.boot@1.0-service \
 
-# Vibrator HAL
-PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.3-service.drv2624
-
 # Thermal HAL
 PRODUCT_PACKAGES += \
     android.hardware.thermal@2.0-service.pixel
@@ -760,3 +756,5 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.charger.enable_suspend=true
+
+include hardware/google/pixel/vibrator/drv2624/device.mk
