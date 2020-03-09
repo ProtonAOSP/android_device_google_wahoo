@@ -180,6 +180,10 @@ BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 2
 # Board uses A/B OTA.
 AB_OTA_UPDATER := true
 
+# Build vendor image
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_VENDORIMAGE_PARTITION_SIZE := 524288000
+
 AB_OTA_PARTITIONS += \
     boot \
     system \
