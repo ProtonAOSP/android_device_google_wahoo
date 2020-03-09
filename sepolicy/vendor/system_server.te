@@ -23,3 +23,6 @@ typeattribute system_server system_writes_vendor_properties_violators;
 set_prop(system_server, public_vendor_system_prop)
 
 dontaudit system_server self:capability sys_module;
+
+dontaudit system_server sysfs_msm_subsys:dir search;
+dontaudit system_server sysfs_msm_subsys:file r_file_perms;
