@@ -463,15 +463,6 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl.recovery:64 \
     android.hardware.boot@1.0-service \
 
-# Thermal HAL
-PRODUCT_PACKAGES += \
-    android.hardware.thermal@2.0-service.pixel
-
-ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
-PRODUCT_PACKAGES += \
-    thermal_logd
-endif
-
 #GNSS HAL
 PRODUCT_PACKAGES += \
     gps.conf \
@@ -759,3 +750,4 @@ PRODUCT_PRODUCT_PROPERTIES += \
 
 include hardware/google/pixel/vibrator/drv2624/device.mk
 include hardware/google/pixel/mm/device_legacy.mk
+include hardware/google/pixel/thermal/device.mk
