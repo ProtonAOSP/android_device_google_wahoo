@@ -25,7 +25,7 @@ set_prop(vendor_init, modem_diag_prop)
 set_prop(vendor_init, power_prop)
 set_prop(vendor_init, public_vendor_default_prop)
 set_prop(vendor_init, vendor_radio_prop)
-set_prop(vendor_init, thermal_prop)
+set_prop(vendor_init, vendor_thermal_prop)
 set_prop(vendor_init, vendor_charge_prop)
 
 dontaudit vendor_init unlabeled:dir getattr;
