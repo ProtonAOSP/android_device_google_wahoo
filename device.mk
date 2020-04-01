@@ -758,3 +758,4 @@ PRODUCT_PRODUCT_PROPERTIES += \
     ro.charger.enable_suspend=true
 
 include hardware/google/pixel/vibrator/drv2624/device.mk
+include hardware/google/pixel/mm/device_legacy.mk
