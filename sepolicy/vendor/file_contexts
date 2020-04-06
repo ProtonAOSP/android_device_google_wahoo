@@ -178,7 +178,6 @@
 /vendor/etc/init\.insmod\.cfg                                        u:object_r:init-insmod-sh_exec:s0
 /vendor/bin/init\.power\.sh     u:object_r:init_power_exec:s0
 /vendor/bin/init\.radio\.sh     u:object_r:init_radio_exec:s0
-/vendor/bin/thermal_logd        u:object_r:init-thermal-logging-sh_exec:s0
 /vendor/bin/ramoops             u:object_r:ramoops_exec:s0
 /vendor/bin/init\.ramoops\.sh   u:object_r:ramoops_exec:s0
 /vendor/bin/init\.fingerprint\.sh                                    u:object_r:init-fingerprint_exec:s0
@@ -193,7 +192,6 @@
 /vendor/bin/hw/android\.hardware\.keymaster@3\.0-service-qti         u:object_r:hal_keymaster_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.gatekeeper@1\.0-service-qti        u:object_r:hal_gatekeeper_qti_exec:s0
 /vendor/bin/hw/android\.hardware\.gnss@1\.0-service-qti              u:object_r:hal_gnss_qti_exec:s0
-/vendor/bin/hw/android\.hardware\.thermal@2\.0-service\.pixel         u:object_r:hal_thermal_default_exec:s0
 
 ###############################################
 # same-process HAL files and their dependencies
