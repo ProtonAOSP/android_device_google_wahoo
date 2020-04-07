@@ -11,7 +11,6 @@ type vendor_ssr_prop, property_type;
 type cnss_diag_prop, property_type;
 type tee_listener_prop, property_type;
 type wc_prop, property_type;
-type thermal_prop, property_type;
 type modem_diag_prop, property_type;
 type sys_time_prop, property_type;
 type atfwd_start_prop, property_type;
