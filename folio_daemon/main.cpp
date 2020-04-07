@@ -45,6 +45,7 @@ int main(void) {
     ASensorRef hallSensor;
     ALooper *looper;
     ASensorEventQueue *eventQueue = nullptr;
+    int32_t hallMinDelay = 0;
     time_t lastWarn = 0;
     int attemptCount = 0;
 
@@ -87,6 +88,14 @@ int main(void) {
 
     // Get Hall-effect sensor events from the NDK
     sensorManager = ASensorManager_getInstanceForPackage(nullptr);
+    looper = ALooper_forThread();
+    if (looper == nullptr) {
+        looper = ALooper_prepare(ALOOPER_PREPARE_ALLOW_NON_CALLBACKS);
+    }
+
+    eventQueue = ASensorManager_createEventQueue(sensorManager, looper, 0, NULL,
+                                                 NULL);
+
     /*
      * As long as we are unable to get the sensor handle, periodically retry
      * and emit an error message at a low frequency to prevent high CPU usage
@@ -98,6 +107,7 @@ int main(void) {
         hallSensor = ASensorManager_getDefaultSensor(sensorManager,
                                                      SENSOR_TYPE);
         if (hallSensor != nullptr) {
+            hallMinDelay = ASensor_getMinDelay(hallSensor);
             break;
         }
 
@@ -112,16 +122,8 @@ int main(void) {
         sleep(RETRY_PERIOD);
     }
 
-    looper = ALooper_forThread();
-    if (looper == nullptr) {
-        looper = ALooper_prepare(ALOOPER_PREPARE_ALLOW_NON_CALLBACKS);
-    }
-
-    eventQueue = ASensorManager_createEventQueue(sensorManager, looper, 0, NULL,
-                                                 NULL);
     err = ASensorEventQueue_registerSensor(eventQueue, hallSensor,
-                                           ASensor_getMinDelay(hallSensor),
-                                           10000);
+                                           hallMinDelay, 10000);
     if (err < 0) {
         ALOGE("Unable to register for Hall-effect sensor events");
         goto out;
