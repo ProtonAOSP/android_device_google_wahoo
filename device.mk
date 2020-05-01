@@ -675,6 +675,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_cdma_sub=0
 
+# Set network mode to Global by default and no DSDS/DSDA
+PRODUCT_PROPERTY_OVERRIDES += ro.telephony.default_network=10
+
 # Add an extra 10% saturation to display colors
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.sf.color_saturation=1.1
