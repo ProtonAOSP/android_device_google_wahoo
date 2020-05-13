@@ -15,7 +15,6 @@ type modem_diag_prop, property_type;
 type sys_time_prop, property_type;
 type atfwd_start_prop, property_type;
 type bluetooth_log_prop, property_type;
-type power_prop, property_type;
 type vendor_bluetooth_prop, property_type;
 type vendor_net_radio_prop, property_type;
 type vendor_radio_prop, property_type;
