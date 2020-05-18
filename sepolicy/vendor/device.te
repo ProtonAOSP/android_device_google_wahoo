@@ -7,7 +7,6 @@ type dsp_device, dev_type;
 type easel_device, dev_type;
 type hbtp_device, dev_type;
 type ipa_dev, dev_type;
-type latency_device, dev_type;
 type modem_block_device, dev_type;
 type persist_block_device, dev_type;
 type pn81a_device, dev_type;
