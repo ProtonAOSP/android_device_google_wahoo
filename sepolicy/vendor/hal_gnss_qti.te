@@ -28,7 +28,7 @@ unix_socket_connect(hal_gnss_qti, netmgrd, netmgrd)
 allow hal_gnss_qti netmgrd_socket:dir search;
 
 allow hal_gnss_qti self:netlink_generic_socket { bind create read };
-allow hal_gnss_qti self:netlink_route_socket { bind create nlmsg_read read write };
+allow hal_gnss_qti self:netlink_route_socket { bind create nlmsg_read nlmsg_readpriv read write };
 
 userdebug_or_eng(`
   allow hal_gnss_qti diag_device:chr_file rw_file_perms;
