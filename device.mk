@@ -695,7 +695,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Preopt SystemUI
 PRODUCT_DEXPREOPT_SPEED_APPS += \
-    SystemUIGoogle
+    SystemUI
 
 # audio effects config
 PRODUCT_PROPERTY_OVERRIDES += \
