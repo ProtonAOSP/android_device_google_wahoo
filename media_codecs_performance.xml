@@ -45,6 +45,7 @@
         </MediaCodec>
         <MediaCodec name="c2.android.hevc.encoder" type="video/hevc" update="true">
             <Limit name="measured-frame-rate-320x240" range="35-36" /> <!-- N=32 v93%=1.0 -->
+            <Limit name="measured-frame-rate-720x480" range="5-15" /> <!-- N=12 manual -->
         </MediaCodec>
         <MediaCodec name="OMX.qcom.video.encoder.mpeg4" type="video/mp4v-es" update="true">
             <Limit name="measured-frame-rate-176x144" range="200-206" /> <!-- N=32 v93%=1.0 -->
