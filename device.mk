@@ -746,7 +746,7 @@ PRODUCT_PACKAGES += \
     libtinyxml
 
 # Setting vendor SPL
-VENDOR_SECURITY_PATCH := "2020-09-05"
+VENDOR_SECURITY_PATCH := "2020-10-05"
 
 # EUICC feature
 PRODUCT_COPY_FILES += \
