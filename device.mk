@@ -802,6 +802,16 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.charger.enable_suspend=true
 
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.setupwizard.enterprise_mode=1 \
+    ro.setupwizard.esim_cid_ignore=00000001 \
+    ro.setupwizard.rotation_locked=true \
+    setupwizard.feature.baseline_setupwizard_enabled=true \
+    setupwizard.feature.show_pai_screen_in_main_flow.carrier1839=false \
+    setupwizard.feature.skip_button_use_mobile_data.carrier1839=true \
+    setupwizard.theme=glif_v3_light \
+    setupwizard.enable_assist_gesture_training=true
+
 include hardware/google/pixel/vibrator/drv2624/device.mk
 include hardware/google/pixel/mm/device_legacy.mk
 include hardware/google/pixel/thermal/device.mk
