@@ -815,6 +815,10 @@ PRODUCT_PRODUCT_PROPERTIES += \
     setupwizard.theme=glif_v3_light \
     setupwizard.enable_assist_gesture_training=true
 
+# Elmyra
+PRODUCT_PACKAGES += \
+    ElmyraService
+
 include hardware/google/pixel/vibrator/drv2624/device.mk
 include hardware/google/pixel/mm/device_legacy.mk
 include hardware/google/pixel/thermal/device.mk
