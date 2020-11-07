@@ -83,6 +83,9 @@ endif
 PRODUCT_CHARACTERISTICS := nosdcard
 PRODUCT_SHIPPING_API_LEVEL := 26
 
+# Create more inodes for flexibility
+PRODUCT_INCREASE_INODE_COUNT := true
+
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 PRODUCT_COPY_FILES += \
