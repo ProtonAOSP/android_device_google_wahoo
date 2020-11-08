@@ -752,7 +752,8 @@ PRODUCT_PACKAGES += \
     libsensorndkbridge:32 \
     libtinyxml
 
-# Setting vendor SPL
+# Last stock security patch levels
+PLATFORM_FAKE_SECURITY_PATCH := 2020-10-05
 VENDOR_SECURITY_PATCH := "2020-10-05"
 
 # EUICC feature
