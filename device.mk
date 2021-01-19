@@ -756,9 +756,6 @@ PRODUCT_PACKAGES += \
 PLATFORM_SECURITY_PATCH := 2020-10-05
 VENDOR_SECURITY_PATCH := "2020-10-05"
 
-# SafetyNet
-PRODUCT_SAFETYNET_MODEL_HACK := true
-
 # EUICC feature
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml
